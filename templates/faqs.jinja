@@ -1,0 +1,40 @@
+{% extends "layout.jinja" %}
+
+{% block header %} {% include 'header.jinja' %} {% endblock %}
+
+{% block main_content %}
+
+
+    <div class="container mt-5 mb-5">
+        <div id="accordion">
+
+            {% for faq in faqs %}
+                <div class="mt-5 mb-5">
+                    <hr>
+                    <div>
+                        <div id="heading{{ loop.index }}">
+
+                            <h2 class="mb-0 faqs-title" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="{% if loop.index == 0 %}true{% else %}false{% endif %}" aria-controls="collapse{{ loop.index }}">
+                                {{ faq.question }}
+                                <span class="icon-expand_more1 accordion-icon"></span>
+                            </h2>
+
+                        </div>
+
+
+                        <div id="collapse{{ loop.index }}" class="collapse {% if loop.index == 0 %}show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
+                            <div class="card-body text-justify">
+                                {{ faq.answer | safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block footer %} {% include 'footer.jinja' %} {% endblock %}

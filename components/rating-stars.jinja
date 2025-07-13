@@ -1,0 +1,14 @@
+{% if rating %}
+        {% set ratingRounded = ((rating * 2 )|round(0, 'ceil')) / 2 %}
+        <div class="d-inline-flex product-card-rating" data-rating="{{ rating }}">
+        {% for n in range(1, 6) %}
+            {% if (n <= ratingRounded) %}
+                <span class="icon-star1"></span>
+            {% elif (n <= ratingRounded + 0.5) %}
+                <span class="icon-half-star"></span>
+            {% else %}
+                <span class="icon-star1 deactive"></span>
+            {% endif %}
+        {% endfor %}
+        </div>
+{% endif %}

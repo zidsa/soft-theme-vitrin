@@ -1,0 +1,118 @@
+<div class="d-flex align-items-center justify-content-between products-filter">
+    <div class="d-flex filter-buttons-container">
+            <div class="{% if has_products_filtration %}d-sm-inline-block d-xs-inline-block d-md-none{% else %}d-inline-block{% endif %}" >
+
+                    <div><label class="filter-result">{{ _('products_list_filter') }}</label></div>
+                    <button id="products-list-filter"
+                            type="button"
+                            class="btn btn-filter filter-block-width d-lg-none products-list-filter-sm"
+                            data-toggle="collapse"
+                            data-target="#filters-form-collapse-sm"
+                            onclick="toggleProductAttributeMobile()"
+                            
+
+                    >
+                        <span>{{ _('products_list_filter') }}</span>
+                        &nbsp;
+                        <i class="icon-add filter-icons filters_expanded"></i>
+                        <i class="icon-remove filter-icons filters_not_expanded d-none"></i>
+                    </button>
+
+                    <button id="products-list-filter"
+                            type="button"
+                            class="btn btn-filter filter-block-width d-none d-lg-block"
+                            data-toggle="modal"
+                            data-target="#filterModal"
+                    >
+                        <span>{{ _('products_list_filter') }}</span>
+                        &nbsp;
+                        <i class="icon-filter-secondary" aria-hidden="true"></i>
+                    </button>
+                    &nbsp;&nbsp;
+
+            </div>
+
+                <div class="d-inline-block filter-block-width sort-block-width">
+                    <div class="dropdown d-inline-block">
+                        <div><label class="filter-order">{{ _('products_list_sort') }}</label></div>
+                        <button id="products-list-sort"
+                                type="button"
+                                class="btn btn-filter"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        >
+                            <span>
+                                {% if session.query_params.get('sort_by') == 'popularity_order' %}
+                                    {{ _('products_list_filter_popularity') }}
+                                {% elif session.query_params.get('sort_by') == 'price' and session.query_params.get('order') == 'asc' %}
+                                    {{ _('products_list_filter_price_low') }}
+                                {% elif session.query_params.get('sort_by') == 'price' and session.query_params.get('order') == 'desc' %}
+                                    {{ _('products_list_filter_price_high') }}
+                                {% else%}
+                                    {{ _('products_list_filter_latest') }}
+                                {% endif %}
+                            </span>
+                            &nbsp;
+                            <i class="icon-swap_vert text hide-ie"></i>
+
+                        </button>
+                        <div class="dropdown-menu select-dropdown">
+
+                                <a class="dropdown-item" onclick="this.href = this.getAttribute('data-href')" data-href="{{ session.url.include_query_params(sort_by='created_at', order='desc') }}">
+                                    {{ _('products_list_filter_latest') }}
+                                </a>
+                                <a class="dropdown-item" onclick="this.href = this.getAttribute('data-href')" data-href="{{ session.url.include_query_params(sort_by='popularity_order', order='asc') }}">
+                                    {{ _('products_list_filter_popularity') }}
+                                </a>
+                                <a class="dropdown-item" onclick="this.href = this.getAttribute('data-href')" data-href="{{ session.url.include_query_params(sort_by='price', order='asc') }}">
+                                    {{ _('products_list_filter_price_low') }}
+                                </a>
+                                <a class="dropdown-item" onclick="this.href = this.getAttribute('data-href')" data-href="{{ session.url.include_query_params(sort_by='price', order='desc') }}">
+                                    {{ _('products_list_filter_price_high') }}
+                                </a>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+        </div>
+
+
+
+        <div class="d-none d-lg-inline-block text-color-primary">
+            {% if count > 0 %}
+                <span class="text-line-height d-inline-block">{{ _('products_list_result') }}&nbsp;</span>
+                <span id="product-filter-count" class="text text-line-height d-inline-block" style="font-weight: bold">{{count}}&nbsp;</span>
+                <span class="text-line-height d-inline-block">
+                            {{ _('products_list_result_products') }}
+                         </span>
+            {% else %}
+                <span class="text text-line-height d-inline-block"
+                      style="font-weight: bold">{{ _('products_list_empty') }}&nbsp;
+                     </span>
+            {% endif %}
+        </div>
+
+</div>
+
+<div id="filters-form-collapse-sm" class="collapse mt-3">
+    {% include 'components/products-filter-form.jinja' %}
+</div>
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="position: relative">
+                <button id="products-list-filter-form-close"
+                        type="button"
+                        class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span class="icon-times2"></span>
+                </button>
+                {% include 'components/products-filter-form.jinja' %}
+            </div>
+        </div>
+    </div>
+</div>
+

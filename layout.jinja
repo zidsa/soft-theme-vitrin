@@ -1,0 +1,219 @@
+<!doctype html>
+<html class="no-js" lang="{{ session.lang }}" dir="{% if session.lang == 'ar' %}rtl{% else %}ltr{% endif %}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    {{ header_meta_tags | safe }}
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+  <link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
+    {#<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa">#}
+    <!--jquery UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family={% if store.settings.branding.fonts_name %}{{ store.settings.branding.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: {{store.settings.branding.colors.primary}};
+            --text-color-primary-bg: {{store.settings.branding.colors.secondary}};
+            --primary-color-op-5: {{store.settings.branding.colors.on_primary}}0c;
+            --sub-primary-color: #521B25;
+            --white-color: #fff;
+            --warning-color:  #FFCF57;
+            --danger-color:  #EC5550;
+            --sucess-color:  #5AA788;
+            --black-color:  #0000;
+            --secondary-color: #DEDEDE;
+            --secondary-color-alt0:  #6B6B6B;
+            --secondary-color-alt1:  #5A5A5A;
+            --secondary-color-alt2:  #EFEFEF;
+            --secondary-color-alt3:  #494949;
+            --secondary-color-alt4:  #D9D9D9;
+            --secondary-color-alt5:   #E8E8E8;
+            --secondary-color-alt6:   #8B8B8B;
+            --secondary-color-alt7: #ebebeb;
+            --secondary-color-alt8: #484848;
+            --secondary-color-alt9: #A8A8A8;
+            --secondary-color-alt10: #4A4A4A;
+            --secondary-color-alt11: #606060;
+            --secondary-color-alt12: #767676;
+            --secondary-color-alt13: #F8F8F8;
+            /* font-wieght */
+            --font-weight-sizeOne: 400;
+            --font-wieght-sizeTwo: 700;
+            --font-wieght-sizeThree: 600;
+            /* font-size */
+            --font-size-forteen: 1.167;
+            --font-size-sixteen: 1.333;
+            --font-size-eighteen: 1.5;
+
+            --main-slider-height: 471.43px;
+            --main-slider-sm-height: 115px;
+        }
+
+        @font-face {
+          font-family: 'icomoon';
+          src:  url('{{ 'icomoon.eot?d668y32' | asset_url }}');
+          src:  url('{{ 'icomoon.eot?d668y32#iefix' | asset_url }}') format('embedded-opentype'),
+          url('{{ 'icomoon.woff2?d668y32' | asset_url }}') format('woff2'),
+          url('{{ 'icomoon.ttf?d668y32' | asset_url }}') format('truetype'),
+          url('{{ 'icomoon.woff?d668y32' | asset_url }}') format('woff'),
+          url('{{ 'icomoon.svg?d668y32#icomoon' | asset_url }}') format('svg');
+          font-weight: normal;
+          font-style: normal;
+          font-display: block;
+        }
+    </style>
+
+  <link rel="stylesheet" type="text/css" href="{{ 'icomoon.css?v=1.0.2' | asset_url }}"  />
+
+    {% if session.lang == 'ar' %}
+        <link rel="stylesheet" type="text/css" href="{{ 'bootstrap-rtl.css?v=1.05' | asset_url }}" />
+    {% else %}
+        <link rel="stylesheet" type="text/css" href="{{ 'bootstrap.min.css?v=1.01' | asset_url }}" />
+    {% endif %}
+
+    <link rel="stylesheet" type="text/css" href="{{ 'bootstrap-fixes.css?v=1.11' | asset_url }}" />
+
+
+    <link rel="stylesheet" type="text/css" href="{{ 'jquery-ui.min.css' | asset_url }}"  />
+    <link rel="stylesheet" type="text/css" href="{{ 'jquery-ui.structure.min.css' | asset_url }}"  />
+    <link rel="stylesheet" type="text/css" href="{{ 'jquery-ui.theme.min.css' | asset_url }}"  />
+
+    <link rel="stylesheet" type="text/css" href="{{ 'slick.css' | asset_url }}" />
+    <link rel="stylesheet" type="text/css" href="{{ 'slick-theme.css?v=1.08' | asset_url }}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ 'slide-menu.css' | asset_url }}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ 'slide-menu-style.css?v=1.16' | asset_url }}" />
+
+    <link rel="stylesheet" href="{{ 'main.css?v=1.226' | asset_url }}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ 'custom.css?v=1.148' | asset_url }}" />
+
+    {% if session.lang == 'ar' %}
+        <link rel="stylesheet" href="{{ 'main.rtl.css?v=1.25' | asset_url }}">
+    {% endif %}
+
+    {% block top_links %}{% endblock %}
+
+  {% if user_custom_css %}
+    <link rel="stylesheet" href="{{ user_custom_css }}">
+  {% endif %}
+
+</head>
+
+<body class="{% if session.lang == 'ar' %}rtl{% else %}ltr{% endif %}"
+      data-template="{{ template }}"
+        {% if template == 'category' and category is not none %} data-category-id="{{ category.id }}" {% endif %}
+>
+
+{% if store.editing_mode %}
+  <link href="https://fonts.googleapis.com/css2?family={% if store.settings.branding.fonts_name %}{{ store.settings.branding.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+{% endif %}
+
+<style>
+  body,html {
+    font-family: {% if store.settings.branding.fonts_name %}{{ store.settings.branding.fonts_name | replace('+', ' ') }}{% else %}'Changa'{% endif %}, sans-serif;
+  }
+  :root {
+    {% if store.settings.branding.colors.on_primary %}
+    --header-primary-color: {{store.settings.branding.colors.on_primary}};
+    {% endif %}
+
+    {% if store.settings.branding.colors.header_menu_background %}
+    --menu-header-primary-color: {{store.settings.branding.colors.header_menu_background}};
+    --header-primary-brightness: brightness(100%);
+    {% elif store.settings.branding.colors.on_primary %}
+    --menu-header-primary-color: {{store.settings.branding.colors.on_primary}};
+    --header-primary-brightness: brightness(80%);
+    {% endif %}
+
+  {% if store.settings.branding.colors.header_menu_text %}
+    --menu-header-text-color-primary-bg: {{store.settings.branding.colors.header_menu_text}};
+  {% elif store.settings.branding.colors.header_text %}
+    --menu-header-text-color-primary-bg: {{store.settings.branding.colors.header_text}};
+  {% endif %}
+
+    {% if store.settings.branding.colors.header_text %}--header-text-color-primary-bg: {{store.settings.branding.colors.header_text}};{% endif %}
+    {% if store.settings.branding.colors.footer_background %}--footer-primary-color: {{store.settings.branding.colors.footer_background}};{% endif %}
+    {% if store.settings.branding.colors.footer_text %}--footer-text-color-primary-bg: {{store.settings.branding.colors.footer_text}};{% endif %}
+  }
+</style>
+
+{% block top_body %}{% endblock %}
+
+<div class="app d-flex flex-column visible">
+    <div class="header">
+        {% block header %}{% endblock %}
+    </div>
+    <div class="main flex-grow-1 app-content"
+            {% if store.settings.branding.colors.background_image %} style="background-repeat: repeat; background-image: url('{{ store.settings.branding.colors.background_image }}');" {% endif %}>
+        {% block main_content %}{% endblock %}
+    </div>
+    <div class="footer">
+        {% block footer %}{% endblock %}
+    </div>
+    {% block footer_sticky %}{% endblock %}
+</div>
+
+{{ zidapi_script|safe }}
+
+<script>
+    window.appDirection = '{% if session.lang == 'ar' %}rtl{% else %}ltr{% endif %}';
+
+    window.loadToasterScriptIfNotLoaded = function (onCompleted) {
+        var list = document.getElementsByTagName('script');
+        var i = list.length, flag = false;
+        while (i--) {
+            if (list[i].src === "{{ 'toastr.min.js' | asset_url }}") {
+                flag = true;
+                break;
+            }
+        }
+
+        if (!flag) {
+            var script = document.createElement('script');
+            script.src = "{{ 'toastr.min.js' | asset_url }}";
+            document.getElementsByTagName('head')[0].appendChild(script);
+
+            var fileref = document.createElement("link");
+            fileref.rel = "stylesheet";
+            fileref.type = "text/css";
+            fileref.href = "{{ 'toastr.min.css' | asset_url }}";
+            document.getElementsByTagName("head")[0].appendChild(fileref)
+
+            script.onload = function () {
+                if(onCompleted)
+                    onCompleted();
+            }
+        }else{
+            if(onCompleted)
+                onCompleted();
+        }
+    }
+</script>
+
+<script src="{{ 'jquery-3.6.0.min.js?v=1.0.0' | asset_url }}" ></script>
+
+<script src="{{ 'jquery-ui.min.js' | asset_url }}" ></script>
+
+<script src="{{ 'popper.min.js?v=1.0' | asset_url }}" ></script>
+<script src="{{ 'bootstrap.min.js' | asset_url }}" ></script>
+
+<script src="{{ 'slide-menu.ie.js?v=1.06' | asset_url }}" ></script>
+<script src="{{ 'slick.min.js' | asset_url }}" ></script>
+
+<script type="text/javascript" src="{{ 'main.js?v=1.120' | asset_url }}" ></script>
+
+{% block footer_scripts %}{% endblock %}
+
+</body>
+
+</html>

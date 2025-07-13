@@ -1,0 +1,83 @@
+{% extends "layout.jinja" %}
+
+{% block header %} {% include 'header.jinja' %} {% endblock %}
+
+{% block top_links %}
+	<link rel="stylesheet" type="text/css" href="{{ 'toastr.min.css' | asset_url }}"/>
+{% endblock %}
+
+
+{% block main_content %}
+
+
+    <section class="breadcrumb-section">
+        <nav aria-label="breadcrumb">
+
+            <ol class="breadcrumb">
+            <div class="container d-flex flex-wrap">
+                <li class="breadcrumb-item" aria-current="page"><a href="/">locals.home_title </a></li>
+                <li class="breadcrumb-item active " aria-current="page">locals.products_title </li>
+            </div>
+
+            </ol>
+
+        </nav>
+    </section>
+
+
+
+     <div class="container d-flex flex-row">
+        {% if  products.filters|length > 0 %}
+            {#{% set async=true %}{% include 'template_for_products_attributes.jinja' %}#}
+        {% endif %}
+        <div class="products-container flex-grow-1 pt-4">
+            <div>
+                {% set count=products.count %}{% set has_products_filtration=(products.filters|length > 0) %}{% include 'components/products-filter.jinja' %}
+            </div>
+            <div id="products-list" class="row products-list">
+                {% for product in products.results %}
+
+                    <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
+                        {% set product=product %}{% set index=key %}{% include 'components/product-card.jinja' %}
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% set totalPages=products.last_page %}{% set currentPage=products.current_page %}{% include 'components/pagination.jinja' %}
+
+{% endblock %}
+
+{% block footer %} {% include 'footer.jinja' %} {% endblock %}
+
+{% block footer_scripts %}
+    <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}"></script>
+    <script>
+        window.onProductAttributesTriggered = function(){
+            $('#products-list').css('opacity', '0.4');
+            $('#product-pagination').css('opacity', '0');
+        }
+
+        window.onProductAttributesChanged = function(htmlStr){
+            var html = $.parseHTML( htmlStr );
+            $('#products-list').html($('#products-list', html).html());
+            $('#products-list').css('opacity', '1');
+            $('#product-filter-count').html($('#product-filter-count', html).html());
+            $('#product-filter-count').css('opacity', '1');
+            if($('#product-pagination', html).length>0){
+                $('#product-pagination').html($('#product-pagination', html).html());
+                $('#product-pagination').css('opacity', '1');
+            }
+
+        }
+
+        {% if  products.data|length > 0 %}
+        document.addEventListener("DOMContentLoaded", function(){
+            var productsObj = {{ products.data | tojson }}
+                window.sendGaProductsViewItemsListEvent('all_products', productsObj);
+        });
+        {% endif %}
+    </script>
+{% endblock %}

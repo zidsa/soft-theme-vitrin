@@ -1,0 +1,28 @@
+{% extends "layout.jinja" %}
+
+{% block header %} {% include 'header.jinja' %} {% endblock %}
+
+{% block main_content %}
+
+    <div id="loader"class="loader-container-relative"></div>
+
+    <section id="blog-post" class="blog mt-5 mb-5 ">
+        <div class="container">
+
+            <div class="blog-title mt-5 mb-5">
+                <h1>
+                    {{ blog.title }}
+                </h1>
+            </div>
+            <div class="blog-text mt-3 mb-5">
+                {{ blog.content | safe }}
+            </div>
+
+            {% include 'template_for_blogs_metafields' %}
+
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block footer %} {% include 'footer.jinja' %} {% endblock %}

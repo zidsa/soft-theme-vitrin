@@ -1,0 +1,46 @@
+{% extends "layout.jinja" %}
+
+{% block header %} {% include 'header.jinja' %} {% endblock %}
+
+{% block top_links %}
+    <link rel="stylesheet" type="text/css" href="{{ 'account-pages.css?v=1.69' | asset_url }}" />
+{% endblock %}
+
+{% block main_content %}
+    <div class="container-parent">
+        <div class="profile-pages-bg d-none d-lg-flex flex-grow-1">
+            <div class="section-colored"></div>
+        </div>
+
+        <div class="container">
+            {% set title=locals.profile.personal_info %}{% set section='profile' %}{% include 'profile-section-dropdown.jinja' %}
+            <div class="d-flex">
+                {% set section='profile' %}{% include 'profile-section.jinja' %}
+                <div class="flex-grow-1">
+                    {% set title=locals.profile.personal_info %}{% include 'profile-title.jinja' %}
+                    <div class="account-content">
+
+                         <div>
+                             {{ account_profile_template_content|safe }}
+                         </div>
+
+                        <div style="margin-top: 80px">
+                            <form action="/auth/logout" method="POST" class="d-flex justify-content-between">
+                                <input type="hidden" name="_token" value="{{ csrf_token }}" />
+                                <button type="submit" class="btn btn-danger">locals.logout </button>
+                            </form>
+                        </div>
+
+                        {% include 'template_for_mazeed_badge' %}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block footer %} {% include 'footer.jinja' %} {% endblock %}

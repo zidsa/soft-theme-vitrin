@@ -1,0 +1,203 @@
+<div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-5">
+                <div class="footer-about-us-links-div footer-about-us-div">
+                    <h2 class="pb-2">{{ store.settings.about_us.title }}</h2>
+                    <p>{{ store.settings.about_us.description | safe }}</p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-7">
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        {% if not (store.settings.about_us.links_1_hide) %}
+                            <div class="footer-about-us-links-div">
+                                <h2 class="pb-2">{{ store.settings.about_us.links_1_title }}</h2>
+                                {% for link in store.settings.about_us.links_1_links %}
+                                    <p><a href="{{ link.url }}">{{ link.title }}</a></p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        {% if not (store.settings.about_us.links_2_hide) %}
+                            <div class="footer-about-us-links-div">
+                                <h2 class="pb-2">{{ store.settings.about_us.links_2_title }}</h2>
+                                {% for link in store.settings.about_us.links_2_links %}
+                                    <p><a href="{{ link.url }}">{{ link.title }}</a></p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        {% if store.settings.general.business_address.show_location %}
+                        <div class="footer-about-us-links-div">
+                            <h2 class="pb-2">{% if store.settings.about_us.business_location_title %}{{ store.settings.about_us.business_location_title }}{% else %}locals.business_location{% endif %}</h2>
+                            <p>
+                                <a {% if store.settings.general.business_address.lat %} target="_blank" href="https://maps.google.com/?q={{ store.settings.general.business_address.lat }},{{ store.settings.general.business_address.lng }}" {% endif %}>
+                                    {{ store.settings.general.business_address.street }}<br/>
+                                    <i class="icon-map-marker-alt"></i> {{ store.settings.general.business_address.city.country.name }}, {{ store.settings.general.business_address.city.name }}, {{ store.settings.general.business_address.district }}, {{ store.settings.general.business_address.street }}
+                                </a>
+                            </p>
+                        </div>
+                        {% endif %}
+                        <div  class="footer-about-us-links-div {% if store.settings.general.business_address.show_location %}mt-5{% endif %}">
+                            <h2 class="pb-2">{% if store.settings.about_us.social_media_title %}{{ store.settings.about_us.social_media_title }}{% else %}locals.social_media{% endif %}</h2>
+                            <div class="social-icons d-flex flex-wrap">
+
+                                {% if store.settings.contact.facebook %}
+                                    <a href="https://www.facebook.com/{{ store.settings.contact.facebook }}" target="_blank">
+                                        <span class="icon-facebook-f d-flex align-items-center justify-content-center"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if store.settings.contact.instagram %}
+                                    <a href="https://www.instagram.com/{{ store.settings.contact.instagram }}" target="_blank">
+                                        <span class="icon-instagram d-flex align-items-center justify-content-center"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if store.settings.contact.twitter %}
+                                    <a href="https://twitter.com/{{ store.settings.contact.twitter }}"
+                                       target="_blank">
+                                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                             width="512.000000pt" height="512.000000pt"
+                                             viewBox="0 0 512.000000 512.000000"
+                                             class="x-icon-twitter d-flex align-items-center justify-content-center"
+                                             preserveAspectRatio="xMidYMid meet">
+
+                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)">
+                                                <path d="M75 5093 c10 -16 448 -653 973 -1418 525 -765 955 -1395 955 -1400 0
+                                                -6 -431 -512 -959 -1126 -527 -613 -965 -1123 -973 -1132 -13 -16 1 -17 206
+                                                -17 l220 0 849 987 c467 542 854 988 859 989 6 2 316 -442 689 -986 l679 -990
+                                                744 0 c705 0 743 1 734 18 -5 9 -460 672 -1010 1472 -550 800 -1001 1457
+                                                -1001 1460 0 4 418 492 929 1085 l928 1080 -215 3 c-177 2 -218 0 -231 -12 -9
+                                                -8 -374 -431 -811 -939 -437 -509 -798 -923 -802 -921 -4 3 -296 425 -649 939
+                                                l-642 935 -745 0 -744 0 17 -27z m2815 -2529 c855 -1224 1557 -2229 1558
+                                                -2235 3 -6 -118 -8 -334 -7 l-338 3 -1558 2228 c-857 1226 -1558 2231 -1558
+                                                2233 0 2 152 4 338 4 l337 -1 1555 -2225z"/>
+                                            </g>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+
+                                {% if store.settings.contact.snapchat %}
+                                    <a href="https://www.snapchat.com/add/{{ store.settings.contact.snapchat }}" target="_blank">
+                                        <span class="icon-snapchat-ghost d-flex align-items-center justify-content-center"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if store.settings.contact.tiktok %}
+                                    <a href="https://www.tiktok.com/@{{ store.settings.contact.tiktok }}" target="_blank">
+                                        <span class="icon-tiktok d-flex align-items-center justify-content-center"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if store.settings.contact.phone %}
+                                    <a href="tel:{{ store.settings.contact.phone }}" target="_blank">
+                                        <span class="icon-call d-flex align-items-center justify-content-center"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if store.settings.contact.email %}
+                                    <a href="mailto:{{ store.settings.contact.email }}" target="_blank">
+                                        <span class="icon-envelope-secondary d-flex align-items-center justify-content-center"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if store.settings.contact.website %}
+                                    <a href="{{ store.settings.contact.website }}" target="_blank">
+                                        <span class="icon-globe-secondary d-flex align-items-center justify-content-center"></span>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-companies">
+    <div class="container">
+        <div class="footer-icons">
+
+            <div class="d-flex flex-row {% if store.settings.general.one_signal.ios_app_id or store.settings.general.one_signal.android_package_name%}justify-content-between{% else %}justify-content-center{% endif %} align-items-center flex-wrap icons-wrapper footer-store-section-bars">
+                {% if store.settings.general.one_signal.ios_app_id or store.settings.general.one_signal.android_package_name%}
+                <div class="icons social-apps-icons d-flex flex-wrap align-items-center">
+                    <div class="google-app-stores apps-social-icons d-flex justify-content-center">
+                        {% if store.settings.general.one_signal.ios_app_id %}
+                            <a href="https://apps.apple.com/app/id{{ store.settings.general.one_signal.ios_app_id }}" target="_blank">
+                                <img src="{{ 'app-store.svg' | asset_url }}" loading="lazy" alt="" width="115" height="35">
+                            </a>
+                        {% endif %}
+                        {% if store.settings.general.one_signal.android_package_name %}
+                            <a href="https://play.google.com/store/apps/details?id={{ store.settings.general.one_signal.android_package_name }}" target="_blank">
+                                <img src="{{ 'google-play.svg' | asset_url }}" loading="lazy" alt="" width="115" height="35">
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="icons">
+                    <div class="logistics-pay-icons d-flex flex-wrap justify-content-center">
+                        {% for shipping_method in store.shipping_methods %}
+                            <a href="/shipping-and-payment">
+                                <img src="{{ image_url(shipping_method.icon, h=80, q=100) }}" loading="lazy" alt="" height="21">
+                            </a>
+                        {% endfor %}
+
+
+                        {% for payment_method in store.payment_methods %}
+                            <a href="/shipping-and-payment">
+                                <img src="{{ image_url(payment_method.icon, h=80, q=100) }}" loading="lazy" alt="" height="21">
+                            </a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer-copyrights-vat-certificate">
+    <div class="container">
+        <div class="d-flex flex-column-reverse flex-lg-row flex-wrap align-items-center justify-content-between footer-store-section-bars" style="border-bottom: 0px;">
+            <div class="d-flex justify-content-center align-items-center">
+                <span class="text-center footer-copyrights">{{ store.copyrights | safe}}</span>
+            </div>
+            <div class="vat-crn-sections py-4 d-flex flex-row flex-wrap justify-content-end align-items-center">
+                {% if store.settings.general.tax_settings.is_certificate_visible %}
+                    <div class="vat-icon">
+                        <a {% if store.settings.general.tax_settings.tax_registration_certificate %}href="{{ store.settings.general.tax_settings.tax_registration_certificate }}"  target="_blank"{% endif %} >
+                            <img src="{{ 'vat-certificate.png' | asset_url }}" loading="lazy" alt="" width="auto" height="40">
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if store.settings.contact.business_center %}
+                    <div class="maroof-icon" style="text-align: center;">
+                        <img src="{{ 'business_center.png' | asset_url }}" loading="lazy" alt="" width="auto" height="30">
+                        <div>{{ store.settings.contact.business_center }}</div>
+                    </div>
+                {% endif %}
+
+                {% if store.settings.general.tax_settings.tax_number %}
+                    <div class="vat-number">
+                        <span>locals.footer_vat_number</span>
+                        <span>{{ store.settings.general.tax_settings.tax_number }}</span>
+                    </div>
+                {% endif %}
+
+                {% if store.commercial_registration_number %}
+                    <div class="maroof-icon">
+                        <span>locals.footer_commercial_registration_number</span>
+                        <span>{{ store.commercial_registration_number }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>

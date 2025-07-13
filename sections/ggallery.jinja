@@ -1,0 +1,36 @@
+<div section-id="{{ sectionId }}"
+     data-lg-scroll-offset="130"
+     data-md-scroll-offset="130"
+     data-sm-scroll-offset="94"
+     class="gallery-section container section-padding-space">
+    {% if settings.title %}
+      <h2 class="section-title p-0 theme-text-primary">{{ settings.title }}</h2>
+    {% endif %}
+    <div class="gallery row">
+        {% for galler in settings.gallery %}
+        {% set key=loop.index %}
+        <div class="gallery-item col-6 {% if (key == 2) or (key == 3) %} bottom-row {% endif %}">
+          <div class="box-1-1">
+            <div class="content">
+              <a href="{{ galler.url }}" style="width: 100%; height: 100%; display: block">
+                <img style="width: 100%; height: 100%; object-fit: cover"
+                     srcset="
+                             {{ image_url(galler.image, w=400, q=100, f='auto') }} 200w,
+                             {{ image_url(galler.image, w=640, q=100, f='auto') }} 320w,
+                             {{ image_url(galler.image, w=750, q=100, f='auto') }} 375w,
+                             {{ image_url(galler.image, w=960, q=100, f='auto') }} 480w,
+                             {{ image_url(galler.image, w=1700, q=100, f='auto') }} 850w,
+                            "
+                     sizes="calc(50vw - 30px)"
+                     src="{{ image_url(galler.image, w=1700, q=100, f='auto') }}"
+                     {% if key != 0 %}
+                     loading="lazy"
+                     {% endif %}
+                     alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{% extends "layout.jinja" %}
+
+
+{% block header %} {% include 'header.jinja' %} {% endblock %}
+
+{% block main_content %}
+
+    <div class="home">
+        {% template_components %}
+    </div>
+
+{% endblock %}
+
+{% block footer %}  {% endblock %}
+
+{% block footer_scripts %}
+    <script>
+        $( window ).resize(function() {
+            $('.s-slider').slick('resize');
+        });
+    </script>
+{% endblock %}
+

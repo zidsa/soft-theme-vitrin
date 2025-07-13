@@ -1,0 +1,51 @@
+{% if totalPages > 1 %}
+<nav id="product-pagination" class="products-pagination" aria-label="products navigation">
+    <ul class="pagination flex-wrap justify-content-center">
+        <li class="page-item {% if currentPage == 1 %}disabled{% endif %}">
+            <a class="page-link" href="{{ session.url.include_query_params(page=(currentPage - 1)) }}" tabindex="-1">{{ _('prev') }}</a>
+        </li>
+
+        {% if currentPage > 3 and totalPages > 5%}
+            <li class="page-item">
+                <a class="page-link" href="{{ session.url.include_query_params(page=1) }}">{{ (1) }}</a>
+            </li>
+        {% endif %}
+
+        {% if currentPage > 3 and totalPages > 5 %}
+        <li class="disabled page-item hidden-xxs-down"><a class="page-link">...</a></li>
+        {% endif %}
+
+        {% if currentPage <= 2 %}
+            {% set startPage = 1 %}
+        {% else %}
+            {% set startPage = (currentPage - 2) %}
+        {% endif %}
+
+        {% if (currentPage + 2) <= totalPages %}
+            {% set endPage = (currentPage + 2) %}
+        {% else %}
+            {% set endPage = totalPages %}
+        {% endif %}
+
+        {% for n in range(startPage, endPage + 1) %}
+            <li class="page-item{% if totalPages > 5 and (n - currentPage == 2 or currentPage - n == 2)  %} page-item-n-last {% endif %}" >
+                <a class="page-link {% if currentPage == n %}active{% endif %}" {% if currentPage != n %} href="{{ session.url.include_query_params(page=n) }}" {% endif %}>{{ (n) }}</a>
+            </li>
+        {% endfor %}
+
+        {% if currentPage < (totalPages - 3) and totalPages > 5 %}
+        <li class="disabled page-item hidden-xxs-down"><a class="page-link">...</a></li>
+        {% endif %}
+
+        {% if currentPage < (totalPages - 2) and totalPages > 5 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ session.url.include_query_params(page=totalPages) }}">{{ (totalPages) }}</a>
+            </li>
+        {% endif %}
+
+        <li class="page-item {% if currentPage == totalPages %}disabled{% endif %}">
+            <a class="page-link" href="{{ session.url.include_query_params(page=(currentPage + 1)) }}">{{ _('next') }}</a>
+        </li>
+    </ul>
+</nav>
+{% endif %}
