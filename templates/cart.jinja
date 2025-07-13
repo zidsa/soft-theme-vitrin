@@ -57,7 +57,7 @@
               </div>
 
               <div class="d-flex justify-content-center mt-3">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" style="width: 120px">locals.cancel</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" style="width: 120px">{{ _('cancel') }}</button>
               </div>
           </div>
         </div>
@@ -69,13 +69,13 @@
             <div class="row cart-products-with-totals {% if cart.products_count <= 0 %}d-none{% endif %}">
                 <div class="col-12 col-lg-8">
                     <div class="section-cart-products">
-                        <h2 class="section-title ">locals.cart_products_title</h2>
+                        <h2 class="section-title ">{{ _('cart_products_title') }}</h2>
                         <div class="header-wrapper">
                             <div class="section-cart-products-row d-flex">
                                 <div class="section-cart-products-col-1"></div>
-                                <div class="section-cart-products-col-2 flex-grow-1">locals.cart_header_product</div>
-                                <div class="section-cart-products-col-3">locals.cart_header_quantity</div>
-                                <div class="section-cart-products-col-4">locals.cart_header_price</div>
+                                <div class="section-cart-products-col-2 flex-grow-1">{{ _('cart_header_product') }}</div>
+                                <div class="section-cart-products-col-3">{{ _('cart_header_quantity') }}</div>
+                                <div class="section-cart-products-col-4">{{ _('cart_header_price') }}</div>
                             </div>
                         </div>
 
@@ -87,15 +87,15 @@
                             <div class="cart-gift-card">
                                 <p class="font-weight-bold mb-2">
                                     <img src="{{ asset_url }}gift_icon.png" style="display: inline-block" />
-                                    locals.cart_send_as_gift_info
+                                    {{ _('cart_send_as_gift_info') }}
                                 </p>
                                 <p class="mb-2">
-                                    <span>locals.products_list_filter_price_from: {{cart.gift_card_details.sender_name}}</span>
-                                    <span class="mx-2">locals.products_list_filter_price_to: {{cart.gift_card_details.receiver_name}}</span>
+                                    <span>{{ _('products_list_filter_price_from') }}: {{cart.gift_card_details.sender_name}}</span>
+                                    <span class="mx-2">{{ _('products_list_filter_price_to') }}: {{cart.gift_card_details.receiver_name}}</span>
                                 </p>
                                 {% if cart.gift_card_details.gift_message | length > 0 %}
                                     <p class="mb-0">
-                                        <span>locals.cart_gift_card_info_message: </span> {{ cart.gift_card_details.gift_message }}
+                                        <span>{{ _('cart_gift_card_info_message') }}: </span> {{ cart.gift_card_details.gift_message }}
                                     </p>
                                 {% endif %}
                             </div>
@@ -105,11 +105,11 @@
                 </div>
                 <div class="col-12 col-lg-4">
 
-                    <h2 class="section-title ">locals.cart_break_down_summary</h2>
+                    <h2 class="section-title ">{{ _('cart_break_down_summary') }}</h2>
                     <div class="header-wrapper">
                         <div class="section-cart-products-row section-cart-totals-row  d-flex">
-                            <div class="flex-grow-1">locals.cart_totals_title</div>
-                            <div class="flex-shrink-0" style="width: 30%">locals.cart_totals_description</div>
+                            <div class="flex-grow-1">{{ _('cart_totals_title') }}</div>
+                            <div class="flex-shrink-0" style="width: 30%">{{ _('cart_totals_description') }}</div>
                         </div>
                     </div>
 
@@ -120,7 +120,7 @@
                             <div class="cart-product-row-wrapper cart-totals-row-wrapper">
                                 <div class="flex-grow-1">
                                     {{ cartTotal.title }}
-                                    {% if cartTotal.code == 'total' and store.is_cart_total_vat_included %}&nbsp;<small>locals.sys_lbl_cart_includes_vat</small>{% endif %}
+                                    {% if cartTotal.code == 'total' and store.is_cart_total_vat_included %}&nbsp;<small>{{ _('sys_lbl_cart_includes_vat') }}</small>{% endif %}
                                 </div>
                                 <div class="flex-shrink-0" style="width: 30%; {% if cartTotal.code == 'total' %} font-weight: bold; color: var( --primary-color); {% endif %}">
                                     {{ cartTotal.value_string }}
@@ -135,12 +135,12 @@
                     <div class="coupon-form mt-5">
                         <form>
                             <div class="form-group">
-                                <h4>locals.coupon_discount</h4>
+                                <h4>{{ _('coupon_discount') }}</h4>
                                 <div class="d-flex">
-                                    <input class="form-control send-coupon" type="text" placeholder="locals.coupon_discount_enter" />
+                                    <input class="form-control send-coupon" type="text" placeholder="{{ _('coupon_discount_enter') }}" />
                                     <button type="button" class="btn btn-primary" onclick="sendCoupon()">
                                         <img class="send-coupon-progress d-none" src="{{ asset_url }}spinner.gif" width="15" height="15"/>
-                                        locals.coupon_discount_submit
+{{ _('coupon_discount_submit') }}
                                     </button>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@
                             <div class="text-muted mr-1 flex-shrink-0 free-shipping-rule-read-more" class="{% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'min_not_reached' %}d-inline-block{% else %}d-none{% endif %}">
                               <a data-toggle="modal" data-target="#searchCitiesModal" href="#">
                                 <small>
-                                  locals.read_more
+                                  {{ _('read_more') }}
                                 </small>
                               </a>
                             </div>
@@ -182,7 +182,7 @@
                         <div class="discount-progress-linear" class="{% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'min_not_reached' %}d-block{% else %}d-none{% endif %}">
                             <div class="progress-bar free-shipping-rule-progress" style="width: {{ cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min }}%">
                                 {% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'applied' %}
-                                    <span>locals.coupon_discount_free_shipping</span>
+                                    <span>{{ _('coupon_discount_free_shipping') }}</span>
                                 {% else %}
                                     <span>{{ cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min }}%</span>
                                 {% endif %}
@@ -197,21 +197,21 @@
                                 <a href="#"
                                    class="btn btn-lg btn-block btn-disabled"
                                 >
-                                    locals.cart_continue_to_purchase
+                                    {{ _('cart_continue_to_purchase') }}
                                 </a>
                             {% else %}
                                 
                                 <a zid-visible-customer="true" href="/checkout/choose-address-and-shipping"
                                 class="btn btn-primary btn-lg btn-block"
                                 >
-                                    locals.cart_continue_to_purchase
+                                    {{ _('cart_continue_to_purchase') }}
                                 </a>
                                 
                                 
                                 <a zid-visible-guest="true" href="/auth/login?redirect_to=/checkout/choose-address-and-shipping"
                                 class="btn btn-primary btn-lg btn-block"
                                 >
-                                    locals.cart_continue_to_purchase
+                                    {{ _('cart_continue_to_purchase') }}
                                 </a>
                                
                                 <div style="margin-top: 1rem">
@@ -229,7 +229,7 @@
 
                         <div class="mt-3">
                             <a href="/" class="btn btn-outline-primary btn-lg btn-block">
-                                locals.cart_back_to_store
+                                {{ _('cart_back_to_store') }}
                             </a>
                         </div>
                     </div>
@@ -243,10 +243,10 @@
                     <span class="icon-shopping_cart_black_36dp-1-1 theme-title-primary" style="font-size: 90px">
                         <span class="path1"></span><span class="path2"></span>
                     </span>
-                    <h2 class="mt-3">locals.cart_list_empty</h2>
+                    <h2 class="mt-3">{{ _('cart_list_empty') }}</h2>
                     <div class="mt-3">
                         <a href="/" class="btn btn-outline-primary btn-lg btn-block">
-                            locals.cart_back_to_store
+                            {{ _('cart_back_to_store') }}
                         </a>
                     </div>
                 </div>
@@ -287,7 +287,7 @@
             if (filteredCities.length) {
               $(".cities-result").html(filteredCities);
             } else {
-              $(".cities-result").html('locals.no_result_found');
+              $(".cities-result").html('{{ _('no_result_found') }}');
             }
         });
 
@@ -299,10 +299,10 @@
             zid.store.cart.redeemCoupon($('.send-coupon').val())
                 .then(function (response) {
                     if(response.status  === 'success'){
-                        toastr.success('locals.sent_successfully', null)
+                        toastr.success('{{ _('sent_successfully') }}', null)
                         window.location.reload();
                     }else{
-                        toastr.error(response.data.message, 'locals.sorry')
+                        toastr.error(response.data.message, '{{ _('sorry') }}')
                     }
                     $('.send-coupon-progress').addClass('d-none');
                 }).catch(function (err) {
@@ -317,10 +317,10 @@
             $('.delete-coupon-progress').removeClass('d-none');
             zid.store.cart.removeCoupon().then(function (response) {
                 if(response.status  === 'success'){
-                    toastr.success('locals.sent_successfully', null)
+                    toastr.success('{{ _('sent_successfully') }}', null)
                     window.location.reload();
                 }else{
-                    toastr.error(response.data.message, 'locals.sorry')
+                    toastr.error(response.data.message, '{{ _('sorry') }}')
                 }
                 $('.delete-coupon-progress').addClass('d-none');
             })
@@ -355,7 +355,7 @@
                     if(cartTotal.code === 'total'){
 
                         var is_cart_total_vat_included = {% if store.is_cart_total_vat_included %}true{% else %}false{% endif %};
-                        var local_sys_lbl_cart_includes_vat = 'locals.sys_lbl_cart_includes_vat';
+                        var local_sys_lbl_cart_includes_vat = '{{ _('sys_lbl_cart_includes_vat') }}';
                     
                         if(is_cart_total_vat_included){
                             vat_included = '&nbsp;<small>'+local_sys_lbl_cart_includes_vat+'</small>';
@@ -380,7 +380,7 @@
                 if (cart.fee_shipping_discount_rules.conditions_subtotal.status.code === 'applied') {
                     $('.free-shipping-rule-done').removeClass('d-none')
                     $('.free-shipping-rule-read-more').addClass('d-none')
-                    $('.free-shipping-rule-progress').html('locals.coupon_discount_free_shipping')
+                    $('.free-shipping-rule-progress').html('{{ _('coupon_discount_free_shipping') }}')
                 }else {
                     $('.free-shipping-rule-done').addClass('d-none')
                     $('.free-shipping-rule-read-more').removeClass('d-none')

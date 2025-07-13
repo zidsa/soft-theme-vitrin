@@ -21,7 +21,7 @@
                 {% include 'shipping-payment-vertical-menu.jinja' %}
                 <div class="flex-grow-1">
                     <div class="profile-title d-none d-lg-block theme-text-primary" style="background: #D9D9D9;">
-                        <div class="container py-4 page-breadcurmb">locals.shipping_option </div>
+                        <div class="container py-4 page-breadcurmb">{{ _('shipping_option') }}</div>
                     </div>
                     <div class="account-content account-content-lg">
                         <div class="tab-content " id="v-pills-tabContent">
@@ -34,10 +34,10 @@
                                         <div class="card">
                                             <div class="card-body card-table-header">
                                                 <div class="row align-items-center">
-                                                    <div class="col col-lg-2 shipping-col-1">locals.shipping_option </div>
-                                                    <div class="col col-lg-3 shipping-col-2">locals.covered_cities </div>
-                                                    <div class="col col-lg-5 shipping-col-3">locals.shipping_charges </div>
-                                                    <div class="col shipping-col-4">locals.payment_upon_receipt </div>
+                                                    <div class="col col-lg-2 shipping-col-1">{{ _('shipping_option') }}</div>
+                                                    <div class="col col-lg-3 shipping-col-2">{{ _('covered_cities') }}</div>
+                                                    <div class="col col-lg-5 shipping-col-3">{{ _('shipping_charges') }}</div>
+                                                    <div class="col shipping-col-4">{{ _('payment_upon_receipt') }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@
                                                         </div>
 
                                                         <div class="col col-lg-3 m-col shipping-col-2">
-                                                            <span class="variant-name-sm d-inline-block d-lg-none">locals.covered_cities :&nbsp;</span>
+                                                            <span class="variant-name-sm d-inline-block d-lg-none">{{ _('covered_cities') }}:&nbsp;</span>
                                                             <span>
                                                                     {% for city in shipping_method.delivery_option_cities | slice(0, 3) %}
                                                                         {{city.name}} {% if loop.last == false %}<span >,</span>{% endif %}
@@ -74,7 +74,7 @@
                                                                           class="color-success cursor-pointer text-decoration-underline"
                                                                           role="button"  href="#" data-toggle="modal"
                                                                           data-target="#shipping-cities-{{ shipping_method.id }}">
-                                                                        locals.and  {{ (shipping_method.delivery_option_cities | length) - 3 }} locals.cities 
+                                                                        {{ _('and') }} {{ (shipping_method.delivery_option_cities | length) - 3 }} {{ _('cities') }}
                                                                     </span>
                                                                 {% endif %}
 
@@ -82,7 +82,7 @@
                                                         </div>
 
                                                         <div class="col col-lg-5 m-col shipping-col-3">
-                                                            <span class="variant-name-sm d-inline-block d-lg-none">locals.shipping_charges :&nbsp;</span>
+                                                            <span class="variant-name-sm d-inline-block d-lg-none">{{ _('shipping_charges') }}:&nbsp;</span>
                                                             <span>
                                                                     {% for cost in shipping_method.cost %}
                                                                         <div v-for="cost in shippingMethodData.cost" class="d-flex flex-wrap s-row">
@@ -95,7 +95,7 @@
                                                         </div>
 
                                                         <div class="col m-col shipping-col-4">
-                                                            <span class="variant-name-sm d-inline-block d-lg-none">locals.payment_upon_receipt :&nbsp;</span>
+                                                            <span class="variant-name-sm d-inline-block d-lg-none">{{ _('payment_upon_receipt') }}:&nbsp;</span>
                                                             <span>
                                                                     {% if shipping_method.cod_enabled %}
                                                                         {% for cod_fee in shipping_method.cod_fee %}
@@ -129,13 +129,13 @@
                                                             <button type="button" class="close" data-dismiss="modal" style="position: absolute"
                                                                     aria-label="Close"><span
                                                                         aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title" id="myModalLabel">locals.covered_cities </h4>
+                                                            <h4 class="modal-title" id="myModalLabel">{{ _('covered_cities') }}</h4>
                                                         </div>
                                                         <div class="modal-body" style="overflow: scroll">
 
                                                             <div class="form-element" style="position: relative">
                                                                 <i class="icon-search"></i>
-                                                                <input type="text" class="form-control" placeholder="locals.shipping_payments_th_shipping_cities_search "
+                                                                <input type="text" class="form-control" placeholder="{{ _('shipping_payments_th_shipping_cities_search') }}"
                                                                        id="citiesFilter-{{ shipping_method.id }}"
                                                                        onkeyup="filterCitiesList({{ shipping_method.id }})"
                                                                        name="citiesFilter"
@@ -156,7 +156,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">locals.close 
+                                                                    data-dismiss="modal">{{ _('close') }}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -201,18 +201,18 @@
                                                         </div>
                                                         <div class="card-account-details">
                                                             <div class="d-flex shipping-text">
-                                                                <p>locals.shipping_payments_th_banks_account_owner </p>
+                                                                <p>{{ _('shipping_payments_th_banks_account_owner') }}</p>
                                                                 <span class="d-block"> <span class="d-inline-block">{{ store_bank.beneficiary_name }}</span></span>
                                                             </div>
                                                             <div class="d-flex shipping-text">
-                                                                <p>locals.shipping_payments_th_banks_account_iban </p>
+                                                                <p>{{ _('shipping_payments_th_banks_account_iban') }}</p>
                                                                 <span class="d-block">
                                                                 <span class="d-inline-block">{{ store_bank.iban }}</span>
                                                                 <span class="icon-content_copy d-inline-block"></span>
                                                             </span>
                                                             </div>
                                                             <div class="d-flex shipping-text">
-                                                                <p>locals.shipping_payments_th_banks_account_number </p>
+                                                                <p>{{ _('shipping_payments_th_banks_account_number') }}</p>
                                                                 <span class="d-block">
                                                                 <span class="d-inline-block">{{ store_bank.account_number }}</span>
                                                                 <span class="icon-content_copy d-inline-block"></span>
@@ -262,8 +262,8 @@
             $('.shipping-payment-icon').addClass('d-none');
 
             if(tabId === '#v-pills-home'){
-                $('.page-breadcurmb').html('locals.shipping_option')
-                $('.profile-item-title-top').html('locals.shipping_option')
+                $('.page-breadcurmb').html('{{ _('shipping_option') }}')
+                $('.profile-item-title-top').html('{{ _('shipping_option') }}')
                 $('.shipping-payment-icon.icon-local_shipping').removeClass('d-none')
                 $('.li-pills-home').addClass('d-none')
                 $('.li-pills-profile').removeClass('d-none')
@@ -271,8 +271,8 @@
             }
 
             if(tabId === '#v-pills-profile'){
-                $('.page-breadcurmb').html('locals.payment_options ')
-                $('.profile-item-title-top').html('locals.payment_options ')
+                $('.page-breadcurmb').html('{{ _('payment_options') }}')
+                $('.profile-item-title-top').html('{{ _('payment_options') }}')
                 $('.shipping-payment-icon.icon-payments_black').removeClass('d-none')
                 $('.li-pills-profile').addClass('d-none')
                 $('.li-pills-home').removeClass('d-none')
@@ -280,8 +280,8 @@
             }
 
             if(tabId === '#v-pills-messages'){
-                $('.page-breadcurmb').html('locals.bank_accounts')
-                $('.profile-item-title-top').html('locals.bank_accounts')
+                $('.page-breadcurmb').html('{{ _('bank_accounts') }}')
+                $('.profile-item-title-top').html('{{ _('bank_accounts') }}')
                 $('.shipping-payment-icon.icon-account_balance').removeClass('d-none')
                 $('.li-pills-message').addClass('d-none')
                 $('.li-pills-home').removeClass('d-none')

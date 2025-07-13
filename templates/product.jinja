@@ -299,13 +299,13 @@
 
                             <div class="border-product"></div>
                             <div class="border-product">
-                                <h4 class="product-title">locals.product_share </h4>
+                                <h4 class="product-title">{{ _('product_share') }}</h4>
                                 <div class="product-icon">
                                     <div class="product-social d-flex">
                                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.html_url }}" target="_blank"><i class="icon-facebook-f"></i></a>
                                         <a href="https://www.pinterest.com/pin/create/button/?url={{ product.html_url }}" target="_blank"><i class="icon-pinterest"></i></a>
                                         <a href="https://twitter.com/intent/tweet?text={{ product.name }}: {{ product.html_url }}" target="_blank"><i class="icon-twitter"></i></a>
-                                        <a href="https://api.whatsapp.com/send?text=locals.check_out_this_product :{{ product.name }} {{ product.html_url }}" target="_blank">
+                                        <a href="https://api.whatsapp.com/send?text={{ _('check_out_this_product') }} :{{ product.name }} {{ product.html_url }}" target="_blank">
                                             <i class="icon-whatsapp"></i>
                                         </a>
                                     </div>
@@ -341,7 +341,7 @@
                     </div>
                     {% if product.bundle_offer and product.bundle_offer.products.results | length > 5 %}
                     <div class="bundle-offer-more">
-                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">locals.bundle_offer_all_products </a>
+                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ _('bundle_offer_all_products') }}</a>
                     </div>
                     {% endif %}
                 </div>
@@ -357,7 +357,7 @@
                             <span class="icon-fact_check_black"></span>
                         </div>
                         <div class="description-title">
-                           locals.product_properties 
+                           {{ _('product_properties') }}
                         </div>
                     </div>
                     <div class="description-paragrah text-justify description-text-clear">
@@ -373,7 +373,7 @@
                             <span class="icon-fact_check_black"></span>
                         </div>
                         <div class="description-title">
-                            locals.product_description 
+                            {{ _('product_description') }}
                         </div>
                     </div>
                     <div class="description-paragrah text-justify description-text-clear">
@@ -390,7 +390,7 @@
                                 <span class="icon-format_list_bulleted"></span>
                             </div>
                             <div class="description-title">
-                                locals.product_options 
+                                {{ _('product_options') }}
                             </div>
                         </div>
 
@@ -401,8 +401,8 @@
                                         {% for option in product.options %}
                                             <div class="col">{{option.name}}</div>
                                         {% endfor %}
-                                        <div class="col col-price">locals.product_images </div>
-                                        <div class="col col-price">locals.product_price </div>
+                                        <div class="col col-price">{{ _('product_images') }}</div>
+                                        <div class="col col-price">{{ _('product_price') }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -439,12 +439,12 @@
                                                             {% endfor %}
                                                         </div>
                                                     {% else %}
-                                                        <span class="d-none d-lg-inline">locals.variants_no_image </span>
+                                                        <span class="d-none d-lg-inline">{{ _('variants_no_image') }}</span>
                                                     {% endif %}
                                                 </div>
 
                                                 <div class="col m-col">
-                                                    <span class="variant-name-sm d-inline-block d-lg-none">locals.product_price </span>
+                                                    <span class="variant-name-sm d-inline-block d-lg-none">{{ _('product_price') }}</span>
                                                     {% if variant.formatted_sale_price %}
                                                         <h4 style="font-size: 1.2rem" class="price-detail d-inline-block">{{ variant.formatted_sale_price }}
                                                             <del>{{ variant.formatted_price }}</del>
@@ -475,7 +475,7 @@
                                 <span class="icon-reviews_black"></span>
                             </div>
                             <div class="description-title">
-                                locals.product_reviews 
+                                {{ _('product_reviews') }}
                             </div>
                             {% if product.rating %}
                             <div class="rating-section">
@@ -488,7 +488,7 @@
 
                             &nbsp;
                             <!-- Button trigger modal -->
-                            <a href="/products/{{ product.slug}}/reviews/add" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>locals.add_product_review </a>
+                            <a href="/products/{{ product.slug}}/reviews/add" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>{{ _('add_product_review') }}</a>
                         </div>
                         <div class="reviews-break-down-div description-paragrah">
                             <div class="d-flex align-items-center mt-3 mb-4">
@@ -504,7 +504,7 @@
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span> &nbsp;  &nbsp;
-                                        <span>locals.reviews_rating_5 </span>
+                                        <span>{{ _('reviews_rating_5') }}</span>
                                     </div>
                                     <div class="row card-rate">
                                         <span class="rating_count_4">{{ product.rating['4_ratings'].count }}</span>
@@ -513,7 +513,7 @@
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>locals.reviews_rating_4 </span>
+                                        <span>{{ _('reviews_rating_4') }}</span>
                                     </div>
                                     <div class="row card-rate">
                                         <span class="rating_count_3">{{ product.rating['3_ratings'].count }}</span>
@@ -522,7 +522,7 @@
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>locals.reviews_rating_3 </span>
+                                        <span>{{ _('reviews_rating_3') }}</span>
                                     </div>
                                     <div class="row card-rate">
                                         <span class="rating_count_2">{{ product.rating['2_ratings'].count }}</span>
@@ -531,7 +531,7 @@
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>locals.reviews_rating_2 </span>
+                                        <span>{{ _('reviews_rating_2') }}</span>
                                     </div>
                                     <div class="row card-rate">
                                         <span class="rating_count_1">{{ product.rating['1_ratings'].count }}</span>
@@ -540,7 +540,7 @@
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>locals.reviews_rating_1 </span>
+                                        <span>{{ _('reviews_rating_1') }}</span>
                                     </div>
                                 </div>
                                 {% endif %}
@@ -548,7 +548,7 @@
                         </div>
                         <div class="reviews-break-down-empty description-paragrah d-none">
                             <div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
-                                <span>locals.product_no_reviews </span>
+                                <span>{{ _('product_no_reviews') }}</span>
                             </div>
                         </div>
 
@@ -558,7 +558,7 @@
                             {% if product.reviews.next_page > 1 %}
                             <div class="text-right">
                                 <a href="/products/{{ product.id }}/reviews" type="button" class="btn all-reviews-btn">
-                                    locals.go_all_reviews 
+                                    {{ _('go_all_reviews') }}
                                 </a>
                             </div>
                             {% endif %}
@@ -575,10 +575,10 @@
                             <span class="icon-reviews_black"></span>
                         </div>
                         <div class="description-title">
-                            locals.product_questions 
+                            {{ _('product_questions') }}
                         </div>
                           {% if product.questions %}
-                          <button type="button" class="btn btn-primary add-review-btn" id="addQuestionButton"><span class="icon-add_circle"></span>locals.add_product_question </button>
+                          <button type="button" class="btn btn-primary add-review-btn" id="addQuestionButton"><span class="icon-add_circle"></span>{{ _('add_product_question') }}</button>
                           {% endif %}
                     </div>
                 </div>
@@ -594,7 +594,7 @@
                             <span class="icon-uniE011"></span>
                         </div>
                         <div class="description-title">
-                            <div class="">locals.similar_products_title </div>
+                            <div class="">{{ _('similar_products_title') }}</div>
                         </div>
                     </div>
                     <div class="description-paragrah">
@@ -693,7 +693,7 @@
                     }
 
                 }else{
-                    toastr.error(response.data.message, 'locals.sorry ')
+                    toastr.error(response.data.message, '{{ _('sorry') }}')
                 }
                 $('.add-to-cart-progress').addClass('d-none');
             })
@@ -734,7 +734,7 @@
 
                     {% if store.is_low_stock_label_enabled %}
                     var store_low_stock_limit = {{ store.low_stock_quantity_limit }};
-                    var low_stock_message = 'locals.product_cart_quantity_low_stock ';
+                    var low_stock_message = '{{ _('product_cart_quantity_low_stock') }}';
 
                     if(!selected_product.is_infinite &&  selected_product.quantity < store_low_stock_limit){
                         $('.low-quantity-section').addClass('d-inline-block');
@@ -744,7 +744,7 @@
                     }
                     {% endif %}
 
-                    var sold_product_count_message = 'locals.product_sold_more_than_x_times ';
+                    var sold_product_count_message = '{{ _('product_sold_more_than_x_times') }}';
                     if (selected_product.sold_products_count) {
                         $('.product-count').removeClass('d-none');
                         $('.product-count .lang').html(sold_product_count_message.replace('%s', selected_product.sold_products_count))
@@ -797,7 +797,7 @@
                     $('.product-buttons').addClass('d-none');
                     $('.section-out-of-stock-notify-me').removeClass('d-none');
 
-                    $('.btn-add-to-cart span').html('locals.error_item_unavailable ');
+                    $('.btn-add-to-cart span').html('{{ _('error_item_unavailable') }}');
 
                     if(selected_product.sku){
                         $('.div-product-sku').removeClass('d-none');
@@ -814,7 +814,7 @@
                 $('.product-buttons').addClass('d-none');
                 $('.section-out-of-stock-notify-me').removeClass('d-none');
 
-                $('.btn-add-to-cart span').html('locals.error_item_unavailable ');
+                $('.btn-add-to-cart span').html('{{ _('error_item_unavailable') }}');
 
                 updateProductImages(selected_product);
             }
@@ -896,12 +896,12 @@
                  countryCode + $('.send-notify-phone').val(),
                 ).then(function (response) {
                 if(response.status  === 'success'){
-                    toastr.success('locals.sent_successfully ', null)
+                    toastr.success('{{ _('sent_successfully') }}', null)
                 }else{
                     if(response && response.data && response.data.message) {
-                        toastr.error(JSON.stringify(response.data.message), 'locals.sorry ')
+                        toastr.error(JSON.stringify(response.data.message), '{{ _('sorry') }}')
                     }else {
-                        toastr.error('locals.notify_me_failed ', 'locals.sorry ')
+                        toastr.error('{{ _('notify_me_failed') }}', '{{ _('sorry') }}')
                     }
                 }
                 $('.send-notify-progress').addClass('d-none');

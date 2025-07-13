@@ -6,7 +6,7 @@
             </div>
             <div class="search-bar flex-grow-1">
                 {% if not ('hide_search_bar' in store.settings.branding.header_options) %}
-                <input id="search-input" placeholder="{% if store.settings.branding.search_placeholder %} {{ store.settings.branding.search_placeholder }} {% else %} locals.search  {% endif %}" autocomplete="off" spellcheck="false">
+                <input id="search-input" placeholder="{% if store.settings.branding.search_placeholder %} {{ store.settings.branding.search_placeholder }} {% else %} {{ _('search') }}  {% endif %}" autocomplete="off" spellcheck="false">
                 <img src="{{ 'search-icon.svg' | asset_url }}" alt="" width="31" height="31">  
                
                 {% endif %}
@@ -26,12 +26,12 @@
         <div id="header-shopping-cart" class="cart-sidebar d-flex flex-column">
             <div class="cart-sidebar-header m-5">
                 <div onclick="hideShoppingCart();">X</div>
-                locals.cart_sidebar_title 
+                {{ _('cart_sidebar_title') }} 
             </div>
             <div id="cart-items" class="d-flex flex-column m-5"></div>
             <div id="empty-cart" class="text-center flex-column text-center flex-grow-1 justify-content-center">
                 <div><img src="{{ 'empty-cart.svg' | asset_url }}" alt="" width="84" height="88"></div>
-                <div class="empty-cart-title text-nowrap pt-3">locals.empty_cart </div>
+                <div class="empty-cart-title text-nowrap pt-3">{{ _('empty_cart') }} </div>
             </div>
         </div>
     </div>

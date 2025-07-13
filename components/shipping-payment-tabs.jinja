@@ -7,33 +7,33 @@
             <div class="d-flex">
                 <span class="icon-local_shipping"></span>
                 <p class="bank-account-tab">  
-                  locals.shipping_option 
+                  {{ _('shipping_option') }} 
                 </p>  
             </div> 
                 <span class="bank-account-sub-title">
-                  locals.list_of_shipping_options
+                  {{ _('list_of_shipping_options') }}
                 </span>
         </a>
         <a class="nav-link shipping-payment" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
             <div class="d-flex">
             <span class="icon-payments_black"></span>
             <p class="bank-account-tab"> 
-locals.payment_options            
+{{ _('payment_options') }}            
             </p>  
         </div>
             <span class="bank-account-sub-title">
-              locals.list_of_payment_options
+              {{ _('list_of_payment_options') }}
             </span>
         </a>
         <a class="nav-link shipping-payment" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
             <div class="d-flex">
             <span class="icon-account_balance"></span>
             <p class="bank-account-tab">  
-              locals.bank_accounts
+              {{ _('bank_accounts') }}
             </p>  
         </div> 
             <span class="bank-account-sub-title">
-              locals.bank_accounts_regular_transfers
+              {{ _('bank_accounts_regular_transfers') }}
             </span>
       
        
@@ -46,7 +46,7 @@ locals.payment_options
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                <!--nav Section-->
          <div>
-           <p> locals.shipping_option</p>
+           <p> {{ _('shipping_option') }}</p>
          </div>
 
             <!--shipping Section-->
@@ -57,7 +57,7 @@ locals.payment_options
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
              <!--nav Section-->
              <div>
-                <p> locals.shipping_option</p>
+                <p> {{ _('shipping_option') }}</p>
               </div>
      
           
@@ -70,7 +70,7 @@ locals.payment_options
         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
              <!--nav Section-->
              <div>
-                <p>locals.bank_accounts </p>
+                <p>{{ _('bank_accounts') }} </p>
               </div>
      
             <!--Bank account section-->

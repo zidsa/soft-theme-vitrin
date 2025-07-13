@@ -32,7 +32,7 @@
                     <div class="col-12 col-lg-4">
                         {% if store.settings.general.business_address.show_location %}
                         <div class="footer-about-us-links-div">
-                            <h2 class="pb-2">{% if store.settings.about_us.business_location_title %}{{ store.settings.about_us.business_location_title }}{% else %}locals.business_location{% endif %}</h2>
+                            <h2 class="pb-2">{% if store.settings.about_us.business_location_title %}{{ store.settings.about_us.business_location_title }}{% else %}{{ _('business_location') }}{% endif %}</h2>
                             <p>
                                 <a {% if store.settings.general.business_address.lat %} target="_blank" href="https://maps.google.com/?q={{ store.settings.general.business_address.lat }},{{ store.settings.general.business_address.lng }}" {% endif %}>
                                     {{ store.settings.general.business_address.street }}<br/>
@@ -42,7 +42,7 @@
                         </div>
                         {% endif %}
                         <div  class="footer-about-us-links-div {% if store.settings.general.business_address.show_location %}mt-5{% endif %}">
-                            <h2 class="pb-2">{% if store.settings.about_us.social_media_title %}{{ store.settings.about_us.social_media_title }}{% else %}locals.social_media{% endif %}</h2>
+                            <h2 class="pb-2">{% if store.settings.about_us.social_media_title %}{{ store.settings.about_us.social_media_title }}{% else %}{{ _('social_media') }}{% endif %}</h2>
                             <div class="social-icons d-flex flex-wrap">
 
                                 {% if store.settings.contact.facebook %}
@@ -185,14 +185,14 @@
 
                 {% if store.settings.general.tax_settings.tax_number %}
                     <div class="vat-number">
-                        <span>locals.footer_vat_number</span>
+                        <span>{{ _('footer_vat_number') }}</span>
                         <span>{{ store.settings.general.tax_settings.tax_number }}</span>
                     </div>
                 {% endif %}
 
                 {% if store.commercial_registration_number %}
                     <div class="maroof-icon">
-                        <span>locals.footer_commercial_registration_number</span>
+                        <span>{{ _('footer_commercial_registration_number') }}</span>
                         <span>{{ store.commercial_registration_number }}</span>
                     </div>
                 {% endif %}

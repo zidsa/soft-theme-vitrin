@@ -14,7 +14,7 @@
             <ol class="breadcrumb">
                 <div class="container d-flex flex-wrap">
 
-                    <li class="breadcrumb-item" aria-current="page"><a href="/">locals.home_title</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="/">{{ _('home_title') }}</a></li>
 
                     {% if category.parent_category.parent_category %}
                         <li class="breadcrumb-item" aria-current="page"><a href="{{ category.parent_category.parent_category.url }}">{{ category.parent_category.parent_category.name }}</a></li>
@@ -40,7 +40,7 @@
         <div class="container pt-2 category-page-slider">
             <div class="home-categories-section section-padding-space">
                 <div class="container slider-container">
-                    <h2 class="section-title" style="font-weight: normal; font-size: 1.167rem;">locals.categories</h2>
+                    <h2 class="section-title" style="font-weight: normal; font-size: 1.167rem;">{{ _('categories') }}</h2>
                     <div class="d-flex flex-column">
                         <div class="categories-slider-wrapper" style="position: relative">
 

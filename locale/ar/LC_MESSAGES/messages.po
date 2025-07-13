@@ -1,0 +1,593 @@
+# Arabic translation for soft-theme-vitrin
+# Copyright (C) 2025
+# This file is distributed under the same license as the soft-theme-vitrin package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: soft-theme-vitrin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-13 12:00+0000\n"
+"PO-Revision-Date: 2025-01-13 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "home_title"
+msgstr "الصفحة الرئيسية"
+
+msgid "products"
+msgstr "المنتجات"
+
+msgid "categories"
+msgstr "التصنيفات"
+
+msgid "login"
+msgstr "تسجيل الدخول"
+
+msgid "logout"
+msgstr "تسجيل خروج"
+
+msgid "hello"
+msgstr "اهلاً"
+
+msgid "product_is_not_taxable"
+msgstr "معفى من الضريبة"
+
+msgid "product_has_options"
+msgstr "متوفر بعدة خيارات"
+
+msgid "products_title"
+msgstr "جميع المنتجات"
+
+msgid "header_all_categories"
+msgstr "جميع التصنيفات"
+
+msgid "header_delivery_and_payment_options"
+msgstr "خيارات الدفع والتوصيل"
+
+msgid "customer_reviews"
+msgstr "آراء العملاء"
+
+msgid "common_requried_input_error"
+msgstr "هذا الحقل مطلوب"
+
+msgid "products_list_filter_show_more"
+msgstr "المزيد"
+
+msgid "search_placeholder"
+msgstr "ابحث"
+
+msgid "store_language"
+msgstr "اللغة"
+
+msgid "store_currency_country"
+msgstr "الدولة"
+
+msgid "or"
+msgstr "او"
+
+msgid "and"
+msgstr "و"
+
+msgid "ok"
+msgstr "موافق"
+
+msgid "sorry"
+msgstr "عفوا"
+
+msgid "search"
+msgstr "إبحث"
+
+msgid "close"
+msgstr "اغلاق"
+
+msgid "welcome"
+msgstr "مرحباً"
+
+msgid "city"
+msgstr "مدينة"
+
+msgid "cities"
+msgstr "مدن"
+
+msgid "save"
+msgstr "حفظ"
+
+msgid "cancel"
+msgstr "إلغاء"
+
+msgid "next"
+msgstr "التالي"
+
+msgid "prev"
+msgstr "السابق"
+
+msgid "edit"
+msgstr "تعديل"
+
+msgid "back"
+msgstr "الرجوع"
+
+msgid "language"
+msgstr "اللغة"
+
+msgid "before"
+msgstr "منذ"
+
+msgid "send"
+msgstr "إرسال"
+
+msgid "clear"
+msgstr "مسح"
+
+msgid "order"
+msgstr "طلب"
+
+msgid "details"
+msgstr "التفاصيل"
+
+msgid "each"
+msgstr "للواحد"
+
+msgid "choose"
+msgstr "اختر"
+
+msgid "products_search_result"
+msgstr "نتائج البحث عن"
+
+msgid "no_result_found"
+msgstr "لا توجد نتائج بحث"
+
+msgid "products_more"
+msgstr "المزيد من المنتجات"
+
+msgid "products_list_empty"
+msgstr "لا يوجد منتجات"
+
+msgid "products_page_show_sale_price"
+msgstr "عرض التخفيضات فقط"
+
+msgid "products_list_sort"
+msgstr "ترتيب حسب"
+
+msgid "products_list_filter_latest"
+msgstr "الأحدث"
+
+msgid "products_list_filter_popularity"
+msgstr "الأكثر شعبية"
+
+msgid "products_list_filter_price_low"
+msgstr "الأقل سعر"
+
+msgid "products_list_filter_price_high"
+msgstr "الأعلى سعر"
+
+msgid "products_list_filter"
+msgstr "تصفية النتائج"
+
+msgid "products_list_filter_price"
+msgstr "السعر"
+
+msgid "products_list_filter_price_from"
+msgstr "من"
+
+msgid "products_list_filter_price_to"
+msgstr "إلى"
+
+msgid "products_list_result"
+msgstr "تم ايجاد"
+
+msgid "products_list_result_products"
+msgstr "منتج"
+
+msgid "empty_cart"
+msgstr "سلة التسوق فارغة"
+
+msgid "cart_sidebar_title"
+msgstr "محتويات السلة"
+
+msgid "product_description_more"
+msgstr "المزيد من المعلومات"
+
+msgid "product_sku"
+msgstr "رمز المنتج"
+
+msgid "product_share"
+msgstr "شارك المنتج"
+
+msgid "product_description"
+msgstr "وصف المنتج"
+
+msgid "product_properties"
+msgstr "معلومات المنتج"
+
+msgid "product_options"
+msgstr "خيارات المنتج"
+
+msgid "product_product_readmore"
+msgstr "المزيد"
+
+msgid "add_to_cart"
+msgstr "اضف للسلة"
+
+msgid "product_price"
+msgstr "السعر"
+
+msgid "product_all_available_options"
+msgstr "جميع الخيارات المتاحة"
+
+msgid "product_cart_quantity"
+msgstr "الكمية"
+
+msgid "product_cart_quantity_low_stock"
+msgstr "متبقي %s فقط"
+
+msgid "product_discount"
+msgstr "وفر"
+
+msgid "product_weight"
+msgstr "الوزن"
+
+msgid "error_item_unavailable"
+msgstr "هذا الخيار غير متوفر"
+
+msgid "variants_no_image"
+msgstr "لا يوجد صور"
+
+msgid "product_images"
+msgstr "صور المنتج"
+
+msgid "product_reviews_more"
+msgstr "سنعراض المزيد من التقيمات"
+
+msgid "product_no_reviews"
+msgstr "لا توجد تقييمات, اترك تقييمك"
+
+msgid "product_sold_more_than_x_times"
+msgstr "تم شراؤه أكثر من %s مرة"
+
+msgid "check_out_this_product"
+msgstr "اطَّلع على المنتج التالي"
+
+msgid "similar_products_title"
+msgstr "قد يعجبك أيضاً"
+
+msgid "product_reviews"
+msgstr "التقييمات"
+
+msgid "product_reviews_x_count"
+msgstr "تقييم"
+
+msgid "product_average_rating"
+msgstr "التقييم العام"
+
+msgid "product_price_vat_inclusive"
+msgstr "السعر شامل ضريبة القيمة المضافة"
+
+msgid "product_price_vat_exclusive"
+msgstr "السعر غير شامل ضريبة القيمة المضافة"
+
+msgid "product_reviews_form_title"
+msgstr "اترك تقييمك"
+
+msgid "product_reviews_is_anonymous_label"
+msgstr "لا تظهر اسمي في قائمة آراء العملاء"
+
+msgid "product_reviews_form_body_placeholder"
+msgstr "اكتب تعليقك هنا.."
+
+msgid "product_reviews_form_send"
+msgstr "إرسال التقييم"
+
+msgid "reviews_submit_success"
+msgstr "شكرًا لتقييمك، سيتم مراجعة التقييم ونشره على المتجر"
+
+msgid "reviews_submit_failed"
+msgstr "عذراً٬ حصل خطأ.. الرجاء المحاولة مرة أخرى"
+
+msgid "reviews_validate_comment_required"
+msgstr "الرجاء إضافة تعليق"
+
+msgid "reviews_validate_comment_max"
+msgstr "تعليقك تخطى الحد المطلوب من عدد الأحرف"
+
+msgid "reviews_validate_comment_min"
+msgstr "يجب أن يحتوي التعليق على 3 أحرف على الأقل"
+
+msgid "reviews_validate_rating"
+msgstr "الرجاء ترك تقييم"
+
+msgid "reviews_rating_1"
+msgstr "سيئ"
+
+msgid "reviews_rating_2"
+msgstr "لم يعجبني"
+
+msgid "reviews_rating_3"
+msgstr "جيد"
+
+msgid "reviews_rating_4"
+msgstr "ممتاز"
+
+msgid "reviews_rating_5"
+msgstr "رائع"
+
+msgid "profile.title"
+msgstr "الملف الشخصي"
+
+msgid "profile.personal_info"
+msgstr "المعلومات الشخصية"
+
+msgid "profile.personal_info_description"
+msgstr "معلومات التواصل الخاصه بك"
+
+msgid "profile.addresses"
+msgstr "دليل العناوين"
+
+msgid "profile.addresses_description"
+msgstr "من خلال دليل العنواين يمكنك إضافة و تعديل عناوينك المفضلة"
+
+msgid "profile.orders"
+msgstr "الطلبات"
+
+msgid "profile.orders_description"
+msgstr "من خلال قائمة الطلبات يمكنك إستعراض الطلبات السابقة و الحالية"
+
+msgid "profile.wishlist"
+msgstr "قائمة اﻷمنيات"
+
+msgid "profile.wishlist_description"
+msgstr "من خلال قائمة الأمنيات يمكنك استعراض المنتجات وحذف المنتجات المفضلة"
+
+msgid "add_new_address"
+msgstr "إضافة عنوان جديد"
+
+msgid "wishlist_no_items"
+msgstr "لم تتم إضافة منتجات إلى قائمة اﻷمنيات"
+
+msgid "shareLabel"
+msgstr "مشاركة"
+
+msgid "location_on_map"
+msgstr "الموقع على الخريطة"
+
+msgid "navBar.allProducts"
+msgstr "جميع المنتجات"
+
+msgid "footer_vat_number"
+msgstr "الرقم الضريبي:"
+
+msgid "footer_commercial_registration_number"
+msgstr "رقم السجل التجاري:"
+
+msgid "title_404"
+msgstr "لم يتم أيجاد الصفحة"
+
+msgid "go_to_home"
+msgstr "العودة للصفحة الرئيسية"
+
+msgid "redirect_message"
+msgstr "سيتم تحويلك للصفحة الرئيسية خلال"
+
+msgid "seconds"
+msgstr "ثواني"
+
+msgid "order_id"
+msgstr "رقم الطلب"
+
+msgid "order_status"
+msgstr "حالة الطلب"
+
+msgid "order_date"
+msgstr "تاريخ الطلب"
+
+msgid "order_total"
+msgstr "المجموع"
+
+msgid "add_product_review"
+msgstr "اضف تقييمك"
+
+msgid "leave_comment"
+msgstr " اترك تقييمك"
+
+msgid "donot_leave_comment"
+msgstr "لا تظهر اسمى فى قائمة العملاء "
+
+msgid "write_your_comment"
+msgstr " اكتب تعليقك هنا"
+
+msgid "send_evaluation"
+msgstr "ارسال تقييم"
+
+msgid "remaining_text"
+msgstr "عدد الحروف المتبقية :250"
+
+msgid "sent_successfully"
+msgstr "تم الإرسال بنجاح"
+
+msgid "bundle_offer_all_products"
+msgstr "عرض جميع المنتجات"
+
+msgid "lbl_error_product_not_exist"
+msgstr "هذا المنتج لم يعد متوفراً"
+
+msgid "lbl_error_product_out_of_stock"
+msgstr "نفدت الكمية"
+
+msgid "btn_error_product_out_of_stock"
+msgstr "نبهني عند التوفر"
+
+msgid "lbl_error_product_quantity_exceed"
+msgstr "لا توجد كمية إضافية كافية من هذا المنتج"
+
+msgid "notify_me_title"
+msgstr "نبهني عند التوفر"
+
+msgid "notify_me_hint"
+msgstr "أدخل البريد الإلكتروني"
+
+msgid "notify_me_hint_name"
+msgstr "أدخل الإسم"
+
+msgid "notify_me_hint_mobile"
+msgstr "ادخل رقم الجوال (إختياري)"
+
+msgid "notify_me_submit"
+msgstr "تفعيل الإشعار"
+
+msgid "notify_me_submit_done"
+msgstr "تم تفعيل الإشعار"
+
+msgid "notify_me_failed"
+msgstr "حدث خطأ! الرجاء اعادة الارسال."
+
+msgid "cart_view_title"
+msgstr "سلة الشراء"
+
+msgid "cart_products_title"
+msgstr "المنتجات"
+
+msgid "cart_break_down_summary"
+msgstr "تفاصيل الفاتورة"
+
+msgid "cart_header_product"
+msgstr "المنتج"
+
+msgid "cart_header_quantity"
+msgstr "الكمية"
+
+msgid "cart_header_price"
+msgstr "السعر"
+
+msgid "cart_list_empty"
+msgstr "السلة فارغة"
+
+msgid "cart_totals_title"
+msgstr "الوصف"
+
+msgid "cart_totals_description"
+msgstr "القيمة"
+
+msgid "cart_continue_to_purchase"
+msgstr "متابعة الشراء"
+
+msgid "cart_back_to_store"
+msgstr "العودة للتسوق"
+
+msgid "coupon_discount"
+msgstr "كوبون الخصم"
+
+msgid "coupon_discount_enter"
+msgstr "ادخل كود الخصم"
+
+msgid "coupon_discount_submit"
+msgstr "إرسال"
+
+msgid "coupon_discount_free_shipping"
+msgstr "شحن مجاني"
+
+msgid "enjoy_free_shipping_cities"
+msgstr "تمتع بالشحن المجاني للمدن التالية"
+
+msgid "shipping_option"
+msgstr "خيارات الشحن"
+
+msgid "covered_cities"
+msgstr "المدن التى يتم تغطيتها"
+
+msgid "shipping_charges"
+msgstr "تكلفة الشحن"
+
+msgid "payment_upon_receipt"
+msgstr "الدفع عند الاستلام"
+
+msgid "package"
+msgstr "طرد"
+
+msgid "riyadh"
+msgstr "الرياض"
+
+msgid "inside_merchant_city"
+msgstr "داخل مدينة التاجر"
+
+msgid "outside_merchant_city"
+msgstr "خارج مدينة التاجر"
+
+msgid "list_of_shipping_options"
+msgstr "قائمة خيارات الشحن المدعومة"
+
+msgid "payment_options"
+msgstr "خيارات الدفع"
+
+msgid "list_of_payment_options"
+msgstr "قائمة خيارات الدفع المدعومة"
+
+msgid "bank_accounts"
+msgstr " الحسابات البنكية"
+
+msgid "bank_accounts_regular_transfers"
+msgstr " الحسابات البنكية للحولات العادية"
+
+msgid "shipping_payments_th_banks_account_owner"
+msgstr "اسم المحول له"
+
+msgid "shipping_payments_th_banks_account_iban"
+msgstr "رقم الآيبان"
+
+msgid "shipping_payments_th_banks_account_number"
+msgstr "رقم الحساب"
+
+msgid "business_location"
+msgstr "العنوان"
+
+msgid "social_media"
+msgstr "وسائل التواصل"
+
+msgid "active_payment_session_notification"
+msgstr "يوجد لديك عملية دفع قائمة في صفحة أخرى للمتجر، لا يمكنك تعديل محتويات السلة"
+
+msgid "active_payment_session_cancel"
+msgstr "إلغاء السلة و متابعة الشراء"
+
+msgid "go_all_reviews"
+msgstr "جميع التقييمات"
+
+msgid "read_more"
+msgstr "اعرف المزيد"
+
+msgid "product_questions"
+msgstr "الأسئلة"
+
+msgid "add_product_question"
+msgstr "إضافة سؤالك"
+
+msgid "add_product_question_placholder"
+msgstr "اكتب سؤالك هنا"
+
+msgid "add_product_question_name"
+msgstr "الاسم"
+
+msgid "add_product_question_email"
+msgstr "البريد الإلكتروني"
+
+msgid "add_product_question_anonymous"
+msgstr "إرسال كمجهول"
+
+msgid "question_submit_success"
+msgstr "تم إرسال سؤالك بنجاح سيصلك تنبيه في حال تمت الإجابة عليه"
+
+msgid "product_question_empty"
+msgstr "لا يوجد أسئلة سابقة،"
+
+msgid "product_question_empty_note"
+msgstr "يمكنك إضافة سؤالك لمعرفة المزيد حول المنتج"
+
+msgid "product_questions_view_all"
+msgstr "عرض جميع الأسئلة"
+
+msgid "common_requried_email_input_error"
+msgstr "البريد الإلكتروني غير صحيح"
