@@ -49,7 +49,7 @@
                     <div class="product-price theme-title-primary"><span>{{ product.formatted_sale_price }}</span></div>
                     <div style="color: #494949"><span class="product-prev-price">{{ product.formatted_price }}</span>
                         <span style="color:#f25f5f;">
-                        &nbsp;  &nbsp;{{ _('product_discount') }}&nbsp;{{ product.discount_percentage }}%
+                        &nbsp;  &nbsp;{{ _("Discount") }}&nbsp;{{ product.discount_percentage }}%
                         </span>
                     </div>
                 </div>
@@ -60,17 +60,17 @@
             {% if product.is_infinite or product.quantity > 0 %}
 
                 {% if (product.has_options or product.has_fields) %}
-                    <small style="font-size: 1.1rem; white-space: break-spaces">{{ _('product_has_options') }}</small>
+                    <small style="font-size: 1.1rem; white-space: break-spaces">{{ _("Available in several options") }}</small>
                 {% endif %}
 
                 {% if not product.is_taxable %}
-                    <small style="font-size: 1.1rem; white-space: break-spaces">{{ _('product_is_not_taxable') }}</small>
+                    <small style="font-size: 1.1rem; white-space: break-spaces">{{ _("Tax free") }}</small>
                 {% endif %}
 
             {% endif %}
 
             {% if product.is_infinite == false and product.quantity <= 0 %}
-                <small style="font-size: 1.1rem; white-space: break-spaces">{{ _('lbl_error_product_out_of_stock') }}</small>
+                <small style="font-size: 1.1rem; white-space: break-spaces">{{ _("This product is out of stock") }}</small>
             {% endif %}
 
         </div>
@@ -78,14 +78,14 @@
             {% if product.is_infinite == false and product.quantity <= 0 %}
             <a class="btn btn-primary btn-product-card-out-of-stock" disabled>
                 <img src="{{ 'u_bell.svg' | asset_url }}" alt="" width="18" height="18" class="d-inline">
-                <span>{{ _('btn_error_product_out_of_stock') }}</span>
+                <span>{{ _("Notify me when available") }}</span>
              </a>
             {% elif ( product.has_options or product.has_fields ) %}
-            <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ _('add_to_cart') }}</a>
+            <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ _("add to cart") }}</a>
             {% else %}
             <a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
                 <img style="display: inline" class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
-                {{ _('add_to_cart') }}
+                {{ _("add to cart") }}
             </a>
             {% endif %}
         </div>

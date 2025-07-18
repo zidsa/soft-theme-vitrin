@@ -2,7 +2,7 @@
     <div class="container d-flex justify-content-center position-relative">
         <div class="announcement-text mb-0 text-center" data-nosnippet>
             <span class="icon-locked_orders" style="font-size: 24px; position: relative; top: 2px;"></span>&nbsp;
-            {{ _('active_payment_session_notification') }} 
+            {{ _("You have an active payment session in another browser, you can't edit the cart contents") }} 
 
                 <form class="d-inline-block"
                       method="post"
@@ -10,7 +10,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token }}" />
 
                     <button class="active-payment-session-action btn-confirm d-inline-block" type="submit" style="color: #007bff; cursor: pointer">
-                        {{ _('active_payment_session_cancel') }} 
+                        {{ _("Discard cart & continue shopping") }} 
                     </button>
                 </form>
 

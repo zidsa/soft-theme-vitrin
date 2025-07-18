@@ -18,7 +18,7 @@
   {% endfor %}
   {% if (questions|length) >= 5 %}
     <div class="text-center questions-view_more">
-      <a href="/products-questions?id={{ product.id }}">{{ _('product_questions_view_all') }} </a>
+      <a href="/products-questions?id={{ product.id }}">{{ _("View all questions") }} </a>
     </div>
   {% endif %}
 {% else %}
@@ -41,11 +41,11 @@
         </svg>
       </div>
       <div class="content-box">
-        <p class="m-0 p-0">{{ _('product_question_empty') }} </p>
-        <p class="m-0 p-0">{{ _('product_question_empty_note') }} </p>
+        <p class="m-0 p-0">{{ _("There is no questions,") }} </p>
+        <p class="m-0 p-0">{{ _("you can ask for this product") }} </p>
       </div>
       <div class="button-box">
-        <button type="button" class="btn btn-primary btn-lg add-review-btn" id="addQuestionButton">{{ _('add_product_question') }} </button>
+        <button type="button" class="btn btn-primary btn-lg add-review-btn" id="addQuestionButton">{{ _("Add your question") }} </button>
       </div>
     </div>
   </div>

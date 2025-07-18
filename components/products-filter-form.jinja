@@ -6,16 +6,16 @@
 
     <div class="form-products-filter">
             <span class="text-color-primary d-none d-block"
-                  style="font-weight: bold">{{ _('products_list_filter_price') }}&nbsp;</span>
+                  style="font-weight: bold">{{ _("Price") }}&nbsp;</span>
         <div class="d-block filter-block-width">
 
             <div class="row">
                 <div class="col">
-                    <label>{{ _('products_list_filter_price_from') }}</label>
+                    <label>{{ _("From") }}</label>
                     <input name="from_price" type="number" class="form-control" placeholder="{{ session.currency.code }}">
                 </div>
                 <div class="col">
-                    <label>{{ _('products_list_filter_price_to') }}</label>
+                    <label>{{ _("To") }}</label>
                     <input name="to_price" type="number" class="form-control" placeholder="{{ session.currency.code }}">
                 </div>
             </div>
@@ -39,7 +39,7 @@
                             >
                             <span class="custom-checkmark custom-checkmark-small" style="top:-2px; left:3px"></span>
                         </span>
-                        <span class="custom-checkbox-label text">{{ _('products_page_show_sale_price') }}</span>
+                        <span class="custom-checkbox-label text">{{ _("Show discounted only") }}</span>
                     </label>
                 </span>
         </div>
@@ -47,11 +47,11 @@
         <div class="form-group mt-3 d-flex justify-content-end">
             <button id="products-list-filter-form-clear"
                     type="button" class="btn round btn-white" onclick="clearFilters()">
-                <span style="padding: 0px 20px">{{ _('clear') }}</span>
+                <span style="padding: 0px 20px">{{ _("Clear") }}</span>
             </button>&nbsp;&nbsp;
             <button id="products-list-filter-form-save"
                     type="submit" class="btn round primary">
-                <span style="padding: 0px 20px">{{ _('save') }}</span>
+                <span style="padding: 0px 20px">{{ _("Save") }}</span>
             </button>
         </div>
 

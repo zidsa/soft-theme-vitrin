@@ -16,578 +16,408 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-msgid "home_title"
+msgid "Home"
 msgstr "الصفحة الرئيسية"
 
-msgid "products"
+msgid "Products"
 msgstr "المنتجات"
 
-msgid "categories"
+msgid "All products"
+msgstr "جميع المنتجات"
+
+msgid "Categories"
 msgstr "التصنيفات"
 
-msgid "login"
+msgid "Login"
 msgstr "تسجيل الدخول"
 
-msgid "logout"
+msgid "Logout"
 msgstr "تسجيل خروج"
 
-msgid "hello"
+msgid "Hello"
 msgstr "اهلاً"
 
-msgid "product_is_not_taxable"
-msgstr "معفى من الضريبة"
-
-msgid "product_has_options"
-msgstr "متوفر بعدة خيارات"
-
-msgid "products_title"
-msgstr "جميع المنتجات"
-
-msgid "header_all_categories"
-msgstr "جميع التصنيفات"
-
-msgid "header_delivery_and_payment_options"
-msgstr "خيارات الدفع والتوصيل"
-
-msgid "customer_reviews"
-msgstr "آراء العملاء"
-
-msgid "common_requried_input_error"
-msgstr "هذا الحقل مطلوب"
-
-msgid "products_list_filter_show_more"
-msgstr "المزيد"
-
-msgid "search_placeholder"
-msgstr "ابحث"
-
-msgid "store_language"
-msgstr "اللغة"
-
-msgid "store_currency_country"
-msgstr "الدولة"
-
-msgid "or"
-msgstr "او"
-
-msgid "and"
-msgstr "و"
-
-msgid "ok"
-msgstr "موافق"
-
-msgid "sorry"
-msgstr "عفوا"
-
-msgid "search"
+msgid "Search"
 msgstr "إبحث"
 
-msgid "close"
-msgstr "اغلاق"
-
-msgid "welcome"
-msgstr "مرحباً"
-
-msgid "city"
-msgstr "مدينة"
-
-msgid "cities"
-msgstr "مدن"
-
-msgid "save"
-msgstr "حفظ"
-
-msgid "cancel"
+msgid "Cancel"
 msgstr "إلغاء"
 
-msgid "next"
-msgstr "التالي"
-
-msgid "prev"
-msgstr "السابق"
-
-msgid "edit"
-msgstr "تعديل"
-
-msgid "back"
-msgstr "الرجوع"
-
-msgid "language"
-msgstr "اللغة"
-
-msgid "before"
-msgstr "منذ"
-
-msgid "send"
+msgid "Send"
 msgstr "إرسال"
 
-msgid "clear"
+msgid "Sorry"
+msgstr "عفوا"
+
+msgid "Close"
+msgstr "اغلاق"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Clear"
 msgstr "مسح"
 
-msgid "order"
-msgstr "طلب"
-
-msgid "details"
-msgstr "التفاصيل"
-
-msgid "each"
-msgstr "للواحد"
-
-msgid "choose"
-msgstr "اختر"
-
-msgid "products_search_result"
-msgstr "نتائج البحث عن"
-
-msgid "no_result_found"
-msgstr "لا توجد نتائج بحث"
-
-msgid "products_more"
-msgstr "المزيد من المنتجات"
-
-msgid "products_list_empty"
-msgstr "لا يوجد منتجات"
-
-msgid "products_page_show_sale_price"
-msgstr "عرض التخفيضات فقط"
-
-msgid "products_list_sort"
-msgstr "ترتيب حسب"
-
-msgid "products_list_filter_latest"
-msgstr "الأحدث"
-
-msgid "products_list_filter_popularity"
-msgstr "الأكثر شعبية"
-
-msgid "products_list_filter_price_low"
-msgstr "الأقل سعر"
-
-msgid "products_list_filter_price_high"
-msgstr "الأعلى سعر"
-
-msgid "products_list_filter"
-msgstr "تصفية النتائج"
-
-msgid "products_list_filter_price"
-msgstr "السعر"
-
-msgid "products_list_filter_price_from"
+msgid "From"
 msgstr "من"
 
-msgid "products_list_filter_price_to"
+msgid "To"
 msgstr "إلى"
 
-msgid "products_list_result"
+msgid "And"
+msgstr "و"
+
+msgid "Cities"
+msgstr "مدن"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Prev"
+msgstr "السابق"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "Filter"
+msgstr "تصفية النتائج"
+
+msgid "Sort by"
+msgstr "ترتيب حسب"
+
+msgid "Most popular"
+msgstr "الأكثر شعبية"
+
+msgid "Low to high"
+msgstr "الأقل سعر"
+
+msgid "High to low"
+msgstr "الأعلى سعر"
+
+msgid "Newest"
+msgstr "الأحدث"
+
+msgid "Total products"
 msgstr "تم ايجاد"
 
-msgid "products_list_result_products"
+msgid "products"
 msgstr "منتج"
 
-msgid "empty_cart"
-msgstr "سلة التسوق فارغة"
+msgid "No products"
+msgstr "لا يوجد منتجات"
 
-msgid "cart_sidebar_title"
-msgstr "محتويات السلة"
-
-msgid "product_description_more"
-msgstr "المزيد من المعلومات"
-
-msgid "product_sku"
-msgstr "رمز المنتج"
-
-msgid "product_share"
-msgstr "شارك المنتج"
-
-msgid "product_description"
-msgstr "وصف المنتج"
-
-msgid "product_properties"
-msgstr "معلومات المنتج"
-
-msgid "product_options"
-msgstr "خيارات المنتج"
-
-msgid "product_product_readmore"
-msgstr "المزيد"
-
-msgid "add_to_cart"
-msgstr "اضف للسلة"
-
-msgid "product_price"
+msgid "Price"
 msgstr "السعر"
 
-msgid "product_all_available_options"
-msgstr "جميع الخيارات المتاحة"
+msgid "Show discounted only"
+msgstr "عرض التخفيضات فقط"
 
-msgid "product_cart_quantity"
-msgstr "الكمية"
-
-msgid "product_cart_quantity_low_stock"
-msgstr "متبقي %s فقط"
-
-msgid "product_discount"
-msgstr "وفر"
-
-msgid "product_weight"
-msgstr "الوزن"
-
-msgid "error_item_unavailable"
-msgstr "هذا الخيار غير متوفر"
-
-msgid "variants_no_image"
-msgstr "لا يوجد صور"
-
-msgid "product_images"
-msgstr "صور المنتج"
-
-msgid "product_reviews_more"
-msgstr "سنعراض المزيد من التقيمات"
-
-msgid "product_no_reviews"
-msgstr "لا توجد تقييمات, اترك تقييمك"
-
-msgid "product_sold_more_than_x_times"
+msgid "Sold more than %s times"
 msgstr "تم شراؤه أكثر من %s مرة"
 
-msgid "check_out_this_product"
+msgid "Remaining %s only"
+msgstr "متبقي %s فقط"
+
+msgid "more information"
+msgstr "المزيد من المعلومات"
+
+msgid "Discount"
+msgstr "وفر"
+
+msgid "product sku"
+msgstr "رمز المنتج"
+
+msgid "Weight"
+msgstr "الوزن"
+
+msgid "Quantity"
+msgstr "الكمية"
+
+msgid "This product is out of stock"
+msgstr "نفدت الكمية"
+
+msgid "add to cart"
+msgstr "اضف للسلة"
+
+msgid "Notify me when available"
+msgstr "نبهني عند التوفر"
+
+msgid "Available in several options"
+msgstr "متوفر بعدة خيارات"
+
+msgid "Tax free"
+msgstr "معفى من الضريبة"
+
+msgid "Option not available"
+msgstr "هذا الخيار غير متوفر"
+
+msgid "share product"
+msgstr "شارك المنتج"
+
+msgid "Check Out this Product"
 msgstr "اطَّلع على المنتج التالي"
 
-msgid "similar_products_title"
+msgid "Display all products"
+msgstr "عرض جميع المنتجات"
+
+msgid "product information"
+msgstr "معلومات المنتج"
+
+msgid "product description"
+msgstr "وصف المنتج"
+
+msgid "Product images"
+msgstr "صور المنتج"
+
+msgid "price"
+msgstr "السعر"
+
+msgid "No images"
+msgstr "لا يوجد صور"
+
+msgid "You may also like"
 msgstr "قد يعجبك أيضاً"
 
-msgid "product_reviews"
+msgid "Cart"
+msgstr "سلة الشراء"
+
+msgid "Cart items"
+msgstr "محتويات السلة"
+
+msgid "Cart is empty"
+msgstr "السلة فارغة"
+
+msgid "Product"
+msgstr "المنتج"
+
+msgid "Total summary"
+msgstr "تفاصيل الفاتورة"
+
+msgid "name"
+msgstr "الوصف"
+
+msgid "value"
+msgstr "القيمة"
+
+msgid "Discount coupon"
+msgstr "كوبون الخصم"
+
+msgid "Enter discount coupon"
+msgstr "ادخل كود الخصم"
+
+msgid "Purchase"
+msgstr "متابعة الشراء"
+
+msgid "continue shopping"
+msgstr "العودة للتسوق"
+
+msgid "Enjoy free shipping for the cities"
+msgstr "تمتع بالشحن المجاني للمدن التالية"
+
+msgid "Free Shipping"
+msgstr "شحن مجاني"
+
+msgid "Read More"
+msgstr "اعرف المزيد"
+
+msgid "No Result Found"
+msgstr "لا توجد نتائج بحث"
+
+msgid "Reviews"
 msgstr "التقييمات"
 
-msgid "product_reviews_x_count"
-msgstr "تقييم"
+msgid "Add Comment "
+msgstr "اضف تقييمك"
 
-msgid "product_average_rating"
-msgstr "التقييم العام"
-
-msgid "product_price_vat_inclusive"
-msgstr "السعر شامل ضريبة القيمة المضافة"
-
-msgid "product_price_vat_exclusive"
-msgstr "السعر غير شامل ضريبة القيمة المضافة"
-
-msgid "product_reviews_form_title"
-msgstr "اترك تقييمك"
-
-msgid "product_reviews_is_anonymous_label"
-msgstr "لا تظهر اسمي في قائمة آراء العملاء"
-
-msgid "product_reviews_form_body_placeholder"
-msgstr "اكتب تعليقك هنا.."
-
-msgid "product_reviews_form_send"
-msgstr "إرسال التقييم"
-
-msgid "reviews_submit_success"
-msgstr "شكرًا لتقييمك، سيتم مراجعة التقييم ونشره على المتجر"
-
-msgid "reviews_submit_failed"
-msgstr "عذراً٬ حصل خطأ.. الرجاء المحاولة مرة أخرى"
-
-msgid "reviews_validate_comment_required"
-msgstr "الرجاء إضافة تعليق"
-
-msgid "reviews_validate_comment_max"
-msgstr "تعليقك تخطى الحد المطلوب من عدد الأحرف"
-
-msgid "reviews_validate_comment_min"
-msgstr "يجب أن يحتوي التعليق على 3 أحرف على الأقل"
-
-msgid "reviews_validate_rating"
-msgstr "الرجاء ترك تقييم"
-
-msgid "reviews_rating_1"
-msgstr "سيئ"
-
-msgid "reviews_rating_2"
-msgstr "لم يعجبني"
-
-msgid "reviews_rating_3"
-msgstr "جيد"
-
-msgid "reviews_rating_4"
-msgstr "ممتاز"
-
-msgid "reviews_rating_5"
+msgid "Great"
 msgstr "رائع"
 
-msgid "profile.title"
-msgstr "الملف الشخصي"
+msgid "Excellent"
+msgstr "ممتاز"
 
-msgid "profile.personal_info"
+msgid "Good"
+msgstr "جيد"
+
+msgid "Dislike"
+msgstr "لم يعجبني"
+
+msgid "Bad"
+msgstr "سيئ"
+
+msgid "No reviews, add yours"
+msgstr "لا توجد تقييمات, اترك تقييمك"
+
+msgid "All reviews"
+msgstr "جميع التقييمات"
+
+msgid "Questions"
+msgstr "الأسئلة"
+
+msgid "Add your question"
+msgstr "إضافة سؤالك"
+
+msgid "View all questions"
+msgstr "عرض جميع الأسئلة"
+
+msgid "There is no questions,"
+msgstr "لا يوجد أسئلة سابقة،"
+
+msgid "you can ask for this product"
+msgstr "يمكنك إضافة سؤالك لمعرفة المزيد حول المنتج"
+
+msgid "Write your question here"
+msgstr "اكتب سؤالك هنا"
+
+msgid "This field is required"
+msgstr "هذا الحقل مطلوب"
+
+msgid "Email is incorrect"
+msgstr "البريد الإلكتروني غير صحيح"
+
+msgid "Send as anonymous"
+msgstr "إرسال كمجهول"
+
+msgid "Your question has been sent successfully. You will receive a notification if it is answered."
+msgstr "تم إرسال سؤالك بنجاح سيصلك تنبيه في حال تمت الإجابة عليه"
+
+msgid "Personal Information"
 msgstr "المعلومات الشخصية"
 
-msgid "profile.personal_info_description"
+msgid "Your contact information"
 msgstr "معلومات التواصل الخاصه بك"
 
-msgid "profile.addresses"
+msgid "Addresses"
 msgstr "دليل العناوين"
 
-msgid "profile.addresses_description"
+msgid "Through the address book, you can add and edit your favorite addresses"
 msgstr "من خلال دليل العنواين يمكنك إضافة و تعديل عناوينك المفضلة"
 
-msgid "profile.orders"
-msgstr "الطلبات"
-
-msgid "profile.orders_description"
-msgstr "من خلال قائمة الطلبات يمكنك إستعراض الطلبات السابقة و الحالية"
-
-msgid "profile.wishlist"
-msgstr "قائمة اﻷمنيات"
-
-msgid "profile.wishlist_description"
-msgstr "من خلال قائمة الأمنيات يمكنك استعراض المنتجات وحذف المنتجات المفضلة"
-
-msgid "add_new_address"
+msgid "Add new Address"
 msgstr "إضافة عنوان جديد"
 
-msgid "wishlist_no_items"
-msgstr "لم تتم إضافة منتجات إلى قائمة اﻷمنيات"
-
-msgid "shareLabel"
-msgstr "مشاركة"
-
-msgid "location_on_map"
+msgid "location on map"
 msgstr "الموقع على الخريطة"
 
-msgid "navBar.allProducts"
-msgstr "جميع المنتجات"
+msgid "Orders"
+msgstr "الطلبات"
 
-msgid "footer_vat_number"
+msgid "Through the list of orders, you can view previous and current orders"
+msgstr "من خلال قائمة الطلبات يمكنك إستعراض الطلبات السابقة و الحالية"
+
+msgid "Wishlist"
+msgstr "قائمة اﻷمنيات"
+
+msgid "Through the wish list you can browse products and delete favorite products"
+msgstr "من خلال قائمة الأمنيات يمكنك استعراض المنتجات وحذف المنتجات المفضلة"
+
+msgid "Shipping Option"
+msgstr "خيارات الشحن"
+
+msgid "Coverd Cities"
+msgstr "المدن التى يتم تغطيتها"
+
+msgid "Shipping Charges "
+msgstr "تكلفة الشحن"
+
+msgid "Payment Upon Receopt"
+msgstr "الدفع عند الاستلام"
+
+msgid "Payment and delivery options"
+msgstr "خيارات الدفع والتوصيل"
+
+msgid "List of supported shipping options"
+msgstr "قائمة خيارات الشحن المدعومة"
+
+msgid "Payment Options"
+msgstr "خيارات الدفع"
+
+msgid "List of supported payment options"
+msgstr "قائمة خيارات الدفع المدعومة"
+
+msgid "Bank Accounts"
+msgstr " الحسابات البنكية"
+
+msgid " Bank accounts for regular transfers  "
+msgstr " الحسابات البنكية للحولات العادية"
+
+msgid "IBAN Number"
+msgstr "رقم الآيبان"
+
+msgid "account number"
+msgstr "رقم الحساب"
+
+msgid "Package"
+msgstr "طرد"
+
+msgid "Riyadh"
+msgstr "الرياض"
+
+msgid "Inside Merchant City"
+msgstr "داخل مدينة التاجر"
+
+msgid "Outside Merchant City"
+msgstr "خارج مدينة التاجر"
+
+msgid "Our place"
+msgstr "العنوان"
+
+msgid "Contact us"
+msgstr "وسائل التواصل"
+
+msgid "The VAT number:"
 msgstr "الرقم الضريبي:"
 
-msgid "footer_commercial_registration_number"
+msgid "The commercial register number:"
 msgstr "رقم السجل التجاري:"
 
-msgid "title_404"
+msgid "Page not found"
 msgstr "لم يتم أيجاد الصفحة"
 
-msgid "go_to_home"
+msgid "Go to Home"
 msgstr "العودة للصفحة الرئيسية"
 
-msgid "redirect_message"
+msgid "You will be redirected to the home page in"
 msgstr "سيتم تحويلك للصفحة الرئيسية خلال"
 
 msgid "seconds"
 msgstr "ثواني"
 
-msgid "order_id"
-msgstr "رقم الطلب"
-
-msgid "order_status"
-msgstr "حالة الطلب"
-
-msgid "order_date"
-msgstr "تاريخ الطلب"
-
-msgid "order_total"
-msgstr "المجموع"
-
-msgid "add_product_review"
-msgstr "اضف تقييمك"
-
-msgid "leave_comment"
-msgstr " اترك تقييمك"
-
-msgid "donot_leave_comment"
-msgstr "لا تظهر اسمى فى قائمة العملاء "
-
-msgid "write_your_comment"
-msgstr " اكتب تعليقك هنا"
-
-msgid "send_evaluation"
-msgstr "ارسال تقييم"
-
-msgid "remaining_text"
-msgstr "عدد الحروف المتبقية :250"
-
-msgid "sent_successfully"
+msgid "Send Successfully"
 msgstr "تم الإرسال بنجاح"
 
-msgid "bundle_offer_all_products"
-msgstr "عرض جميع المنتجات"
-
-msgid "lbl_error_product_not_exist"
-msgstr "هذا المنتج لم يعد متوفراً"
-
-msgid "lbl_error_product_out_of_stock"
-msgstr "نفدت الكمية"
-
-msgid "btn_error_product_out_of_stock"
-msgstr "نبهني عند التوفر"
-
-msgid "lbl_error_product_quantity_exceed"
-msgstr "لا توجد كمية إضافية كافية من هذا المنتج"
-
-msgid "notify_me_title"
-msgstr "نبهني عند التوفر"
-
-msgid "notify_me_hint"
-msgstr "أدخل البريد الإلكتروني"
-
-msgid "notify_me_hint_name"
-msgstr "أدخل الإسم"
-
-msgid "notify_me_hint_mobile"
-msgstr "ادخل رقم الجوال (إختياري)"
-
-msgid "notify_me_submit"
-msgstr "تفعيل الإشعار"
-
-msgid "notify_me_submit_done"
-msgstr "تم تفعيل الإشعار"
-
-msgid "notify_me_failed"
+msgid "failed to send"
 msgstr "حدث خطأ! الرجاء اعادة الارسال."
 
-msgid "cart_view_title"
-msgstr "سلة الشراء"
+msgid "Notify me when product is available"
+msgstr "نبهني عند التوفر"
 
-msgid "cart_products_title"
-msgstr "المنتجات"
+msgid "Enter your name"
+msgstr "أدخل الإسم"
 
-msgid "cart_break_down_summary"
-msgstr "تفاصيل الفاتورة"
+msgid "Enter your email"
+msgstr "أدخل البريد الإلكتروني"
 
-msgid "cart_header_product"
-msgstr "المنتج"
+msgid "Enter your phone (Optional)"
+msgstr "ادخل رقم الجوال (إختياري)"
 
-msgid "cart_header_quantity"
-msgstr "الكمية"
-
-msgid "cart_header_price"
-msgstr "السعر"
-
-msgid "cart_list_empty"
-msgstr "السلة فارغة"
-
-msgid "cart_totals_title"
-msgstr "الوصف"
-
-msgid "cart_totals_description"
-msgstr "القيمة"
-
-msgid "cart_continue_to_purchase"
-msgstr "متابعة الشراء"
-
-msgid "cart_back_to_store"
-msgstr "العودة للتسوق"
-
-msgid "coupon_discount"
-msgstr "كوبون الخصم"
-
-msgid "coupon_discount_enter"
-msgstr "ادخل كود الخصم"
-
-msgid "coupon_discount_submit"
-msgstr "إرسال"
-
-msgid "coupon_discount_free_shipping"
-msgstr "شحن مجاني"
-
-msgid "enjoy_free_shipping_cities"
-msgstr "تمتع بالشحن المجاني للمدن التالية"
-
-msgid "shipping_option"
-msgstr "خيارات الشحن"
-
-msgid "covered_cities"
-msgstr "المدن التى يتم تغطيتها"
-
-msgid "shipping_charges"
-msgstr "تكلفة الشحن"
-
-msgid "payment_upon_receipt"
-msgstr "الدفع عند الاستلام"
-
-msgid "package"
-msgstr "طرد"
-
-msgid "riyadh"
-msgstr "الرياض"
-
-msgid "inside_merchant_city"
-msgstr "داخل مدينة التاجر"
-
-msgid "outside_merchant_city"
-msgstr "خارج مدينة التاجر"
-
-msgid "list_of_shipping_options"
-msgstr "قائمة خيارات الشحن المدعومة"
-
-msgid "payment_options"
-msgstr "خيارات الدفع"
-
-msgid "list_of_payment_options"
-msgstr "قائمة خيارات الدفع المدعومة"
-
-msgid "bank_accounts"
-msgstr " الحسابات البنكية"
-
-msgid "bank_accounts_regular_transfers"
-msgstr " الحسابات البنكية للحولات العادية"
-
-msgid "shipping_payments_th_banks_account_owner"
-msgstr "اسم المحول له"
-
-msgid "shipping_payments_th_banks_account_iban"
-msgstr "رقم الآيبان"
-
-msgid "shipping_payments_th_banks_account_number"
-msgstr "رقم الحساب"
-
-msgid "business_location"
-msgstr "العنوان"
-
-msgid "social_media"
-msgstr "وسائل التواصل"
-
-msgid "active_payment_session_notification"
+msgid "You have an active payment session in another browser, you can't edit the cart contents"
 msgstr "يوجد لديك عملية دفع قائمة في صفحة أخرى للمتجر، لا يمكنك تعديل محتويات السلة"
 
-msgid "active_payment_session_cancel"
+msgid "Discard cart & continue shopping"
 msgstr "إلغاء السلة و متابعة الشراء"
 
-msgid "go_all_reviews"
-msgstr "جميع التقييمات"
+# System keys that may not have translations in the JSON file
+msgid "sys_lbl_cart_includes_vat"
+msgstr "شامل ضريبة القيمة المضافة"
 
-msgid "read_more"
-msgstr "اعرف المزيد"
+msgid "cart_send_as_gift_info"
+msgstr "إرسال كهدية"
 
-msgid "product_questions"
-msgstr "الأسئلة"
+msgid "cart_gift_card_info_message"
+msgstr "رسالة الهدية"
 
-msgid "add_product_question"
-msgstr "إضافة سؤالك"
-
-msgid "add_product_question_placholder"
-msgstr "اكتب سؤالك هنا"
-
-msgid "add_product_question_name"
-msgstr "الاسم"
-
-msgid "add_product_question_email"
-msgstr "البريد الإلكتروني"
-
-msgid "add_product_question_anonymous"
-msgstr "إرسال كمجهول"
-
-msgid "question_submit_success"
-msgstr "تم إرسال سؤالك بنجاح سيصلك تنبيه في حال تمت الإجابة عليه"
-
-msgid "product_question_empty"
-msgstr "لا يوجد أسئلة سابقة،"
-
-msgid "product_question_empty_note"
-msgstr "يمكنك إضافة سؤالك لمعرفة المزيد حول المنتج"
-
-msgid "product_questions_view_all"
-msgstr "عرض جميع الأسئلة"
-
-msgid "common_requried_email_input_error"
-msgstr "البريد الإلكتروني غير صحيح"
+msgid "shipping_payments_th_shipping_cities_search"
+msgstr "ابحث عن المدينة"

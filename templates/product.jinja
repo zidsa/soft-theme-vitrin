@@ -133,12 +133,12 @@
                                     {% if product.sold_products_count %}
                                         <div class="product-count d-flex align-items-center">
                                             <span class="icon-military_tech" style="color: #FFCF57; font-size: 16px"></span>&nbsp;
-                                            <span class="lang">{{ _('product_sold_more_than_x_times') | format(product.sold_products_count) }}</span>
+                                            <span class="lang">{{ _("Sold more than %s times") | format(product.sold_products_count) }}</span>
                                         </div>
                                     {% elif product.selected_product.sold_products_count %}
                                         <div class="product-count d-flex align-items-center">
                                             <span class="icon-military_tech" style="color: #FFCF57; font-size: 16px"></span>&nbsp;
-                                            <span class="lang">{{ _('product_sold_more_than_x_times') | format(product.selected_product.sold_products_count) }}</span>
+                                            <span class="lang">{{ _("Sold more than %s times") | format(product.selected_product.sold_products_count) }}</span>
                                         </div>
                                     {% endif %}
 
@@ -146,7 +146,7 @@
                                     {% if product.low_stock_quantity %}
                                         <div class="low-quantity-section d-inline-block">
                                             <span class="icon-flag_black" style="color: #EC5550; font-size: 16px"></span>&nbsp;
-                                            <span class="low-quantity">{{ _('product_cart_quantity_low_stock') | format(product.low_stock_quantity) }}</span>
+                                            <span class="low-quantity">{{ _("Remaining %s only") | format(product.low_stock_quantity) }}</span>
                                         </div>
                                     {% endif %}
 
@@ -163,7 +163,7 @@
                                 {% if product.short_description %}
                                     <p class="text-short-description">
                                         {{ product.short_description | safe }}
-                                        &nbsp;<a id="product-description-a" href="#product-description" class="text-color-primary">{{ _('product_description_more') }}</a>
+                                        &nbsp;<a id="product-description-a" href="#product-description" class="text-color-primary">{{ _("more information") }}</a>
                                     </p>
                                 {% endif %}
                                 <div class="d-flex">
@@ -171,7 +171,7 @@
                                         <h2 class="product-formatted-price theme-text-primary">{% if product.selected_product.formatted_sale_price %}{{ product.selected_product.formatted_sale_price }}{% else %}{{ product.selected_product.formatted_price }}{% endif %}</h2>
                                         <p>
                                             <del class="product-formatted-price-old">{% if product.selected_product.formatted_sale_price %} {{ product.selected_product.formatted_price }}{% endif %}</del>
-                                            <span class="product-formatted-price-discount" style="color:#f25f5f;">{% if product.selected_product.formatted_sale_price %}  &nbsp;  &nbsp;{{ _('product_discount') }}&nbsp;{{ product.discount_percentage }}%{% endif %}</span>
+                                            <span class="product-formatted-price-discount" style="color:#f25f5f;">{% if product.selected_product.formatted_sale_price %}  &nbsp;  &nbsp;{{ _("Discount") }}&nbsp;{{ product.discount_percentage }}%{% endif %}</span>
                                         </p>
                                     </div>
 
@@ -189,14 +189,14 @@
 
                             <div class="border-product"></div>
                             <div style="margin-bottom: 25px" class="div-product-sku {% if not product.selected_product.sku %}d-none{% endif %}">
-                                <h4 class="product-title">{{ _('product_sku') }}</h4>
+                                <h4 class="product-title">{{ _("product sku") }}</h4>
                                 <div class="product-sku">
                                     {{ product.selected_product.sku }}
                                 </div>
                             </div>
 
                             <div style="margin-bottom: 25px" class="div-product-weight {% if not product.selected_product.weight.value %}d-none{% endif %}">
-                                <h4 class="product-title">{{ _('product_weight') }}</h4>
+                                <h4 class="product-title">{{ _("Weight") }}</h4>
                                 <div class="product-weight">
                                     {{ product.selected_product.weight.value }}&nbsp;{{ product.selected_product.weight.unit }}
                                 </div>
@@ -219,7 +219,7 @@
                                 {% if product.selected_product.is_infinite or product.selected_product.quantity > 0 %}
                                     <div class="border-product" style="margin-top: 15px"></div>
                                     <div class="select-quantity-div">
-                                        <h4 class="product-title">{{ _('product_cart_quantity') }}</h4>
+                                        <h4 class="product-title">{{ _("Quantity") }}</h4>
                                         <div class="form-group">
                                             <div>
                                                 <select  id="product-quantity" name="quantity" class="select-quantity">
@@ -241,24 +241,24 @@
                                 <div class="section-out-of-stock-notify-me {% if product.selected_product.out_of_stock %}d-block{% else %}d-none{% endif %}">
                                     <div class="border-product" style="margin-top: 15px"></div>
                                     <div>
-                                        <h4 class="product-title">{{ _('lbl_error_product_out_of_stock') }}</h4>
+                                        <h4 class="product-title">{{ _("This product is out of stock") }}</h4>
                                         <form>
                                             <input type="hidden" class="send-notify-product-id" value="{{ product.selected_product.id }}">
                                             <div class="form-group form-notify-me">
-                                                <h4>{{ _('notify_me_title') }}</h4>
+                                                <h4>{{ _("Notify me when product is available") }}</h4>
                                                 
-                                                <input class="form-control send-notify-name" value="" type="text" placeholder="{{ _('notify_me_hint_name') }}" />
-                                                <input class="form-control send-notify-email" type="email" value="" placeholder="{{ _('notify_me_hint') }}" />
+                                                <input class="form-control send-notify-name" value="" type="text" placeholder="{{ _("Enter your name") }}" />
+                                                <input class="form-control send-notify-email" type="email" value="" placeholder="{{ _("Enter your email") }}" />
                                                 <div class="d-flex form-notify-me-phone-row">
                                                     <input class="form-control send-notify-country-key"
                                                         type="number"
                                                         placeholder="966" maxlength="4" />
-                                                    <input class="form-control send-notify-phone" type="number"  value="" placeholder="{{ _('notify_me_hint_mobile') }}" maxlength="10" />
+                                                    <input class="form-control send-notify-phone" type="number"  value="" placeholder="{{ _("Enter your phone (Optional)") }}" maxlength="10" />
                                                 </div>
                                                 <div class="form-notify-me-submit-button-row">
                                                     <button type="button" class="btn btn-primary btn-send-notify" onclick="sendProductNotifyMe()">
                                                     <img class="send-notify-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
-                                                    {{ _('send') }}
+                                                    {{ _("Send") }}
                                                     </button>
                                                 </div>
                                             
@@ -276,7 +276,7 @@
                                           class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
                                       <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
                                       <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
-                                      <span>{{ _('add_to_cart') }}</span>
+                                      <span>{{ _("add to cart") }}</span>
                                   </button>
                                   {% if store.settings.products.wishlist_enabled == true %}
                                     <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
@@ -299,13 +299,13 @@
 
                             <div class="border-product"></div>
                             <div class="border-product">
-                                <h4 class="product-title">{{ _('product_share') }}</h4>
+                                <h4 class="product-title">{{ _("share product") }}</h4>
                                 <div class="product-icon">
                                     <div class="product-social d-flex">
                                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.html_url }}" target="_blank"><i class="icon-facebook-f"></i></a>
                                         <a href="https://www.pinterest.com/pin/create/button/?url={{ product.html_url }}" target="_blank"><i class="icon-pinterest"></i></a>
                                         <a href="https://twitter.com/intent/tweet?text={{ product.name }}: {{ product.html_url }}" target="_blank"><i class="icon-twitter"></i></a>
-                                        <a href="https://api.whatsapp.com/send?text={{ _('check_out_this_product') }} :{{ product.name }} {{ product.html_url }}" target="_blank">
+                                        <a href="https://api.whatsapp.com/send?text={{ _("Check Out this Product") }} :{{ product.name }} {{ product.html_url }}" target="_blank">
                                             <i class="icon-whatsapp"></i>
                                         </a>
                                     </div>
@@ -341,7 +341,7 @@
                     </div>
                     {% if product.bundle_offer and product.bundle_offer.products.results | length > 5 %}
                     <div class="bundle-offer-more">
-                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ _('bundle_offer_all_products') }}</a>
+                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ _("Display all products") }}</a>
                     </div>
                     {% endif %}
                 </div>
@@ -357,7 +357,7 @@
                             <span class="icon-fact_check_black"></span>
                         </div>
                         <div class="description-title">
-                           {{ _('product_properties') }}
+                           {{ _("product information") }}
                         </div>
                     </div>
                     <div class="description-paragrah text-justify description-text-clear">
@@ -373,7 +373,7 @@
                             <span class="icon-fact_check_black"></span>
                         </div>
                         <div class="description-title">
-                            {{ _('product_description') }}
+                            {{ _("product description") }}
                         </div>
                     </div>
                     <div class="description-paragrah text-justify description-text-clear">
@@ -390,7 +390,7 @@
                                 <span class="icon-format_list_bulleted"></span>
                             </div>
                             <div class="description-title">
-                                {{ _('product_options') }}
+                                {{ _("product description") }}
                             </div>
                         </div>
 
@@ -401,8 +401,8 @@
                                         {% for option in product.options %}
                                             <div class="col">{{option.name}}</div>
                                         {% endfor %}
-                                        <div class="col col-price">{{ _('product_images') }}</div>
-                                        <div class="col col-price">{{ _('product_price') }}</div>
+                                        <div class="col col-price">{{ _("Product images") }}</div>
+                                        <div class="col col-price">{{ _("price") }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -439,12 +439,12 @@
                                                             {% endfor %}
                                                         </div>
                                                     {% else %}
-                                                        <span class="d-none d-lg-inline">{{ _('variants_no_image') }}</span>
+                                                        <span class="d-none d-lg-inline">{{ _("No images") }}</span>
                                                     {% endif %}
                                                 </div>
 
                                                 <div class="col m-col">
-                                                    <span class="variant-name-sm d-inline-block d-lg-none">{{ _('product_price') }}</span>
+                                                    <span class="variant-name-sm d-inline-block d-lg-none">{{ _("price") }}</span>
                                                     {% if variant.formatted_sale_price %}
                                                         <h4 style="font-size: 1.2rem" class="price-detail d-inline-block">{{ variant.formatted_sale_price }}
                                                             <del>{{ variant.formatted_price }}</del>
@@ -475,7 +475,7 @@
                                 <span class="icon-reviews_black"></span>
                             </div>
                             <div class="description-title">
-                                {{ _('product_reviews') }}
+                                {{ _("Reviews") }}
                             </div>
                             {% if product.rating %}
                             <div class="rating-section">
@@ -488,7 +488,7 @@
 
                             &nbsp;
                             <!-- Button trigger modal -->
-                            <a href="/products/{{ product.slug}}/reviews/add" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>{{ _('add_product_review') }}</a>
+                            <a href="/products/{{ product.slug}}/reviews/add" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }}</a>
                         </div>
                         <div class="reviews-break-down-div description-paragrah">
                             <div class="d-flex align-items-center mt-3 mb-4">
@@ -504,7 +504,7 @@
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span> &nbsp;  &nbsp;
-                                        <span>{{ _('reviews_rating_5') }}</span>
+                                        <span>{{ _("Great") }}</span>
                                     </div>
                                     <div class="row card-rate">
                                         <span class="rating_count_4">{{ product.rating['ratings_4'].count }}</span>
@@ -513,7 +513,7 @@
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>{{ _('reviews_rating_4') }}</span>
+                                        <span>{{ _("Excellent") }}</span>
                                     </div>
                                     <div class="row card-rate">
                                         <span class="rating_count_3">{{ product.rating['ratings_3'].count }}</span>
@@ -522,7 +522,7 @@
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>{{ _('reviews_rating_3') }}</span>
+                                        <span>{{ _("Good") }}</span>
                                     </div>
                                     <div class="row card-rate">
                                         <span class="rating_count_2">{{ product.rating['ratings_2'].count }}</span>
@@ -531,7 +531,7 @@
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>{{ _('reviews_rating_2') }}</span>
+                                        <span>{{ _("Dislike") }}</span>
                                     </div>
                                     <div class="row card-rate">
                                         <span class="rating_count_1">{{ product.rating['ratings_1'].count }}</span>
@@ -540,7 +540,7 @@
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                                        <span>{{ _('reviews_rating_1') }}</span>
+                                        <span>{{ _("Bad") }}</span>
                                     </div>
                                 </div>
                                 {% endif %}
@@ -548,7 +548,7 @@
                         </div>
                         <div class="reviews-break-down-empty description-paragrah d-none">
                             <div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
-                                <span>{{ _('product_no_reviews') }}</span>
+                                <span>{{ _("No reviews, add yours") }}</span>
                             </div>
                         </div>
 
@@ -558,7 +558,7 @@
                             {% if product.reviews.next_page > 1 %}
                             <div class="text-right">
                                 <a href="/products/{{ product.id }}/reviews" type="button" class="btn all-reviews-btn">
-                                    {{ _('go_all_reviews') }}
+                                    {{ _("All reviews") }}
                                 </a>
                             </div>
                             {% endif %}
@@ -575,10 +575,10 @@
                             <span class="icon-reviews_black"></span>
                         </div>
                         <div class="description-title">
-                            {{ _('product_questions') }}
+                            {{ _("Questions") }}
                         </div>
                           {% if product.questions %}
-                          <button type="button" class="btn btn-primary add-review-btn" id="addQuestionButton"><span class="icon-add_circle"></span>{{ _('add_product_question') }}</button>
+                          <button type="button" class="btn btn-primary add-review-btn" id="addQuestionButton"><span class="icon-add_circle"></span>{{ _("Add your question") }}</button>
                           {% endif %}
                     </div>
                 </div>
@@ -594,7 +594,7 @@
                             <span class="icon-uniE011"></span>
                         </div>
                         <div class="description-title">
-                            <div class="">{{ _('similar_products_title') }}</div>
+                            <div class="">{{ _("You may also like") }}</div>
                         </div>
                     </div>
                     <div class="description-paragrah">
@@ -693,7 +693,7 @@
                     }
 
                 }else{
-                    toastr.error(response.data.message, '{{ _('sorry') }}')
+                    toastr.error(response.data.message, '{{ _("Sorry") }}')
                 }
                 $('.add-to-cart-progress').addClass('d-none');
             })
@@ -709,7 +709,7 @@
                     if(selected_product.formatted_sale_price){
                         $('.product-formatted-price').html(selected_product.formatted_sale_price)
                         $('.product-formatted-price-old').html(selected_product.formatted_price)
-                        $('.product-formatted-price-discount').html('{{ _('product_discount') }}'+' '+selected_product.discount_percentage+'%')
+                        $('.product-formatted-price-discount').html('{{ _("Discount") }}'+' '+selected_product.discount_percentage+'%')
 
                     }else{
                         $('.product-formatted-price').html(selected_product.formatted_price)
@@ -734,7 +734,7 @@
 
                     {% if store.settings.products.low_stock_label_enabled %}
                     var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_limit }};
-                    var low_stock_message = '{{ _('product_cart_quantity_low_stock') }}';
+                    var low_stock_message = '{{ _("Remaining %s only") }}';
 
                     if(!selected_product.is_infinite &&  selected_product.quantity < store_low_stock_limit){
                         $('.low-quantity-section').addClass('d-inline-block');
@@ -744,7 +744,7 @@
                     }
                     {% endif %}
 
-                    var sold_product_count_message = '{{ _('product_sold_more_than_x_times') }}';
+                    var sold_product_count_message = '{{ _("Sold more than %s times") }}';
                     if (selected_product.sold_products_count) {
                         $('.product-count').removeClass('d-none');
                         $('.product-count .lang').html(sold_product_count_message.replace('%s', selected_product.sold_products_count))
@@ -778,7 +778,7 @@
                     $('.product-buttons').removeClass('d-none');
                     $('.section-out-of-stock-notify-me').addClass('d-none');
 
-                    $('.btn-add-to-cart span').html('{{ _('add_to_cart') }}');
+                    $('.btn-add-to-cart span').html('{{ _("add to cart") }}');
 
                     updateProductImages(selected_product);
                 } else {
@@ -786,7 +786,7 @@
                     if(selected_product.formatted_sale_price){
                         $('.product-formatted-price').html(selected_product.formatted_sale_price)
                         $('.product-formatted-price-old').html(selected_product.formatted_price)
-                        $('.product-formatted-price-discount').html('{{ _('product_discount') }}'+' '+selected_product.discount_percentage+'%')
+                        $('.product-formatted-price-discount').html('{{ _("Discount") }}'+' '+selected_product.discount_percentage+'%')
 
                     } else{
                         $('.product-formatted-price').html(selected_product.formatted_price)
@@ -797,7 +797,7 @@
                     $('.product-buttons').addClass('d-none');
                     $('.section-out-of-stock-notify-me').removeClass('d-none');
 
-                    $('.btn-add-to-cart span').html('{{ _('error_item_unavailable') }}');
+                    $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
 
                     if(selected_product.sku){
                         $('.div-product-sku').removeClass('d-none');
@@ -814,7 +814,7 @@
                 $('.product-buttons').addClass('d-none');
                 $('.section-out-of-stock-notify-me').removeClass('d-none');
 
-                $('.btn-add-to-cart span').html('{{ _('error_item_unavailable') }}');
+                $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
 
                 updateProductImages(selected_product);
             }
@@ -896,12 +896,12 @@
                  countryCode + $('.send-notify-phone').val(),
                 ).then(function (response) {
                 if(response.status  === 'success'){
-                    toastr.success('{{ _('sent_successfully') }}', null)
+                    toastr.success('{{ _("Send Successfully") }}', null)
                 }else{
                     if(response && response.data && response.data.message) {
-                        toastr.error(JSON.stringify(response.data.message), '{{ _('sorry') }}')
+                        toastr.error(JSON.stringify(response.data.message), '{{ _("Sorry") }}')
                     }else {
-                        toastr.error('{{ _('notify_me_failed') }}', '{{ _('sorry') }}')
+                        toastr.error('{{ _("failed to send") }}', '{{ _("Sorry") }}')
                     }
                 }
                 $('.send-notify-progress').addClass('d-none');

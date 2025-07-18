@@ -26,7 +26,7 @@
                <span class="icon-reviews_black"></span>
             </div>
             <div class="description-title">
-                {{ _('product_reviews') }} 
+                {{ _("Reviews") }} 
             </div>
              {% if product.rating %}
                 <div class="rating-section">
@@ -39,7 +39,7 @@
 
             &nbsp;
             <!-- Button trigger modal -->
-            <a href="/products/{{ product.id}}/reviews/add" class="btn btn-primary add-review-btn"><span class="icon-add_circle"></span>{{ _('add_product_review') }} </a>
+            <a href="/products/{{ product.id}}/reviews/add" class="btn btn-primary add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }} </a>
          </div>
          <div class="reviews-break-down-div description-paragrah">
             <div class="d-flex align-items-center mt-3 mb-4">
@@ -55,7 +55,7 @@
                          <span class="icon-star1"></span>
                          <span class="icon-star1"></span>
                          <span class="icon-star1"></span> &nbsp;  &nbsp;
-                         <span>{{ _('reviews_rating_5') }} </span>
+                         <span>{{ _("Great") }} </span>
                       </div>
                       <div class="row card-rate">
                          <span class="rating_count_4">{{ product.rating['4_ratings'].count }}</span>
@@ -64,7 +64,7 @@
                          <span class="icon-star1"></span>
                          <span class="icon-star1"></span>
                          <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                         <span>{{ _('reviews_rating_4') }} </span>
+                         <span>{{ _("Excellent") }} </span>
                       </div>
                       <div class="row card-rate">
                          <span class="rating_count_3">{{ product.rating['3_ratings'].count }}</span>
@@ -73,7 +73,7 @@
                          <span class="icon-star1"></span>
                          <span class="icon-star1 deactive"></span>
                          <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                         <span>{{ _('reviews_rating_3') }} </span>
+                         <span>{{ _("Good") }} </span>
                       </div>
                       <div class="row card-rate">
                          <span class="rating_count_2">{{ product.rating['2_ratings'].count }}</span>
@@ -82,7 +82,7 @@
                          <span class="icon-star1 deactive"></span>
                          <span class="icon-star1 deactive"></span>
                          <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                         <span>{{ _('reviews_rating_2') }} </span>
+                         <span>{{ _("Dislike") }} </span>
                       </div>
                       <div class="row card-rate">
                          <span class="rating_count_1">{{ product.rating['1_ratings'].count }}</span>
@@ -91,7 +91,7 @@
                          <span class="icon-star1 deactive"></span>
                          <span class="icon-star1 deactive"></span>
                          <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
-                         <span>{{ _('reviews_rating_1') }} </span>
+                         <span>{{ _("Bad") }} </span>
                       </div>
                    </div>
                 {% endif %}
@@ -99,7 +99,7 @@
          </div>
          <div class="reviews-break-down-empty description-paragrah d-none">
             <div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
-               <span>{{ _('product_no_reviews') }} </span>
+               <span>{{ _("No reviews, add yours") }} </span>
             </div>
          </div>
 

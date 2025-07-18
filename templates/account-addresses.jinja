@@ -15,14 +15,14 @@
         </div>
 
         <div class="container">
-            {% set title=_('profile.addresses') %}{% set section='addresses' %}{% include 'profile-section-dropdown.jinja' %}
+            {% set title="Addresses" %}{% set section='addresses' %}{% include 'profile-section-dropdown.jinja' %}
             <div class="d-flex">
                 {% set section='addresses' %}{% include 'profile-section.jinja' %}
                 <div class="flex-grow-1">
-                    {% set title=_('profile.addresses') %}{% include 'profile-title.jinja' %}
+                    {% set title="Addresses" %}{% include 'profile-title.jinja' %}
                     <div class="account-content">
                         <div>
-                            <a href="/account-addresses/add" class="btn aaddress-personal-btn"> {{ _('add_new_address') }}  <span class="icon-add_black"></span></a>
+                            <a href="/account-addresses/add" class="btn aaddress-personal-btn"> {{ _("Add new Address") }}  <span class="icon-add_black"></span></a>
                             <div class="row mt-3 mb-5">
                                 {% for address in addresses %}
                                     <div id="address-div-{{ address.id }}" class="col-lg-6">
@@ -41,7 +41,7 @@
 
                                                     {% if address.address_lat %}
                                                     <a style="color: inherit; text-decoration: underline" target="_blank" href="https://maps.google.com/?q={{ address.address_lat }},{{ address.address_lng }}">
-                                                        <i class="fa fa-map-marker"></i>&nbsp;&nbsp;{{ _('location_on_map') }} 
+                                                        <i class="fa fa-map-marker"></i>&nbsp;&nbsp;{{ _("location on map") }} 
                                                     </a>
                                                     {% endif %}
                                                 </div>
