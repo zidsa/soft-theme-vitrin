@@ -165,7 +165,7 @@
     <div class="container">
         <div class="d-flex flex-column-reverse flex-lg-row flex-wrap align-items-center justify-content-between footer-store-section-bars" style="border-bottom: 0px;">
             <div class="d-flex justify-content-center align-items-center">
-                <span class="text-center footer-copyrights">{{ store.copyrights | safe}}</span>
+                <span class="text-center footer-copyrights">{{ store.settings.branding.copyrights | safe}}</span>
             </div>
             <div class="vat-crn-sections py-4 d-flex flex-row flex-wrap justify-content-end align-items-center">
                 {% if store.settings.general.tax_settings.is_certificate_visible %}

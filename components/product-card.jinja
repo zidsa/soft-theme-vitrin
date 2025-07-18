@@ -35,10 +35,10 @@
         </div>
 
         <div class="product-title" style="margin-top: 15px"><span>{{ product.name | safe }}</span></div>
-        {% if store.is_product_reviews_enabled %}
+        {% if store.settings.products.reviews_enabled %}
             <div class="product-card-rating-wrapper" style="height: 18px">
                 {% if product.rating %}
-                    {% set rating=product.rating.average %}{% include 'rating-stars.jinja' %}
+                    {% set rating=product.rating.average %}{% include 'components/rating-stars.jinja' %}
                     <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
                 {% endif %}
             </div>

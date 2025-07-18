@@ -7,7 +7,7 @@
                 <span class="profile-item-image icon-import_contacts"></span>
                 <h2 class=" m-0 profile-item-title">
                     {{ title }}
-                    {% if section == 'wishlist' and wishlist.total > 0 %}<span class="mx-1">({{ wishlist.total }})</span>{% endif %}
+                    {% if section == 'wishlist' and wishlist.count > 0 %}<span class="mx-1">({{ wishlist.count }})</span>{% endif %}
                 </h2>
                 <span class="icon-arrow_drop_down1"></span>
             </a>
