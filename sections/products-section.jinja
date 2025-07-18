@@ -11,7 +11,7 @@
                     <div class="products-slider s-slider">
                         {% for product in settings.products.results %}
                             <div class="prod-col">
-                                {% set index=loop.index %}{% include 'components/product-card.jinja' %}
+                                {% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                             </div>
                         {% endfor %}
                     </div>

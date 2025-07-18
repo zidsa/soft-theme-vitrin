@@ -20,7 +20,7 @@
             <div class="content">
                 <div class="d-flex justify-content-center" style="width: 100%; height: 100%;">
                    {% if product.badge %}
-                     {% include 'template_for_products_badge' ignore missing %}
+                        {% include 'vitrin:products/badge.jinja' %}
                   {% endif %}
                     <img id="product-card-img-{{ product.id }}"
                             {% if product.images or product.videos %}

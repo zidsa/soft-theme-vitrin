@@ -8,7 +8,7 @@
     {% endif %}
     <div class="gallery row">
         {% for galler in settings.gallery %}
-        {% set key=loop.index %}
+        {% set key=loop.index0 %}
         <div class="gallery-item col-6 {% if (key == 2) or (key == 3) %} bottom-row {% endif %}">
           <div class="box-1-1">
             <div class="content">

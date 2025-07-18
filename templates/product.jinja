@@ -83,13 +83,13 @@
                                                 <div class="col-3">
                                                     <div class="box-1-1">
                                                         <div class="content">
-                                                            <a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="{{ loop.index }}"
+                                                            <a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="{{ loop.index0 }}"
                                                                style="width: 100%; height: 100%;" >
-                                                                <img src="{{ image.image.medium }}" data-index="{{ loop.index }}">
+                                                                <img src="{{ image.image.medium }}" data-index="{{ loop.index0 }}">
                                                                 {% if image.provider and image.link %}
                                                                   <img id="video-play-icon" class="play-icon"
                                                                     src="{{ 'video-play.svg' | asset_url }}" alt="play"
-                                                                    data-index="{{ loop.index }}"
+                                                                    data-index="{{ loop.index0 }}"
                                                                   />
                                                                 {% endif %}
                                                             </a>
@@ -120,7 +120,7 @@
 
                             <section>
                                 {% if product.badge %}
-                                   {{ template_for_product_badge }}
+                                   {% include 'vitrin:products/badge.jinja' %}
                                 {% endif %}
                                 <h1>{{ product.name | safe }}</h1>
                                 <div class="d-flex flex-column flex-lg-row product-features">
@@ -182,7 +182,7 @@
                                 </div>
 
                                 <div>
-                                    {{ template_for_product_payments_widget }}
+                                    {% include 'vitrin:products/payment_widgets.jinja' %}
                                 </div>
                             </section>
 
@@ -207,7 +207,7 @@
 
                                 <div class="size-box">
 
-                                    {{ template_for_product_variants_list }}
+                                    {% include 'vitrin:products/variants_list.jinja' %}
 
                                     <!-- new custom fields update -->
                                     {% if product.has_custom_input_fields  %}
@@ -278,7 +278,7 @@
                                       <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
                                       <span>{{ _('add_to_cart') }}</span>
                                   </button>
-                                  {% if store.is_wishlist_enabled == true %}
+                                  {% if store.settings.products.wishlist_enabled == true %}
                                     <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
                                         <a zid-visible-customer="true" class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>      
                                         <a zid-visible-guest="true" class="icon-heart-mask" href="/auth/login?redirect_to={{ session.url.path }}"></a>
@@ -334,7 +334,7 @@
                         <div class="row bundle-offer-details-products">
                             {% for product in product.bundle_offer.products.results | slice(0, 5) %}
                                 <div class="prod-col prod-col-tb">
-                                    {% set product=product %}{% set index=loop.index %}{% include 'components/product-card.jinja' %}
+                                    {% set product=product %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                                 </div>
                             {% endfor %}
                         </div>
@@ -417,7 +417,7 @@
 
                                                 {% for attribute in variant.attributes %}
                                                     <div class="col m-col">
-                                                        <span class="variant-name-sm d-inline-block d-lg-none">{{ product.options[loop.index].name }}</span>
+                                                        <span class="variant-name-sm d-inline-block d-lg-none">{{ product.options[loop.index0].name }}</span>
                                                         <span>{{ attribute.value }}</span>
                                                     </div>
                                                 {% endfor %}
@@ -429,7 +429,7 @@
                                                                 <div class="variant-image-wrapper" data-var-id="{{ variant.id }}">
                                                                     <div class="box-1-1">
                                                                         <div class="content">
-                                                                            <a data-index="{{ loop.index }}" data-link-var-id="{{ variant.id }}" class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;" >
+                                                                            <a data-index="{{ loop.index0 }}" data-link-var-id="{{ variant.id }}" class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;" >
                                                                                 <img src="{{ image.image.medium }}" data-image-url="{{ image.image.full_size }}">
                                                                             </a>
                                                                         </div>
@@ -467,7 +467,7 @@
                 </section>
             {% endif %}
 
-            {% if store.is_product_reviews_enabled %}
+            {% if store.settings.products.reviews_enabled %}
                 <section class="mt-5 review-details">
                     <div>
                         <div class="d-flex flex-wrap align-items-center" style="width: 100%">
@@ -498,7 +498,7 @@
 
 
                                     <div class="row card-rate">
-                                        <span class="rating_count_5">{{ product.rating['5_ratings'].count }}</span>
+                                        <span class="rating_count_5">{{ product.rating['ratings_5'].count }}</span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
@@ -507,7 +507,7 @@
                                         <span>{{ _('reviews_rating_5') }}</span>
                                     </div>
                                     <div class="row card-rate">
-                                        <span class="rating_count_4">{{ product.rating['4_ratings'].count }}</span>
+                                        <span class="rating_count_4">{{ product.rating['ratings_4'].count }}</span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
@@ -516,7 +516,7 @@
                                         <span>{{ _('reviews_rating_4') }}</span>
                                     </div>
                                     <div class="row card-rate">
-                                        <span class="rating_count_3">{{ product.rating['3_ratings'].count }}</span>
+                                        <span class="rating_count_3">{{ product.rating['ratings_3'].count }}</span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
@@ -525,7 +525,7 @@
                                         <span>{{ _('reviews_rating_3') }}</span>
                                     </div>
                                     <div class="row card-rate">
-                                        <span class="rating_count_2">{{ product.rating['2_ratings'].count }}</span>
+                                        <span class="rating_count_2">{{ product.rating['ratings_2'].count }}</span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1 deactive"></span>
@@ -534,7 +534,7 @@
                                         <span>{{ _('reviews_rating_2') }}</span>
                                     </div>
                                     <div class="row card-rate">
-                                        <span class="rating_count_1">{{ product.rating['1_ratings'].count }}</span>
+                                        <span class="rating_count_1">{{ product.rating['ratings_1'].count }}</span>
                                         <span class="icon-star1"></span>
                                         <span class="icon-star1 deactive"></span>
                                         <span class="icon-star1 deactive"></span>
@@ -567,7 +567,7 @@
                     </div>
                 </section>
             {% endif %}
-            {% if store.is_product_question_and_answer_enabled %}
+            {% if store.settings.products.questions_enabled %}
             <section class="mt-5 review-details">
                 <div>
                     <div class="d-flex flex-wrap align-items-center" style="width: 100%">
@@ -604,7 +604,7 @@
                                 <div id="related-products" class="products-slider s-slider d-block">
                                     {% for rProduct in product.related_products %}
                                         <div class="prod-col">
-                                            {% set product=rProduct %}{% set index=loop.index %}{% include 'components/product-card.jinja' %}
+                                            {% set product=rProduct %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -637,7 +637,7 @@
                             <div class="row bundle-offer-details-products-all">
                                 {% for product in product.bundle_offer.products.results %}
                                     <div class="prod-col prod-col-tb">
-                                        {% set product=product %}{% set index=loop.index %}{% include 'components/product-card.jinja' %}
+                                        {% set product=product %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                                     </div>
                                 {% endfor %}
                             </div>
@@ -732,8 +732,8 @@
                     }
 
 
-                    {% if store.is_low_stock_label_enabled %}
-                    var store_low_stock_limit = {{ store.low_stock_quantity_limit }};
+                    {% if store.settings.products.low_stock_label_enabled %}
+                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_limit }};
                     var low_stock_message = '{{ _('product_cart_quantity_low_stock') }}';
 
                     if(!selected_product.is_infinite &&  selected_product.quantity < store_low_stock_limit){

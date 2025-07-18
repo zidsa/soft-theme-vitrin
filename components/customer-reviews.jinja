@@ -19,7 +19,7 @@
                             {% if review.images %}
                             <div class="d-flex review-images-container mt-3 ">
                                 {% for image in review.images %}
-                                        <img src="{{ image.path }}" attr-index={{ loop.index }} />
+                                        <img src="{{ image.path }}" attr-index={{ loop.index0 }} />
                                 {% endfor %}
                             </div>
                             {% endif %}
@@ -37,7 +37,7 @@
                                 {% if review.reply.images %}
                                 <div class="d-flex review-images-container mt-3 ">
                                         {% for image in review.reply.images %}
-                                                <img src="{{ image.path }}" attr-index={{ loop.index }} />
+                                                <img src="{{ image.path }}" attr-index={{ loop.index0 }} />
                                         {% endfor %}
                                 </div>
                                 {% endif %}

@@ -1,7 +1,7 @@
 <form method="get" action="{{ session.url.path }}">
 
     {% for input in session.url.query_params %}
-        <input type="hidden" name="{{ loop.index }}" value="{{ input }}">
+        <input type="hidden" name="{{ loop.index0 }}" value="{{ input }}">
     {% endfor %}
 
     <div class="form-products-filter">
