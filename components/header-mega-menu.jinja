@@ -3,14 +3,13 @@
     <div class="container">
         <div class="top-main-menu-wrapper">
             <nav role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
-
                 <ul class="main-nav d-flex flex-grow-1 flex-wrap menu-header-theme-text-for-primary-bg">
                     
                     {% for menu in store.settings.menus.main_menu.items %}
                         {% if menu.url %}
                             <li class="top-level-link {% if menu.slug == 'all_categories' %} all-categories {% endif %}" >
                                 <a href="{{ menu.url }}"
-                                        {% if menu.items | length > 0 %} class="mega-menu" {% endif %} ><span>{{ menu.name }}</span></a>
+                                        {% if menu.items | length > 0 %} class="mega-menu" {% endif %} ><span>{{ menu.label }}</span></a>
                                 {% if menu.items | length > 0 %}
                                     <div class="sub-menu-block">
                                         <div class="row">
@@ -18,15 +17,15 @@
                                                 <div class="col-md-4 col-lg-4 col-sm-4">
                                                     {% if menu_sub.items | length > 0 %}
                                                         <h5 class="sub-menu-head">
-                                                            <a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.name }}</a>
+                                                            <a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.label }}</a>
                                                         </h5>
                                                         <ul class="sub-menu-lists">
                                                             {% for menu_sub_sub in menu_sub.items %}
-                                                                <li><a href="{{ menu_sub_sub.url }}">{{ menu_sub_sub.name }}</a></li>
+                                                                <li><a href="{{ menu_sub_sub.url }}">{{ menu_sub_sub.label }}</a></li>
                                                             {% endfor %}
                                                         </ul>
                                                     {% else %}
-                                                        <h2 class="sub-menu-head"><a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.name }}</a></h2>
+                                                        <h2 class="sub-menu-head"><a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.label }}</a></h2>
                                                     {% endif %}
                                                 </div>
                                             {% endfor %}
