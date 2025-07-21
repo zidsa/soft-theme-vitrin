@@ -210,9 +210,9 @@
                                     {% include 'vitrin:products/variants_list.jinja' %}
 
                                     <!-- new custom fields update -->
-                                    {% if product.has_custom_input_fields  %}
+                                    {% if product.custom_input_fields  %}
                                         <div class="border-product" style="margin-top: 25px"></div>
-                                        {{ template_for_product_custom_input_fields }}
+                                        {% include 'vitrin:products/custom_input_fields.jinja' %}
                                     {% endif %}
                                 </div>
 

@@ -1,7 +1,7 @@
 {% if product %}
 
 <div class="product-item position-relative {% if product.is_infinite == false and product.quantity <= 0 %}product-item-out-of-stock{% endif %}">
-    {% if store.is_wishlist_enabled == true %}
+    {% if store.settings.products.wishlist_enabled == true %}
       <span class="add-to-wishlist" data-wishlist-id="{{ product.id }}">
         <span zid-visible-customer="true">
             <a zid-visible-wishlist="{{ product.id }}" class="icon-heart-mask filled" onclick="addToWishlist(this, '{{ product.id }}')"></a>
