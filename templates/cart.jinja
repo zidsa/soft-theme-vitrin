@@ -49,7 +49,7 @@
 
               <div>
                 <p class="cities-result lead">
-                  {% for city in cart.fee_shipping_discount_rules.conditions_shipping_city | slice(0, 50) %}
+                  {% for city in cart.free_shipping_rule.shipping_cities_condition %}
                     {{ city.name }}
                     {% if not loop.last %} ، {% endif %}
                   {% endfor %}
@@ -83,7 +83,7 @@
                             {{ template_for_cart_products_list }}
                         </div>
 
-                        {% if cart.gift_card_details | length > 0 %}
+                        {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}
                             <div class="cart-gift-card">
                                 <p class="font-weight-bold mb-2">
                                     <img src="{{ asset_url }}gift_icon.png" style="display: inline-block" />
@@ -93,7 +93,7 @@
                                     <span>{{ _("From") }}: {{cart.gift_card_details.sender_name}}</span>
                                     <span class="mx-2">{{ _("To") }}: {{cart.gift_card_details.receiver_name}}</span>
                                 </p>
-                                {% if cart.gift_card_details.gift_message | length > 0 %}
+                                {% if cart.gift_card_details.gift_message and cart.gift_card_details.gift_message | length > 0 %}
                                     <p class="mb-0">
                                         <span>{{ _('cart_gift_card_info_message') }}: </span> {{ cart.gift_card_details.gift_message }}
                                     </p>
@@ -114,7 +114,7 @@
                     </div>
 
                     <div>{{ template_for_cart_loyalty_points_widget }}</div>
-                    
+
                     <div class="cart-totals-div">
                         {% for cartTotal in cart.totals %}
                             <div class="cart-product-row-wrapper cart-totals-row-wrapper">
@@ -161,12 +161,12 @@
 
 
 
-                    <div class="cart-discount-rule-wrapper free-shipping-rule-section mt-5 {% if cart.fee_shipping_discount_rules %}d-block{% else %}d-none{% endif %}">
+                    <div class="cart-discount-rule-wrapper free-shipping-rule-section mt-5 {% if cart.free_shipping_rule %}d-block{% else %}d-none{% endif %}">
                         <div class="d-flex align-items-center">
                             <div class="message flex-grow-1 free-shipping-rule-message">
-                                {{ cart.fee_shipping_discount_rules.conditions_subtotal.status.message }}
+                                {{ cart.free_shipping_rule.subtotal_condition.status }}
                             </div>
-                            <div class="text-muted mr-1 flex-shrink-0 free-shipping-rule-read-more" class="{% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'min_not_reached' %}d-inline-block{% else %}d-none{% endif %}">
+                            <div class="text-muted mr-1 flex-shrink-0 free-shipping-rule-read-more" class="{% if cart.free_shipping_rule.subtotal_condition.status == 'min_not_reached' %}d-inline-block{% else %}d-none{% endif %}">
                               <a data-toggle="modal" data-target="#searchCitiesModal" href="#">
                                 <small>
                                   {{ _("Read More") }}
@@ -174,17 +174,18 @@
                               </a>
                             </div>
                             <div class="discount-progress flex-shrink-0">
-                                <span class="free-shipping-rule-done {% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'applied' %}d-inline-block{% else %}d-none{% endif %}">
+                                <span class="free-shipping-rule-done {% if cart.free_shipping_rule.subtotal_condition.status == 'applied' %}d-inline-block{% else %}d-none{% endif %}">
                                     <span style="font-size: 28px"  class="icon-done text-color-primary"></span>
                                 </span>
                             </div>
                         </div>
-                        <div class="discount-progress-linear" class="{% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'min_not_reached' %}d-block{% else %}d-none{% endif %}">
-                            <div class="progress-bar free-shipping-rule-progress" style="width: {{ cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min }}%">
-                                {% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'applied' %}
+
+                        <div class="discount-progress-linear" class="{% if cart.free_shipping_rule.subtotal_condition.status == 'min_not_reached' %}d-block{% else %}d-none{% endif %}">
+                            <div class="progress-bar free-shipping-rule-progress" style="width: {{ cart.free_shipping_rule.subtotal_condition.products_subtotal_percentage_from_min }}%">
+                                {% if cart.free_shipping_rule.subtotal_condition.status == 'applied' %}
                                     <span>{{ _("Free Shipping") }}</span>
                                 {% else %}
-                                    <span>{{ cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min }}%</span>
+                                    <span>{{ cart.free_shipping_rule.subtotal_condition.products_subtotal_percentage_from_min }}%</span>
                                 {% endif %}
                             </div>
                         </div>
@@ -193,27 +194,20 @@
 
                     <div>
                         <div class="mt-5">
-                            {% if store.availability.closed_now %}
+                            {% if store.settings.general.availability.is_store_closed %}
                                 <a href="#"
                                    class="btn btn-lg btn-block btn-disabled"
                                 >
                                     {{ _("Purchase") }}
                                 </a>
                             {% else %}
-                                
-                                <a zid-visible-customer="true" href="/checkout/choose-address-and-shipping"
+
+                                <a href="/checkout"
                                 class="btn btn-primary btn-lg btn-block"
                                 >
                                     {{ _("Purchase") }}
                                 </a>
-                                
-                                
-                                <a zid-visible-guest="true" href="/auth/login?redirect_to=/checkout/choose-address-and-shipping"
-                                class="btn btn-primary btn-lg btn-block"
-                                >
-                                    {{ _("Purchase") }}
-                                </a>
-                               
+
                                 <div style="margin-top: 1rem">
                                     {{ template_for_cart_apple_pay_button }}
                                 </div>
@@ -279,7 +273,7 @@
 
         $(".cities-search-input").on('keyup', function (e) {
             const searchVal = e.target.value
-            const mappedCities = cartObj.fee_shipping_discount_rules.conditions_shipping_city.map((city) => city.name);
+            const mappedCities = cartObj.free_shipping_rule.shipping_cities_condition.map((city) => city.name);
             let filteredCities = mappedCities.slice(0, 50).join(' ، ');
             if (searchVal.length > 2) {
               filteredCities = mappedCities.filter((name) => name.trim().toLowerCase().includes(searchVal.trim().toLowerCase())).join(' ، ');
@@ -350,17 +344,17 @@
                     if(cartTotal.code === 'total'){
                         totalStyle = 'font-weight: bold; color: var( --primary-color)';
                     }
-            
+
                     var vat_included = '';
                     if(cartTotal.code === 'total'){
 
                         var is_cart_total_vat_included = {% if store.is_cart_total_vat_included %}true{% else %}false{% endif %};
                         var local_sys_lbl_cart_includes_vat = '{{ _('sys_lbl_cart_includes_vat') }}';
-                    
+
                         if(is_cart_total_vat_included){
                             vat_included = '&nbsp;<small>'+local_sys_lbl_cart_includes_vat+'</small>';
                         }
-                        
+
                     }
 
 
@@ -373,18 +367,18 @@
                 $('.cart-totals-div').html(strCartTotlas);
             }
 
-            if(cart.fee_shipping_discount_rules){
+            if(cart.free_shipping_rule){
                 $('.free-shipping-rule-section').removeClass('d-none')
-                $('.free-shipping-rule-message').html(cart.fee_shipping_discount_rules.conditions_subtotal.status.message)
-                $('.free-shipping-rule-progress').css('width', `${cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min}%`)
-                if (cart.fee_shipping_discount_rules.conditions_subtotal.status.code === 'applied') {
+                $('.free-shipping-rule-message').html(cart.free_shipping_rule.subtotal_condition.status)
+                $('.free-shipping-rule-progress').css('width', `${cart.free_shipping_rule.subtotal_condition.products_subtotal_percentage_from_min}%`)
+                if (cart.free_shipping_rule.subtotal_condition.status === 'applied') {
                     $('.free-shipping-rule-done').removeClass('d-none')
                     $('.free-shipping-rule-read-more').addClass('d-none')
                     $('.free-shipping-rule-progress').html('{{ _("Free Shipping") }}')
                 }else {
                     $('.free-shipping-rule-done').addClass('d-none')
                     $('.free-shipping-rule-read-more').removeClass('d-none')
-                    $('.free-shipping-rule-progress').html(`${cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min}%`)
+                    $('.free-shipping-rule-progress').html(`${cart.free_shipping_rule.subtotal_condition.products_subtotal_percentage_from_min}%`)
                 }
             }else{
                 $('.free-shipping-rule-section').addClass('d-none')
