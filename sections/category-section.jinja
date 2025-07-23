@@ -33,7 +33,7 @@
 
             {% if settings.display_more %}
                 <div class="text-center mt-5 category-display-more-section">
-                    <a href="/categories" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
+                    <a href="{{ url_for('list_categories') }}" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
                 </div>
             {% endif %}
         </div>

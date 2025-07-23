@@ -40,7 +40,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col"><a class="theme-text-primary" style="text-decoration: underline" href="/orders/{{ order.code }}/invoice">#{{ order.id }}</a></div>
+                                                <div class="col"><a class="theme-text-primary" style="text-decoration: underline" href="{{ url_for('order_invoice', order_code=order.code) }}">#{{ order.id }}</a></div>
                                                 <div class="col">{{ order.order_status.name }}</div>
                                                 <div class="col">{{ order.created_at.strftime('%d-%m-%Y %I:%M:%S %p') if order.created_at else '' }}</div>
                                                 <div class="col">{{ order.order_total_string }}</div>

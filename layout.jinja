@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="{{ session.lang }}" dir="{% if session.lang == 'ar' %}rtl{% else %}ltr{% endif %}">
+<html class="no-js" lang="{{ session.lang }}" dir="{{ session.locale.language.direction }}">
 
 <head>
   <meta charset="utf-8">
@@ -30,8 +30,8 @@
     <style>
         :root {
             --primary-color: {{store.settings.branding.colors.primary}};
-            --text-color-primary-bg: {{store.settings.branding.colors.secondary}};
-            --primary-color-op-5: {{store.settings.branding.colors.on_primary}}0c;
+            --text-color-primary-bg: {{store.settings.branding.colors.on_primary}};
+            --primary-color-op-5: {{store.settings.branding.colors.primary}}0c;
             --sub-primary-color: #521B25;
             --white-color: #fff;
             --warning-color:  #FFCF57;
@@ -118,7 +118,7 @@
 
 </head>
 
-<body class="{% if session.lang == 'ar' %}rtl{% else %}ltr{% endif %}"
+<body class="{{ session.locale.language.direction }}"
       data-template="{{ template }}"
         {% if template == 'category' and category is not none %} data-category-id="{{ category.id }}" {% endif %}
 >
@@ -132,28 +132,30 @@
     font-family: {% if store.settings.branding.fonts_name %}{{ store.settings.branding.fonts_name | replace('+', ' ') }}{% else %}'Changa'{% endif %}, sans-serif;
   }
   :root {
-    {% if store.settings.branding.colors.on_primary %}
-    --header-primary-color: {{store.settings.branding.colors.on_primary}};
-    {% endif %}
+  {% if settings is defined %}
+        {% if settings.colors_header_background_color %}
+        --header-primary-color: {{ settings.colors_header_background_color }};
+        {% endif %}
 
-    {% if store.settings.branding.colors.header_menu_background %}
-    --menu-header-primary-color: {{store.settings.branding.colors.header_menu_background}};
-    --header-primary-brightness: brightness(100%);
-    {% elif store.settings.branding.colors.on_primary %}
-    --menu-header-primary-color: {{store.settings.branding.colors.on_primary}};
-    --header-primary-brightness: brightness(80%);
-    {% endif %}
+      {% if settings.colors_header_menu_background_color %}
+            --menu-header-primary-color: {{settings.colors_header_menu_background_color}};
+            --header-primary-brightness: brightness(100%);
+            {% elif settings.colors_header_background_color %}
+            --menu-header-primary-color: {{settings.colors_header_background_color}};
+            --header-primary-brightness: brightness(80%);
+        {% endif %}
 
-  {% if store.settings.branding.colors.header_menu_text %}
-    --menu-header-text-color-primary-bg: {{store.settings.branding.colors.header_menu_text}};
-  {% elif store.settings.branding.colors.header_text %}
-    --menu-header-text-color-primary-bg: {{store.settings.branding.colors.header_text}};
+      {% if settings.colors_header_menu_text_color %}
+        --menu-header-text-color-primary-bg: {{settings.colors_header_menu_text_color}};
+      {% elif settings.colors_header_text_color %}
+        --menu-header-text-color-primary-bg: {{settings.colors_header_text_color}};
+      {% endif %}
+
+        {% if settings.colors_header_text_color %}--header-text-color-primary-bg: {{settings.colors_header_text_color}};{% endif %}
+        {% if settings.colors_footer_background_color %}--footer-primary-color: {{settings.colors_footer_background_color}};{% endif %}
+        {% if settings.colors_footer_text_color %}--footer-text-color-primary-bg: {{settings.colors_footer_text_color}};{% endif %}
+      }
   {% endif %}
-
-    {% if store.settings.branding.colors.header_text %}--header-text-color-primary-bg: {{store.settings.branding.colors.header_text}};{% endif %}
-    {% if store.settings.branding.colors.footer_background %}--footer-primary-color: {{store.settings.branding.colors.footer_background}};{% endif %}
-    {% if store.settings.branding.colors.footer_text %}--footer-text-color-primary-bg: {{store.settings.branding.colors.footer_text}};{% endif %}
-  }
 </style>
 
 {% block top_body %}{% endblock %}
@@ -175,7 +177,7 @@
 {{ zidapi_script|safe }}
 
 <script>
-    window.appDirection = '{% if session.lang == 'ar' %}rtl{% else %}ltr{% endif %}';
+    window.appDirection = '{{ session.locale.language.direction }}';
 
     window.loadToasterScriptIfNotLoaded = function (onCompleted) {
         var list = document.getElementsByTagName('script');

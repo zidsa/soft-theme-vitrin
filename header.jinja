@@ -2,7 +2,12 @@
 
     {# {% include 'template_for_store_messages' %} #}
     {% set ab_settings=settings %}{% include 'components/header-announcement-bar.jinja' %}
-    {% set header_settings=settings %}{% include 'components/header-account-lang-currency.jinja' %}
+    {% set multiple_countries = store.countries | length > 1 %}
+    {% set multiple_languages = store.languages | length > 1 %}
+
+    {% if multiple_countries or multiple_languages %}
+      {% set header_settings=settings %}{% include 'components/header-account-lang-currency.jinja' %}
+    {% endif %}
 
 
 
@@ -29,19 +34,18 @@
     {% set menu_settings=settings %}{% include 'components/header-sliding-menu.jinja' %}
     {% set menu_settings=settings %}{% include 'components/header-mega-menu.jinja' %}
 
-    {% if not ('hide_country' in store.settings.branding.header_options) or not ('hide_language' in store.settings.branding.header_options)%}
-  <div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body" style="padding: 10px">
+    {% set show_country = 'hide_country' not in store.settings.branding.header_options %}
+    {% set show_language = 'hide_language' not in store.settings.branding.header_options %}
+    
 
-        
+    {% if (show_country and multiple_countries) or (show_language and multiple_languages) %}
+      <div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body" style="padding: 10px">
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  {% endif %}
-
+    {% endif %}
 </header>
-
-
