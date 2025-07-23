@@ -10,7 +10,7 @@
                 {% endif %}
 
                 <a href="javascript:void(0);"
-                   onclick="window.slidingMenu.open()"
+                   onclick="openSlidingMenu()"
                    class="ic menu icon-menu-top d-block d-lg-none"
                    tabindex="1"
                 >
@@ -86,3 +86,29 @@
         </div>
     </div>
 </div>
+
+<script>
+function openSlidingMenu() {
+    if (window.slidingMenu && window.slidingMenu.open) {
+        window.slidingMenu.open();
+
+    } else if (typeof SlideMenu !== 'undefined') {
+        var element = document.getElementById('sliding-menu');
+        if (element) {
+            window.slidingMenu = new SlideMenu(element, {
+                position: (window.appDirection === 'ltr') ? 'left' : 'right',
+                showBackLink: true,
+                backLinkBefore: (window.appDirection === 'ltr') ? '<span class="icon-arrow_left slide-menu-arrow slide-menu-arrow-back"></span>' : '<span class="icon-arrow_right slide-menu-arrow slide-menu-arrow-back"></span>',
+                submenuLinkAfter: (window.appDirection === 'ltr') ? '<span class="icon-arrow_right slide-menu-arrow"></span>' : '<span class="icon-arrow_left slide-menu-arrow"></span>'
+            });
+
+            if (typeof $ !== 'undefined') {
+                element.addEventListener('sm.open', () => $('body').addClass('sidenav-open'));
+                element.addEventListener('sm.close', () => $('body').removeClass('sidenav-open'));
+            }
+
+            window.slidingMenu.open();
+        }
+    }
+}
+</script>
