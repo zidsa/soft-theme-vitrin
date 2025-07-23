@@ -281,7 +281,7 @@
                                   {% if store.settings.products.wishlist_enabled == true %}
                                     <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
                                         <a zid-visible-customer="true" class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>      
-                                        <a zid-visible-guest="true" class="icon-heart-mask" href="/auth/login?redirect_to={{ session.url.path }}"></a>
+                                        <a zid-visible-guest="true" class="icon-heart-mask" href=" {{ url_for('login_page', query_params={"redirect_to": session.path} ) }}"></a>
                                       <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
                                     </span>
                                   {% endif %}
@@ -488,7 +488,7 @@
 
                             &nbsp;
                             <!-- Button trigger modal -->
-                            <a href="/products/{{ product.slug}}/reviews/add" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }}</a>
+                            <a href="{{ url_for('add_product_review', slug=product.slug) }}" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }}</a>
                         </div>
                         <div class="reviews-break-down-div description-paragrah">
                             <div class="d-flex align-items-center mt-3 mb-4">
@@ -557,7 +557,7 @@
 
                             {% if product.reviews.next_page > 1 %}
                             <div class="text-right">
-                                <a href="/products/{{ product.id }}/reviews" type="button" class="btn all-reviews-btn">
+                                <a href="{{ url_for('product_reviews', slug=product.id) }} " type="button" class="btn all-reviews-btn">
                                     {{ _("All reviews") }}
                                 </a>
                             </div>

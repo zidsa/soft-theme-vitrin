@@ -2,7 +2,7 @@
 
     <div>
         <div class="profile-item">
-            <a href="/account-profile" class="d-flex flex-column profile-row {% if section == 'profile' %}active{% endif %}">
+            <a href="{{ url_for('profile') }}" class="d-flex flex-column profile-row {% if section == 'profile' %}active{% endif %}">
                 <div class="d-flex align-items-center">
                     <span class="profile-item-image icon-badge_black"></span>
                     <h2 class="m-0  profile-item-title">
@@ -17,7 +17,7 @@
         </div>
 
         <div class="profile-item">
-            <a href="/account-addresses" class="d-flex flex-column profile-row {% if section == 'addresses' %}active{% endif %}">
+            <a href="{{ url_for('addresses') }}" class="d-flex flex-column profile-row {% if section == 'addresses' %}active{% endif %}">
                 <div class="d-flex align-items-center">
                     <span class="profile-item-image icon-import_contacts"></span>
                     <h2 class=" m-0 profile-item-title">
@@ -32,7 +32,7 @@
 
 
         <div class="profile-item">
-            <a href="/account-orders" class="d-flex flex-column profile-row {% if section == 'orders' %}active{% endif %}">
+            <a href="{{ url_for('orders') }}" class="d-flex flex-column profile-row {% if section == 'orders' %}active{% endif %}">
                 <div class="d-flex align-items-center">
                     <span class="profile-item-image icon-local_mall"></span>
                     <h2 class=" m-0 profile-item-title">
@@ -46,9 +46,9 @@
             </a>
         </div>
 
-        {% if store.is_wishlist_enabled == true %}
+        {% if store.settings.products.wishlist_enabled %}
             <div class="profile-item">
-                <a href="/account-wishlist" class="d-flex flex-column profile-row {% if section == 'wishlist' %}active{% endif %}">
+                <a href="{{ url_for('wishlist') }}" class="d-flex flex-column profile-row {% if section == 'wishlist' %}active{% endif %}">
                     <div class="d-flex align-items-center">
                         <span class="profile-item-image icon-heart-secondary"></span>
                         <h2 class=" m-0 profile-item-title">
