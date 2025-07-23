@@ -12,7 +12,7 @@
    <div class="container pb-5">
       <section class="products-details mb-5">
 
-         <a href="/products/{{ product.slug }}">
+         <a href="{{ url_for('product_details', slug=product.slug )}}">
             <div class="d-flex">
                <img src="{{ product.images[0].image.large }}" class="product-image" alt="{{ product.name }}" />
                <h1 style="color: initial">{{ product.name }}</h1>
@@ -39,7 +39,7 @@
 
             &nbsp;
             <!-- Button trigger modal -->
-            <a href="/products/{{ product.id}}/reviews/add" class="btn btn-primary add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }} </a>
+            <a href="{{ url_for('add_product_review', slug=product.id) }}" class="btn btn-primary add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }} </a>
          </div>
          <div class="reviews-break-down-div description-paragrah">
             <div class="d-flex align-items-center mt-3 mb-4">

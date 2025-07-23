@@ -30,7 +30,7 @@
 
             if (--timer < 0) {
                 clearInterval(countdownTimer);
-                window.location.href = '/';
+                window.location.href = "{{ url_for('home') }}";
             }
         }, 1000);
     }
