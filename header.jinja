@@ -5,10 +5,7 @@
     {% set multiple_countries = store.countries | length > 1 %}
     {% set multiple_languages = store.languages | length > 1 %}
 
-    {% if multiple_countries or multiple_languages %}
-      {% set header_settings=settings %}{% include 'components/header-account-lang-currency.jinja' %}
-    {% endif %}
-
+    {% set header_settings=settings %}{% include 'components/header-account-lang-currency.jinja' %}
 
 
 
