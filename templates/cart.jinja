@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="template_for_cart_products_list">
-                            {{ template_for_cart_products_list }}
+                            {% include 'vitrin:cart/products_list.jinja' %}
                         </div>
 
                         {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}
