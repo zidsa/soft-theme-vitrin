@@ -12,6 +12,13 @@
 
   {% include "vitrin:shared/meta.jinja" %}
   {% include "vitrin:shared/head_scripts.jinja" %}
+  
+  <!-- Vitrin Cart SDK -->
+  <link rel="stylesheet" href="https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev/dist/theme-service/vitrin-sdk.css">
+  <script type="module">
+    import vitrin from "https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev/dist/theme-service/vitrin-theme-service.es.js";
+    window.vitrin = vitrin;
+  </script>
 
   <link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
     {#<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa">#}

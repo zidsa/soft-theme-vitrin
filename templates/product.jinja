@@ -273,7 +273,7 @@
                                 <div class="border-product"></div>
                                 <div class="d-flex align-center">
                                   <button style="margin-bottom: 20px"
-                                          class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+                                          class="btn btn-add-to-cart" type="button" onclick="window.vitrin.cart.addProduct({ product_id: '{{ product.id }}', quantity: 1 })">
                                       <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
                                       <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
                                       <span>{{ _("add to cart") }}</span>
@@ -674,7 +674,7 @@
 
             $('.add-to-cart-progress').removeClass('d-none');
 
-            zid.store.cart.addProduct({ formId:'product-form' }).then(function (response) {
+            window.vitrin.cart.addProduct({ product_id: '{{ product.id }}', quantity: 1 }).then(function (response) {
                 if(response.status  === 'success'){
 
                     if(response.data)
