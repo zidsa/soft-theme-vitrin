@@ -5,18 +5,15 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  {{ header_meta_tags | safe }}
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   {% include "vitrin:shared/meta.jinja" %}
   {% include "vitrin:shared/head_scripts.jinja" %}
   
   <!-- Vitrin Cart SDK -->
-  <link rel="stylesheet" href="https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev/dist/theme-service/vitrin-sdk.css">
+  <link rel="stylesheet" href="{{'dist/theme-service/vitrin-sdk.css' | sdk_asset_url }}">
   <script type="module">
-    import vitrin from "https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev/dist/theme-service/vitrin-theme-service.es.js";
+    import vitrin from "{{'theme-service/vitrin-theme-service.es.js' | sdk_asset_url }}";
     window.vitrin = vitrin;
   </script>
 
