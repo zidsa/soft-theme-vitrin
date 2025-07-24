@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    {% set totalPages=products.last_page %}{% set currentPage=products.current_page %}{% include 'components/pagination.jinja' %}
+    {% set totalPages=products.pages_count %}{% set currentPage=products.page %}{% include 'components/pagination.jinja' %}
 
 {% endblock %}
 

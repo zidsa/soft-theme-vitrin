@@ -31,8 +31,8 @@
         </div>
       </div>
       <div class="mt-5">
-        {% if product.questions is defined and product.questions is not none and product.questions.data is defined and product.questions.data is not none %}
-          {% for question in product.questions.data %}
+        {% if product.questions is defined and product.questions is not none and product.questions.results is defined and product.questions.results is not none %}
+          {% for question in product.questions.results %}
             <div class="card questions-card-preview mt-2 mb-5">
               <div class="card-body p-0">
                 {% if not question.is_anonymous and question.name is defined and question.name is not none %}
@@ -51,24 +51,24 @@
           {% endfor %}
         {% endif %}
       </div>
-      {% if product.questions is defined and (product.questions.pages|length) > 1 %}
+      {% if product.questions is defined and product.questions.pages_count > 1 %}
         <div class="d-flex justify-content-center">
           <nav class="questions-pagination">
             <ul class="pagination">
               <!-- Previous Page Link -->
-              <li class="page-item {% if product.questions.current_page == 1 %}disabled{% endif %}">
-                <a class="page-link" href="{{ url_for('product_questions', slug=product.id, query_params={'page': product.questions.current_page - 1}) }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+              <li class="page-item {% if product.questions.page == 1 %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('product_questions', slug=product.id, query_params={'page': product.questions.page - 1}) }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
               </li>
 
               {% for page in product.questions.pages %}
-                <li class="page-item {% if product.questions.current_page == page %}disabled selected{% endif %}">
+                <li class="page-item {% if product.questions.page == page %}disabled selected{% endif %}">
                   <a class="page-link" href="{{ url_for('product_questions', slug=product.id, query_params={'page': page }) }}">{{ page }}</a>
                 </li>
               {% endfor %}
 
               <!-- Next Page Link -->
-              <li class="page-item {% if product.questions.current_page == product.questions.last_page %}disabled{% endif %}">
-                <a class="page-link" href="{{ url_for('product_questions', slug=product.id, query_params={'page': product.questions.current_page + 1}) }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+              <li class="page-item {% if product.questions.page == product.questions.pages_count %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('product_questions', slug=product.id, query_params={'page': product.questions.page + 1}) }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
               </li>
             </ul>
           </nav>
