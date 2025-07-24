@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="{{ 'ekko-lightbox.css' | asset_url }}" />
 
     <link rel="stylesheet" type="text/css" href="{{ 'product-details.css' | asset_url }}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 {% endblock %}
 
 
@@ -247,13 +249,13 @@
                                             <div class="form-group form-notify-me">
                                                 <h4>{{ _("Notify me when product is available") }}</h4>
                                                 
-                                                <input class="form-control send-notify-name" value="" type="text" placeholder="{{ _("Enter your name") }}" />
-                                                <input class="form-control send-notify-email" type="email" value="" placeholder="{{ _("Enter your email") }}" />
+                                                <input class="form-control send-notify-name" value="" type="text" placeholder="{{ _('Enter your name') }}" />
+                                                <input class="form-control send-notify-email" type="email" value="" placeholder="{{ _('Enter your email') }}" />
                                                 <div class="d-flex form-notify-me-phone-row">
                                                     <input class="form-control send-notify-country-key"
                                                         type="number"
                                                         placeholder="966" maxlength="4" />
-                                                    <input class="form-control send-notify-phone" type="number"  value="" placeholder="{{ _("Enter your phone (Optional)") }}" maxlength="10" />
+                                                    <input class="form-control send-notify-phone" type="number"  value="" placeholder="{{ _('Enter your phone (Optional)') }}" maxlength="10" />
                                                 </div>
                                                 <div class="form-notify-me-submit-button-row">
                                                     <button type="button" class="btn btn-primary btn-send-notify" onclick="sendProductNotifyMe()">
@@ -373,6 +375,75 @@
                                             toastr.error(errorMessage, '{{ _("Sorry") }}');
                                         }
                                     });
+                                };
+
+
+                                async function sendProductNotifyMe() {
+                                    $('.send-notify-progress').removeClass('d-none');
+
+                                    const countryCode = '+' + ($('.send-notify-country-key').val() || '966');
+                                    const productId   = $('.send-notify-product-id').val();
+                                    const email       = $('.send-notify-email').val();
+                                    const name        = $('.send-notify-name').val();
+
+                                    let phone = '';
+                                    const rawPhone = $('.send-notify-phone').val();
+                                    if (rawPhone) {
+                                    phone = countryCode + rawPhone;
+                                    }
+
+                                    const baseUrl = "{{ store.permalink }}";
+                                    const payload = {
+                                    customer_email:        email,
+                                    customer_phone_number: phone,
+                                    customer_name:         name
+                                    };
+
+                                    const url = `${baseUrl}api/v1/products/${encodeURIComponent(productId)}/stock-alerts`;
+
+                                    try {
+                                        const res = await fetch(url, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body:    JSON.stringify(payload)
+                                        });
+
+                                        if (res.ok) {
+                                            let data = null;
+                                            try {
+                                                data = await res.json();
+                                            } catch (_) {}
+
+                                            if (!data || data?.status === 'success') {
+                                                toastr.success('{{ _("Send Successfully") }}');
+                                            } else if (data.data?.message) {
+                                                toastr.error(JSON.stringify(data.data.message), '{{ _("Sorry") }}');
+                                            } else {
+                                                toastr.error('{{ _("failed to send") }}', '{{ _("Sorry") }}');
+                                            }
+                                            } else {
+
+                                            let errData = null;
+                                            try {
+                                                errData = await res.json();
+                                            } catch (_) {}
+                                            const msg = errData?.data?.message
+                                                        || errData?.detail
+                                                        || `HTTP ${res.status}`;
+                                            toastr.error(msg, '{{ _("Sorry") }}');
+                                            }
+
+                                    } catch (error) {                                        
+                                        var errorMessage = '{{ _("Failed to send alert request") }}';
+
+                                        if (typeof toastr !== 'undefined') {
+                                            toastr.error(errorMessage, '{{ _("Sorry") }}');
+                                        }
+                                    } finally {
+                                        $('.send-notify-progress').addClass('d-none');
+                                    }
                                 };
                             </script>
 
@@ -933,31 +1004,6 @@
                 $('.product-images-carousel-thumbs').addClass('d-none-important');
                 $('.product-images-empty').removeClass('d-none');
             }
-        }
-
-        function sendProductNotifyMe() {
-            if(!$('.send-notify-progress').hasClass('d-none'))
-                return;
-
-            $('.send-notify-progress').removeClass('d-none');
-            const countryCode = '+'+ ($('.send-notify-country-key').val() || '966');
-            zid.store.product.setAvailabilityNotificationEmail(
-                $('.send-notify-product-id').val(),
-                $('.send-notify-email').val(),
-                $('.send-notify-name').val(),
-                 countryCode + $('.send-notify-phone').val(),
-                ).then(function (response) {
-                if(response.status  === 'success'){
-                    toastr.success('{{ _("Send Successfully") }}', null)
-                }else{
-                    if(response && response.data && response.data.message) {
-                        toastr.error(JSON.stringify(response.data.message), '{{ _("Sorry") }}')
-                    }else {
-                        toastr.error('{{ _("failed to send") }}', '{{ _("Sorry") }}')
-                    }
-                }
-                $('.send-notify-progress').addClass('d-none');
-            })
         }
 
 
