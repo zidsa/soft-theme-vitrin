@@ -31,7 +31,7 @@
              {% if product.rating %}
                 <div class="rating-section">
                    <div>
-                       {% set rating=product.rating.average %}{% include 'rating-stars.jinja' %}
+                       {% set rating=product.rating.average %}{% include 'components/rating-stars.jinja' %}
                       <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
                    </div>
                 </div>
@@ -104,13 +104,13 @@
          </div>
 
          <div class="comment-section description-paragrah bg-transparent">
-             {% set reviews=product.reviews.data %}{% include 'customer-reviews.jinja' %}
+             {% set reviews=product.reviews.data %}{% include 'components/customer-reviews.jinja' %}
          </div>
 
       </div>
    </section>
 
-    {% set totalPages=product.reviews.last_page %}{% set currentPage=product.reviews.current_page %}{% include 'pagination.jinja' %}
+    {% set totalPages=product.reviews.last_page %}{% set currentPage=product.reviews.current_page %}{% include 'components/pagination.jinja' %}
 
 
       </section>

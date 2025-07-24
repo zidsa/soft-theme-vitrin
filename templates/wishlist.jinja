@@ -21,17 +21,17 @@
         <div class="container">
             <div class="d-flex">
                 <div class="flex-grow-1">
-                    {% set title=_("Wishlist") %}{% set section='wishlist' %}{% include 'profile-title.jinja' %}
+                    {% set title=_("Wishlist") %}{% set section='wishlist' %}{% include 'components/profile-title.jinja' %}
                     <div class="account-content">
                         <div>
                             <div id="wishlist-list" class="row">
                                 {% for product in wishlist.data %}
                                     <div class="col-6 col-md-4 col-lg-3 py-3">
-                                        {% set product=product %}{% set index=key %}{% include 'product-card.jinja' %}
+                                        {% set product=product %}{% set index=key %}{% include 'components/product-card.jinja' %}
                                     </div>
                                 {% endfor %}
                             </div>
-                            {% set totalPages=products.last_page %}{% set currentPage=products.current_page %}{% include 'pagination.jinja' %}
+                            {% set totalPages=products.last_page %}{% set currentPage=products.current_page %}{% include 'components/pagination.jinja' %}
                         </div>
                     </div>
                 </div>
