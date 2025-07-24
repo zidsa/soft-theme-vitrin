@@ -9,7 +9,7 @@
                                     <div class="card-name">
                                             <p class="card-name-customer">{{ review.customer.name }}</p>
                                             <div class="d-flex card-rate-comment">
-                                                {% set rating=review.rating %}{% include 'rating-stars.jinja' %}
+                                                {% set rating=review.rating %}{% include 'components/rating-stars.jinja' %}
                                             </div>
                                     </div>
                                     <div class="card-date user-review-date" data-time-ago-date="{{ review.created_at }}">    
