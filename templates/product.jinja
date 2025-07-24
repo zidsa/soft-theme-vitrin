@@ -273,16 +273,19 @@
                                 <div class="border-product"></div>
                                 <div class="d-flex align-center">
                                   <button style="margin-bottom: 20px"
-                                          class="btn btn-add-to-cart" type="button" onclick="window.vitrin.cart.addProduct({ product_id: '{{ product.id }}', quantity: 1 })">
+                                          class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
                                       <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
                                       <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
                                       <span>{{ _("add to cart") }}</span>
                                   </button>
                                   {% if store.settings.products.wishlist_enabled == true %}
                                     <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
-                                        <a zid-visible-customer="true" class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>      
-                                        <a zid-visible-guest="true" class="icon-heart-mask" href=" {{ url_for('login_page', query_params={"redirect_to": session.path} ) }}"></a>
-                                      <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
+                                        {% if not session.is_guest %}
+                                        <a class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
+                                        {% else %}
+                                        <a class="icon-heart-mask" href="{{ url_for('login_page', query_params={"redirect_to": session.path} ) }}"></a>
+                                        {% endif %}
+                                        <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
                                     </span>
                                   {% endif %}
                                 </div>
@@ -296,6 +299,82 @@
                             <div>
                                 <span id="product-view-add-to-cart"></span>
                             </div>
+
+                            <script>
+                                window.productAddToCart = function() {
+                                    if (typeof $ === 'undefined') {
+                                        return;
+                                    }
+                                    
+                                    if(!$('.add-to-cart-progress').hasClass('d-none'))
+                                        return;
+
+                                    $('.add-to-cart-progress').removeClass('d-none');
+
+                                    var quantity = parseInt($('#product-quantity').val()) || 1;
+                                    var productId = $('#product-id').val() || '{{ product.selected_product.id }}';
+
+                                    if (!window.vitrin || !window.vitrin.cart || !window.vitrin.cart.addProduct) {
+                                        $('.add-to-cart-progress').addClass('d-none');
+                                        if (typeof toastr !== 'undefined') {
+                                            toastr.error('{{ _("Cart service not available") }}', '{{ _("Sorry") }}');
+                                        }
+                                        return;
+                                    }
+
+                                    window.vitrin.cart.addProduct({ product_id: productId, quantity: quantity }).then(function (response) {
+                                        if(response && response.item && response.cart_items_quantity){
+                                            
+                                            if(response.cart_items_quantity) {
+                                                $('.cart-badge').removeClass('d-none').text(response.cart_items_quantity);
+                                            }
+                                            
+                                            if(typeof setCartTotalAndBadge === 'function') {
+                                                setCartTotalAndBadge({ items_count: response.cart_items_quantity });
+                                            }
+
+                                            $('.added-notification').addClass("show");
+                                            setTimeout(function () {
+                                                $('.added-notification').removeClass("show");
+                                            }, 5000);
+                                            
+                                            if (typeof toastr !== 'undefined') {
+                                                toastr.success('{{ _("Added to cart successfully") }}', '{{ _("Success") }}');
+                                            }
+
+                                            var image = $('#product-images-slick .slick-slide.slick-active img');
+                                            var cart = $('.a-shopping-cart');
+
+                                            if(image.length && cart.length && typeof addToCartAnimation === 'function'){
+                                                addToCartAnimation(cart, image);
+                                            }
+
+                                        } else {
+                                            if (typeof toastr !== 'undefined') {
+                                                var errorMessage = response && response.message ? response.message : '{{ _("Failed to add to cart") }}';
+                                                toastr.error(errorMessage, '{{ _("Sorry") }}');
+                                            }
+                                        }
+                                        $('.add-to-cart-progress').addClass('d-none');
+                                    }).catch(function(error) {
+                                        $('.add-to-cart-progress').addClass('d-none');
+                                        
+                                        var errorMessage = '{{ _("Failed to add to cart") }}';
+                                        
+                                        if (error && error.response && error.response.data && error.response.data.message) {
+                                            errorMessage = error.response.data.message;
+                                        } else if (error && error.message) {
+                                            errorMessage = error.message;
+                                        } else if (typeof error === 'string') {
+                                            errorMessage = error;
+                                        }
+                                        
+                                        if (typeof toastr !== 'undefined') {
+                                            toastr.error(errorMessage, '{{ _("Sorry") }}');
+                                        }
+                                    });
+                                };
+                            </script>
 
                             <div class="border-product"></div>
                             <div class="border-product">
@@ -616,7 +695,9 @@
 
                 <script>
                     document.addEventListener("DOMContentLoaded", function(){
-                        showRelatedProducts();
+                        if (typeof showRelatedProducts === 'function') {
+                            showRelatedProducts();
+                        }
                     });
                 </script>
             {% endif %}
@@ -668,36 +749,7 @@
         var productImages = {{  product.selected_product.media | tojson }};
         var customerWishlistIds = {{  customer.wishlist | tojson }};
 
-        function productAddToCart() {
-            if(!$('.add-to-cart-progress').hasClass('d-none'))
-                return;
 
-            $('.add-to-cart-progress').removeClass('d-none');
-
-            window.vitrin.cart.addProduct({ product_id: '{{ product.id }}', quantity: 1 }).then(function (response) {
-                if(response.status  === 'success'){
-
-                    if(response.data)
-                        setCartTotalAndBadge(response.data.cart);
-
-                    $('.added-notification').addClass("show");
-                    setTimeout(function () {
-                        $('.added-notification').removeClass("show");
-                    }, 5000);
-
-                    var image = $('#product-images-slick .slick-slide.slick-active img');
-                    var cart = $('.a-shopping-cart');
-
-                    if(image.length && cart.length){
-                        addToCartAnimation(cart, image);
-                    }
-
-                }else{
-                    toastr.error(response.data.message, '{{ _("Sorry") }}')
-                }
-                $('.add-to-cart-progress').addClass('d-none');
-            })
-        }
 
         function productOptionsChanged(selected_product) {
             if (selected_product) {
