@@ -18,7 +18,7 @@
   {% endfor %}
   {% if (questions|length) >= 5 %}
     <div class="text-center questions-view_more">
-      <a href="/products-questions?id={{ product.id }}">{{ _("View all questions") }} </a>
+      <a href="{{ url_for('product_questions', slug=product.id) }}">{{ _("View all questions") }} </a>
     </div>
   {% endif %}
 {% else %}

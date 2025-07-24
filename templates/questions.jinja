@@ -57,25 +57,25 @@
             <ul class="pagination">
               <!-- Previous Page Link -->
               <li class="page-item {% if product.questions.current_page == 1 %}disabled{% endif %}">
-                <a class="page-link" href="/products-questions?id={{ product.id }}&page={{ product.questions.current_page - 1 }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                <a class="page-link" href="{{ url_for('product_questions', slug=product.id, query_params={'page': product.questions.current_page - 1}) }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
               </li>
 
               {% for page in product.questions.pages %}
                 <li class="page-item {% if product.questions.current_page == page %}disabled selected{% endif %}">
-                  <a class="page-link" href="/products-questions?id={{ product.id }}&page={{ page }}">{{ page }}</a>
+                  <a class="page-link" href="{{ url_for('product_questions', slug=product.id, query_params={'page': page }) }}">{{ page }}</a>
                 </li>
               {% endfor %}
 
               <!-- Next Page Link -->
               <li class="page-item {% if product.questions.current_page == product.questions.last_page %}disabled{% endif %}">
-                <a class="page-link" href="/products-questions?id={{ product.id }}&page={{ product.questions.current_page + 1 }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                <a class="page-link" href="{{ url_for('product_questions', slug=product.id, query_params={'page': product.questions.current_page + 1}) }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
               </li>
             </ul>
           </nav>
         </div>
       {% endif %}
     </div>
-    {% set product=product %}{% include 'product-question-add.jinja' %}
+    {% set product=product %}{% include 'components/product-question-add.jinja' %}
   </section>
 {% endblock %}
 
