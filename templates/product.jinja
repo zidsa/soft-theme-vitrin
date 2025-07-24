@@ -269,7 +269,7 @@
 
 
                             </form>
-                            <div class="product-buttons {% if product.selected_product.out_of_stock %}d-none{% else %}d-block{% endif %}">
+                            <div class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
                                 <div class="border-product"></div>
                                 <div class="d-flex align-center">
                                   <button style="margin-bottom: 20px"
