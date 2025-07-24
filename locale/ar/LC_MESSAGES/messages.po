@@ -316,13 +316,13 @@ msgstr "من خلال قائمة الأمنيات يمكنك استعراض ال
 msgid "Shipping Option"
 msgstr "خيارات الشحن"
 
-msgid "Coverd Cities"
+msgid "Covered Cities"
 msgstr "المدن التى يتم تغطيتها"
 
 msgid "Shipping Charges "
 msgstr "تكلفة الشحن"
 
-msgid "Payment Upon Receopt"
+msgid "Payment Upon Receipt"
 msgstr "الدفع عند الاستلام"
 
 msgid "Payment and delivery options"
@@ -340,7 +340,7 @@ msgstr "قائمة خيارات الدفع المدعومة"
 msgid "Bank Accounts"
 msgstr " الحسابات البنكية"
 
-msgid " Bank accounts for regular transfers  "
+msgid "Bank accounts for regular transfers"
 msgstr " الحسابات البنكية للحولات العادية"
 
 msgid "IBAN Number"

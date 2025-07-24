@@ -87,7 +87,7 @@
                             <div class="cart-gift-card">
                                 <p class="font-weight-bold mb-2">
                                     <img src="{{ 'gift_icon.png' | asset_url }}" style="display: inline-block" />
-                                    {{ _('cart_send_as_gift_info') }}
+                                    {{ _('These products will be sent as a gift') }}
                                 </p>
                                 <p class="mb-2">
                                     <span>{{ _("From") }}: {{cart.gift_card_details.sender_name}}</span>
@@ -95,7 +95,7 @@
                                 </p>
                                 {% if cart.gift_card_details.gift_message and cart.gift_card_details.gift_message | length > 0 %}
                                     <p class="mb-0">
-                                        <span>{{ _('cart_gift_card_info_message') }}: </span> {{ cart.gift_card_details.gift_message }}
+                                        <span>{{ _('Message') }}: </span> {{ cart.gift_card_details.gift_message }}
                                     </p>
                                 {% endif %}
                             </div>
@@ -120,7 +120,7 @@
                             <div class="cart-product-row-wrapper cart-totals-row-wrapper">
                                 <div class="flex-grow-1">
                                     {{ cartTotal.title }}
-                                    {% if cartTotal.code == 'total' and store.is_cart_total_vat_included %}&nbsp;<small>{{ _('sys_lbl_cart_includes_vat') }}</small>{% endif %}
+                                    {% if cartTotal.code == 'total' and store.settings.general.tax_settings.is_tax_included_in_product_price %}&nbsp;<small>{{ _('Includes TAX {percentage}') | format(percentage=store.settings.general.tax_settings.tax_percentage) }}</small>{% endif %}
                                 </div>
                                 <div class="flex-shrink-0" style="width: 30%; {% if cartTotal.code == 'total' %} font-weight: bold; color: var( --primary-color); {% endif %}">
                                     {{ cartTotal.value_string }}

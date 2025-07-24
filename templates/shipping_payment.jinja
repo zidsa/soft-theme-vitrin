@@ -35,9 +35,9 @@
                                             <div class="card-body card-table-header">
                                                 <div class="row align-items-center">
                                                     <div class="col col-lg-2 shipping-col-1">{{ _("Shipping Option") }}</div>
-                                                    <div class="col col-lg-3 shipping-col-2">{{ _("Coverd Cities") }}</div>
+                                                    <div class="col col-lg-3 shipping-col-2">{{ _("Covered Cities") }}</div>
                                                     <div class="col col-lg-5 shipping-col-3">{{ _("Shipping Charges ") }}</div>
-                                                    <div class="col shipping-col-4">{{ _("Payment Upon Receopt") }}</div>
+                                                    <div class="col shipping-col-4">{{ _("Payment Upon Receipt") }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@
                                                         </div>
 
                                                         <div class="col col-lg-3 m-col shipping-col-2">
-                                                            <span class="variant-name-sm d-inline-block d-lg-none">{{ _("Coverd Cities") }}:&nbsp;</span>
+                                                            <span class="variant-name-sm d-inline-block d-lg-none">{{ _("Covered Cities") }}:&nbsp;</span>
                                                             <span>
                                                                     {% for city in shipping_method.delivery_option_cities | slice(0, 3) %}
                                                                         {{city.name}} {% if loop.last == false %}<span >,</span>{% endif %}
@@ -95,7 +95,7 @@
                                                         </div>
 
                                                         <div class="col m-col shipping-col-4">
-                                                            <span class="variant-name-sm d-inline-block d-lg-none">{{ _("Payment Upon Receopt") }}:&nbsp;</span>
+                                                            <span class="variant-name-sm d-inline-block d-lg-none">{{ _("Payment Upon Receipt") }}:&nbsp;</span>
                                                             <span>
                                                                     {% if shipping_method.cod_enabled %}
                                                                         {% for cod_fee in shipping_method.cod_fee %}
@@ -129,13 +129,13 @@
                                                             <button type="button" class="close" data-dismiss="modal" style="position: absolute"
                                                                     aria-label="Close"><span
                                                                         aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title" id="myModalLabel">{{ _("Coverd Cities") }}</h4>
+                                                            <h4 class="modal-title" id="myModalLabel">{{ _("Covered Cities") }}</h4>
                                                         </div>
                                                         <div class="modal-body" style="overflow: scroll">
 
                                                             <div class="form-element" style="position: relative">
                                                                 <i class="icon-search"></i>
-                                                                <input type="text" class="form-control" placeholder="{{ _('shipping_payments_th_shipping_cities_search') }}"
+                                                                <input type="text" class="form-control" placeholder="{{ _('Search') }}"
                                                                        id="citiesFilter-{{ shipping_method.id }}"
                                                                        onkeyup="filterCitiesList({{ shipping_method.id }})"
                                                                        name="citiesFilter"
