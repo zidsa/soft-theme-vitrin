@@ -421,3 +421,18 @@ msgstr "رسالة الهدية"
 
 msgid "shipping_payments_th_shipping_cities_search"
 msgstr "ابحث عن المدينة"
+
+msgid "Cart service not available"
+msgstr "خدمة السلة غير متوفرة"
+
+msgid "Added to cart successfully"
+msgstr "تم إضافة المنتج للسلة بنجاح"
+
+msgid "Success"
+msgstr "نجح"
+
+msgid "Failed to add to cart"
+msgstr "فشل في إضافة المنتج للسلة"
+
+msgid "Service not available"
+msgstr "الخدمة غير متوفرة"
