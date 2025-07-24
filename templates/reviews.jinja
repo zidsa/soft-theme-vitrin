@@ -104,13 +104,13 @@
          </div>
 
          <div class="comment-section description-paragrah bg-transparent">
-             {% set reviews=product.reviews.data %}{% include 'components/customer-reviews.jinja' %}
+             {% set reviews=product.reviews.results %}{% include 'components/customer-reviews.jinja' %}
          </div>
 
       </div>
    </section>
 
-    {% set totalPages=product.reviews.last_page %}{% set currentPage=product.reviews.current_page %}{% include 'components/pagination.jinja' %}
+    {% set totalPages=product.reviews.pages_count %}{% set currentPage=product.reviews.page %}{% include 'components/pagination.jinja' %}
 
 
       </section>

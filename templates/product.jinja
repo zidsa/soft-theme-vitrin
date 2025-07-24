@@ -632,9 +632,9 @@
                         </div>
 
                         <div class="comment-section description-paragrah bg-transparent">
-                            {% set reviews=product.reviews.data %}{% include 'components/customer-reviews.jinja' %}
+                            {% set reviews=product.reviews.results %}{% include 'components/customer-reviews.jinja' %}
 
-                            {% if product.reviews.next_page > 1 %}
+                            {% if product.reviews.pages_count > 1 %}
                             <div class="text-right">
                                 <a href="{{ url_for('product_reviews', slug=product.id) }} " type="button" class="btn all-reviews-btn">
                                     {{ _("All reviews") }}
