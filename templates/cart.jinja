@@ -51,7 +51,7 @@
                 <p class="cities-result lead">
                   {% for city in cart.free_shipping_rule.shipping_cities_condition %}
                     {{ city.name }}
-                    {% if not loop.last %} ، {% endif %}
+                    {% if not loop.last %} {{ _(",") }} {% endif %}
                   {% endfor %}
                 </p>
               </div>
@@ -86,7 +86,7 @@
                         {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}
                             <div class="cart-gift-card">
                                 <p class="font-weight-bold mb-2">
-                                    <img src="{{ asset_url }}gift_icon.png" style="display: inline-block" />
+                                    <img src="{{ 'gift_icon.png' | asset_url }}" style="display: inline-block" />
                                     {{ _('cart_send_as_gift_info') }}
                                 </p>
                                 <p class="mb-2">
@@ -139,7 +139,7 @@
                                 <div class="d-flex">
                                     <input class="form-control send-coupon" type="text" placeholder="{{ _("Enter discount coupon") }}" />
                                     <button type="button" class="btn btn-primary" onclick="sendCoupon()">
-                                        <img class="send-coupon-progress d-none" src="{{ asset_url }}spinner.gif" width="15" height="15"/>
+                                        <img class="send-coupon-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
 {{ _("Send") }}
                                     </button>
                                 </div>
@@ -152,7 +152,7 @@
                                 <span>{{ cart.coupon.message }}</span>&nbsp;
                                 <a onclick="deleteCoupon()" style="color: inherit; cursor: pointer">
                                     <span class="icon-trash-alt"></span>
-                                    <img class="delete-coupon-progress d-none" src="{{ asset_url }}spinner.gif" width="15" height="15"/>
+                                    <img class="delete-coupon-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
                                 </a>
                             </div>
                         {% endif %}
@@ -262,7 +262,7 @@
 
         function addDeleteProgressImage(){
             $('.cart-product-delete a .prefix', document).addClass('d-none');
-            $('.cart-product-delete a .prefix', document).html('<img class="send-coupon-progress" src="{{ asset_url }}spinner.gif" width="15" height="15"/>');
+            $('.cart-product-delete a .prefix', document).html('<img class="send-coupon-progress" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>');
         }
 
         $(document).on('click','.cart-product-delete a', function(event) {

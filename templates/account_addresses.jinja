@@ -30,7 +30,7 @@
                                             <div class="card-personal">
                                                 <div class="card-body">
                                                     <a class="delete-button" onclick="deleteAddress({{ address.id }})">
-                                                        <img class="delete-address-progress d-none" src="{{ asset_url }}spinner.gif" width="15" height="15"/>
+                                                        <img class="delete-address-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
                                                         <span class="icon-trash-alt"></span>
                                                     </a>
                                                     <a href="{{ url_for('edit_address', address_id=address.id) }}">
