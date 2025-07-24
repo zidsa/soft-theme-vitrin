@@ -13,11 +13,11 @@
         </div>
 
         <div class="container">
-            {% set title="Personal Information" %}{% set section='profile' %}{% include 'components/profile-section-dropdown.jinja' %}
+            {% set title=_("Personal Information") %}{% set section='profile' %}{% include 'components/profile-section-dropdown.jinja' %}
             <div class="d-flex">
                 {% set section='profile' %}{% include 'components/profile-section.jinja' %}
                 <div class="flex-grow-1">
-                    {% set title="Personal Information" %}{% include 'components/profile-title.jinja' %}
+                    {% set title=_("Personal Information") %}{% include 'components/profile-title.jinja' %}
                     <div class="account-content">
 
                          <div>
