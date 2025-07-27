@@ -24,24 +24,24 @@
                         {% set logoUrl = store.logo %}
                     {% endif %}
 
-                    <img class="image-logo {% if store.settings.branding.logo_mobile %} d-none d-lg-block {% endif %}" src="{{ image_url(logoUrl, h=175, q=100) }}" alt="{{ store.name }}" style="width: auto; max-height: 100%">
+                    <img class="image-logo {% if store.settings.branding.mobile_app_logo %} d-none d-lg-block {% endif %}" src="{{ image_url(logoUrl, h=175, q=100) }}" alt="{{ store.name }}" style="width: auto; max-height: 100%">
 
-                    {% if store.settings.branding.logo_mobile %}
-                        {% set logoUrlMobile = store.settings.branding.logo_mobile %}
+                    {% if store.settings.branding.mobile_app_logo %}
+                        {% set logoUrlMobile = store.settings.branding.mobile_app_logo %}
                         <img class="image-logo d-block d-lg-none" src="{{ image_url(logoUrlMobile, h=175, q=100) }}" alt="{{ store.name }}" style="width: auto; max-height: 100%">
                     {% endif %}
                 </a>
             </div>
             <div class="p-2 d-none d-lg-flex align-items-center bd-highlight search-input lg-search-div flex-grow-1">
 
-                {% if not ('hide_search_bar' in store.settings.branding.header_options) %}
+                {% if not ('hide_search_bar' in layout_settings.header_options) %}
                 <div class="form-group" style="position: relative; margin: 0px">
                     <span class="icon-search search-input-icon" style="z-index: 1"></span>
                     <div class="autocomplete" style="position: relative">
                         <input type="text"
-                               data-cat-id="{{ category.id }}"
+                               data-cat-id="{{ category.id if category is defined else '' }}"
                                class="form-control search-input-input"
-                               placeholder="{% if store.settings.branding.search_placeholder %}{{ store.settings.branding.search_placeholder }}{% else %}{{_("Search")}}{% endif %}"
+                               placeholder="{% if layout_settings.search_placeholder %}{{ layout_settings.search_placeholder }}{% else %}{{_("Search")}}{% endif %}"
                         >
                         <div class="autocomplete-items"></div>
                     </div>
@@ -50,7 +50,7 @@
 
             </div>
             <div class="bd-highlight d-flex align-items-center justify-content-end header-cart">
-                {% if not ('hide_search_bar' in store.settings.branding.header_options) %}
+                {% if not ('hide_search_bar' in layout_settings.header_options) %}
                 <div class="d-block d-lg-none sm-search-icon">
                     <span class="icon-search header-theme-icon-primary"></span>
                 </div>

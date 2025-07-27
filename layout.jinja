@@ -11,9 +11,9 @@
   {% include "vitrin:shared/head_scripts.jinja" %}
   
   <!-- Vitrin Cart SDK -->
-  <link rel="stylesheet" href="{{'dist/theme-service/vitrin-sdk.css' | sdk_asset_url }}">
+  <link rel="stylesheet" href="{{ 'dist/theme-service/vitrin-sdk.css' | sdk_asset_url }}">
   <script type="module">
-    import vitrin from "{{'dist/theme-service/vitrin-theme-service.es.js' | sdk_asset_url }}";
+    import vitrin from "{{ 'dist/theme-service/vitrin-theme-service.es.js' | sdk_asset_url }}";
     window.vitrin = vitrin;
   </script>
 
@@ -22,7 +22,7 @@
     <!--jquery UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family={% if store.settings.branding.fonts_name %}{{ store.settings.branding.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family={% if layout_settings.fonts_name %}{{ layout_settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -121,36 +121,36 @@
 >
 
 {% if store.editing_mode %}
-  <link href="https://fonts.googleapis.com/css2?family={% if store.settings.branding.fonts_name %}{{ store.settings.branding.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family={% if layout_settings.fonts_name %}{{ layout_settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
 {% endif %}
 
 <style>
   body,html {
-    font-family: {% if store.settings.branding.fonts_name %}{{ store.settings.branding.fonts_name | replace('+', ' ') }}{% else %}'Changa'{% endif %}, sans-serif;
+    font-family: {% if layout_settings.fonts_name %}{{ layout_settings.fonts_name | replace('+', ' ') }}{% else %}'Changa'{% endif %}, sans-serif;
   }
   :root {
-  {% if settings is defined %}
-        {% if settings.colors_header_background_color %}
-        --header-primary-color: {{ settings.colors_header_background_color }};
+  {% if layout_settings is defined %}
+        {% if layout_settings.colors_header_background_color %}
+        --header-primary-color: {{ layout_settings.colors_header_background_color }};
         {% endif %}
 
-      {% if settings.colors_header_menu_background_color %}
-            --menu-header-primary-color: {{settings.colors_header_menu_background_color}};
+      {% if layout_settings.colors_header_menu_background_color %}
+            --menu-header-primary-color: {{layout_settings.colors_header_menu_background_color}};
             --header-primary-brightness: brightness(100%);
-            {% elif settings.colors_header_background_color %}
-            --menu-header-primary-color: {{settings.colors_header_background_color}};
+            {% elif layout_settings.colors_header_background_color %}
+            --menu-header-primary-color: {{layout_settings.colors_header_background_color}};
             --header-primary-brightness: brightness(80%);
         {% endif %}
 
-      {% if settings.colors_header_menu_text_color %}
-        --menu-header-text-color-primary-bg: {{settings.colors_header_menu_text_color}};
-      {% elif settings.colors_header_text_color %}
-        --menu-header-text-color-primary-bg: {{settings.colors_header_text_color}};
+      {% if layout_settings.colors_header_menu_text_color %}
+        --menu-header-text-color-primary-bg: {{layout_settings.colors_header_menu_text_color}};
+      {% elif layout_settings.colors_header_text_color %}
+        --menu-header-text-color-primary-bg: {{layout_settings.colors_header_text_color}};
       {% endif %}
 
-        {% if settings.colors_header_text_color %}--header-text-color-primary-bg: {{settings.colors_header_text_color}};{% endif %}
-        {% if settings.colors_footer_background_color %}--footer-primary-color: {{settings.colors_footer_background_color}};{% endif %}
-        {% if settings.colors_footer_text_color %}--footer-text-color-primary-bg: {{settings.colors_footer_text_color}};{% endif %}
+        {% if layout_settings.colors_header_text_color %}--header-text-color-primary-bg: {{layout_settings.colors_header_text_color}};{% endif %}
+        {% if layout_settings.colors_footer_background_color %}--footer-primary-color: {{layout_settings.colors_footer_background_color}};{% endif %}
+        {% if layout_settings.colors_footer_text_color %}--footer-text-color-primary-bg: {{layout_settings.colors_footer_text_color}};{% endif %}
       }
   {% endif %}
 </style>
@@ -162,7 +162,7 @@
         {% block header %}{% endblock %}
     </div>
     <div class="main flex-grow-1 app-content"
-            {% if store.settings.branding.colors.background_image %} style="background-repeat: repeat; background-image: url('{{ store.settings.branding.colors.background_image }}');" {% endif %}>
+            {% if store.settings.branding.cover %} style="background-repeat: repeat; background-image: url('{{ store.settings.branding.cover }}');" {% endif %}>
         {% block main_content %}{% endblock %}
     </div>
     <div class="footer">

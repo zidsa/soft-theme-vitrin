@@ -818,7 +818,7 @@
 
     <script>
         var productImages = {{  product.selected_product.media | tojson }};
-        var customerWishlistIds = {{  customer.wishlist | tojson }};
+        var customerWishlistIds = []; // TODO: customers are lazy-loaded, add a listener on 'zid-customer-fetched' and a check to see if products in page are also in wishlist
 
 
 
@@ -856,7 +856,7 @@
 
 
                     {% if store.settings.products.low_stock_label_enabled %}
-                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_limit }};
+                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_threshold }};
                     var low_stock_message = '{{ _("Remaining %s only") }}';
 
                     if(!selected_product.is_infinite &&  selected_product.quantity < store_low_stock_limit){

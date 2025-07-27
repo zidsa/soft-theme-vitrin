@@ -34,7 +34,7 @@
                                                         <span class="icon-trash-alt"></span>
                                                     </a>
                                                     <a href="{{ url_for('edit_address', address_id=address.id) }}">
-                                                        <h5 class="address-title">{{ address.name }}</h5>
+                                                        <h5 class="address-title">{{ address.name or '' }}</h5>
                                                         <p class="address-text">{{ address.address_street }}</p>
                                                         <p class="address-text">{{ address.country.name }}, {{ address.city.name }}, {{ address.address_district }}</p>
                                                     </a>
