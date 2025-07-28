@@ -162,7 +162,7 @@
         {% block header %}{% endblock %}
     </div>
     <div class="main flex-grow-1 app-content"
-            {% if store.settings.branding.cover %} style="background-repeat: repeat; background-image: url('{{ store.settings.branding.cover }}');" {% endif %}>
+            {% if layout_settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}>
         {% block main_content %}{% endblock %}
     </div>
     <div class="footer">

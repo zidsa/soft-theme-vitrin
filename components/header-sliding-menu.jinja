@@ -7,19 +7,19 @@
         {% for menu in store.settings.menus.main_menu.items %}
             {% if menu.url %}
             <li class="slide-menu-ul-li {% if menu.slug == 'all_categories' %} all-categories {% endif %}"  onclick="scrollToSubMenu(this)">
-                <a href="{{ menu.url }}" title="{{ menu.label }}" class="menu-link">
+                <a href="{{ menu.url | localized_url if menu.resource_type != 'url' else menu.url }}" title="{{ menu.label }}" class="menu-link">
                     <span class="px-1 clickable-span">{{ menu.label }}</span>
                 </a>
                 {% if menu.items | length > 0 %}
                     <ul>
                         {% for menu_sub in menu.items %}
                             <li class="slide-menu-ul-li">
-                                <a href="{{ menu_sub.url }}">{{ menu_sub.label }}</a>
+                                <a href="{{ menu_sub.url | localized_url if menu_sub.resource_type != 'url' else menu_sub.url  }}">{{ menu_sub.label }}</a>
                                 {% if menu_sub.items | length > 0 %}
                                     <ul>
                                         {% for menu_sub_sub in menu_sub.items %}
                                             <li class="slide-menu-ul-li">
-                                                <a href="{{ menu_sub_sub.url }}">
+                                                <a href="{{ menu_sub_sub.url | localized_url if menu_sub_sub.resource_type != 'url' else menu_sub_sub.url }}">
                                                     {{ menu_sub_sub.label }}
                                                 </a>
                                             </li>

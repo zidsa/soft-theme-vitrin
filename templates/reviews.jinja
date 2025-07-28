@@ -14,7 +14,7 @@
 
          <a href="{{ url_for('product_details', slug=product.slug )}}">
             <div class="d-flex">
-               <img src="{{ product.images[0].image.large }}" class="product-image" alt="{{ product.name }}" />
+               <img src="{{ product.main_image.image.large if product.main_image else '' }}" class="product-image" alt="{{ product.name }}" />
                <h1 style="color: initial">{{ product.name }}</h1>
             </div>
          </a>
