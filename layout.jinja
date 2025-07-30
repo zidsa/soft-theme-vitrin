@@ -22,7 +22,7 @@
     <!--jquery UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family={% if layout_settings.fonts_name %}{{ layout_settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -116,41 +116,41 @@
 </head>
 
 <body class="{{ session.locale.language.direction }}"
-      data-template="{{ template }}"
+      data-template="{{ session.template }}"
         {% if template == 'category' and category is not none %} data-category-id="{{ category.id }}" {% endif %}
 >
 
 {% if store.editing_mode %}
-  <link href="https://fonts.googleapis.com/css2?family={% if layout_settings.fonts_name %}{{ layout_settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
 {% endif %}
 
 <style>
   body,html {
-    font-family: {% if layout_settings.fonts_name %}{{ layout_settings.fonts_name | replace('+', ' ') }}{% else %}'Changa'{% endif %}, sans-serif;
+    font-family: {% if settings.fonts_name %}{{ settings.fonts_name | replace('+', ' ') }}{% else %}'Changa'{% endif %}, sans-serif;
   }
   :root {
-  {% if layout_settings is defined %}
-        {% if layout_settings.colors_header_background_color %}
-        --header-primary-color: {{ layout_settings.colors_header_background_color }};
+  {% if settings is defined %}
+        {% if settings.colors_header_background_color %}
+        --header-primary-color: {{ settings.colors_header_background_color }};
         {% endif %}
 
-      {% if layout_settings.colors_header_menu_background_color %}
-            --menu-header-primary-color: {{layout_settings.colors_header_menu_background_color}};
+      {% if settings.colors_header_menu_background_color %}
+            --menu-header-primary-color: {{settings.colors_header_menu_background_color}};
             --header-primary-brightness: brightness(100%);
-            {% elif layout_settings.colors_header_background_color %}
-            --menu-header-primary-color: {{layout_settings.colors_header_background_color}};
+            {% elif settings.colors_header_background_color %}
+            --menu-header-primary-color: {{settings.colors_header_background_color}};
             --header-primary-brightness: brightness(80%);
         {% endif %}
 
-      {% if layout_settings.colors_header_menu_text_color %}
-        --menu-header-text-color-primary-bg: {{layout_settings.colors_header_menu_text_color}};
-      {% elif layout_settings.colors_header_text_color %}
-        --menu-header-text-color-primary-bg: {{layout_settings.colors_header_text_color}};
+      {% if settings.colors_header_menu_text_color %}
+        --menu-header-text-color-primary-bg: {{settings.colors_header_menu_text_color}};
+      {% elif settings.colors_header_text_color %}
+        --menu-header-text-color-primary-bg: {{settings.colors_header_text_color}};
       {% endif %}
 
-        {% if layout_settings.colors_header_text_color %}--header-text-color-primary-bg: {{layout_settings.colors_header_text_color}};{% endif %}
-        {% if layout_settings.colors_footer_background_color %}--footer-primary-color: {{layout_settings.colors_footer_background_color}};{% endif %}
-        {% if layout_settings.colors_footer_text_color %}--footer-text-color-primary-bg: {{layout_settings.colors_footer_text_color}};{% endif %}
+        {% if settings.colors_header_text_color %}--header-text-color-primary-bg: {{settings.colors_header_text_color}};{% endif %}
+        {% if settings.colors_footer_background_color %}--footer-primary-color: {{settings.colors_footer_background_color}};{% endif %}
+        {% if settings.colors_footer_text_color %}--footer-text-color-primary-bg: {{settings.colors_footer_text_color}};{% endif %}
       }
   {% endif %}
 </style>
@@ -162,7 +162,7 @@
         {% block header %}{% endblock %}
     </div>
     <div class="main flex-grow-1 app-content"
-            {% if layout_settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}>
+            {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}>
         {% block main_content %}{% endblock %}
     </div>
     <div class="footer">

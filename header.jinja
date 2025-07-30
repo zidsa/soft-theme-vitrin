@@ -20,7 +20,7 @@
             <input type="text"
                    data-cat-id="{{ category.id if category is defined else '' }}"
                    class="form-control search-input-input"
-                   placeholder="{% if layout_settings.search_placeholder %}{{ layout_settings.search_placeholder }}{% else %}{{ _('Search') }}{% endif %}"
+                   placeholder="{% if settings.header_search_placeholder %}{{ settings.header_search_placeholder }}{% else %}{{ _('Search') }}{% endif %}"
             >
             <div class="autocomplete-items"></div>
           </div>
@@ -31,8 +31,8 @@
     {% set menu_settings=settings %}{% include 'components/header-sliding-menu.jinja' %}
     {% set menu_settings=settings %}{% include 'components/header-mega-menu.jinja' %}
 
-    {% set show_country = 'hide_country' not in layout_settings.header_options %}
-    {% set show_language = 'hide_language' not in layout_settings.header_options %}
+    {% set show_country = 'hide_country' not in settings.header_options %}
+    {% set show_language = 'hide_language' not in settings.header_options %}
     
 
     {% if (show_country and multiple_countries) or (show_language and multiple_languages) %}

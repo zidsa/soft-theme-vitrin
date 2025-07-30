@@ -5,8 +5,8 @@
                 {% set width='100' %}{% set height='100' %}{% include 'logo.jinja' %}
             </div>
             <div class="search-bar flex-grow-1">
-                {% if not ('hide_search_bar' in layout_settings.header_options) %}
-                <input id="search-input" placeholder="{% if layout_settings.search_placeholder %} {{ layout_settings.search_placeholder }} {% else %} {{ _("Search") }}  {% endif %}" autocomplete="off" spellcheck="false">
+                {% if not ('hide_search_bar' in settings.header_options) %}
+                <input id="search-input" placeholder="{% if settings.header_search_placeholder %} {{ settings.header_search_placeholder }} {% else %} {{ _("Search") }}  {% endif %}" autocomplete="off" spellcheck="false">
                 <img src="{{ 'search-icon.svg' | asset_url }}" alt="" width="31" height="31">  
                
                 {% endif %}
