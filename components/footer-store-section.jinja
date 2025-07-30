@@ -143,7 +143,7 @@
                 {% endif %}
                 <div class="icons">
                     <div class="logistics-pay-icons d-flex flex-wrap justify-content-center">
-                        {% for shipping_method in store.shipping_methods %}
+                        {% for shipping_method in store.settings.checkout.shipping_methods %}
                             <a href="/shipping-and-payment">
                                 <img src="{{ image_url(shipping_method.icon, h=80, q=100) }}" loading="lazy" alt="" height="21">
                             </a>
