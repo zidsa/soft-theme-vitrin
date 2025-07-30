@@ -42,7 +42,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {% for shipping_method in store_shipping_methods %}
+                                    {% for shipping_method in shipping_methods %}
                                         <div  class="card-table options-table">
                                             <div class="card">
                                                 <div class="card-body">
@@ -65,7 +65,7 @@
                                                         <div class="col col-lg-3 m-col shipping-col-2">
                                                             <span class="variant-name-sm d-inline-block d-lg-none">{{ _("Covered Cities") }}:&nbsp;</span>
                                                             <span>
-                                                                    {% for city in shipping_method.delivery_option_cities | slice(0, 3) %}
+                                                                    {% for city in shipping_method.delivery_option_cities[:3] %}
                                                                         {{city.name}} {% if loop.last == false %}<span >,</span>{% endif %}
                                                                     {% endfor %}
 
@@ -174,7 +174,7 @@
                             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                 <div class="mt-5 mb-5">
                                     <div class="d-flex flex-wrap">
-                                        {% for payment_method in store_payment_methods %}
+                                        {% for payment_method in payment_methods %}
                                             {% if payment_method.icon %}
                                                 <div class="d-flex align-items-center justify-content-center payment-method-card">
                                                     <img src="{{ payment_method.icon }}">
@@ -190,7 +190,7 @@
                             <!-- tab 3 -->
                             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 
-                                {% for store_bank in store_banks %}
+                                {% for store_bank in banks %}
                                     <div class="mt-5 mb-5">
                                         <div class="shipping-payment-card">
                                                 <div class="card-body-shipping">

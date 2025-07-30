@@ -3,27 +3,28 @@
         <div class="row">
             <div class="col-12 col-lg-5">
                 <div class="footer-about-us-links-div footer-about-us-div">
-                    <h2 class="pb-2">{{ store.settings.about_us.title }}</h2>
-                    <p>{{ store.settings.about_us.description | safe }}</p>
+                    <h2 class="pb-2">{{ settings.about_us_title }}</h2>
+                    <p>{{ settings.about_us_des | safe }}</p>
                 </div>
             </div>
             <div class="col-12 col-lg-7">
                 <div class="row">
                     <div class="col-12 col-lg-4">
-                        {% if not (store.settings.about_us.links_1_hide) %}
+                        {% if not (settings.links_1_hide) %}
                             <div class="footer-about-us-links-div">
-                                <h2 class="pb-2">{{ store.settings.about_us.links_1_title }}</h2>
-                                {% for link in store.settings.about_us.links_1_links %}
+                            {# maybe do links_1 and links_2 with settings menus later #}
+                                <h2 class="pb-2">{{ settings.links_1_title }}</h2>
+                                {% for link in settings.links_1_links %}
                                     <p><a href="{{ link.url }}">{{ link.title }}</a></p>
                                 {% endfor %}
                             </div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-lg-4">
-                        {% if not (store.settings.about_us.links_2_hide) %}
+                        {% if not (settings.links_2_hide) %}
                             <div class="footer-about-us-links-div">
-                                <h2 class="pb-2">{{ store.settings.about_us.links_2_title }}</h2>
-                                {% for link in store.settings.about_us.links_2_links %}
+                                <h2 class="pb-2">{{ settings.links_2_title }}</h2>
+                                {% for link in settings.links_2_links %}
                                     <p><a href="{{ link.url }}">{{ link.title }}</a></p>
                                 {% endfor %}
                             </div>
@@ -32,9 +33,9 @@
                     <div class="col-12 col-lg-4">
                         {% if store.settings.general.business_address.show_location %}
                         <div class="footer-about-us-links-div">
-                            <h2 class="pb-2">{% if store.settings.about_us.business_location_title %}{{ store.settings.about_us.business_location_title }}{% else %}{{ _("Our place") }}{% endif %}</h2>
+                            <h2 class="pb-2">{% if settings.business_location_title %}{{ settings.business_location_title }}{% else %}{{ _("Our place") }}{% endif %}</h2>
                             <p>
-                                <a {% if store.settings.general.business_address.lat %} target="_blank" href="https://maps.google.com/?q={{ store.settings.general.business_address.lat }},{{ store.settings.general.business_address.lng }}" {% endif %}>
+                                <a {% if store.settings.general.business_address.latitude %} target="_blank" href="https://maps.google.com/?q={{ store.settings.general.business_address.latitude }},{{ store.settings.general.business_address.longitude }}" {% endif %}>
                                     {{ store.settings.general.business_address.street }}<br/>
                                     <i class="icon-map-marker-alt"></i> {{ store.settings.general.business_address.city.country.name }}, {{ store.settings.general.business_address.city.name }}, {{ store.settings.general.business_address.district }}, {{ store.settings.general.business_address.street }}
                                 </a>
@@ -42,7 +43,7 @@
                         </div>
                         {% endif %}
                         <div  class="footer-about-us-links-div {% if store.settings.general.business_address.show_location %}mt-5{% endif %}">
-                            <h2 class="pb-2">{% if store.settings.about_us.social_media_title %}{{ store.settings.about_us.social_media_title }}{% else %}{{ _("Contact us") }}{% endif %}</h2>
+                            <h2 class="pb-2">{% if settings.social_media_title %}{{ settings.social_media_title }}{% else %}{{ _("Contact us") }}{% endif %}</h2>
                             <div class="social-icons d-flex flex-wrap">
 
                                 {% if store.settings.contact.facebook %}
@@ -142,14 +143,14 @@
                 {% endif %}
                 <div class="icons">
                     <div class="logistics-pay-icons d-flex flex-wrap justify-content-center">
-                        {% for shipping_method in store.shipping_methods %}
+                        {% for shipping_method in store.settings.checkout.shipping_methods %}
                             <a href="/shipping-and-payment">
                                 <img src="{{ image_url(shipping_method.icon, h=80, q=100) }}" loading="lazy" alt="" height="21">
                             </a>
                         {% endfor %}
 
 
-                        {% for payment_method in store.payment_methods %}
+                        {% for payment_method in store.settings.checkout.payment_methods %}
                             <a href="/shipping-and-payment">
                                 <img src="{{ image_url(payment_method.icon, h=80, q=100) }}" loading="lazy" alt="" height="21">
                             </a>
@@ -190,10 +191,10 @@
                     </div>
                 {% endif %}
 
-                {% if store.commercial_registration_number %}
+                {% if store.settings.general.commercial_registration_number %}
                     <div class="maroof-icon">
                         <span>{{ _("The commercial register number:") }}</span>
-                        <span>{{ store.commercial_registration_number }}</span>
+                        <span>{{ store.settings.general.commercial_registration_number }}</span>
                     </div>
                 {% endif %}
             </div>
