@@ -11,9 +11,9 @@
   {% include "vitrin:shared/head_scripts.jinja" %}
   
   <!-- Vitrin Cart SDK -->
-  <link rel="stylesheet" href="{{ 'dist/theme-service/vitrin-sdk.css' | sdk_asset_url }}">
+  <link rel="stylesheet" href="{{ 'theme-service/vitrin-sdk.css' | sdk_asset_url }}">
   <script type="module">
-    import vitrin from "{{ 'dist/theme-service/vitrin-theme-service.es.js' | sdk_asset_url }}";
+    import vitrin from "{{ 'theme-service/vitrin-theme-service.es.js' | sdk_asset_url }}";
     window.vitrin = vitrin;
   </script>
 
