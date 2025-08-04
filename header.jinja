@@ -18,9 +18,9 @@
         <div class="sm-search-div">
           <div class="autocomplete" style="position: relative">
             <input type="text"
-                   data-cat-id="{{ category.id }}"
+                   data-cat-id="{{ category.id if category is defined else '' }}"
                    class="form-control search-input-input"
-                   placeholder="{% if store.settings.branding.search_placeholder %}{{ store.settings.branding.search_placeholder }}{% else %}{{ _('Search') }}{% endif %}"
+                   placeholder="{% if settings.header_search_placeholder %}{{ settings.header_search_placeholder }}{% else %}{{ _('Search') }}{% endif %}"
             >
             <div class="autocomplete-items"></div>
           </div>
@@ -31,8 +31,8 @@
     {% set menu_settings=settings %}{% include 'components/header-sliding-menu.jinja' %}
     {% set menu_settings=settings %}{% include 'components/header-mega-menu.jinja' %}
 
-    {% set show_country = 'hide_country' not in store.settings.branding.header_options %}
-    {% set show_language = 'hide_language' not in store.settings.branding.header_options %}
+    {% set show_country = 'hide_country' not in settings.header_options %}
+    {% set show_language = 'hide_language' not in settings.header_options %}
     
 
     {% if (show_country and multiple_countries) or (show_language and multiple_languages) %}

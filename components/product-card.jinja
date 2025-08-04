@@ -14,8 +14,6 @@
     
     <a href="/products/{{ product.slug }}" class="d-flex flex-column justify-content-start">
 
-
-
         <div class="box-1-1">
             <div class="content">
                 <div class="d-flex justify-content-center" style="width: 100%; height: 100%;">
@@ -24,7 +22,7 @@
                   {% endif %}
                     <img id="product-card-img-{{ product.id }}"
                             {% if product.images or product.videos %}
-                                    src="{{ product.images[0]['image']['large'] or product.videos[0]['image']['large'] }}"
+                                    src="{{ product.main_image.image.large if product.main_image else '' }}"
                              {% else %}
                                  src="{{ image_url(('product-img.svg' | asset_url), w=235, q=100, f='auto') }}"
                             {% endif %}

@@ -15,7 +15,7 @@
       <div class="row">
         {% if product.images is not none and product.images[0].image.medium is defined %}
           <div class="col-md-3">
-            <img src="{{ product.images[0].image.medium }}" alt="product-image" class="img-fluid" />
+            <img src="{{ product.main_image.image.medium if product.main_image else '' }}" alt="product-image" class="img-fluid" />
           </div>
         {% endif %}
         <div class="col-md-9 d-flex align-items-center">

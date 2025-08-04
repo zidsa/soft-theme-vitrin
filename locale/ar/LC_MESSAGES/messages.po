@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-24 15:26+0300\n"
+"POT-Creation-Date: 2025-07-24 22:53+0300\n"
 "PO-Revision-Date: 2025-03-10 08:08+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ar\n"
@@ -54,7 +54,8 @@ msgstr "تجاهل السلة وواصل التسوق"
 msgid "Send as gift"
 msgstr "أرسل كهدية"
 
-msgid "Continue"
+
+msgid "continue"
 msgstr "متابعة"
 
 msgid "Payment and delivery options"
@@ -165,11 +166,11 @@ msgstr "من الأعلى إلى الأقل"
 msgid "Newest"
 msgstr "الأحدث"
 
-msgid "Total products"
-msgstr "إجمالي المنتجات"
+msgid "Total "
+msgstr "إجمالي "
 
 msgid "products"
-msgstr "المنتجات"
+msgstr "منتجات"
 
 msgid "No products"
 msgstr "لا توجد منتجات"
@@ -306,9 +307,8 @@ msgstr "الاسم"
 msgid "value"
 msgstr "القيمة"
 
-#, python-brace-format
-msgid "Includes TAX {percentage}"
-msgstr "شامل الضريبة {percentage}"
+msgid "Includes TAX %(percentage)s"
+msgstr "شامل الضريبة %(percentage)s"
 
 msgid "Discount coupon"
 msgstr "قسيمة الخصم"
@@ -339,7 +339,7 @@ msgstr "الرئيسية"
 
 #, fuzzy
 msgid "Categories"
-msgstr "جميع التصنيفات"
+msgstr "التصنيفات"
 
 #, python-format
 msgid "Sold more than %s times"
@@ -354,7 +354,7 @@ msgstr "مزيد من المعلومات"
 
 #, fuzzy
 msgid "product sku"
-msgstr "المنتجات"
+msgstr "رقم المنتج (sku)"
 
 msgid "Weight"
 msgstr "الوزن"
@@ -383,6 +383,10 @@ msgstr "نجاح"
 msgid "Failed to add to cart"
 msgstr "فشل في إضافة المنتج للسلة"
 
+#, fuzzy
+msgid "Failed to send alert request"
+msgstr "فشل في الإرسال"
+
 msgid "share product"
 msgstr "مشاركة المنتج"
 
@@ -391,7 +395,7 @@ msgstr "اطلع على هذا المنتج"
 
 #, fuzzy
 msgid "Display all products"
-msgstr "جميع المنتجات"
+msgstr "عرض جميع المنتجات"
 
 msgid "product information"
 msgstr "معلومات المنتج"
@@ -401,7 +405,7 @@ msgstr "وصف المنتج"
 
 #, fuzzy
 msgid "Product images"
-msgstr "المنتجات"
+msgstr "صور المنتج"
 
 msgid "price"
 msgstr "السعر"
@@ -433,9 +437,8 @@ msgstr "سيء"
 msgid "No reviews, add yours"
 msgstr "لا توجد مراجعات، أضف مراجعتك"
 
-#, fuzzy
 msgid "All reviews"
-msgstr "جميع التصنيفات"
+msgstr "جميع التقييمات"
 
 msgid "Questions"
 msgstr "أسئلة"
@@ -445,7 +448,7 @@ msgstr "قد يعجبك أيضًا"
 
 #, fuzzy
 msgid "Option not available"
-msgstr "الخدمة غير متوفرة"
+msgstr "الخيار غير متوفر"
 
 msgid "All products"
 msgstr "جميع المنتجات"
@@ -566,6 +569,18 @@ msgstr "حدث خطأ غير متوقع. الرجاء المحاولة مرة أ
 
 msgid "Choose"
 msgstr "اختر"
+
+msgid "close"
+msgstr "إغلاق"
+
+msgid "loading"
+msgstr "تحميل"
+
+msgid "success"
+msgstr "نجاح"
+
+msgid "ok"
+msgstr "نعم"
 
 msgid "GET"
 msgstr "GET"

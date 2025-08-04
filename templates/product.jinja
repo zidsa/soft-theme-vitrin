@@ -858,7 +858,7 @@
                     }
 
                     {% if store.settings.products.low_stock_label_enabled %}
-                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_limit | default(0) }};
+                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_threshold }};
                     var low_stock_message = '{{ _("Remaining %s only") }}';
 
                     if (!selected_product.is_infinite && selected_product.quantity < store_low_stock_limit) {

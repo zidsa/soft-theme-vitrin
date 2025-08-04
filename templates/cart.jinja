@@ -87,7 +87,7 @@
                             <div class="cart-gift-card">
                                 <p class="font-weight-bold mb-2">
                                     <img src="{{ 'gift_icon.png' | asset_url }}" style="display: inline-block" />
-                                    {{ _('These products will be sent as a gift') }}
+                                    {{ _('The following products will be sent as a gift') }}
                                 </p>
                                 <p class="mb-2">
                                     <span>{{ _("From") }}: {{cart.gift_card_details.sender_name}}</span>
@@ -120,7 +120,7 @@
                             <div class="cart-product-row-wrapper cart-totals-row-wrapper">
                                 <div class="flex-grow-1">
                                     {{ cartTotal.title }}
-                                    {% if cartTotal.code == 'total' and store.settings.general.tax_settings.is_tax_included_in_product_price %}&nbsp;<small>{{ _('Includes TAX {percentage}') | format(percentage=store.settings.general.tax_settings.tax_percentage) }}</small>{% endif %}
+                                    {% if cartTotal.code == 'total' and store.settings.general.tax_settings.is_tax_included_in_product_price %}&nbsp;<small>{{ _('Includes TAX %(percentage)s') | format(percentage=store.settings.general.tax_settings.tax_percentage) }}</small>{% endif %}
                                 </div>
                                 <div class="flex-shrink-0" style="width: 30%; {% if cartTotal.code == 'total' %} font-weight: bold; color: var( --primary-color); {% endif %}">
                                     {{ cartTotal.value_string }}
@@ -140,7 +140,7 @@
                                     <input class="form-control send-coupon" type="text" placeholder="{{ _("Enter discount coupon") }}" />
                                     <button type="button" class="btn btn-primary" onclick="sendCoupon()">
                                         <img class="send-coupon-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
-{{ _("Send") }}
+                                    {{ _("Send") }}
                                     </button>
                                 </div>
                             </div>
@@ -161,35 +161,49 @@
 
 
 
-                    <div class="cart-discount-rule-wrapper free-shipping-rule-section mt-5 {% if cart.free_shipping_rule %}d-block{% else %}d-none{% endif %}">
-                        <div class="d-flex align-items-center">
+                    {% if cart.free_shipping_rule and cart.free_shipping_rule.code %}
+                        {% set status = cart.free_shipping_rule.subtotal_condition.status | default('') %}
+                        {% set subtotal_condition = cart.free_shipping_rule.subtotal_condition %}
+                        <div class="cart-discount-rule-wrapper free-shipping-rule-section mt-5 d-block">
+                            <div class="d-flex align-items-center">
                             <div class="message flex-grow-1 free-shipping-rule-message">
-                                {{ cart.free_shipping_rule.subtotal_condition.status }}
-                            </div>
-                            <div class="text-muted mr-1 flex-shrink-0 free-shipping-rule-read-more" class="{% if cart.free_shipping_rule.subtotal_condition.status == 'min_not_reached' %}d-inline-block{% else %}d-none{% endif %}">
-                              <a data-toggle="modal" data-target="#searchCitiesModal" href="#">
-                                <small>
-                                  {{ _("Read More") }}
-                                </small>
-                              </a>
-                            </div>
-                            <div class="discount-progress flex-shrink-0">
-                                <span class="free-shipping-rule-done {% if cart.free_shipping_rule.subtotal_condition.status == 'applied' %}d-inline-block{% else %}d-none{% endif %}">
-                                    <span style="font-size: 28px"  class="icon-done text-color-primary"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="{% if cart.free_shipping_rule.subtotal_condition.status == 'min_not_reached' and cart.free_shipping_rule.code %}d-block{% else %}d-none{% endif %} discount-progress-linear">
-                            <div class="progress-bar free-shipping-rule-progress" style="width: {{ cart.free_shipping_rule.subtotal_condition.products_subtotal_percentage_from_min }}%">
-                                {% if cart.free_shipping_rule.subtotal_condition.status == 'applied' %}
-                                    <span>{{ _("Free Shipping") }}</span>
-                                {% else %}
-                                    <span>{{ cart.free_shipping_rule.subtotal_condition.products_subtotal_percentage_from_min }}%</span>
+                                {% if status == 'min_not_reached' %}
+                                    {{ _("Add products with total of %(total)s to get free shipping") | format(total=subtotal_condition.remaining_to_min_total | default("0")) }}
+                                {% elif status == 'max_exceed' %}
+                                    {{ _("Free shipping applied for cart total between %(min)s and %(max)s") | format(min=subtotal_condition.min_total | default("0"), max=subtotal_condition.max_total | default("0")) }}
+                                {% elif status == 'applied' %}
+                                    {{  _("Free shipping applied") }}
                                 {% endif %}
                             </div>
-                        </div>
 
-                    </div>
+                            <div class="text-muted mr-1 flex-shrink-0 free-shipping-rule-read-more 
+                                {% if status == 'min_not_reached' %}d-inline-block{% else %}d-none{% endif %}">
+                                <a data-toggle="modal" data-target="#searchCitiesModal" href="#">
+                                <small>{{ _("Read More") }}</small>
+                                </a>
+                            </div>
+
+                            <div class="discount-progress flex-shrink-0">
+                                <span class="free-shipping-rule-done 
+                                    {% if status == 'applied' %}d-inline-block{% else %}d-none{% endif %}">
+                                <span style="font-size: 28px" class="icon-done text-color-primary"></span>
+                                </span>
+                            </div>
+                            </div>
+
+                            <div class="{% if status == 'min_not_reached' %}d-block{% else %}d-none{% endif %} discount-progress-linear">
+                            <div class="progress-bar free-shipping-rule-progress" style="width: {{ subtotal_condition.products_subtotal_percentage_from_min | default(0) }}%">
+                                {% if status == 'applied' %}
+                                <span>{{ _("Free Shipping") }}</span>
+                                {% else %}
+                                <span>{{ subtotal_condition.products_subtotal_percentage_from_min | default(0) }}%</span>
+                                {% endif %}
+                            </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
 
                     <div>
                         <div class="mt-5">
@@ -347,8 +361,8 @@
                     var vat_included = '';
                     if(cartTotal.code === 'total'){
 
-                        var is_cart_total_vat_included = {% if store.is_cart_total_vat_included %}true{% else %}false{% endif %};
-                        var local_sys_lbl_cart_includes_vat = '{{ _('sys_lbl_cart_includes_vat') }}';
+                        var is_cart_total_vat_included = {% if store.settings.general.tax_settings.is_tax_included_in_product_price %}true{% else %}false{% endif %};
+                        var local_sys_lbl_cart_includes_vat = "{{ _('Includes TAX %(percentage)s') | format(percentage=store.settings.general.tax_settings.tax_percentage) }}";
 
                         if(is_cart_total_vat_included){
                             vat_included = '&nbsp;<small>'+local_sys_lbl_cart_includes_vat+'</small>';
