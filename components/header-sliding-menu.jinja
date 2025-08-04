@@ -41,18 +41,17 @@
                 <div class="account-lang-currency upper-bar">
                     <div class="container d-flex flex-wrap">
                         <div class="account-area">
-                            {% if not session.is_guest and customer is defined %}
-                            <button type="button" onclick="window.location.href='/account-profile'" class="btn btn-dark account-btn">
-                                <span class="icon-account_circle_black_24dp" style="position: relative; top: 1px"></span>
-                                {# TODO: this should be lazy-loaded #}
-                                <span style="position: relative; bottom: 2px">{{ _("Hello") }}&nbsp; {{ customer.name }} &nbsp;</span>
-                            </button>
-                            {% else %}
-                            <button type="button" onclick="window.location.href='/auth/login'" class="btn btn-dark account-btn">
+                            <!-- Default Login button (shown initially) -->
+                            <button type="button" onclick="window.location.href='/auth/login'" class="btn btn-dark account-btn" id="login-btn-alt">
                                 <span class="icon-account_circle_black_24dp" style="position: relative; top: 1px"></span>
                                 <span style="position: relative; bottom: 2px">&nbsp;{{ _("Login") }}&nbsp;</span>
                             </button>
-                            {% endif %}
+
+                            <!-- Placeholder for Hello, Customer (hidden initially) -->
+                            <button type="button" onclick="window.location.href='/account-profile'" class="btn btn-dark account-btn" id="hello-btn-alt" style="display: none;">
+                                <span class="icon-account_circle_black_24dp" style="position: relative; top: 1px"></span>
+                                <span id="customer-greeting-alt" style="position: relative; bottom: 2px">{{ _("Hello") }} ...</span>
+                            </button>
                         </div>
 
                         {% set multiple_countries = store.countries | length > 1 %}
@@ -129,5 +128,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
+document.addEventListener('zid-customer-fetched', function (event) {
+    const customer = event.detail.customer;
+    if (customer && customer.name) {
+        // Update greeting text
+        const greeting = document.getElementById('customer-greeting-alt');
+        greeting.textContent = `{{ _("Hello") }} ${customer.name}`;
+
+        // Show Hello button, hide Login button
+        document.getElementById('hello-btn-alt').style.display = 'inline-block';
+        document.getElementById('login-btn-alt').style.display = 'none';
+    }
 });
 </script>
