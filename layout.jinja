@@ -172,6 +172,7 @@
 </div>
 
 {{ zidapi_script|safe }}
+{% include "vitrin:shared/body_scripts.jinja" %}
 
 <script>
     window.appDirection = '{{ session.locale.language.direction }}';
