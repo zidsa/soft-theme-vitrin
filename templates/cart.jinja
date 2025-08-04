@@ -129,7 +129,8 @@
                         {% endfor %}
                     </div>
 
-                    <div>{{ template_for_cart_payments_widget }}</div>
+                    <div> 
+                    {% include 'vitrin:cart/payment_widgets.jinja' %}</div>
 
 
                     <div class="coupon-form mt-5">

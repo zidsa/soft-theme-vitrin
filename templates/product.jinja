@@ -558,7 +558,7 @@
                             </div>
                         </div>
                         {% for variant in product.variants %}
-                            {% if not variant.unavailable %}
+                            {% if variant.in_stock %}
                                 <div  class="card-table options-table">
                                     <div class="card">
                                         <div class="card-body">
