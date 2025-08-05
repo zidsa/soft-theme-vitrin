@@ -13,7 +13,7 @@
   <!-- Vitrin Cart SDK -->
   <link rel="stylesheet" href="{{ 'theme-service/vitrin-sdk.css' | sdk_asset_url }}">
   <script type="module">
-    import vitrin from "http://localhost:5300/src/theme/api/index.ts";
+    import vitrin from "{{ 'theme-service/vitrin-theme-service.es.js' | sdk_asset_url }}";
     window.vitrin = vitrin;
   </script>
 
@@ -219,7 +219,7 @@
 <script src="{{ 'slide-menu.ie.js?v=1.06' | asset_url }}" ></script>
 <script src="{{ 'slick.min.js' | asset_url }}" ></script>
 
-<script type="text/javascript" src="http://localhost:5300/src/theme/main.js"></script>
+<script type="text/javascript" src="{{ 'main.js?v=1.120' | asset_url }}" ></script>
 
 {% block footer_scripts %}{% endblock %}
 
