@@ -435,6 +435,7 @@ button.more-button , a.more-button {
 
 .search-header .image-logo {
     padding: 0px;
+    max-width: 100px;
 }
 
 .input-group-text{
@@ -2008,6 +2009,7 @@ hr {
 
     .search-header .image-logo {
         padding: 10px 0px;
+        max-width: 40px;
     }
 
     .page-item-n-last {
