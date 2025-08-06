@@ -148,9 +148,9 @@
                         </form>
 
 
-                        {% if cart.coupon.message %}
+                        {% if cart.coupon.name %}
                             <div class="message-coupon alert alert-primary" role="alert">
-                                <span>{{ cart.coupon.message }}</span>&nbsp;
+                                <span>{{ cart.coupon.name }}</span>&nbsp;
                                 <a onclick="deleteCoupon()" style="color: inherit; cursor: pointer">
                                     <span class="icon-trash-alt"></span>
                                     <img class="delete-coupon-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
@@ -273,6 +273,7 @@
 
 {% block footer_scripts %}
     <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}"></script>
+    <script type="text/javascript" src="{{ 'cart.js' | asset_url }}"></script>
 
     {{ cart_view_scripts|safe }}
 
@@ -311,14 +312,10 @@
                 return;
 
             $('.send-coupon-progress').removeClass('d-none');
-            zid.store.cart.redeemCoupon($('.send-coupon').val())
+            vitrin.cart.applyCoupon({coupon_code: $('.send-coupon').val()})
                 .then(function (response) {
-                    if(response.status  === 'success'){
-                        toastr.success('{{ _("Send Successfully") }}', null)
-                        window.location.reload();
-                    }else{
-                        toastr.error(response.data.message, '{{ _("Sorry") }}')
-                    }
+                    toastr.success('{{ _("Send Successfully") }}', null)
+                    window.location.reload();
                     $('.send-coupon-progress').addClass('d-none');
                 }).catch(function (err) {
                     $('.send-coupon-progress').addClass('d-none');
@@ -330,14 +327,9 @@
                 return;
 
             $('.delete-coupon-progress').removeClass('d-none');
-            zid.store.cart.removeCoupon().then(function (response) {
-                if(response.status  === 'success'){
-                    toastr.success('{{ _("Send Successfully") }}', null)
-                    window.location.reload();
-                }else{
-                    toastr.error(response.data.message, '{{ _("Sorry") }}')
-                }
+            vitrin.cart.removeCoupons().then(function (response) {
                 $('.delete-coupon-progress').addClass('d-none');
+                window.location.reload();
             })
         }
 

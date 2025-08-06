@@ -729,20 +729,6 @@
               $('.add-to-cart-progress').addClass('d-none');
           }).catch(function(error) {
               $('.add-to-cart-progress').addClass('d-none');
-              
-              var errorMessage = '{{ _("Failed to add to cart") }}';
-              
-              if (error && error.response && error.response.data && error.response.data.message) {
-                  errorMessage = error.response.data.message;
-              } else if (error && error.message) {
-                  errorMessage = error.message;
-              } else if (typeof error === 'string') {
-                  errorMessage = error;
-              }
-              
-              if (typeof toastr !== 'undefined') {
-                  toastr.error(errorMessage, '{{ _("Sorry") }}');
-              }
           });
       };
 

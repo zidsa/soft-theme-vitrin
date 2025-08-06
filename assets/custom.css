@@ -651,11 +651,11 @@
   mask-size: 100%;
   mask-position: center;
   mask-repeat: no-repeat;
-  mask-image: url('./heart-outlined.svg');
+  mask-image: var(--heart-outlined-icon);
   background-color: var(--secondary, #A1A0A9);
 }
 
 .icon-heart-mask.filled {
-  mask-image: url('./heart-filled.svg');
+  mask-image: var(--heart-filled-icon);
   background-color: var(--primary_color, #D86F6F);
 }
