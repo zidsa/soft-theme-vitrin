@@ -205,17 +205,23 @@
                     {% endif %}
 
 
-
                     <div>
                         <div class="mt-5">
+
                             {% if store.settings.general.availability.is_store_closed %}
                                 <a href="#"
-                                   class="btn btn-lg btn-block btn-disabled"
+                                class="btn btn-lg btn-block btn-disabled"
                                 >
                                     {{ _("Purchase") }}
                                 </a>
                             {% else %}
-
+                            {% if session.is_guest %}
+                                <a href="/auth/login?redirect_to=/checkout"
+                                class="btn btn-primary btn-lg btn-block"
+                                >
+                                    {{ _("Purchase") }}
+                                </a>
+                            {% else %}
                                 <a href="/checkout"
                                 class="btn btn-primary btn-lg btn-block"
                                 >
@@ -226,7 +232,8 @@
                                     {{ template_for_cart_apple_pay_button }}
                                 </div>
                             {% endif %}
-
+                            {% endif %}
+                    
                         </div>
 
                         {% if store.settings.checkout.gift_order_settings.is_gift_order_enabled == '1' %}
