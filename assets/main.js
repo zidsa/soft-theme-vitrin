@@ -453,7 +453,7 @@ $(window).resize(function () {
 
 $('.search-input-input').on('keyup', function (e) {
   if (e.key === 'Enter' || e.keyCode === 13) {
-    window.location.href = '/products?search=' + encodeURI(this.value);
+    window.location.href = '/products?q=' + encodeURI(this.value);
   }
 });
 
