@@ -9,13 +9,6 @@
 
   {% include "vitrin:shared/meta.jinja" %}
   {% include "vitrin:shared/head_scripts.jinja" %}
-  
-  <!-- Vitrin Cart SDK -->
-  <link rel="stylesheet" href="{{ 'theme-service/vitrin-sdk.css' | sdk_asset_url }}">
-  <script type="module">
-    import vitrin from "{{ 'theme-service/vitrin-theme-service.es.js' | sdk_asset_url }}";
-    window.vitrin = vitrin;
-  </script>
 
   <link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
     {#<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa">#}
