@@ -123,7 +123,6 @@ function removeCartItems() {
 }
 
 function updateCartProducts(res) {
-  console.log(res);
 
   let added_product = res.data.cart.product;
   let i = cart_products.findIndex(item => item.product_id == added_product.product_id);
@@ -242,7 +241,6 @@ function shareWishlist() {
   $('.share-wishlist .loader').removeClass('d-none').siblings('.share-icon').addClass('d-none');
   vitrin.account.shareWishlist().then(async response => {
     if (response) {
-      console.log(response);
       $('.share-wishlist .loader').addClass('d-none').siblings('.share-icon').removeClass('d-none');
 
       if (response.data.link) {
@@ -335,7 +333,7 @@ function getCartTotal(cart) {
 }
 
 function setCartTotalAndBadge(cart) {
-  setCartBadge(cart.products_count);
+  setCartBadge(cart.cart_items_quantity ?? cart.products_count);
   var cartTotal = getCartTotal(cart);
 
   if (cartTotal) {
@@ -515,7 +513,6 @@ function fetchProductsSearch(catId, query) {
       categories: catId,
     })
     .then(function (response) {
-      console.log(response);
 
       if (response && response.results) {
         $('.autocomplete-items').html('');
@@ -718,7 +715,6 @@ class ProductsQuestions {
         });
 
         if (response) {
-          console.log(response);
           toastr.success(locales_messages.success, locales_messages.success_header);
 
           $('textarea[name="question"]').val('');
