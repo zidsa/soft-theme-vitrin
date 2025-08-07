@@ -175,9 +175,9 @@
                                 <div class="mt-5 mb-5">
                                     <div class="d-flex flex-wrap">
                                         {% for payment_method in payment_methods %}
-                                            {% if payment_method.icon %}
+                                            {% if payment_method.icons %}
                                                 <div class="d-flex align-items-center justify-content-center payment-method-card">
-                                                    <img src="{{ payment_method.icon }}">
+                                                    <img src="{{ payment_method.icons[0] }}">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
