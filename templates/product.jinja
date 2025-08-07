@@ -700,8 +700,8 @@
                       $('.cart-badge').removeClass('d-none').text(response.cart_items_quantity);
                   }
                   
-                  if (typeof setCartTotalAndBadge === 'function') {
-                      setCartTotalAndBadge({ items_count: response.cart_items_quantity });
+                  if (typeof fetchCart === 'function') {
+                      fetchCart()
                   }
 
                   $('.added-notification').addClass("show");
