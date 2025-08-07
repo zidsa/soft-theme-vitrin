@@ -4,8 +4,8 @@
     {% if store.settings.products.wishlist_enabled == true %}
       <span class="add-to-wishlist" data-wishlist-id="{{ product.id }}">
         <span zid-visible-customer="true">
-            <a zid-visible-wishlist="{{ product.id }}" class="icon-heart-mask filled" onclick="addToWishlist(this, '{{ product.id }}')"></a>
-            <a zid-hidden-wishlist="{{ product.id }}" class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
+            <button zid-visible-wishlist="{{ product.id }}" class="icon-heart-mask filled" onclick="addToWishlist(this, '{{ product.id }}')"></button>
+            <button zid-hidden-wishlist="{{ product.id }}" class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></button>
         </span>
         <a zid-visible-guest="true" class="icon-heart-mask" href="/auth/login?redirect_to={{ session.url.path }}"></a>
         <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
@@ -74,17 +74,17 @@
         </div>
         <div style="text-align: center">
             {% if product.is_infinite == false and product.quantity <= 0 %}
-            <a class="btn btn-primary btn-product-card-out-of-stock" disabled>
-                <img src="{{ 'u_bell.svg' | asset_url }}" alt="" width="18" height="18" class="d-inline">
-                <span>{{ _("Notify me when available") }}</span>
-             </a>
+                <button class="btn btn-primary btn-product-card-out-of-stock">
+                    <img src="{{ 'u_bell.svg' | asset_url }}" alt="" width="18" height="18" class="d-inline">
+                    <span>{{ _("Notify me when available") }}</span>
+                </button>
             {% elif ( product.has_options or product.has_fields ) %}
-            <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ _("add to cart") }}</a>
+                <button class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ _("add to cart") }}</button>
             {% else %}
-            <a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
+            <button class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
                 <img style="display: inline" class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
                 {{ _("add to cart") }}
-            </a>
+            </button>
             {% endif %}
         </div>
 
