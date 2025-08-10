@@ -123,7 +123,6 @@ function removeCartItems() {
 }
 
 function updateCartProducts(res) {
-
   let added_product = res.data.cart.product;
   let i = cart_products.findIndex(item => item.product_id == added_product.product_id);
   i > -1 ? (cart_products[i] = added_product) : cart_products.push(added_product);
@@ -193,12 +192,12 @@ function fillWishlistItems(items) {
   items.forEach(product => {
     $(`.add-to-wishlist[data-wishlist-id=${product.id}]`)
       .find('.icon-heart-mask')
-      .addClass('filled');
+      .addClass('filled icon-heart-mask');
   });
 }
 
 function addToWishlist(elm, productId) {
-  $(elm).siblings('.add-to-wishlist .loader').removeClass('d-none');
+  $(elm).closest('.add-to-wishlist').find('.loader').removeClass('d-none');
   $(elm).addClass('d-none');
 
   // Remove From Wishlist if added
@@ -208,31 +207,25 @@ function addToWishlist(elm, productId) {
 
   vitrin.account.addToWishlists({ product_ids: [productId] }).then(response => {
     if (response) {
-      $(elm).siblings('.add-to-wishlist .loader').addClass('d-none');
-      $(elm).addClass('filled').removeClass('d-none');
+      $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
+      $(elm).addClass('filled icon-heart-mask').removeClass('d-none');
 
-      toastr.success(response.data.message);
+      // toastr.success(response.data.message);
     } else {
-      toastr.error(response.data.message);
+      // toastr.error(response.data.message);
     }
   });
 }
 
 function removeFromWishlist(elm, productId) {
-  $(elm).siblings('.add-to-wishlist .loader').removeClass('d-none');
+  $(elm).closest('.add-to-wishlist').find('.loader').removeClass('d-none');
   $(elm).addClass('d-none');
   vitrin.account.removeFromWishlist(productId).then(response => {
-    if (response) {
-      $(elm).siblings('.add-to-wishlist .loader').addClass('d-none');
-      $(elm).removeClass('d-none filled');
+    $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
+    $(elm).removeClass('d-none filled');
 
-      // toastr.success(response.data.message);
-
-      if (location.pathname === '/account-wishlist') {
-        location.reload();
-      }
-    } else {
-      toastr.error(response.data.message);
+    if (location.pathname === '/account-wishlist') {
+      location.reload();
     }
   });
 }
@@ -513,7 +506,6 @@ function fetchProductsSearch(catId, query) {
       categories: catId,
     })
     .then(function (response) {
-
       if (response && response.results) {
         $('.autocomplete-items').html('');
 
