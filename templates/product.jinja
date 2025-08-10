@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{ 'ekko-lightbox.css' | asset_url }}" />
 
     <link rel="stylesheet" type="text/css" href="{{ 'product-details.css' | asset_url }}" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 
 {% endblock %}
 
@@ -664,9 +664,9 @@
 
 {% block footer_scripts %}
 
-    <script type="text/javascript" src="{{ 'ekko-lightbox.min.js' | asset_url }}"></script>
-    <script type="text/javascript" src="{{ 'product-details.js' | asset_url }}"></script>
-    <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}"></script>
+    <script type="text/javascript" src="{{ 'ekko-lightbox.min.js' | asset_url }}" defer></script>
+    <script type="text/javascript" src="{{ 'product-details.js' | asset_url }}" defer></script>
+    <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
     <script src="{{ 'theme-statics/variants.js' | sdk_asset_url }}" defer></script>
     <script>
         var productImages = {{ product.selected_product.media | tojson }};

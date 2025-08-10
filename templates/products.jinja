@@ -53,7 +53,7 @@
 {% block footer %} {% include 'footer.jinja' %} {% endblock %}
 
 {% block footer_scripts %}
-    <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}"></script>
+    <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
     <script>
         window.onProductAttributesTriggered = function(){
             $('#products-list').css('opacity', '0.4');

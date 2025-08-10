@@ -85,7 +85,7 @@
 {% endblock %}
 
 {% block footer_scripts %}
-    <script src="{{ 'masonry.pkgd.min.js' | asset_url }}"></script>
+    <script src="{{ 'masonry.pkgd.min.js' | asset_url }}" defer></script>
     <script>
 
         // Initial resize in window.load as the content in each item may contain images
