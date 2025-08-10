@@ -50,5 +50,5 @@
 {% block footer %} {% include 'footer.jinja' %} {% endblock %}
 
 {% block footer_scripts %}
-	<script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}"></script>
+	<script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
 {% endblock %}
