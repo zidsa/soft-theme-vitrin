@@ -336,14 +336,14 @@
                 <div class="description-paragrah">
                     <div class="bundle-offer-products">
                         <div class="row bundle-offer-details-products">
-                            {% for product in product.bundle_offer.products.results | slice(0, 5) %}
+                            {% for product in product.bundle_offer.products.results %}
                                 <div class="prod-col prod-col-tb">
                                     {% set product=product %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                                 </div>
                             {% endfor %}
                         </div>
                     </div>
-                    {% if product.bundle_offer and product.bundle_offer.products.results | length > 5 %}
+                    {% if product.bundle_offer and and product.bundle_offer.products product.bundle_offer.products.results | length > 5 %}
                     <div class="bundle-offer-more">
                         <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ _("Display all products") }}</a>
                     </div>
