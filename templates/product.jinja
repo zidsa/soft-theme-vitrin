@@ -343,7 +343,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                    {% if product.bundle_offer and and product.bundle_offer.products product.bundle_offer.products.results | length > 5 %}
+                    {% if product.bundle_offer and product.bundle_offer.products and product.bundle_offer.products.results | length > 5 %}
                     <div class="bundle-offer-more">
                         <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ _("Display all products") }}</a>
                     </div>
