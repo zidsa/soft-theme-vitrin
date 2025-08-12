@@ -1,5 +1,5 @@
 {
-  "name": "summer-theme",
+  "name": "soft-theme-vitrin",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zidsa/summer-theme.git"
+    "url": "git+https://github.com/zidsa/soft-theme-vitrin.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zidsa/summer-theme/issues"
+    "url": "https://github.com/zidsa/soft-theme-vitrin/issues"
   },
-  "homepage": "https://github.com/zidsa/summer-theme#readme"
+  "homepage": "https://github.com/zidsa/soft-theme-vitrin#readme"
 }
