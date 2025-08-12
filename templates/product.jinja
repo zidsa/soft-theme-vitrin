@@ -671,7 +671,6 @@
     <script type="text/javascript" src="{{ 'ekko-lightbox.min.js' | asset_url }}" defer></script>
     <script type="text/javascript" src="{{ 'product-details.js' | asset_url }}" defer></script>
     <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
-    <script src="{{ 'theme-statics/variants.js' | sdk_asset_url }}" defer></script>
     <script>
         var productImages = {{ product.selected_product.media | tojson }};
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
