@@ -10,6 +10,32 @@
   {% include "vitrin:shared/meta.jinja" %}
   {% include "vitrin:shared/head_scripts.jinja" %}
 
+  {% if settings.header_logo %}
+    {% set logoUrl = settings.header_logo %}
+  {% else %}
+    {% set logoUrl = store.logo %}
+  {% endif %}
+  {% if settings.header_logo_mobile %}
+    {% set logoUrlMobile = settings.header_logo_mobile %}
+  {% elif store.settings.branding.mobile_app_logo %}
+    {% set logoUrlMobile = store.settings.branding.mobile_app_logo %}
+  {% endif %}
+
+  <link rel="preload" as="image"
+        href="{{ image_url(logoUrl, h=175, q=100) }}"
+        media="(min-width: 992px)">
+
+  {% if logoUrlMobile %}
+    <link rel="preload" as="image"
+          href="{{ image_url(logoUrlMobile, h=175, q=100) }}"
+          media="(max-width: 991px)">
+  {% else %}
+    <link rel="preload" as="image"
+          href="{{ image_url(logoUrl, h=175, q=100) }}"
+          media="(max-width: 991px)">
+  {% endif %}
+        
+    
   <link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
     {#<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa">#}
     <!--jquery UI -->
@@ -76,8 +102,14 @@
           font-display: block;
         }
     </style>
-
-  <link rel="stylesheet" type="text/css" href="{{ 'icomoon.css?v=1.0.2' | asset_url }}"  />
+    
+    <link rel="stylesheet"
+          href="{{ 'icomoon.css?v=1.0.2' | asset_url }}"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="{{ 'icomoon.css?v=1.0.2' | asset_url }}">
+    </noscript>
 
     {% if session.lang == 'ar' %}
         <link rel="stylesheet" type="text/css" href="{{ 'bootstrap-rtl.css?v=1.05' | asset_url }}" />
@@ -171,9 +203,6 @@
     {% block footer_sticky %}{% endblock %}
 </div>
 
-{{ zidapi_script|safe }}
-{% include "vitrin:shared/body_scripts.jinja" %}
-
 <script>
     window.appDirection = '{{ session.locale.language.direction }}';
 
@@ -220,6 +249,8 @@
 <script src="{{ 'slick.min.js' | asset_url }}" defer></script>
 
 <script type="text/javascript" src="{{ 'main.js?v=1.120' | asset_url }}" defer></script>
+
+{% include "vitrin:shared/body_scripts.jinja" %}
 
 {% block footer_scripts %}{% endblock %}
 
