@@ -1,4 +1,4 @@
-{% if store.availability.closed_now %}
+{% if store.settings.availability.closed_now %}
 <div class="availability-bar" style="z-index: 4; {% if store.announcement_bar.background_color %}background: {{ store.announcement_bar.background_color }} {% endif %}">
     <div class="container d-flex justify-content-center position-relative">
         <div class="announcement-text mb-0 text-center" data-nosnippet>
