@@ -1,4 +1,6 @@
 {
+  "section_id": "uuid",
+  "template": "sections/main-slider.jinja",
   "icon": "fal fa-presentation",
   "name": {
     "ar": "شرائح الصور",

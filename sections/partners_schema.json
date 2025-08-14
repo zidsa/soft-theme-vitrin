@@ -1,4 +1,6 @@
 {
+  "section_id": "uuid",
+  "template": "sections/partners.jinja",
   "icon": "fal fa-sparkles",
   "name": {
     "ar": "شركائنا",

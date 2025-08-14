@@ -1,4 +1,6 @@
 {
+  "section_id": "uuid",
+  "template": "sections/category-products-section.jinja",
   "icon": "fal fa-box",
   "name": {
     "ar": "منتجات التصنيف",

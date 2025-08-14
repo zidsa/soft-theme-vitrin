@@ -1,4 +1,6 @@
 {
+  "section_id": "uuid",
+  "template": "sections/features-section.jinja",
   "icon": "fal fa-sparkles",
   "name": {
     "ar": "خصائص المتجر",

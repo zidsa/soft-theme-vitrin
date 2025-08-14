@@ -1,4 +1,6 @@
 {
+  "section_id": "uuid",
+  "template": "sections/category-section.jinja",
   "icon": "fal fa-cabinet-filing",
   "name": {
     "ar": "التصنيفات",
