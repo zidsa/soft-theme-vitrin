@@ -1,0 +1,43 @@
+{
+  "icon": "fal fa-sparkles",
+  "name": {
+    "ar": "خصائص المتجر",
+    "en": "Gallery"
+  },
+  "display": true,
+  "settings": {
+    "store_features": {
+      "info": {
+        "ar": "",
+        "en": "This is an info text sample here"
+      },
+      "type": "list",
+      "noLabel": true,
+      "maxItems": 3,
+      "settings": {
+        "image": {
+          "info": {
+            "ar": "ارفع صورة بحجم ٢٠٠ *٢٠٠ ",
+            "en": "This is an info text sample here"
+          },
+          "type": "image",
+          "label": {
+            "ar": "الصورة",
+            "en": "Image"
+          }
+        },
+        "title": {
+          "type": "text",
+          "label": {
+            "ar": "العنوان",
+            "en": "text"
+          }
+        }
+      },
+      "settings_label": {
+        "ar": "الصورة",
+        "en": "Picture"
+      }
+    }
+  }
+}

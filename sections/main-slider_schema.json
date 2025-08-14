@@ -1,0 +1,79 @@
+{
+  "icon": "fal fa-presentation",
+  "name": {
+    "ar": "شرائح الصور",
+    "en": "Slider"
+  },
+  "display": true,
+  "settings": {
+    "slider": {
+      "type": "list",
+      "noLabel": true,
+      "maxItems": 4,
+      "settings": {
+        "des": {
+          "type": "text",
+          "label": {
+            "ar": "النص",
+            "en": "text"
+          }
+        },
+        "url": {
+          "type": "url",
+          "label": {
+            "ar": "الرابط",
+            "en": "Link"
+          }
+        },
+        "image": {
+          "info": {
+            "ar": "ارفع صورة بحجم 1400 * 600",
+            "en": "This is an info text sample here"
+          },
+          "type": "image",
+          "label": {
+            "ar": "الصورة",
+            "en": "Image"
+          }
+        },
+        "title": {
+          "type": "text",
+          "label": {
+            "ar": "العنوان",
+            "en": "text"
+          }
+        }
+      },
+      "settings_label": {
+        "ar": "الصورة",
+        "en": "Picture"
+      }
+    },
+    "hide_dots": {
+      "type": "checkbox",
+      "label": {
+        "ar": " ",
+        "en": " "
+      },
+      "option": {
+        "ar": "إخفاء النقاط",
+        "en": "Hide dots"
+      },
+      "noLabel": true
+    },
+    "text_color": {
+      "type": "color",
+      "label": {
+        "ar": "لون النص",
+        "en": "Text color"
+      }
+    },
+    "background_color": {
+      "type": "color",
+      "label": {
+        "ar": "لون الخلفية",
+        "en": "Text color"
+      }
+    }
+  }
+}

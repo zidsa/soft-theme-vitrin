@@ -1,0 +1,159 @@
+{
+  "icon": "fa fa-square",
+  "name": {
+    "ar": "اعلى الصفحة",
+    "en": "Header"
+  },
+  "display": true,
+  "settings": {
+    "header": {
+      "icon": "font_awesome",
+      "type": "fieldset",
+      "label": {
+        "ar": "رأس الصفحة",
+        "en": "Header"
+      },
+      "settings": {
+        "logo": {
+          "info": {
+            "ar": "ارفع صورة بحجم 750 * 750 ",
+            "en": "This is an info text sample here"
+          },
+          "type": "image",
+          "label": {
+            "ar": "الشعار",
+            "en": "Logo"
+          }
+        },
+        "options": {
+          "type": "checkboxes",
+          "label": {
+            "ar": "الخيارات",
+            "en": "Options"
+          },
+          "options": [
+            {
+              "label": {
+                "ar": "إخفاء شريط البحث",
+                "en": "Hide search bar"
+              },
+              "value": "hide_search_bar"
+            },
+            {
+              "label": {
+                "ar": "إخفاء اللغة",
+                "en": "Hide language"
+              },
+              "value": "hide_language"
+            },
+            {
+              "label": {
+                "ar": "إخفاء اسم الدولة",
+                "en": "Hide country"
+              },
+              "value": "hide_country"
+            }
+          ]
+        },
+        "logo_mobile": {
+          "info": {
+            "ar": "ارفع صورة بحجم 322 * 750 ",
+            "en": "This is an info text sample here"
+          },
+          "type": "image",
+          "label": {
+            "ar": " الشعار للجوال (اختياري)",
+            "en": "Logo mobile (optional)"
+          }
+        },
+        "search_placeholder": {
+          "type": "text",
+          "label": {
+            "ar": "تلميح شريط البحث",
+            "en": "Search placeholder"
+          }
+        }
+      },
+      "expandable": true
+    },
+    "announcement_bar": {
+      "icon": "font_awesome",
+      "type": "fieldset",
+      "label": {
+        "ar": "شريط التنبيهات",
+        "en": "Announcement bar"
+      },
+      "settings": {
+        "url": {
+          "info": {
+            "ar": "في حال كان الحقل فارغا لن يتم الانتقال للرابط عند الضغط",
+            "en": "This is an info text sample here"
+          },
+          "type": "url",
+          "label": {
+            "ar": "الرابط",
+            "en": "Link"
+          }
+        },
+        "text": {
+          "type": "text",
+          "label": {
+            "ar": "النص",
+            "en": "Text"
+          }
+        },
+        "display": {
+          "type": "checkbox",
+          "label": {
+            "ar": " ",
+            "en": " "
+          },
+          "option": {
+            "ar": "إظهار",
+            "en": "Display menu"
+          },
+          "noLabel": true
+        },
+        "text_color": {
+          "type": "color",
+          "label": {
+            "ar": "لون النص",
+            "en": "Text color"
+          }
+        },
+        "page_display": {
+          "type": "select",
+          "label": {
+            "ar": "عرض شريط التنبيهات في",
+            "en": "Display announcement bar in"
+          },
+          "default": "all",
+          "options": [
+            {
+              "label": {
+                "ar": "جميع الصفحات",
+                "en": "all pages"
+              },
+              "value": "all"
+            },
+            {
+              "label": {
+                "ar": "الصفحة الرئيسية ففط",
+                "en": "home page only"
+              },
+              "value": "home"
+            }
+          ]
+        },
+        "background_color": {
+          "type": "color",
+          "label": {
+            "ar": "لون الخلفية",
+            "en": "Text color"
+          }
+        }
+      },
+      "expandable": true
+    }
+  }
+}

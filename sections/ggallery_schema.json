@@ -1,0 +1,50 @@
+{
+  "icon": "fal fa-images",
+  "name": {
+    "ar": "مجموعة الصور",
+    "en": "Gallery"
+  },
+  "display": true,
+  "settings": {
+    "title": {
+      "type": "text",
+      "label": {
+        "ar": "العنوان",
+        "en": "text"
+      }
+    },
+    "gallery": {
+      "info": {
+        "ar": "",
+        "en": "This is an info text sample here"
+      },
+      "type": "list",
+      "noLabel": true,
+      "maxItems": 8,
+      "settings": {
+        "url": {
+          "type": "url",
+          "label": {
+            "ar": "الرابط",
+            "en": "Link"
+          }
+        },
+        "image": {
+          "info": {
+            "ar": "ارفع صورة بحجم 750 * 750 ",
+            "en": "This is an info text sample here"
+          },
+          "type": "image",
+          "label": {
+            "ar": "الصورة",
+            "en": "Image"
+          }
+        }
+      },
+      "settings_label": {
+        "ar": "الصورة",
+        "en": "Picture"
+      }
+    }
+  }
+}

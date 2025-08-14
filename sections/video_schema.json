@@ -1,0 +1,52 @@
+{
+  "icon": "fa fa-play",
+  "name": {
+    "ar": "فيديو",
+    "en": "Video"
+  },
+  "display": true,
+  "settings": {
+    "title": {
+      "type": "text",
+      "label": {
+        "ar": "العنوان",
+        "en": "text"
+      }
+    },
+    "video": {
+      "info": {
+        "ar": "mp4 اقصى حجم 10MB",
+        "en": ""
+      },
+      "type": "video",
+      "label": {
+        "ar": "الفيديو",
+        "en": "Video"
+      }
+    },
+    "autoplay": {
+      "type": "checkbox",
+      "label": {
+        "ar": "",
+        "en": ""
+      },
+      "option": {
+        "ar": "تشغيل الفيديو  بشكل مباشر",
+        "en": "autoplay"
+      },
+      "noLabel": true
+    },
+    "controls": {
+      "type": "checkbox",
+      "label": {
+        "ar": "",
+        "en": ""
+      },
+      "option": {
+        "ar": "عرض ازرار التحكم",
+        "en": "Controls"
+      },
+      "noLabel": true
+    }
+  }
+}

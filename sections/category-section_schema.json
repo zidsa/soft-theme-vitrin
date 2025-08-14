@@ -1,0 +1,53 @@
+{
+  "icon": "fal fa-cabinet-filing",
+  "name": {
+    "ar": "التصنيفات",
+    "en": "Slider"
+  },
+  "display": true,
+  "settings": {
+    "title": {
+      "type": "text",
+      "label": {
+        "ar": "العنوان",
+        "en": "text"
+      }
+    },
+    "more_text": {
+      "type": "text",
+      "label": {
+        "ar": "نص زر جميع التصنيفات",
+        "en": "More text"
+      }
+    },
+    "categories": {
+      "type": "list",
+      "noLabel": true,
+      "settings": {
+        "category": {
+          "type": "category",
+          "label": {
+            "ar": "اختر التصنيف",
+            "en": "Select category"
+          }
+        }
+      },
+      "settings_label": {
+        "ar": "التصنيف",
+        "en": "Picture"
+      }
+    },
+    "display_more": {
+      "type": "checkbox",
+      "label": {
+        "ar": "",
+        "en": ""
+      },
+      "option": {
+        "ar": "عرض زر جميع التصنيفات",
+        "en": "Display button more products"
+      },
+      "noLabel": true
+    }
+  }
+}

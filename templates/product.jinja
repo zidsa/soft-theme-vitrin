@@ -133,7 +133,7 @@
                                     {% if product.rating %}
                                         <div>
                                             {% set rating=product.rating.average %}{% include 'components/rating-stars.jinja' %}
-                                            <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
+                                            {% if product.rating.total_count > 0 %}<span class="product-card-rating-count">({{ product.rating.total_count }})</span>{% endif %}
                                         </div>
                                     {% endif %}
                                     {% if product.sold_products_count %}
@@ -384,9 +384,11 @@
                             {{ _("product description") }}
                         </div>
                     </div>
-                    <div class="description-paragrah text-justify description-text-clear">
-                        {{ product.description | safe }}
-                    </div>
+                    {% autoescape false %}
+                        <div class="description-paragrah text-justify description-text-clear">
+                            {{ product.description }}
+                        </div>
+                    {% endautoescape %}
                 </section>
             {% endif %}
 
