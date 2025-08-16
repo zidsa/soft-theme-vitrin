@@ -6,62 +6,61 @@
     "ar": "أراء العملاء",
     "en": "Testimonials"
   },
-  "display": true,
-  "settings": {
-    "title": {
+  "settings": [
+    {
+      "id": "title",
       "type": "text",
       "label": {
         "ar": "العنوان",
         "en": "text"
       }
     },
-    "hide_dots": {
+    {
+      "id": "hide_dots",
       "type": "checkbox",
       "label": {
-        "ar": " ",
-        "en": " "
-      },
-      "option": {
         "ar": "إخفاء النقاط",
         "en": "Hide dots"
-      },
-      "noLabel": true
+      }
     },
-    "testimonials": {
+    {
+      "id": "testimonials",
+      "type": "list",
+      "label": {
+        "ar": "رأي العميل",
+        "en": "Testimonial"
+      },
+      "max_items": 12,
       "info": {
         "ar": "",
         "en": ""
       },
-      "type": "list",
-      "noLabel": true,
-      "maxItems": 12,
-      "settings": {
-        "date": {
+      "settings": [
+        {
+          "id": "date",
           "type": "text",
           "label": {
             "ar": "التاريخ",
             "en": "date"
           }
         },
-        "name": {
+        {
+          "id": "name",
           "type": "text",
           "label": {
             "ar": "الإسم",
             "en": "name"
           }
         },
-        "text": {
+        {
+          "id": "text",
           "type": "textarea",
           "label": {
             "ar": "النص",
             "en": "text"
           }
         }
-      },
-      "settings_label": {
-        "ar": "رأي العميل",
-        "en": "Testimonial"
-      }
+      ]
     }
-  }
+  ]
 }

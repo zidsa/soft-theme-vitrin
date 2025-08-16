@@ -6,40 +6,38 @@
     "ar": "قائمة المنتجات",
     "en": "Products"
   },
-  "display": true,
-  "settings": {
-    "title": {
+  "settings": [
+    {
+      "id": "title",
       "type": "text",
       "label": {
         "ar": "العنوان",
         "en": "Title"
       }
     },
-    "products": {
+    {
+      "id": "products",
       "type": "products",
       "label": {
         "ar": "اختر قائمة المنتجات ",
         "en": "Select category products"
       }
     },
-    "more_text": {
+    {
+      "id": "more_text",
       "type": "text",
       "label": {
         "ar": "نص زر المزيد  ",
         "en": "More text"
       }
     },
-    "display_more": {
+    {
+      "id": "display_more",
       "type": "checkbox",
       "label": {
-        "ar": "",
-        "en": ""
-      },
-      "option": {
         "ar": "عرض زر جميع منتجات التصنيف",
         "en": "Display button more products"
-      },
-      "noLabel": true
+      }
     }
-  }
+  ]
 }

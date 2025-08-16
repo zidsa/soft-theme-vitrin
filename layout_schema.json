@@ -1,314 +1,331 @@
 {
-  "fonts": {
-    "icon": "fa fa-font",
-    "name": {
-      "ar": "الخطوط",
-      "en": "fonts"
-    },
-    "display": true,
-    "settings": {
-      "name": {
-        "type": "select",
-        "label": {
-          "ar": "اسم الخط",
-          "en": "Font name"
-        },
-        "default": "Changa",
-        "options": [
-          {
-            "label": {
-              "ar": "Changa",
-              "en": "Changa"
-            },
-            "value": "Changa"
-          },
-          {
-            "label": {
-              "ar": "Cairo",
-              "en": "Cairo"
-            },
-            "value": "Cairo"
-          },
-          {
-            "label": {
-              "ar": "Amiri",
-              "en": "Amiri"
-            },
-            "value": "Amiri"
-          },
-          {
-            "label": {
-              "ar": "Mada",
-              "en": "Mada"
-            },
-            "value": "Mada"
-          },
-          {
-            "label": {
-              "ar": "Tajawal",
-              "en": "Tajawal"
-            },
-            "value": "Tajawal"
-          },
-          {
-            "label": {
-              "ar": "Almarai",
-              "en": "Almarai"
-            },
-            "value": "Almarai"
-          },
-          {
-            "label": {
-              "ar": "El Messiri",
-              "en": "El Messiri"
-            },
-            "value": "El+Messiri"
-          },
-          {
-            "label": {
-              "ar": "Lalezar",
-              "en": "Lalezar"
-            },
-            "value": "Lalezar"
-          },
-          {
-            "label": {
-              "ar": "Scheherazade",
-              "en": "Scheherazade"
-            },
-            "value": "Scheherazade"
-          },
-          {
-            "label": {
-              "ar": "Lemonada",
-              "en": "Lemonada"
-            },
-            "value": "Lemonada"
-          },
-          {
-            "label": {
-              "ar": "Markazi",
-              "en": "Markazi"
-            },
-            "value": "Markazi+Text"
-          },
-          {
-            "label": {
-              "ar": "Lateef",
-              "en": "Lateef"
-            },
-            "value": "Lateef"
-          },
-          {
-            "label": {
-              "ar": "Reem Kufi",
-              "en": "Reem Kufi"
-            },
-            "value": "Reem+Kufi"
-          },
-          {
-            "label": {
-              "ar": "IBM Arabic",
-              "en": "IBM Arabic"
-            },
-            "value": "IBM+Plex+Sans+Arabic"
-          },
-          {
-            "label": {
-              "ar": "Harmattan",
-              "en": "Harmattan"
-            },
-            "value": "Harmattan"
-          },
-          {
-            "label": {
-              "ar": "Mirza",
-              "en": "Mirza"
-            },
-            "value": "Mirza"
-          },
-          {
-            "label": {
-              "ar": "Rakkas",
-              "en": "Rakkas"
-            },
-            "value": "Rakkas"
-          },
-          {
-            "label": {
-              "ar": "Katibeh",
-              "en": "Katibeh"
-            },
-            "value": "Katibeh"
-          },
-          {
-            "label": {
-              "ar": "Scheherazade New",
-              "en": "Scheherazade New"
-            },
-            "value": "Scheherazade+New"
-          },
-          {
-            "label": {
-              "ar": "Aref Ruqaa",
-              "en": "Aref Ruqaa"
-            },
-            "value": "Aref+Ruqaa"
-          },
-          {
-            "label": {
-              "ar": "Qahiri",
-              "en": "Qahiri"
-            },
-            "value": "Qahiri"
-          },
-          {
-            "label": {
-              "ar": "Jomhuria",
-              "en": "Jomhuria"
-            },
-            "value": "Jomhuria"
-          },
-          {
-            "label": {
-              "ar": "Kufam",
-              "en": "Kufam"
-            },
-            "value": "Kufam"
-          },
-          {
-            "label": {
-              "ar": "Vibes",
-              "en": "Vibes"
-            },
-            "value": "Vibes"
-          },
-          {
-            "label": {
-              "ar": "Noto Kufi",
-              "en": "Noto Kufi"
-            },
-            "value": "Noto+Kufi+Arabic"
-          },
-          {
-            "label": {
-              "ar": "Noto Naskh",
-              "en": "Noto Naskh"
-            },
-            "value": "Noto+Naskh+Arabic"
-          },
-          {
-            "label": {
-              "ar": "Noto Sans",
-              "en": "Noto Sans"
-            },
-            "value": "Noto+Sans+Arabic"
-          },
-          {
-            "label": {
-              "ar": "Noto Nastaliq Urdu",
-              "en": "Noto Nastaliq Urdu"
-            },
-            "value": "Noto+Nastaliq+Urdu"
-          }
-        ]
-      }
-    }
+  "name": {
+    "ar": "إعدادات التخطيط",
+    "en": "Layout Settings"
   },
-  "colors": {
-    "icon": "fa fa-paint-brush",
-    "name": {
-      "ar": "الالوان",
-      "en": "Colors"
-    },
-    "display": true,
-    "settings": {
-      "footer": {
-        "icon": "font_awesome",
-        "type": "fieldset",
-        "label": {
-          "ar": "اسفل الصفحة",
-          "en": "Header"
-        },
-        "settings": {
-          "text_color": {
-            "type": "color",
-            "label": {
-              "ar": "لون النص",
-              "en": "Text color"
-            }
-          },
-          "background_color": {
-            "type": "color",
-            "label": {
-              "ar": "لون الخلفية",
-              "en": "Text color"
-            }
-          }
-        },
-        "expandable": true
+  "sections": [
+    {
+      "id": "fonts",
+      "icon": "fa fa-font",
+      "name": {
+        "ar": "الخطوط",
+        "en": "fonts"
       },
-      "header": {
-        "icon": "font_awesome",
-        "type": "fieldset",
-        "label": {
-          "ar": "رأس الصفحة",
-          "en": "Header"
-        },
-        "settings": {
-          "text_color": {
-            "type": "color",
-            "label": {
-              "ar": "لون النص",
-              "en": "Text color"
-            }
+      "settings": [
+        {
+          "id": "name",
+          "type": "select",
+          "label": {
+            "ar": "اسم الخط",
+            "en": "Font name"
           },
-          "menu_text_color": {
-            "type": "color",
-            "label": {
-              "ar": "لون نص القائممة الرئيسية (اختياري)",
-              "en": "Text color"
-            }
-          },
-          "background_color": {
-            "type": "color",
-            "label": {
-              "ar": "لون الخلفية",
-              "en": "Background color"
-            }
-          },
-          "menu_background_color": {
-            "type": "color",
-            "label": {
-              "ar": "لون خلفية القائمة الرئيسية (اختياري)",
-              "en": "Menu color"
-            }
-          }
-        },
-        "expandable": true
-      },
-      "background": {
-        "icon": "font_awesome",
-        "type": "fieldset",
-        "label": {
-          "ar": "الخلفية",
-          "en": "Background"
-        },
-        "settings": {
-          "image": {
-            "info": {
-              "ar": "ارفع صورة بحجم 150 * 150 ",
-              "en": "This is an info text sample here"
+          "default": "Changa",
+          "options": [
+            {
+              "label": {
+                "ar": "Changa",
+                "en": "Changa"
+              },
+              "value": "Changa"
             },
-            "type": "image",
-            "label": {
-              "ar": "الصورة",
-              "en": "Logo"
+            {
+              "label": {
+                "ar": "Cairo",
+                "en": "Cairo"
+              },
+              "value": "Cairo"
+            },
+            {
+              "label": {
+                "ar": "Amiri",
+                "en": "Amiri"
+              },
+              "value": "Amiri"
+            },
+            {
+              "label": {
+                "ar": "Mada",
+                "en": "Mada"
+              },
+              "value": "Mada"
+            },
+            {
+              "label": {
+                "ar": "Tajawal",
+                "en": "Tajawal"
+              },
+              "value": "Tajawal"
+            },
+            {
+              "label": {
+                "ar": "Almarai",
+                "en": "Almarai"
+              },
+              "value": "Almarai"
+            },
+            {
+              "label": {
+                "ar": "El Messiri",
+                "en": "El Messiri"
+              },
+              "value": "El+Messiri"
+            },
+            {
+              "label": {
+                "ar": "Lalezar",
+                "en": "Lalezar"
+              },
+              "value": "Lalezar"
+            },
+            {
+              "label": {
+                "ar": "Scheherazade",
+                "en": "Scheherazade"
+              },
+              "value": "Scheherazade"
+            },
+            {
+              "label": {
+                "ar": "Lemonada",
+                "en": "Lemonada"
+              },
+              "value": "Lemonada"
+            },
+            {
+              "label": {
+                "ar": "Markazi",
+                "en": "Markazi"
+              },
+              "value": "Markazi+Text"
+            },
+            {
+              "label": {
+                "ar": "Lateef",
+                "en": "Lateef"
+              },
+              "value": "Lateef"
+            },
+            {
+              "label": {
+                "ar": "Reem Kufi",
+                "en": "Reem Kufi"
+              },
+              "value": "Reem+Kufi"
+            },
+            {
+              "label": {
+                "ar": "IBM Arabic",
+                "en": "IBM Arabic"
+              },
+              "value": "IBM+Plex+Sans+Arabic"
+            },
+            {
+              "label": {
+                "ar": "Harmattan",
+                "en": "Harmattan"
+              },
+              "value": "Harmattan"
+            },
+            {
+              "label": {
+                "ar": "Mirza",
+                "en": "Mirza"
+              },
+              "value": "Mirza"
+            },
+            {
+              "label": {
+                "ar": "Rakkas",
+                "en": "Rakkas"
+              },
+              "value": "Rakkas"
+            },
+            {
+              "label": {
+                "ar": "Katibeh",
+                "en": "Katibeh"
+              },
+              "value": "Katibeh"
+            },
+            {
+              "label": {
+                "ar": "Scheherazade New",
+                "en": "Scheherazade New"
+              },
+              "value": "Scheherazade+New"
+            },
+            {
+              "label": {
+                "ar": "Aref Ruqaa",
+                "en": "Aref Ruqaa"
+              },
+              "value": "Aref+Ruqaa"
+            },
+            {
+              "label": {
+                "ar": "Qahiri",
+                "en": "Qahiri"
+              },
+              "value": "Qahiri"
+            },
+            {
+              "label": {
+                "ar": "Jomhuria",
+                "en": "Jomhuria"
+              },
+              "value": "Jomhuria"
+            },
+            {
+              "label": {
+                "ar": "Kufam",
+                "en": "Kufam"
+              },
+              "value": "Kufam"
+            },
+            {
+              "label": {
+                "ar": "Vibes",
+                "en": "Vibes"
+              },
+              "value": "Vibes"
+            },
+            {
+              "label": {
+                "ar": "Noto Kufi",
+                "en": "Noto Kufi"
+              },
+              "value": "Noto+Kufi+Arabic"
+            },
+            {
+              "label": {
+                "ar": "Noto Naskh",
+                "en": "Noto Naskh"
+              },
+              "value": "Noto+Naskh+Arabic"
+            },
+            {
+              "label": {
+                "ar": "Noto Sans",
+                "en": "Noto Sans"
+              },
+              "value": "Noto+Sans+Arabic"
+            },
+            {
+              "label": {
+                "ar": "Noto Nastaliq Urdu",
+                "en": "Noto Nastaliq Urdu"
+              },
+              "value": "Noto+Nastaliq+Urdu"
             }
-          }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "colors",
+      "icon": "fa fa-paint-brush",
+      "name": {
+        "ar": "الالوان",
+        "en": "Colors"
+      },
+      "settings": [
+        {
+          "id": "footer",
+          "icon": "font_awesome",
+          "type": "fieldset",
+          "label": {
+            "ar": "اسفل الصفحة",
+            "en": "Header"
+          },
+          "expandable": true,
+          "settings": [
+            {
+              "id": "text_color",
+              "type": "color",
+              "label": {
+                "ar": "لون النص",
+                "en": "Text color"
+              }
+            },
+            {
+              "id": "background_color",
+              "type": "color",
+              "label": {
+                "ar": "لون الخلفية",
+                "en": "Text color"
+              }
+            }
+          ]
         },
-        "expandable": true
-      }
+        {
+          "id": "header",
+          "icon": "font_awesome",
+          "type": "fieldset",
+          "label": {
+            "ar": "رأس الصفحة",
+            "en": "Header"
+          },
+          "expandable": true,
+          "settings": [
+            {
+              "id": "text_color",
+              "type": "color",
+              "label": {
+                "ar": "لون النص",
+                "en": "Text color"
+              }
+            },
+            {
+              "id": "menu_text_color",
+              "type": "color",
+              "label": {
+                "ar": "لون نص القائممة الرئيسية (اختياري)",
+                "en": "Text color"
+              }
+            },
+            {
+              "id": "background_color",
+              "type": "color",
+              "label": {
+                "ar": "لون الخلفية",
+                "en": "Background color"
+              }
+            },
+            {
+              "id": "menu_background_color",
+              "type": "color",
+              "label": {
+                "ar": "لون خلفية القائمة الرئيسية (اختياري)",
+                "en": "Menu color"
+              }
+            }
+          ]
+        },
+        {
+          "id": "background",
+          "icon": "font_awesome",
+          "type": "fieldset",
+          "label": {
+            "ar": "الخلفية",
+            "en": "Background"
+          },
+          "expandable": true,
+          "settings": [
+            {
+              "id": "image",
+              "type": "image",
+              "label": {
+                "ar": "الصورة",
+                "en": "Logo"
+              },
+              "info": {
+                "ar": "ارفع صورة بحجم 150 * 150 ",
+                "en": "This is an info text sample here"
+              }
+            }
+          ]
+        }
+      ]
     }
-  }
+  ]
 }

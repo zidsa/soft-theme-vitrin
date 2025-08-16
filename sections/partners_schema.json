@@ -6,47 +6,49 @@
     "ar": "شركائنا",
     "en": "Partners"
   },
-  "display": true,
-  "settings": {
-    "title": {
+  "settings": [
+    {
+      "id": "title",
       "type": "text",
       "label": {
         "ar": "العنوان",
         "en": "text"
       }
     },
-    "store_partners": {
+    {
+      "id": "store_partners",
+      "type": "list",
+      "label": {
+        "ar": "الصورة",
+        "en": "Picture"
+      },
+      "max_items": 20,
       "info": {
         "ar": "",
         "en": "This is an info text sample here"
       },
-      "type": "list",
-      "noLabel": true,
-      "maxItems": 20,
-      "settings": {
-        "url": {
+      "settings": [
+        {
+          "id": "url",
           "type": "url",
           "label": {
             "ar": "الرابط",
             "en": "Link"
           }
         },
-        "image": {
-          "info": {
-            "ar": "ارفع صورة بحجم ٢٠٠ *٢٠٠ ",
-            "en": "This is an info text sample here"
-          },
+        {
+          "id": "image",
           "type": "image",
           "label": {
             "ar": "الصورة",
             "en": "Image"
+          },
+          "info": {
+            "ar": "ارفع صورة بحجم ٢٠٠ *٢٠٠ ",
+            "en": "This is an info text sample here"
           }
         }
-      },
-      "settings_label": {
-        "ar": "الصورة",
-        "en": "Picture"
-      }
+      ]
     }
-  }
+  ]
 }
