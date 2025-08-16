@@ -4,176 +4,182 @@
     "ar": "اسفل الصفحة",
     "en": "footer"
   },
-  "display": true,
-  "settings": {
-    "links_1": {
+  "settings": [
+    {
+      "id": "links_1",
       "icon": "font_awesome",
       "type": "fieldset",
       "label": {
         "ar": "روابط مهمة",
         "en": "Links"
       },
-      "settings": {
-        "hide": {
+      "expandable": true,
+      "settings": [
+        {
+          "id": "hide",
           "type": "checkbox",
           "label": {
-            "ar": " ",
-            "en": " "
-          },
-          "option": {
             "ar": "إخفاء",
             "en": "Hide"
-          },
-          "noLabel": true
+          }
         },
-        "links": {
+        {
+          "id": "links",
           "type": "list",
-          "noLabel": true,
-          "settings": {
-            "url": {
+          "label": {
+            "ar": "الروابط",
+            "en": "Links"
+          },
+          "settings": [
+            {
+              "id": "url",
               "type": "url",
               "label": {
                 "ar": "الرابط",
                 "en": "Link"
               }
             },
-            "title": {
+            {
+              "id": "title",
               "type": "text",
               "label": {
                 "ar": "العنوان",
                 "en": "text"
               }
             }
-          },
-          "settings_label": {
-            "ar": "الروابط",
-            "en": "Links"
-          }
+          ]
         },
-        "title": {
+        {
+          "id": "title",
           "type": "text",
           "label": {
             "ar": "العنوان",
             "en": "Title"
           }
         }
-      },
-      "expandable": true
+      ]
     },
-    "links_2": {
+    {
+      "id": "links_2",
       "icon": "font_awesome",
       "type": "fieldset",
       "label": {
         "ar": "روابط مهمة",
         "en": "Links"
       },
-      "settings": {
-        "hide": {
+      "expandable": true,
+      "settings": [
+        {
+          "id": "hide",
           "type": "checkbox",
           "label": {
-            "ar": " ",
-            "en": " "
-          },
-          "option": {
             "ar": "إخفاء",
             "en": "Hide"
-          },
-          "noLabel": true
+          }
         },
-        "links": {
+        {
+          "id": "links",
           "type": "list",
-          "noLabel": true,
-          "settings": {
-            "url": {
+          "label": {
+            "ar": "الروابط",
+            "en": "Links"
+          },
+          "settings": [
+            {
+              "id": "url",
               "type": "url",
               "label": {
                 "ar": "الرابط",
                 "en": "Link"
               }
             },
-            "title": {
+            {
+              "id": "title",
               "type": "text",
               "label": {
                 "ar": "العنوان",
                 "en": "text"
               }
             }
-          },
-          "settings_label": {
-            "ar": "الروابط",
-            "en": "Links"
-          }
+          ]
         },
-        "title": {
+        {
+          "id": "title",
           "type": "text",
           "label": {
             "ar": "العنوان",
             "en": "Title"
           }
         }
-      },
-      "expandable": true
+      ]
     },
-    "about_us": {
+    {
+      "id": "about_us",
       "icon": "font_awesome",
       "type": "fieldset",
       "label": {
         "ar": "عن المتجر",
         "en": "About us"
       },
-      "settings": {
-        "des": {
+      "expandable": true,
+      "settings": [
+        {
+          "id": "des",
           "type": "textarea",
           "label": {
             "ar": "النص",
             "en": "Description"
           }
         },
-        "title": {
+        {
+          "id": "title",
           "type": "text",
           "label": {
             "ar": "العنوان",
             "en": "Title"
           }
         }
-      },
-      "expandable": true
+      ]
     },
-    "social_media": {
+    {
+      "id": "social_media",
       "icon": "font_awesome",
       "type": "fieldset",
       "label": {
         "ar": "وسائل التواصل",
         "en": "Business location"
       },
-      "settings": {
-        "title": {
+      "expandable": true,
+      "settings": [
+        {
+          "id": "title",
           "type": "text",
           "label": {
             "ar": "العنوان",
             "en": "Title"
           }
         }
-      },
-      "expandable": true
+      ]
     },
-    "business_location": {
+    {
+      "id": "business_location",
       "icon": "font_awesome",
       "type": "fieldset",
       "label": {
         "ar": "الموقع الجغرافي",
         "en": "Business location"
       },
-      "settings": {
-        "title": {
+      "expandable": true,
+      "settings": [
+        {
+          "id": "title",
           "type": "text",
           "label": {
             "ar": "العنوان",
             "en": "Title"
           }
         }
-      },
-      "expandable": true
+      ]
     }
-  }
+  ]
 }

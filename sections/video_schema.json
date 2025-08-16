@@ -6,49 +6,42 @@
     "ar": "فيديو",
     "en": "Video"
   },
-  "display": true,
-  "settings": {
-    "title": {
+  "settings": [
+    {
+      "id": "title",
       "type": "text",
       "label": {
         "ar": "العنوان",
         "en": "text"
       }
     },
-    "video": {
-      "info": {
-        "ar": "mp4 اقصى حجم 10MB",
-        "en": ""
-      },
+    {
+      "id": "video",
       "type": "video",
       "label": {
         "ar": "الفيديو",
         "en": "Video"
+      },
+      "info": {
+        "ar": "mp4 اقصى حجم 10MB",
+        "en": ""
       }
     },
-    "autoplay": {
+    {
+      "id": "autoplay",
       "type": "checkbox",
       "label": {
-        "ar": "",
-        "en": ""
-      },
-      "option": {
         "ar": "تشغيل الفيديو  بشكل مباشر",
         "en": "autoplay"
-      },
-      "noLabel": true
+      }
     },
-    "controls": {
+    {
+      "id": "controls",
       "type": "checkbox",
       "label": {
-        "ar": "",
-        "en": ""
-      },
-      "option": {
         "ar": "عرض ازرار التحكم",
         "en": "Controls"
-      },
-      "noLabel": true
+      }
     }
-  }
+  ]
 }

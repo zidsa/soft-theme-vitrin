@@ -6,40 +6,41 @@
     "ar": "خصائص المتجر",
     "en": "Gallery"
   },
-  "display": true,
-  "settings": {
-    "store_features": {
+  "settings": [
+    {
+      "id": "store_features",
+      "type": "list",
+      "label": {
+        "ar": "الصورة",
+        "en": "Picture"
+      },
+      "max_items": 3,
       "info": {
         "ar": "",
         "en": "This is an info text sample here"
       },
-      "type": "list",
-      "noLabel": true,
-      "maxItems": 3,
-      "settings": {
-        "image": {
-          "info": {
-            "ar": "ارفع صورة بحجم ٢٠٠ *٢٠٠ ",
-            "en": "This is an info text sample here"
-          },
+      "settings": [
+        {
+          "id": "image",
           "type": "image",
           "label": {
             "ar": "الصورة",
             "en": "Image"
+          },
+          "info": {
+            "ar": "ارفع صورة بحجم ٢٠٠ *٢٠٠ ",
+            "en": "This is an info text sample here"
           }
         },
-        "title": {
+        {
+          "id": "title",
           "type": "text",
           "label": {
             "ar": "العنوان",
             "en": "text"
           }
         }
-      },
-      "settings_label": {
-        "ar": "الصورة",
-        "en": "Picture"
-      }
+      ]
     }
-  }
+  ]
 }

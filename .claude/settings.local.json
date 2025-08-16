@@ -4,7 +4,12 @@
       "Bash(find:*)",
       "Bash(mv:*)",
       "Bash(rg:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(for file in *_schema.json)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(python3:*)",
+      "Bash(done)",
+      "Bash(for file in footer_schema.json header_schema.json layout_schema.json)"
     ],
     "deny": []
   }

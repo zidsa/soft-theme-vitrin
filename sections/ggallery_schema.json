@@ -6,47 +6,49 @@
     "ar": "مجموعة الصور",
     "en": "Gallery"
   },
-  "display": true,
-  "settings": {
-    "title": {
+  "settings": [
+    {
+      "id": "title",
       "type": "text",
       "label": {
         "ar": "العنوان",
         "en": "text"
       }
     },
-    "gallery": {
+    {
+      "id": "gallery",
+      "type": "list",
+      "label": {
+        "ar": "الصورة",
+        "en": "Picture"
+      },
+      "max_items": 8,
       "info": {
         "ar": "",
         "en": "This is an info text sample here"
       },
-      "type": "list",
-      "noLabel": true,
-      "maxItems": 8,
-      "settings": {
-        "url": {
+      "settings": [
+        {
+          "id": "url",
           "type": "url",
           "label": {
             "ar": "الرابط",
             "en": "Link"
           }
         },
-        "image": {
-          "info": {
-            "ar": "ارفع صورة بحجم 750 * 750 ",
-            "en": "This is an info text sample here"
-          },
+        {
+          "id": "image",
           "type": "image",
           "label": {
             "ar": "الصورة",
             "en": "Image"
+          },
+          "info": {
+            "ar": "ارفع صورة بحجم 750 * 750 ",
+            "en": "This is an info text sample here"
           }
         }
-      },
-      "settings_label": {
-        "ar": "الصورة",
-        "en": "Picture"
-      }
+      ]
     }
-  }
+  ]
 }
