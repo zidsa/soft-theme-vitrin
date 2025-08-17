@@ -1,0 +1,246 @@
+<style>
+    .loyalty-points-section {
+        font-size: 1.1rem;
+        border: 1px solid #cccccc;
+        margin-top: 10px;
+        border-radius: 3px;
+        padding: 5px;
+    }
+
+    .loyalty-points-expected-section {
+        padding: 5px;
+        display: flex;
+    }
+
+    .loyalty-point-cashback-d-none {
+        display: none;
+    }
+
+    .loyalty-points-section .loyalty-points__earning, .loyalty-points-section .loyalty-points__earning-login {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .loyalty-points-section .loyalty-points__points-text {
+        color: var(--primary-color, #cccccc);
+        margin: 0 3px;
+    }
+
+    .loyalty-points-section .loyalty-points-login {
+        color: #363636;
+    }
+
+    .loyalty-points-section .loyalty-points-login{
+        color: var(--primary-color, #cccccc);
+        text-decoration: underline;
+    }
+
+    .loyalty-points-section.loyalty-points-section-d-none {
+        display: none !important;
+    }
+
+    .loyalty-points-section #selectedMethodStatusValue {
+        display: flex;
+    }
+
+    .loyalty-points-section #selectedMethodStatusValue #redemptionMethodsList {
+        flex-grow: 1;
+    }
+
+    .loyalty-points-section.rtl .loyalty-points-redemption-form button {
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+
+    .loyalty-points-section .loyalty-points-redemption-form button {
+        min-width: 80px;
+        margin-left: 15px;
+    }
+
+    .loyalty-points-section .loyalty-points-redemption-form  .form-group {
+        margin-bottom: 5px;
+    }
+
+    .loyalty-points-section .loyalty-points-redemption-form select, .loyalty-points-section .loyalty-points-redemption-form button {
+        height: 36px;
+    }
+
+    .loyalty-points-section .loyalty-points-redemption-form select {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .loyalty-points-section .loyalty-points-method-applied-section {
+        display: block;
+    }
+
+    .loyalty-points-section .loyalty-points-method-applied-row {
+        display: flex;
+    }
+
+    .loyalty-points-section .loyalty-points-method-applied-row button {
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+
+    .loyalty-points-section .loyalty-points-method-applied-row button {
+        min-width: 44px;
+        margin-left: 15px;
+        text-decoration: underline;
+    }
+
+    .loyalty-points-section .loyalty-points-method-applied-row > span, .loyalty-points-section .loyalty-points-method-applied-row button {
+        height: 36px;
+    }
+
+    .loyalty-points-section .loyalty-points-method-applied-row > span {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        display: block;
+        width: 100%;
+        line-height: 2.9;
+    }
+
+    .loyalty-points-section .loyalty-points-method-applied-section .applied_redemption_method_name {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 2.1;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .loyalty-points-section .loyalty-points__info p {
+        margin: 0px;
+    }
+
+    .loyalty-points-section .loyalty-points__info {
+        margin: 10px 0px;
+    }
+
+</style>
+<div class="{{ session.language.direction }} loyalty-points-section loyalty-points-section-d-none">
+    {% if not session.is_guest %}
+        <div class="loyalty-points__actions_section">
+
+            <div class="loyalty-points-expected-section loyalty-point-cashback-d-none" style="padding: 0px">
+                <div class="flex-grow-1">
+                    {{ _('Points Earned') }}
+                </div>
+                <div class="flex-shrink-0" style="width: 30%; color: var(--primary-color, #cccccc);">
+                    <span id="calculatedValue"> {{ calculatedPoints }} </span>
+                    <span>
+                        {{ _('Points') }}
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="loyalty-points__info">
+                <p>
+                    <span>
+                        {{ _('have') }}
+                    </span>
+                    <span id="customerPointsValue" class="loyalty-points__points-text"></span>
+                    <span>
+                        {{ _('Points') }}
+                    </span>
+{#                    <span>#}
+{#                        {{ _('cart_loyalty_points_points_balance') }}#}
+{#                    </span>#}
+                    <br/>
+                    <span>
+                        {{ _('Redeem points for rewards on this order') }}
+                    </span>
+                </p>
+
+            </div>
+
+
+
+
+            {% if not cart.loyalty_applied_redemption_method %}
+                <form class="loyalty-points-redemption-form">
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <select class="form-control loyalty-points-redemption-methods" name="" index="" onchange="">
+                                <option value="0"> {{ _('Choose') }} </option>
+                            </select>
+                            <button class="loyalty-points-redemption-methods-submit btn btn-primary" disabled="disabled" type="button" onClick="addRedemption(event)">
+                                <img class="loyalty-points-redemption-send-progress d-none" src="/img/spinner.gif" width="15" height="15"/>
+                                {{ _('Use') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            {% else %}
+                <div class="loyalty-points-method-applied-section">
+                    <div class="loyalty-points-method-applied-row">
+                        <span class="applied_redemption_method_name">
+                            {{ _('Use {} points to get {} discount').format(cart.loyalty_applied_redemption_method.points_to_redeem, cart.loyalty_applied_redemption_method.reward.discount_amount) }}
+                            {{ cart.currency.cart_currency.code }}
+                        </span>
+                        <button type="button" class="btn btn-link" onClick="removeRedemption()">
+                            <img class="loyalty-points-redemption-remove-progress d-none" src="/img/spinner.gif" width="15" height="15"/>
+                            {{ _('Cancel') }}
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+
+
+
+        </div>
+    {% else %}
+        <div class="loyalty-points__normal-section">
+
+            <div class="loyalty-points-expected-section loyalty-point-cashback-d-none" style="padding: 0px">
+                <div class="flex-grow-1">
+                    {{ _('Points Earned') }}
+                </div>
+                <div class="flex-shrink-0" style="width: 30%; color: var(--primary-color, #cccccc);">
+                    <span id="noCustomerCalculatedValue"> {{ calculatedPoints }} </span>
+                    <span>
+                        {{ _('Points') }}
+                    </span>
+                </div>
+            </div>
+
+            <a href="/auth/login" class="loyalty-points-login">
+                {{ _('Please login to view and redeem your points') }}
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+    var loyaltyStatus = {{ safeget(store, "settings.checkout.is_loyalty_enabled", false)  | tojson }};
+
+    var loyaltyCashbackStatus = {{
+        (safeget(store, "settings.checkout.loyalty_cashback_rules", [])| selectattr("is_active", "equalto", true) | first is not none ) | tojson
+    }};
+
+    var loyaltyCashbackRules = {{ safeget(store, "settings.checkout.loyalty_cashback_rules", []) | tojson}};
+
+    var text_loyalty_options = '{{ _('For {points} get a discount {percentage}') }}';
+    var cart_currency_code = '{{ cart.currency.cart_currency.code }}';
+    var cart_total_value = {{ cart.total_value }};
+    var store_currency_code = '{{ session.currency.code }}';
+    var cart_total_discount = 0;
+    {% for c_total in cart.totals %}
+        {% if c_total.code == 'products_discount' or  c_total.code == 'coupon' %}
+            cart_total_discount = {{ c_total.value }};
+        {% endif %}
+    {% endfor %}
+</script>
+<script type='text/javascript' src="{{ 'cart_loyalty_points.js' | asset_url }}"></script>
