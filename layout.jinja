@@ -6,9 +6,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-  {% include "vitrin:shared/meta.jinja" %}
-  {% include "vitrin:shared/head_scripts.jinja" %}
+  {% vitrin_head %}
 
   {% if settings.header_logo %}
     {% set logoUrl = settings.header_logo %}
@@ -249,8 +247,7 @@
 <script src="{{ 'slick.min.js' | asset_url }}"></script>
 
 <script type="text/javascript" src="{{ 'main.js?v=1.120' | asset_url }}" defer></script>
-
-{% include "vitrin:shared/body_scripts.jinja" %}
+  {% vitrin_body %}
 
 {% block footer_scripts %}{% endblock %}
 
