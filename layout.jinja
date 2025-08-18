@@ -1,14 +1,13 @@
 <!doctype html>
 <html class="no-js" lang="{{ session.lang }}" dir="{{ session.locale.language.direction }}">
 
-<head>
+{% extends "vitrin:shared/main.jinja" %}
+
+{% block head %}
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-  {% include "vitrin:shared/meta.jinja" %}
-  {% include "vitrin:shared/head_scripts.jinja" %}
 
   {% if settings.header_logo %}
     {% set logoUrl = settings.header_logo %}
@@ -145,115 +144,110 @@
     <link rel="stylesheet" href="{{ user_custom_css }}">
   {% endif %}
 
-</head>
+{% endblock %}
 
-<body class="{{ session.locale.language.direction }}"
-      data-template="{{ session.template }}"
-        {% if template == 'category' and category is not none %} data-category-id="{{ category.id }}" {% endif %}
->
+{% block body %}
 
-{% if store.editing_mode %}
-  <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
-{% endif %}
-
-<style>
-  body,html {
-    font-family: {% if settings.fonts_name %}{{ settings.fonts_name | replace('+', ' ') }}{% else %}'Changa'{% endif %}, sans-serif;
-  }
-  :root {
-  {% if settings is defined %}
-        {% if settings.colors_header_background_color %}
-        --header-primary-color: {{ settings.colors_header_background_color }};
-        {% endif %}
-
-      {% if settings.colors_header_menu_background_color %}
-            --menu-header-primary-color: {{settings.colors_header_menu_background_color}};
-            --header-primary-brightness: brightness(100%);
-            {% elif settings.colors_header_background_color %}
-            --menu-header-primary-color: {{settings.colors_header_background_color}};
-            --header-primary-brightness: brightness(80%);
-        {% endif %}
-
-      {% if settings.colors_header_menu_text_color %}
-        --menu-header-text-color-primary-bg: {{settings.colors_header_menu_text_color}};
-      {% elif settings.colors_header_text_color %}
-        --menu-header-text-color-primary-bg: {{settings.colors_header_text_color}};
-      {% endif %}
-
-        {% if settings.colors_header_text_color %}--header-text-color-primary-bg: {{settings.colors_header_text_color}};{% endif %}
-        {% if settings.colors_footer_background_color %}--footer-primary-color: {{settings.colors_footer_background_color}};{% endif %}
-        {% if settings.colors_footer_text_color %}--footer-text-color-primary-bg: {{settings.colors_footer_text_color}};{% endif %}
-      }
+  {% if store.editing_mode %}
+    <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
   {% endif %}
-</style>
 
-{% block top_body %}{% endblock %}
-
-<div class="app d-flex flex-column visible">
-    <div class="header">
-        {% block header %}{% endblock %}
-    </div>
-    <div class="main flex-grow-1 app-content"
-            {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}>
-        {% block main_content %}{% endblock %}
-    </div>
-    <div class="footer">
-        {% block footer %}{% endblock %}
-    </div>
-    {% block footer_sticky %}{% endblock %}
-</div>
-
-<script>
-    window.appDirection = '{{ session.locale.language.direction }}';
-
-    window.loadToasterScriptIfNotLoaded = function (onCompleted) {
-        var list = document.getElementsByTagName('script');
-        var i = list.length, flag = false;
-        while (i--) {
-            if (list[i].src === "{{ 'toastr.min.js' | asset_url }}") {
-                flag = true;
-                break;
-            }
-        }
-
-        if (!flag) {
-            var script = document.createElement('script');
-            script.src = "{{ 'toastr.min.js' | asset_url }}";
-            document.getElementsByTagName('head')[0].appendChild(script);
-
-            var fileref = document.createElement("link");
-            fileref.rel = "stylesheet";
-            fileref.type = "text/css";
-            fileref.href = "{{ 'toastr.min.css' | asset_url }}";
-            document.getElementsByTagName("head")[0].appendChild(fileref)
-
-            script.onload = function () {
-                if(onCompleted)
-                    onCompleted();
-            }
-        }else{
-            if(onCompleted)
-                onCompleted();
-        }
+  <style>
+    body,html {
+      font-family: {% if settings.fonts_name %}{{ settings.fonts_name | replace('+', ' ') }}{% else %}'Changa'{% endif %}, sans-serif;
     }
-</script>
+    :root {
+    {% if settings is defined %}
+          {% if settings.colors_header_background_color %}
+          --header-primary-color: {{ settings.colors_header_background_color }};
+          {% endif %}
 
-<script src="{{ 'jquery-3.6.0.min.js?v=1.0.0' | asset_url }}"></script>
+        {% if settings.colors_header_menu_background_color %}
+              --menu-header-primary-color: {{settings.colors_header_menu_background_color}};
+              --header-primary-brightness: brightness(100%);
+              {% elif settings.colors_header_background_color %}
+              --menu-header-primary-color: {{settings.colors_header_background_color}};
+              --header-primary-brightness: brightness(80%);
+          {% endif %}
 
-<script src="{{ 'jquery-ui.min.js' | asset_url }}"></script>
+        {% if settings.colors_header_menu_text_color %}
+          --menu-header-text-color-primary-bg: {{settings.colors_header_menu_text_color}};
+        {% elif settings.colors_header_text_color %}
+          --menu-header-text-color-primary-bg: {{settings.colors_header_text_color}};
+        {% endif %}
 
-<script src="{{ 'popper.min.js?v=1.0' | asset_url }}" defer></script>
-<script src="{{ 'bootstrap.min.js' | asset_url }}" defer></script>
+          {% if settings.colors_header_text_color %}--header-text-color-primary-bg: {{settings.colors_header_text_color}};{% endif %}
+          {% if settings.colors_footer_background_color %}--footer-primary-color: {{settings.colors_footer_background_color}};{% endif %}
+          {% if settings.colors_footer_text_color %}--footer-text-color-primary-bg: {{settings.colors_footer_text_color}};{% endif %}
+        }
+    {% endif %}
+  </style>
 
-<script src="{{ 'slide-menu.ie.js?v=1.06' | asset_url }}" defer></script>
-<script src="{{ 'slick.min.js' | asset_url }}"></script>
+  {% block top_body %}{% endblock %}
 
-<script type="text/javascript" src="{{ 'main.js?v=1.120' | asset_url }}" defer></script>
+  <div class="app d-flex flex-column visible">
+      <div class="header">
+          {% block header %}{% endblock %}
+      </div>
+      <div class="main flex-grow-1 app-content"
+              {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}>
+          {% block main_content %}{% endblock %}
+      </div>
+      <div class="footer">
+          {% block footer %}{% endblock %}
+      </div>
+      {% block footer_sticky %}{% endblock %}
+  </div>
 
-{% include "vitrin:shared/body_scripts.jinja" %}
+  <script>
+      window.appDirection = '{{ session.locale.language.direction }}';
 
-{% block footer_scripts %}{% endblock %}
+      window.loadToasterScriptIfNotLoaded = function (onCompleted) {
+          var list = document.getElementsByTagName('script');
+          var i = list.length, flag = false;
+          while (i--) {
+              if (list[i].src === "{{ 'toastr.min.js' | asset_url }}") {
+                  flag = true;
+                  break;
+              }
+          }
 
-</body>
+          if (!flag) {
+              var script = document.createElement('script');
+              script.src = "{{ 'toastr.min.js' | asset_url }}";
+              document.getElementsByTagName('head')[0].appendChild(script);
+
+              var fileref = document.createElement("link");
+              fileref.rel = "stylesheet";
+              fileref.type = "text/css";
+              fileref.href = "{{ 'toastr.min.css' | asset_url }}";
+              document.getElementsByTagName("head")[0].appendChild(fileref)
+
+              script.onload = function () {
+                  if(onCompleted)
+                      onCompleted();
+              }
+          }else{
+              if(onCompleted)
+                  onCompleted();
+          }
+      }
+  </script>
+
+  <script src="{{ 'jquery-3.6.0.min.js?v=1.0.0' | asset_url }}"></script>
+
+  <script src="{{ 'jquery-ui.min.js' | asset_url }}"></script>
+
+  <script src="{{ 'popper.min.js?v=1.0' | asset_url }}" defer></script>
+  <script src="{{ 'bootstrap.min.js' | asset_url }}" defer></script>
+
+  <script src="{{ 'slide-menu.ie.js?v=1.06' | asset_url }}" defer></script>
+  <script src="{{ 'slick.min.js' | asset_url }}"></script>
+
+  <script type="text/javascript" src="{{ 'main.js?v=1.120' | asset_url }}" defer></script>
+
+  {% block footer_scripts %}{% endblock %}
+{% endblock %}
+
 
 </html>
