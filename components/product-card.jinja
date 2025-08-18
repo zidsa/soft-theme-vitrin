@@ -81,10 +81,10 @@
             {% elif ( product.has_options or product.has_fields ) %}
                 <button class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ _("add to cart") }}</button>
             {% else %}
-            <button class="btn btn-primary product-card-add-to-cart" onclick="event.preventDefault(); event.stopPropagation(); productCartAddToCart(this,'{{ product.id }}')">
+            <a class="btn btn-primary product-card-add-to-cart" onclick="event.preventDefault(); event.stopPropagation(); productCartAddToCart(this,'{{ product.id }}')">
                 <img style="display: inline" class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
                 {{ _("add to cart") }}
-            </button>
+            </a>
             {% endif %}
         </div>
 
