@@ -119,7 +119,7 @@
                             <div class="cart-product-row-wrapper cart-totals-row-wrapper">
                                 <div class="flex-grow-1">
                                     {{ cartTotal.title }}
-                                    {% if cartTotal.code == 'total' and store.settings.general.tax_settings.is_tax_included_in_product_price %}&nbsp;<small>{{ _('Includes TAX %(percentage)s') | format(percentage=store.settings.general.tax_settings.tax_percentage) }}</small>{% endif %}
+                                    {% if cartTotal.code == 'total' and store.settings.general.tax_settings.is_tax_included_in_product_price %}&nbsp;<small>{{ _('Includes TAX %(percentage)s') | format(percentage=store.settings.general.tax_settings.tax_percentage_formatted) }}</small>{% endif %}
                                 </div>
                                 <div class="flex-shrink-0" style="width: 30%; {% if cartTotal.code == 'total' %} font-weight: bold; color: var( --primary-color); {% endif %}">
                                     {{ cartTotal.value_string }}
@@ -358,7 +358,7 @@
                     if(cartTotal.code === 'total'){
 
                         var is_cart_total_vat_included = {% if store.settings.general.tax_settings.is_tax_included_in_product_price %}true{% else %}false{% endif %};
-                        var local_sys_lbl_cart_includes_vat = "{{ _('Includes TAX %(percentage)s') | format(percentage=store.settings.general.tax_settings.tax_percentage) }}";
+                        var local_sys_lbl_cart_includes_vat = "{{ _('Includes TAX %(percentage)s') | format(percentage=store.settings.general.tax_settings.tax_percentage_formatted) }}";
 
                         if(is_cart_total_vat_included){
                             vat_included = '&nbsp;<small>'+local_sys_lbl_cart_includes_vat+'</small>';
