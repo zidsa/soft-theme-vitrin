@@ -823,7 +823,7 @@
                 $('#product-id').val(selected_product.id);
                 $('.send-notify-product-id').val(selected_product.id);
 
-                if (!selected_product.unavailable) {
+                if (selected_product.in_stock) {
                     // Selected a valid variant that is available.
                     if (selected_product.formatted_sale_price) {
                         $('.product-formatted-price').html(selected_product.formatted_sale_price);
@@ -1217,7 +1217,7 @@
             }
 
             return null;
-        }
+                }
 
         function showIframe(elm, imageVideoSrc) {
             if (!elm || !imageVideoSrc) {
