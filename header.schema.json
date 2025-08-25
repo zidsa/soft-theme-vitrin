@@ -4,16 +4,14 @@
     "ar": "اعلى الصفحة",
     "en": "Header"
   },
-  "settings": [
+  "settings_groups": [
     {
       "id": "header",
       "icon": "font_awesome",
-      "type": "fieldset",
-      "label": {
+      "name": {
         "ar": "رأس الصفحة",
         "en": "Header"
       },
-      "expandable": true,
       "settings": [
         {
           "id": "logo",
@@ -83,12 +81,10 @@
     {
       "id": "announcement_bar",
       "icon": "font_awesome",
-      "type": "fieldset",
-      "label": {
+      "name": {
         "ar": "شريط التنبيهات",
         "en": "Announcement bar"
       },
-      "expandable": true,
       "settings": [
         {
           "id": "url",
