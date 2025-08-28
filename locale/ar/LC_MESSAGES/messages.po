@@ -36,7 +36,7 @@ msgstr "تواصل معنا"
 msgid "The VAT number:"
 msgstr "الرقم الضريبي:"
 
-msgid "The commercial register number:"
+msgid "Commercial registeration number:"
 msgstr "الرقم التجارى:"
 
 msgid "Hello"
@@ -233,7 +233,7 @@ msgid "Package"
 msgstr "الطرد"
 
 msgid "Riyadh"
-msgstr "Riyadh"
+msgstr "الرياض"
 
 msgid "Inside Merchant City"
 msgstr "داخل مدينة التاجر"
@@ -337,7 +337,6 @@ msgstr "عذرًا"
 msgid "Home"
 msgstr "الرئيسية"
 
-#, fuzzy
 msgid "Categories"
 msgstr "التصنيفات"
 
@@ -352,7 +351,6 @@ msgstr "يتبقى %s فقط"
 msgid "more information"
 msgstr "مزيد من المعلومات"
 
-#, fuzzy
 msgid "product sku"
 msgstr "رقم المنتج (sku)"
 
@@ -383,7 +381,6 @@ msgstr "نجاح"
 msgid "Failed to add to cart"
 msgstr "فشل في إضافة المنتج للسلة"
 
-#, fuzzy
 msgid "Failed to send alert request"
 msgstr "فشل في الإرسال"
 
@@ -393,7 +390,6 @@ msgstr "مشاركة المنتج"
 msgid "Check Out this Product"
 msgstr "اطلع على هذا المنتج"
 
-#, fuzzy
 msgid "Display all products"
 msgstr "عرض جميع المنتجات"
 
@@ -403,7 +399,6 @@ msgstr "معلومات المنتج"
 msgid "product description"
 msgstr "وصف المنتج"
 
-#, fuzzy
 msgid "Product images"
 msgstr "صور المنتج"
 
@@ -446,7 +441,6 @@ msgstr "أسئلة"
 msgid "You may also like"
 msgstr "قد يعجبك أيضًا"
 
-#, fuzzy
 msgid "Option not available"
 msgstr "الخيار غير متوفر"
 
@@ -586,7 +580,7 @@ msgid "GET"
 msgstr "GET"
 
 msgid "Discover new products and stores, and stay updated on the status of your orders, all while enjoying a unique shopping experience with Mazeed"
-msgstr "اكتشف منتجات ومتاجر جديدة، وتابع حالة طلباتك، واستمتع بتجربة تسوق فريدة مع Mazeed"
+msgstr "اكتشف منتجات ومتاجر جديدة، وتابع حالة طلباتك، واستمتع بتجربة تسوق فريدة مع مزيد"
 
 msgid "Download now"
 msgstr "حمّل الآن"
