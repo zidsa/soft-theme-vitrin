@@ -147,9 +147,9 @@
                         </form>
 
 
-                        {% if cart.coupon.name %}
+                        {% if cart.coupon.code %}
                             <div class="message-coupon alert alert-primary" role="alert">
-                                <span>{{ cart.coupon.name }}</span>&nbsp;
+                                <span>{{ cart.coupon.code }}</span>&nbsp;
                                 <a onclick="deleteCoupon()" style="color: inherit; cursor: pointer">
                                     <span class="icon-trash-alt"></span>
                                     <img class="delete-coupon-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
