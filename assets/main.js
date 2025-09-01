@@ -162,7 +162,7 @@ function productCartAddToCart(elm, product_id) {
 }
 
 function addToCart(product_id, quantity, onCompleted) {
-  vitrin.cart
+  zid.cart
     .addProduct({
       product_id: product_id,
       quantity: quantity,
@@ -183,7 +183,7 @@ function removeFromCart(product_id) {
   product_id_str = product_id.replaceAll('-', '');
   let i = cart_products.findIndex(item => item.product_id == product_id_str);
 
-  vitrin.cart
+  zid.cart
     .removeProduct({ product_id: cart_products[i].id })
     .then(res => removeFromCartProducts(res, product_id_str));
 }
@@ -205,7 +205,7 @@ function addToWishlist(elm, productId) {
     return removeFromWishlist(elm, productId);
   }
 
-  vitrin.account.addToWishlists({ product_ids: [productId] }).then(response => {
+  zid.account.addToWishlists({ product_ids: [productId] }).then(response => {
     if (response) {
       $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
       $(elm).addClass('filled icon-heart-mask').removeClass('d-none');
@@ -220,7 +220,7 @@ function addToWishlist(elm, productId) {
 function removeFromWishlist(elm, productId) {
   $(elm).closest('.add-to-wishlist').find('.loader').removeClass('d-none');
   $(elm).addClass('d-none');
-  vitrin.account.removeFromWishlist(productId).then(response => {
+  zid.account.removeFromWishlist(productId).then(response => {
     $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
     $(elm).removeClass('d-none filled');
 
@@ -232,7 +232,7 @@ function removeFromWishlist(elm, productId) {
 
 function shareWishlist() {
   $('.share-wishlist .loader').removeClass('d-none').siblings('.share-icon').addClass('d-none');
-  vitrin.account.shareWishlist().then(async response => {
+  zid.account.shareWishlist().then(async response => {
     if (response) {
       $('.share-wishlist .loader').addClass('d-none').siblings('.share-icon').removeClass('d-none');
 
@@ -303,7 +303,7 @@ function displayActivePaymentSessionBar(cart) {
 }
 
 function fetchCart() {
-  vitrin.cart.get().then(function (response) {
+  zid.cart.get().then(function (response) {
     if (response && response.id) {
       setCartTotalAndBadge(response);
       displayActivePaymentSessionBar(response.id);
@@ -499,7 +499,7 @@ function fetchProductsSearch(catId, query) {
     return;
   }
 
-  vitrin.products
+  zid.products
     .list({
       page_size: 5,
       q: query,
@@ -699,7 +699,7 @@ class ProductsQuestions {
       this.submitButton.attr('disabled', true);
 
       try {
-        const response = await vitrin.products.createQuestion(productId, {
+        const response = await zid.products.createQuestion(productId, {
           question: this.customerQuestion.val(),
           name: this.customerName.val(),
           email: this.customerEmail.val(),
