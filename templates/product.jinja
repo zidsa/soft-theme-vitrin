@@ -687,14 +687,14 @@
           var quantity = parseInt($('#product-quantity').val()) || 1;
           var productId = $('#product-id').val() || '{{ product.selected_product.id }}';
 
-          if (!window.vitrin || !window.vitrin.cart || !window.vitrin.cart.addProduct) {
+          if (!window.zid || !window.zid.cart || !window.zid.cart.addProduct) {
               $('.add-to-cart-progress').addClass('d-none');
               if (typeof toastr !== 'undefined') {
                   toastr.error('{{ _("Cart service not available") }}', '{{ _("Sorry") }}');
               }
               return;
           }
-          window.vitrin.cart.addProduct({ form_id:'product-form' }).then(function(response) {
+          window.zid.cart.addProduct({ form_id:'product-form' }).then(function(response) {
               if (response && response.item && response.cart_items_quantity) {
                   
                   if (response.cart_items_quantity) {
