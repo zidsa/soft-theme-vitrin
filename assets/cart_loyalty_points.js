@@ -22,8 +22,9 @@ window.addEventListener("load", (event) => {
     }
     window.loyaltyCalculations = loyaltyCalculations;
     loyaltyCalculations(cart_total_value);
-    if (window.customer)
+    if (window.customer && window.customer.message != "Unauthorized") {
       getCustomerLoyaltyPoints(getRedemptionMethods);
+    }
   } else {
     hideLoyaltyProgram();
     window.loyaltyCalculations = null;
@@ -151,7 +152,7 @@ window.removeRedemption = function (event) {
   if (!$('.loyalty-points-redemption-remove-progress').hasClass('d-none'))
     return;
 
-  zidStore.loyalty.removeRedmptionMethod().then(function (response) {
+  zid.cart.removeRedemptionMethod().then(function (response) {
     if (response.ok) {
       location.reload();
       return;

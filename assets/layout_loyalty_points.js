@@ -11,7 +11,7 @@ window.addEventListener("load", (event) => {
 
   showLoyaltyProgram();
   getRedemptionMethods();
-  if (window.customer) {
+  if (window.customer && window.customer.message != "Unauthorized") {
     getCustomerLoyaltyPoints()
   }
 

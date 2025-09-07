@@ -1,3 +1,4 @@
+{% set ver = '0.1.004' %}
 <!doctype html>
 <html class="no-js" lang="{{ session.lang }}" dir="{{ session.locale.language.direction }}">
 
@@ -247,7 +248,21 @@
 <script src="{{ 'slick.min.js' | asset_url }}"></script>
 
 <script type="text/javascript" src="{{ 'main.js?v=1.120' | asset_url }}" defer></script>
-  {% vitrin_body %}
+
+{% vitrin_body %}
+
+{% if session.template not in ['product_details', 'cart_page', 'page_details'] and safeget(store, "settings.checkout.is_loyalty_enabled", False) %}
+
+    <script>
+        var loyalty_button_direction = "{{ session.language.direction }}";
+        var text_loyalty_rewards = '{{ _('Rewards') }}';
+        var text_loyalty_options = '{{ _('For {points} get a discount {percentage}') }}';
+        var store_currency_code = '{{ session.currency }}';
+    </script>
+
+    <script type='text/javascript' src="{{ ('layout_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
+
+{% endif %}
 
 {% block footer_scripts %}{% endblock %}
 

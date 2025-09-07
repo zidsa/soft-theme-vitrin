@@ -243,4 +243,4 @@
         {% endif %}
     {% endfor %}
 </script>
-<script type='text/javascript' src="{{ 'cart_loyalty_points.js' | asset_url }}"></script>
+<script type='text/javascript' src="{{ ('cart_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
