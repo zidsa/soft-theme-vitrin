@@ -647,6 +647,10 @@
     overflow-y: auto;
 }
 
+.bundle-offer-title {
+    unicode-bidi: isolate;
+}
+
 .bundle-offer-products-dialog .bundle-offer-title, .bundle-offer-products-dialog .bundle-offer-title-description {
     margin-right: 40px;
 }
