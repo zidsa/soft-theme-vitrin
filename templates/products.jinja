@@ -28,7 +28,7 @@
 
      <div class="container d-flex flex-row">
         {% if  products.filters|length > 0 %}
-            {#{% set async=true %}{% include 'template_for_products_attributes.jinja' %}#}
+            {% set async=true %} {% include 'vitrin:products/filters.jinja' %}
         {% endif %}
         <div class="products-container flex-grow-1 pt-4">
             <div>
