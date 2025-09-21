@@ -166,7 +166,7 @@ function addToCart(product_id, quantity, onCompleted) {
     .addProduct({
       product_id: product_id,
       quantity: quantity,
-    })
+    }, { showErrorNotification: true })
     .then(function (response) {
       if (response) {
         setCartTotalAndBadge(response);
