@@ -77,7 +77,7 @@ const showLoyaltyProgram = () => {
 }
 
 const getRedemptionMethods = () => {
-  zid.cart.getRedemptionMethods(store_currency_code).then(function (response) {
+  zid.cart.getRedemptionMethods(store_currency_code, { showErrorNotification: true }).then(function (response) {
     if (response && response.options) {
       redemptionMethods = response.options;
       if (redemptionMethods.length > 0) {
@@ -104,7 +104,7 @@ const getRedemptionMethods = () => {
 }
 
 const getCustomerLoyaltyPoints = () => {
-  zid.cart.getCustomerLoyaltyPoints().then(function (response) {
+  zid.cart.getCustomerLoyaltyPoints({ showErrorNotification: true }).then(function (response) {
 
     if (response.status === "success" &&
       response.data &&

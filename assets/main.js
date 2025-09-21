@@ -205,7 +205,7 @@ function addToWishlist(elm, productId) {
     return removeFromWishlist(elm, productId);
   }
 
-  zid.account.addToWishlists({ product_ids: [productId] }).then(response => {
+  zid.account.addToWishlists({ product_ids: [productId] }, { showErrorNotification: true }).then(response => {
     if (response) {
       $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
       $(elm).addClass('filled icon-heart-mask').removeClass('d-none');
@@ -220,7 +220,7 @@ function addToWishlist(elm, productId) {
 function removeFromWishlist(elm, productId) {
   $(elm).closest('.add-to-wishlist').find('.loader').removeClass('d-none');
   $(elm).addClass('d-none');
-  zid.account.removeFromWishlist(productId).then(response => {
+  zid.account.removeFromWishlist(productId, { showErrorNotification: true }).then(response => {
     $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
     $(elm).removeClass('d-none filled');
 
@@ -232,7 +232,7 @@ function removeFromWishlist(elm, productId) {
 
 function shareWishlist() {
   $('.share-wishlist .loader').removeClass('d-none').siblings('.share-icon').addClass('d-none');
-  zid.account.shareWishlist().then(async response => {
+  zid.account.shareWishlist({ showErrorNotification: true }).then(async response => {
     if (response) {
       $('.share-wishlist .loader').addClass('d-none').siblings('.share-icon').removeClass('d-none');
 
@@ -303,7 +303,7 @@ function displayActivePaymentSessionBar(cart) {
 }
 
 function fetchCart() {
-  zid.cart.get().then(function (response) {
+  zid.cart.get({ showErrorNotification: true }).then(function (response) {
     if (response && response.id) {
       setCartTotalAndBadge(response);
       displayActivePaymentSessionBar(response.id);
@@ -704,7 +704,7 @@ class ProductsQuestions {
           name: this.customerName.val(),
           email: this.customerEmail.val(),
           is_anonymous: this.isAnonymous.is(':checked'),
-        });
+        }, { showErrorNotification: true });
 
         if (response) {
           toastr.success(locales_messages.success, locales_messages.success_header);
