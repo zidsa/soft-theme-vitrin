@@ -19,7 +19,7 @@
 
                 {% if settings.more_text %}
                     <div class="text-center mt-5 category-products-display-more-section">
-                        <a href="{{ url_for('list_products') }}"
+                        <a href="{{ settings.products.url or url_for('list_products') }}"
                            class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
                     </div>
                 {% endif %}
