@@ -263,18 +263,28 @@ jQuery(document).on('click', '.mega-dropdown', function (e) {
   e.stopPropagation();
 });
 
-function waitForDependencies(callback, requiredPlugins = [], maxAttempts = 50) {
+function waitForDependencies(callback, requiredPlugins = [], maxAttempts = 300) {
   var attempts = 0;
+  var jQueryAttempts = 0;
+  var pluginAttempts = 0;
 
   function check() {
     attempts++;
 
+    // First, wait for jQuery to be available
     if (typeof $ === 'undefined' || typeof jQuery === 'undefined' || !$.fn) {
+      jQueryAttempts++;
       if (attempts < maxAttempts) {
         requestAnimationFrame(check);
       } else {
-        console.error('jQuery failed to load after maximum attempts');
+        console.error('jQuery failed to load after', jQueryAttempts, 'attempts');
       }
+      return;
+    }
+
+    // jQuery is loaded, now check for required plugins
+    if (requiredPlugins.length === 0) {
+      callback();
       return;
     }
 
@@ -285,33 +295,52 @@ function waitForDependencies(callback, requiredPlugins = [], maxAttempts = 50) {
     if (allPluginsLoaded) {
       callback();
     } else if (attempts < maxAttempts) {
-      requestAnimationFrame(check);
+      pluginAttempts++;
+      // Use longer delays for plugin loading
+      if (pluginAttempts % 20 === 0) {
+        setTimeout(check, 100);
+      } else {
+        requestAnimationFrame(check);
+      }
     } else {
-      console.error('Required plugins failed to load:', requiredPlugins.filter(function(plugin) {
-        return !$.fn[plugin];
-      }));
+      console.error('Required plugins failed to load after', pluginAttempts, 'plugin attempts:',
+        requiredPlugins.filter(function(plugin) {
+          return !$.fn[plugin];
+        })
+      );
     }
   }
 
-  check();
+  // Start checking after a delay to let defer scripts load
+  setTimeout(check, 100);
 }
 
-$(function () {
-  waitForDependencies(function() {
-    $('#slider-range').slider({
-      range: true,
-      min: 0,
-      max: 500,
-      values: [75, 300],
-      slide: function (event, ui) {
-        $('#amount').val('$' + ui.values[0] + ' - $' + ui.values[1]);
-      },
-    });
-    $('#amount').val(
-      '$' + $('#slider-range').slider('values', 0) + ' - $' + $('#slider-range').slider('values', 1)
-    );
-  }, ['slider']);
-});
+// Wait for jQuery to be available before using $()
+function initSliderWhenReady() {
+  if (typeof $ === 'undefined') {
+    setTimeout(initSliderWhenReady, 50);
+    return;
+  }
+
+  $(function () {
+    waitForDependencies(function() {
+      $('#slider-range').slider({
+        range: true,
+        min: 0,
+        max: 500,
+        values: [75, 300],
+        slide: function (event, ui) {
+          $('#amount').val('$' + ui.values[0] + ' - $' + ui.values[1]);
+        },
+      });
+      $('#amount').val(
+        '$' + $('#slider-range').slider('values', 0) + ' - $' + $('#slider-range').slider('values', 1)
+      );
+    }, ['slider']);
+  });
+}
+
+initSliderWhenReady();
 
 /*
  product-comment-twig show more show less
