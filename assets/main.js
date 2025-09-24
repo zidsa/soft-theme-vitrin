@@ -184,7 +184,7 @@ function removeFromCart(product_id) {
   let i = cart_products.findIndex(item => item.product_id == product_id_str);
 
   zid.cart
-    .removeProduct({ product_id: cart_products[i].id })
+    .removeProduct({ product_id: cart_products[i].id }, {showErrorNotification: true})
     .then(res => removeFromCartProducts(res, product_id_str));
 }
 
@@ -220,6 +220,7 @@ function addToWishlist(elm, productId) {
 function removeFromWishlist(elm, productId) {
   $(elm).closest('.add-to-wishlist').find('.loader').removeClass('d-none');
   $(elm).addClass('d-none');
+
   zid.account.removeFromWishlist(productId, { showErrorNotification: true }).then(response => {
     $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
     $(elm).removeClass('d-none filled');
@@ -232,6 +233,7 @@ function removeFromWishlist(elm, productId) {
 
 function shareWishlist() {
   $('.share-wishlist .loader').removeClass('d-none').siblings('.share-icon').addClass('d-none');
+
   zid.account.shareWishlist({ showErrorNotification: true }).then(async response => {
     if (response) {
       $('.share-wishlist .loader').addClass('d-none').siblings('.share-icon').removeClass('d-none');
@@ -303,6 +305,7 @@ function displayActivePaymentSessionBar(cart) {
 }
 
 function fetchCart() {
+
   zid.cart.get({ showErrorNotification: true }).then(function (response) {
     if (response && response.id) {
       setCartTotalAndBadge(response);
@@ -504,7 +507,7 @@ function fetchProductsSearch(catId, query) {
       page_size: 5,
       q: query,
       categories: catId,
-    })
+    }, {showErrorNotification: true})
     .then(function (response) {
       if (response && response.results) {
         $('.autocomplete-items').html('');

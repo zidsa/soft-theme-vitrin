@@ -323,6 +323,7 @@
                 return;
 
             $('.delete-coupon-progress').removeClass('d-none');
+
             zid.cart.removeCoupons({ showErrorNotification: true }).then(function (response) {
                 $('.delete-coupon-progress').addClass('d-none');
                 window.location.reload();

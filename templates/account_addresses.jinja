@@ -74,7 +74,7 @@
 
             $('.delete-address-progress',element).removeClass('d-none');
 
-            zid.store.customer.deleteAddress(addressId).then(function (response) {
+            zid.store.customer.deleteAddress(addressId, {showErrorNotification: true}).then(function (response) {
                 if(response.status  === 'success'){
                     $('.delete-address-progress',element).addClass('d-none');
                     $( element ).remove();

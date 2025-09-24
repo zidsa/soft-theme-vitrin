@@ -105,7 +105,6 @@ const getRedemptionMethods = () => {
 
 const getCustomerLoyaltyPoints = () => {
   zid.cart.getCustomerLoyaltyPoints({ showErrorNotification: true }).then(function (response) {
-
     if (response.status === "success" &&
       response.data &&
       response.data.points
