@@ -263,22 +263,54 @@ jQuery(document).on('click', '.mega-dropdown', function (e) {
   e.stopPropagation();
 });
 
-/*
- slider-filter
- */
+function waitForDependencies(callback, requiredPlugins = [], maxAttempts = 50) {
+  var attempts = 0;
+
+  function check() {
+    attempts++;
+
+    if (typeof $ === 'undefined' || typeof jQuery === 'undefined' || !$.fn) {
+      if (attempts < maxAttempts) {
+        requestAnimationFrame(check);
+      } else {
+        console.error('jQuery failed to load after maximum attempts');
+      }
+      return;
+    }
+
+    var allPluginsLoaded = requiredPlugins.every(function(plugin) {
+      return $.fn[plugin] !== undefined;
+    });
+
+    if (allPluginsLoaded) {
+      callback();
+    } else if (attempts < maxAttempts) {
+      requestAnimationFrame(check);
+    } else {
+      console.error('Required plugins failed to load:', requiredPlugins.filter(function(plugin) {
+        return !$.fn[plugin];
+      }));
+    }
+  }
+
+  check();
+}
+
 $(function () {
-  $('#slider-range').slider({
-    range: true,
-    min: 0,
-    max: 500,
-    values: [75, 300],
-    slide: function (event, ui) {
-      $('#amount').val('$' + ui.values[0] + ' - $' + ui.values[1]);
-    },
-  });
-  $('#amount').val(
-    '$' + $('#slider-range').slider('values', 0) + ' - $' + $('#slider-range').slider('values', 1)
-  );
+  waitForDependencies(function() {
+    $('#slider-range').slider({
+      range: true,
+      min: 0,
+      max: 500,
+      values: [75, 300],
+      slide: function (event, ui) {
+        $('#amount').val('$' + ui.values[0] + ' - $' + ui.values[1]);
+      },
+    });
+    $('#amount').val(
+      '$' + $('#slider-range').slider('values', 0) + ' - $' + $('#slider-range').slider('values', 1)
+    );
+  }, ['slider']);
 });
 
 /*

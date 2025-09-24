@@ -702,7 +702,7 @@
                       $('.cart-badge').removeClass('d-none').text(response.cart_items_quantity);
                   }
                   
-                  if (typeof fetchCart === 'function') {
+                  if (typeof fetchCart === 'function' && window.zid && window.zid.cart) {
                       fetchCart()
                   }
 
@@ -1084,24 +1084,26 @@
                 return;
             }
 
-            var arrowNextClass, arrowPrevClass;
-            if (window.appDirection === 'ltr') {
-                arrowNextClass = 'icon-keyboard_arrow_right';
-                arrowPrevClass = 'icon-keyboard_arrow_left';
-            } else {
-                arrowNextClass = 'icon-keyboard_arrow_left';
-                arrowPrevClass = 'icon-keyboard_arrow_right';
-            }
+            waitForDependencies(function() {
+                var arrowNextClass, arrowPrevClass;
+                if (window.appDirection === 'ltr') {
+                    arrowNextClass = 'icon-keyboard_arrow_right';
+                    arrowPrevClass = 'icon-keyboard_arrow_left';
+                } else {
+                    arrowNextClass = 'icon-keyboard_arrow_left';
+                    arrowPrevClass = 'icon-keyboard_arrow_right';
+                }
 
-            $('#product-images-slick').slick({
-                infinite: false,
-                autoplay: false,
-                arrows: (productImages.length > 1),
-                dots: (productImages.length > 1),
-                rtl: !(window.appDirection === 'ltr'),
-                nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
-                prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>'
-            });
+                $('#product-images-slick').slick({
+                    infinite: false,
+                    autoplay: false,
+                    arrows: (productImages.length > 1),
+                    dots: (productImages.length > 1),
+                    rtl: !(window.appDirection === 'ltr'),
+                    nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
+                    prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>'
+                });
+            }, ['slick']);
         }
 
         $('#product-images-slick').on('init', function(event, slick) {
@@ -1148,44 +1150,46 @@
         }
 
         function showRelatedProducts() {
-            var arrowNextClass, arrowPrevClass;
-            if (window.appDirection === 'ltr') {
-                arrowNextClass = 'icon-keyboard_arrow_right';
-                arrowPrevClass = 'icon-keyboard_arrow_left';
-            } else {
-                arrowNextClass = 'icon-keyboard_arrow_left';
-                arrowPrevClass = 'icon-keyboard_arrow_right';
-            }
+            waitForDependencies(function() {
+                var arrowNextClass, arrowPrevClass;
+                if (window.appDirection === 'ltr') {
+                    arrowNextClass = 'icon-keyboard_arrow_right';
+                    arrowPrevClass = 'icon-keyboard_arrow_left';
+                } else {
+                    arrowNextClass = 'icon-keyboard_arrow_left';
+                    arrowPrevClass = 'icon-keyboard_arrow_right';
+                }
 
-            var screenWidth = window.screen.width;
-            var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
+                var screenWidth = window.screen.width;
+                var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
 
-            if (screenWidth >= 768 || editingMode) {
-                $('#related-products.products-slider').slick({
-                    slidesToShow: 5,
-                    slidesToScroll: 5,
-                    infinite: false,
-                    autoplay: false,
-                    arrows: true,
-                    dots: false,
-                    rtl: !(window.appDirection === 'ltr'),
-                    nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
-                    prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>',
-                    responsive: [
-                        {
-                            breakpoint: 992,
-                            settings: {
-                                slidesToShow: 5,
-                                slidesToScroll: 5
+                if (screenWidth >= 768 || editingMode) {
+                    $('#related-products.products-slider').slick({
+                        slidesToShow: 5,
+                        slidesToScroll: 5,
+                        infinite: false,
+                        autoplay: false,
+                        arrows: true,
+                        dots: false,
+                        rtl: !(window.appDirection === 'ltr'),
+                        nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
+                        prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>',
+                        responsive: [
+                            {
+                                breakpoint: 992,
+                                settings: {
+                                    slidesToShow: 5,
+                                    slidesToScroll: 5
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: "unslick"
                             }
-                        },
-                        {
-                            breakpoint: 768,
-                            settings: "unslick"
-                        }
-                    ]
-                });
-            }
+                        ]
+                    });
+                }
+            }, ['slick']);
         }
 
         document.addEventListener('zid-customer-fetched', function(event) {
