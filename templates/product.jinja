@@ -694,7 +694,7 @@
               }
               return;
           }
-          window.zid.cart.addProduct({ form_id:'product-form' }).then(function(response) {
+          window.zid.cart.addProduct({ form_id:'product-form' }, { showErrorNotification: true }).then(function(response) {
               if (response && response.item && response.cart_items_quantity) {
                   
                   if (response.cart_items_quantity) {
