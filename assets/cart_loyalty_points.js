@@ -45,7 +45,7 @@ const showLoyaltyCashBackProgram = () => {
 }
 
 const loyaltyCalculations = (total) => {
-  zid.cart.getCalculatedPoints(total).then(function (response) {
+  zid.cart.getCalculatedPoints(total, {showErrorNotification: true}).then(function (response) {
     if (response &&
       response.points
     ) {
@@ -64,7 +64,7 @@ const loyaltyCalculations = (total) => {
 }
 
 const getRedemptionMethods = () => {
-  zid.cart.getRedemptionMethods(store_currency_code).then(function (response) {
+  zid.cart.getRedemptionMethods(store_currency_code, {showErrorNotification: true}).then(function (response) {
 
     if (response &&
       response.options
@@ -105,7 +105,7 @@ const getLoyaltyCashBackRules = () => {
 }
 
 const getCustomerLoyaltyPoints = (onComplete) => {
-  zid.cart.getCustomerLoyaltyPoints().then(function (response) {
+  zid.cart.getCustomerLoyaltyPoints({showErrorNotification: true}).then(function (response) {
     if (response &&
       response.balance !== undefined
     ) {
@@ -133,7 +133,7 @@ window.addRedemption = function (element) {
   }
 
   $('.loyalty-points-redemption-send-progress').removeClass('d-none');
-  zid.cart.addRedemptionMethod(redemptionMethod[0]).then(function (response) {
+  zid.cart.addRedemptionMethod(redemptionMethod[0], {showErrorNotification: true}).then(function (response) {
     if (response.ok) {
       location.reload();
     } else {
@@ -152,7 +152,7 @@ window.removeRedemption = function (event) {
   if (!$('.loyalty-points-redemption-remove-progress').hasClass('d-none'))
     return;
 
-  zid.cart.removeRedemptionMethod().then(function (response) {
+  zid.cart.removeRedemptionMethod({showErrorNotification: true}).then(function (response) {
     if (response.ok) {
       location.reload();
       return;

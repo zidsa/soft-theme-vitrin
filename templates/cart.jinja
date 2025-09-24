@@ -308,7 +308,7 @@
                 return;
 
             $('.send-coupon-progress').removeClass('d-none');
-            zid.cart.applyCoupon({coupon_code: $('.send-coupon').val()})
+            zid.cart.applyCoupon({coupon_code: $('.send-coupon').val()}, {showErrorNotification: true})
                 .then(function (response) {
                     toastr.success('{{ _("Send Successfully") }}', null)
                     window.location.reload();
@@ -323,7 +323,7 @@
                 return;
 
             $('.delete-coupon-progress').removeClass('d-none');
-            zid.cart.removeCoupons().then(function (response) {
+            zid.cart.removeCoupons({showErrorNotification: true}).then(function (response) {
                 $('.delete-coupon-progress').addClass('d-none');
                 window.location.reload();
             })
