@@ -1,0 +1,110 @@
+{
+  "components": {
+    "ar": [
+      {
+        "settings": {
+          "slider": [
+            null,
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/2b342014-5313-451e-868d-f6d686451c55.png"
+            }
+          ],
+          "hide_dots": false
+        },
+        "template": "sections/main-slider.jinja"
+      },
+      {
+        "settings": {
+          "gallery": [
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/d6c8abf1-d191-46fb-8e67-92e2217a63ff.png"
+            },
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/d6c8abf1-d191-46fb-8e67-92e2217a63ff.png"
+            },
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/d6c8abf1-d191-46fb-8e67-92e2217a63ff.png"
+            },
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/d6c8abf1-d191-46fb-8e67-92e2217a63ff.png"
+            }
+          ]
+        },
+        "template": "sections/ggallery.jinja"
+      },
+      {
+        "settings": {
+          "slider": [
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/2b342014-5313-451e-868d-f6d686451c55.png"
+            }
+          ],
+          "hide_dots": false
+        },
+        "template": "sections/main-slider.jinja"
+      },
+      {
+        "settings": {
+          "title": "احدث المنتجات",
+          "products": {
+            "id": 0,
+            "type": "recent_products"
+          },
+          "display_more": true
+        },
+        "template": "sections/products-section.jinja"
+      },
+      {
+        "settings": {
+          "store_partners": [
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/f9df883c-2474-4ab7-ba3f-8899b8dd1adf.png"
+            },
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/f9df883c-2474-4ab7-ba3f-8899b8dd1adf.png"
+            },
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/f9df883c-2474-4ab7-ba3f-8899b8dd1adf.png"
+            },
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/f9df883c-2474-4ab7-ba3f-8899b8dd1adf.png"
+            },
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/f9df883c-2474-4ab7-ba3f-8899b8dd1adf.png"
+            },
+            {
+              "image": "https://media.zid.store/e214177f-3b72-43a1-af24-32cfb231aee9/f9df883c-2474-4ab7-ba3f-8899b8dd1adf.png"
+            }
+          ]
+        },
+        "template": "sections/partners.jinja"
+      },
+      {
+        "settings": {
+          "title": " لوريم ابسيوم",
+          "hide_dots": false,
+          "testimonials": [
+            {
+              "date": "ابسيوم",
+              "name": "لوريم",
+              "text": "لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم لوريم ابسيوم "
+            }
+          ]
+        },
+        "template": "sections/testimonials.jinja"
+      },
+      {
+        "settings": {
+          "store_features": [
+            {
+              "title": "aaaaaa"
+            }
+          ]
+        },
+        "template": "sections/features-section.jinja"
+      }
+    ],
+    "en": [
+    ]
+  }
+}
