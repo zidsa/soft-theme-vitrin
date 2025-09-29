@@ -1,0 +1,13 @@
+{
+  "ar": {
+    "header_logo": "https://media.zid.store/9fc92996-ffbe-4bca-9b8e-6682137fe7b6/4de6bbde-8a30-434e-ac04-5beaedd1653a.png",
+    "header_options": [],
+    "announcement_bar_text": "a",
+    "announcement_bar_display": true,
+    "header_search_placeholder": "a",
+    "announcement_bar_text_color": "#000000",
+    "announcement_bar_page_display": "all",
+    "announcement_bar_background_color": "#ffffff"
+  },
+  "en": {}
+}

@@ -1,0 +1,12 @@
+{
+  "ar": {
+    "fonts_name": "Changa",
+    "colors_footer_text_color": "#000000",
+    "colors_header_text_color": "#000000",
+    "colors_header_menu_text_color": "#000000",
+    "colors_footer_background_color": "#ffffff",
+    "colors_header_background_color": "#ffffff",
+    "colors_header_menu_background_color": "#ffffff"
+  },
+  "en": {}
+}
