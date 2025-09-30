@@ -179,8 +179,10 @@
 
                 {% if store.settings.contact.business_center %}
                     <div class="maroof-icon" style="text-align: center;">
-                        <img src="{{ 'business_center.png' | asset_url }}" loading="lazy" alt="" width="auto" height="30">
-                        <div>{{ store.settings.contact.business_center }}</div>
+                        <a href="https://eauthenticate.saudibusiness.gov.sa/certificate-details/{{ store.settings.contact.business_center }}" target="_blank">
+                            <img src="{{ 'business_center.png' | asset_url }}" loading="lazy" alt="" width="auto" height="30">
+                            <div class="footer-theme-text-for-primary-bg">{{ store.settings.contact.business_center }}</div>
+                        </a>
                     </div>
                 {% endif %}
 
