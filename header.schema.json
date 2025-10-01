@@ -4,7 +4,7 @@
     "ar": "اعلى الصفحة",
     "en": "Header"
   },
-  "settings_groups": [
+  "groups": [
     {
       "id": "header",
       "icon": "font_awesome",

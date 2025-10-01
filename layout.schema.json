@@ -3,7 +3,7 @@
     "ar": "إعدادات التخطيط",
     "en": "Layout Settings"
   },
-  "settings_groups": [
+  "groups": [
     {
       "id": "fonts",
       "icon": "fa fa-font",

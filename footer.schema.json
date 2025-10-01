@@ -4,7 +4,7 @@
     "ar": "اسفل الصفحة",
     "en": "footer"
   },
-  "settings_groups": [
+  "groups": [
     {
       "id": "links_1",
       "icon": "font_awesome",
