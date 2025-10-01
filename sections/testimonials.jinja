@@ -10,7 +10,7 @@
 
             <div class="testimonials-slider s-slider">
 
-                {% for testimonial in settings.testimonials %}
+                {% for testimonial in safeget(settings, "testimonials", []) %}
 
                 <div class="testimonials-customer-card bg-transparent">
                     <div class="card-body">
@@ -57,7 +57,7 @@
                 infinite: false,
                 autoplay: false,
                 arrows: true,
-                dots: {% if (settings.hide_dots or (settings.testimonials | length <= 3)) %}false{% else %}true{% endif %},
+                dots: {% if (settings.hide_dots or (safeget(settings, "testimonials", []) | length <= 3)) %}false{% else %}true{% endif %},
                 rtl: !(window.appDirection === 'ltr'),
                 nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="'+arrowNextClass+'"></span></button>',
                 prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="'+arrowPrevClass+'"></span></button>',

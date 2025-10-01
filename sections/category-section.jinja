@@ -9,7 +9,7 @@
             <div class="categories-slider-wrapper" style="position: relative">
 
                 <div class="categories-slider s-slider">
-                    {% for categoryItem in settings.categories %}
+                    {% for categoryItem in safeget(settings, "categories", []) %}
                         <div class="cat-col">
                             <div class="category-item">
                                 <a href="/categories/{{ categoryItem.category.id }}/{{ categoryItem.category.slug }}">

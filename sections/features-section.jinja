@@ -4,7 +4,7 @@
      data-sm-scroll-offset="94"
      class="features-section section-padding-space">
     <div class="features-section container d-flex flex-row justify-content-around align-items-center">
-        {% for galler in settings.store_features %}
+        {% for galler in safeget(settings, "store_features", []) %}
             <div class="feature d-flex flex-column justify-content-center align-items-center">
                 <img class="features-section-img" src="{{ image_url(galler.image, w=350, q=100, f='auto') }}" loading="lazy" alt=""  />
                 <p class="px-2 theme-text-for-primary-bg features-section-title">{{ galler.title }}</p>
