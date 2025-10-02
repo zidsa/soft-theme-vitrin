@@ -325,6 +325,9 @@ msgstr "شحن مجاني"
 msgid "Purchase"
 msgstr "شراء"
 
+msgid "Complete Order"
+msgstr "إتمام الطلب"
+
 msgid "continue shopping"
 msgstr "متابعة التسوق"
 
