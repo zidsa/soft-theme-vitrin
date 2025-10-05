@@ -64,6 +64,14 @@ class BundleOffersLoader {
       if (bundleOffer && bundleOffer.name) {
         el.textContent = bundleOffer.name;
         el.classList.add('bundle-offer-product-tag');
+
+        // Check if there's a badge sibling and adjust position
+        const parent = el.parentElement;
+        const badge = parent ? parent.querySelector('[class*="badge"]') : null;
+        if (badge && badge !== el) {
+          el.style.top = '45px';
+        }
+
         this.loadedOffers.set(productId, bundleOffer);
       }
     });

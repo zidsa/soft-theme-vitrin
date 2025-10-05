@@ -2072,9 +2072,9 @@ hr {
     display: none;
     position: absolute;
     left: 15px;
-    top:15px;
+    top: 15px;
     max-width: 80%;
-    padding: 4px  7px;
+    padding: 4px 7px;
     color: var(--text-color-primary-bg);
     background-color: var(--primary-color);
     font-size: 12px;
@@ -2084,6 +2084,7 @@ hr {
     text-overflow: ellipsis;
 
     border-radius: 5px;
+    z-index: 1;
 }
 
 .rtl .product-card-bundle-offer {
@@ -2091,6 +2092,10 @@ hr {
     right: 15px;
 }
 
+/* Stack bundle offer below badge if badge exists */
+.product-item .box-1-1 .content > [class*="badge"]:first-child ~ .product-card-bundle-offer {
+    top: 45px;
+}
 
 .product-card-bundle-offer.bundle-offer-product-tag {
     display: inline-block;
