@@ -71,6 +71,10 @@
                 $('#product-pagination').css('opacity', '1');
             }
 
+            // Reload bundle offers for newly loaded products
+            if (window.bundleOffersLoader) {
+                window.bundleOffersLoader.reload();
+            }
         }
 
         {% if  products.data|length > 0 %}
