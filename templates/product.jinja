@@ -364,7 +364,8 @@
                         </div>
                     </div>
                     <div class="description-paragrah text-justify description-text-clear">
-                        {{ template_for_product_metafields }}
+                          {% set entity = product %}
+                          {% include 'vitrin:shared/metafields.jinja' %}
                     </div>
                 </section>
             {% endif %}

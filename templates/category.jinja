@@ -135,7 +135,8 @@
     {% set totalPages=products.pages_count %}{% set currentPage=products.page %}{% include 'components/pagination.jinja' %}
 
     <div class="container">
-      {# {% include 'template_for_category_metafields' %} #}
+      {% set entity = category %}
+      {% include 'vitrin:shared/metafields.jinja' %}
     </div>
 
 {% endblock %}
