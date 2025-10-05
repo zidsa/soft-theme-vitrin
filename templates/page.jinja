@@ -16,6 +16,8 @@
                 {{ page.content | safe }}
             </div>
 
+            {% set entity = page %}
+            {% include 'vitrin:shared/metafields.jinja' %}
 
         </div>
     </section>
