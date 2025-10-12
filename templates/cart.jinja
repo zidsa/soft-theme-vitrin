@@ -83,42 +83,32 @@
                             {% include 'vitrin:cart/products_list.jinja' %}
                         </div>
 
-                        {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}
-                            <div class="cart-gift-card" 
-                                 data-gift-icon="{{ 'gift_icon.png' | asset_url }}"
-                                 data-gift-title="{{ _('The following products will be sent as a gift') }}"
-                                 data-from-label="{{ _('From') }}"
-                                 data-to-label="{{ _('To') }}"
-                                 data-message-label="{{ _('Message') }}"
-                                 data-order-added="{{ _('The order has been added as a gift') }}"
-                                 data-send-as-gift="{{ _('Send as a gift') }}"
-                                 data-gift-removed-success="{{ _('Gift card removed successfully') }}">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <p class="font-weight-bold mb-0">
-                                        <img src="{{ 'gift_icon.png' | asset_url }}" style="display: inline-block" />
-                                        {{ _('The following products will be sent as a gift') }}
-                                    </p>
-                                    <div class="gift-card-actions">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary gift-card-edit-btn" onclick="editGiftCard()" style="border-radius: 8px; padding: 5px 10px; margin-right: 5px;">
-                                            <span class="icon-file-alt"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger gift-card-delete-btn" onclick="deleteGiftCard()" style="border-radius: 8px; padding: 5px 10px;">
-                                            <span class="icon-trash-alt"></span>
-                                            <img class="delete-gift-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="mb-2">
-                                    <span>{{ _("From") }}: {{cart.gift_card_details.sender_name}}</span>
-                                    <span class="mx-2">{{ _("To") }}: {{cart.gift_card_details.receiver_name}}</span>
+                        <div class="cart-gift-card" data-gift-removed-success="{{ _('Gift card removed successfully') }}" style="display: {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}block{% else %}none{% endif %};">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <p class="font-weight-bold mb-0">
+                                    <img src="{{ 'gift_icon.png' | asset_url }}" style="display: inline-block" />
+                                    <span class="gift-title">{{ _('The following products will be sent as a gift') }}</span>
                                 </p>
-                                {% if cart.gift_card_details.gift_message and cart.gift_card_details.gift_message | length > 0 %}
-                                    <p class="mb-0">
-                                        <span>{{ _('Message') }}: </span> {{ cart.gift_card_details.gift_message }}
-                                    </p>
-                                {% endif %}
+                                <div class="gift-card-actions">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary gift-card-edit-btn" onclick="editGiftCard()" style="border-radius: 8px; padding: 5px 10px; margin-inline-end: 8px;">
+                                        <span class="icon-cog"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger gift-card-delete-btn" onclick="deleteGiftCard()" style="border-radius: 8px; padding: 5px 10px;">
+                                        <span class="icon-trash-alt"></span>
+                                        <img class="delete-gift-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
+                                    </button>
+                                </div>
                             </div>
-                        {% endif %}
+                            <div class="gift-details">
+                                <p class="mb-2">
+                                    <span class="from-info">{{ _("From") }}: <span class="sender-name">{{cart.gift_card_details.sender_name if cart.gift_card_details else ''}}</span></span>
+                                    <span class="mx-2 to-info">{{ _("To") }}: <span class="receiver-name">{{cart.gift_card_details.receiver_name if cart.gift_card_details else ''}}</span></span>
+                                </p>
+                                <p class="mb-0 message-info" style="display: {% if cart.gift_card_details and cart.gift_card_details.gift_message and cart.gift_card_details.gift_message | length > 0 %}block{% else %}none{% endif %};">
+                                    <span class="message-label">{{ _('Message') }}: </span><span class="gift-message">{{ cart.gift_card_details.gift_message if cart.gift_card_details else '' }}</span>
+                                </p>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
