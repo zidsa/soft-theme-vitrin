@@ -64,14 +64,17 @@ function updateGiftCardDisplay(giftData) {
 
 function updateGiftButtonText(hasGift) {
   const giftButton = $('button[onclick="window.gift_dialog.open()"]');
-  
+
   if (giftButton.length > 0) {
     giftButton.removeClass('gift-added gift-send');
-    
+    const editLink = giftButton.find('.gift-edit-link');
+
     if (hasGift) {
       giftButton.addClass('gift-added');
+      editLink.removeClass('d-none').addClass('d-inline');
     } else {
       giftButton.addClass('gift-send');
+      editLink.removeClass('d-inline').addClass('d-none');
     }
   }
 }

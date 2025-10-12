@@ -246,9 +246,10 @@
 
                         {% if store.settings.checkout.gift_order_settings.is_gift_order_enabled == '1' %}
                           <div class="card border-0 mt-3 text-body">
-                            <button class="btn btn-lg btn-block btn-outline-primary {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}gift-added{% else %}gift-send{% endif %}" onclick="window.gift_dialog.open()">
-                              <span class="mx-auto gift-added-text" style="display: {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}block{% else %}none{% endif %};">{{ _("The order has been added as a gift") }}</span>
-                              <span class="mx-auto gift-send-text" style="display: {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}none{% else %}block{% endif %};">{{ _("Send as a gift") }}</span>
+                            <button class="btn btn-lg btn-block btn-outline-primary gift-card-toggle-btn d-flex align-items-center justify-content-between {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}gift-added{% else %}gift-send{% endif %}" onclick="window.gift_dialog.open()">
+                              <span class="icon-gift" style="font-size: 24px;"></span>
+                              <span class="flex-grow-1 text-left ml-3">{{ _("Make it a gift") }}</span>
+                              <span class="gift-edit-link {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}d-inline{% else %}d-none{% endif %}">{{ _("Edit details") }}</span>
                             </button>
                           </div>
                           {% include 'vitrin:cart/gift-card.jinja' %}

@@ -54,6 +54,12 @@ msgstr "تجاهل السلة وواصل التسوق"
 msgid "Send as gift"
 msgstr "أرسل كهدية"
 
+msgid "Make it a gift"
+msgstr "اجعلها هدية"
+
+msgid "Edit details"
+msgstr "تعديل التفاصيل"
+
 msgid "The order has been added as a gift"
 msgstr "تم إضافة الطلب كهدية"
 
