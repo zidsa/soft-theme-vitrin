@@ -1064,3 +1064,47 @@
     padding: 1rem;
     border-radius: 8px;
 }
+
+.gift-card-actions {
+    display: flex;
+    align-items: center;
+}
+
+.gift-card-edit-btn,
+.gift-card-delete-btn {
+    border: 1px solid;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+}
+
+.gift-card-edit-btn:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.gift-card-delete-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.gift-card-edit-btn .icon-file,
+.gift-card-delete-btn .icon-trash-alt {
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .gift-card-actions {
+        margin-top: 10px;
+    }
+    
+    .cart-gift-card .d-flex {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+}

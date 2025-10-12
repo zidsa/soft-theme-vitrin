@@ -54,6 +54,11 @@ msgstr "تجاهل السلة وواصل التسوق"
 msgid "Send as gift"
 msgstr "أرسل كهدية"
 
+msgid "The order has been added as a gift"
+msgstr "تم إضافة الطلب كهدية"
+
+msgid "Gift card removed successfully"
+msgstr "تم حذف بطاقة الهدية بنجاح"
 
 msgid "continue"
 msgstr "متابعة"
