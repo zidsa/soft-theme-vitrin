@@ -63,13 +63,15 @@ function updateGiftCardDisplay(giftData) {
 }
 
 function updateGiftButtonText(hasGift) {
-  const giftButton = $('button[onclick="window.gift_dialog.open()"] span');
+  const giftButton = $('button[onclick="window.gift_dialog.open()"]');
   
   if (giftButton.length > 0) {
+    giftButton.removeClass('gift-added gift-send');
+    
     if (hasGift) {
-      giftButton.text('The order has been added as a gift');
+      giftButton.addClass('gift-added');
     } else {
-      giftButton.text('Send as a gift');
+      giftButton.addClass('gift-send');
     }
   }
 }

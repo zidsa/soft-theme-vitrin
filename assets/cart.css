@@ -1098,6 +1098,22 @@
     font-size: 14px;
 }
 
+.gift-added .gift-added-text {
+    display: block !important;
+}
+
+.gift-added .gift-send-text {
+    display: none !important;
+}
+
+.gift-send .gift-added-text {
+    display: none !important;
+}
+
+.gift-send .gift-send-text {
+    display: block !important;
+}
+
 @media (max-width: 768px) {
     .gift-card-actions {
         margin-top: 10px;
