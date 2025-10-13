@@ -26,9 +26,11 @@ function deleteGiftCard() {
     .then(() => {
       $('.cart-gift-card').hide();
       updateGiftButtonText(false);
-      
+
       // Show success alert - get translation from existing element
-      const successMessage = $('.cart-gift-card').data('gift-removed-success') || 'Gift card removed successfully';
+      const successMessage =
+        $('.cart-gift-card').data('gift-removed-success') || 'Gift card removed successfully';
+
       if (typeof toastr !== 'undefined') {
         toastr.success(successMessage);
       }
@@ -48,14 +50,38 @@ function updateGiftCardDisplay(giftData) {
   // Simply update the values - container always exists
   giftCardContainer.find('.sender-name').text(giftData.sender_name || '');
   giftCardContainer.find('.receiver-name').text(giftData.receiver_name || '');
-  
+
+  // Handle gift card image display
+  const giftCardImage = giftCardContainer.find('.gift-card-image');
+  const giftIconFallback = giftCardContainer.find('.gift-icon-fallback');
+
+  if (giftData.card_design && giftData.card_design.length > 0) {
+    giftCardImage.attr('src', giftData.card_design);
+    giftCardImage.removeClass('d-none');
+    giftIconFallback.addClass('d-none');
+  } else {
+    giftCardImage.addClass('d-none');
+    giftIconFallback.removeClass('d-none');
+  }
+
   // Handle message display
   const messageContainer = giftCardContainer.find('.message-info');
+
   if (giftData.gift_message && giftData.gift_message.length > 0) {
     giftCardContainer.find('.gift-message').text(giftData.gift_message);
     messageContainer.show();
   } else {
     messageContainer.hide();
+  }
+
+  // Handle media link display
+  const mediaLinkContainer = giftCardContainer.find('.media-link-info');
+
+  if (giftData.media_link && giftData.media_link.length > 0) {
+    giftCardContainer.find('.gift-media-link').text(giftData.media_link);
+    mediaLinkContainer.show();
+  } else {
+    mediaLinkContainer.hide();
   }
 
   giftCardContainer.show();
