@@ -270,6 +270,22 @@
 
 
                             </form>
+                            
+                            <!-- Bundle Product Selection Container -->
+                            {% if product.product_class == 'dynamic_bundle' %}
+                                {% include 'vitrin:products/bundle-products.jinja' %}
+                            {% endif %}
+                            
+                            <script>
+                                // Make product data available globally for bundle selection
+                                var productId = '{{ product.selected_product.id }}';
+
+                                window.bundleProductData = {
+                                    mainProductId: productId,
+                                };
+                            </script>
+
+
                             <div class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
                                 <div class="border-product"></div>
                                 <div class="d-flex align-center">
@@ -695,7 +711,12 @@
               return;
           }
 
-          window.zid.cart.addProduct({ form_id:'product-form' }, { showErrorNotification: true }).then(function(response) {
+          const bundlePayload = window.bundleCartPayload;
+          const addProductOptions = bundlePayload ? 
+            bundlePayload : 
+            { form_id:'product-form' };
+
+          window.zid.cart.addProduct(addProductOptions, { showErrorNotification: true }).then(function(response) {
               if (response && response.item && response.cart_items_quantity) {
                   
                   if (response.cart_items_quantity) {
