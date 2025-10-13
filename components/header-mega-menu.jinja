@@ -4,52 +4,37 @@
         <div class="top-main-menu-wrapper">
             <nav role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
                 <ul class="main-nav d-flex flex-grow-1 flex-wrap menu-header-theme-text-for-primary-bg">                 
-                {% set total = store.settings.menus.main_menu.items | length %}
-                {% set n = 5 %} {# number of first items to show #}
-                {% for menu in store.settings.menus.main_menu.items %}
-                    {% if loop.index0 < n or loop.index0 == total - 1 %}
-                        <li class="top-level-link {% if menu.slug == 'all_categories' %} all-categories {% endif %}">
-                            <a href="{{ menu.url | localized_url if menu.resource_type != 'url' else menu.url }}"
-                                {% if menu.items | length > 0 %} class="mega-menu" {% endif %}>
-                                <span>{{ menu.label }}</span>
-                            </a>
-                            {% if menu.items | length > 0 %}
-                                <div class="sub-menu-block">
-                                    <div class="row">
-                                        {% for menu_sub in menu.items %}
-                                            <div class="col-md-4 col-lg-4 col-sm-4">
-                                                {% if menu_sub.items | length > 0 %}
-                                                    <h5 class="sub-menu-head">
-                                                        <a style="font-size: 1.16rem; color: inherit"
-                                                        href="{{ menu_sub.url | localized_url if menu_sub.resource_type != 'url' else menu_sub.url }}">
-                                                            {{ menu_sub.label }}
-                                                        </a>
-                                                    </h5>
-                                                    <ul class="sub-menu-lists">
-                                                        {% for menu_sub_sub in menu_sub.items %}
-                                                            <li>
-                                                                <a href="{{ menu_sub_sub.url | localized_url if menu_sub_sub.resource_type != 'url' else menu_sub_sub.url }}">
-                                                                    {{ menu_sub_sub.label }}
-                                                                </a>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                {% else %}
-                                                    <h2 class="sub-menu-head">
-                                                        <a style="font-size: 1.16rem; color: inherit"
-                                                        href="{{ menu_sub.url | localized_url if menu_sub.resource_type != 'url' else menu_sub.url }}">
-                                                            {{ menu_sub.label }}
-                                                        </a>
-                                                    </h2>
-                                                {% endif %}
-                                            </div>
-                                        {% endfor %}
+
+                    {% for menu in store.settings.menus.main_menu.items %}
+                        {% if menu.url %}
+                            <li class="top-level-link {% if safeget(menu, "url") == '/c/' %} all-categories {% endif %}" >
+                                <a href="{{ menu.url }}"
+                                        {% if menu.items | length > 0 %} class="mega-menu" {% endif %} ><span>{{ menu.label }}</span></a>
+                                {% if menu.items | length > 0 %}
+                                    <div class="sub-menu-block">
+                                        <div class="row">
+                                            {% for menu_sub in menu.items %}
+                                                <div class="col-md-4 col-lg-4 col-sm-4">
+                                                    {% if menu_sub.items | length > 0 %}
+                                                        <h5 class="sub-menu-head">
+                                                            <a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.label }}</a>
+                                                        </h5>
+                                                        <ul class="sub-menu-lists">
+                                                            {% for menu_sub_sub in menu_sub.items %}
+                                                                <li><a href="{{ menu_sub_sub.url }}">{{ menu_sub_sub.label }}</a></li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% else %}
+                                                        <h2 class="sub-menu-head"><a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.label }}</a></h2>
+                                                    {% endif %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
                                     </div>
-                                </div>
-                            {% endif %}
-                        </li>
-                    {% endif %}
-                {% endfor %}
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             </nav>
         </div>
