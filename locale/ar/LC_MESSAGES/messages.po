@@ -607,3 +607,15 @@ msgstr "سلة المنتجات"
 
 msgid "Checkout"
 msgstr "إتمام الشراء"
+
+msgid "Sender"
+msgstr "المرسل"
+
+msgid "Recipient"
+msgstr "المستقبل"
+
+msgid "Gift"
+msgstr "هدية"
+
+msgid "Free"
+msgstr "مجاني"
