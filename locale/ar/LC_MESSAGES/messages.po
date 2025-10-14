@@ -612,7 +612,7 @@ msgid "Sender"
 msgstr "المرسل"
 
 msgid "Recipient"
-msgstr "المستقبل"
+msgstr "المستلم"
 
 msgid "Gift"
 msgstr "هدية"
