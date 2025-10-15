@@ -713,8 +713,8 @@
 
           const bundlePayload = window.bundleCartPayload;
           const addProductOptions = bundlePayload ? 
-            bundlePayload : 
-            { form_id:'product-form' };
+            { ...bundlePayload, form_id: 'product-form' } : 
+            { form_id: 'product-form' };
 
           window.zid.cart.addProduct(addProductOptions, { showErrorNotification: true }).then(function(response) {
               if (response && response.item && response.cart_items_quantity) {
