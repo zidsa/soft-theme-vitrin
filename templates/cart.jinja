@@ -83,7 +83,7 @@
                             {% include 'vitrin:cart/products_list.jinja' %}
                         </div>
 
-                        <div class="cart-gift-card" data-gift-removed-success="{{ _('Gift card removed successfully') }}" style="display: {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}block{% else %}none{% endif %};">
+                        <div class="cart-gift-card" data-gift-removed-success="{{ _('Gift card removed successfully') }}" data-gift-added-success="{{ _('Send Successfully') }}" style="display: {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}block{% else %}none{% endif %};">
                             <div class="d-flex align-items-start">
                                 <span class="gift-card-icon-wrapper">
                                     <span class="icon-gift gift-icon-fallback"></span>
