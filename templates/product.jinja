@@ -494,7 +494,11 @@
 
                             &nbsp;
                             <!-- Button trigger modal -->
+                            {% if session.is_guest %}
+                            <a href="/auth/login?redirect_to={{ url_for('add_product_review', slug=product.id) }}" class="btn btn-primary add-review-btn" onclick="event.preventDefault(); handleLoginAction('{{ url_for('add_product_review', slug=product.id) }}'); return false;"><span class="icon-add_circle"></span>{{ _("Add Comment ") }} </a>
+                            {% else %}
                             <a href="{{ url_for('add_product_review', slug=product.slug) }}" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }}</a>
+                            {% endif %}
                         </div>
                         <div class="reviews-break-down-div description-paragrah">
                             <div class="d-flex align-items-center mt-3 mb-4">
@@ -1019,10 +1023,15 @@
         });
 
         function addReviewButtonChecks() {
-            if (typeof customer === 'undefined' || !customer) {
+            if (!window.customerAuthState || !window.customerAuthState.isAuthenticated) {
                 $('#add-review-btn').css('display', 'none');
                 $('#add-review-link').removeClass('d-none');
                 $('#add-review-link').attr('href', '/auth/login?redirect_to=' + window.location.pathname.replace('/', ''));
+                $('#add-review-link').on('click', function(e) {
+                    e.preventDefault();
+                    handleLoginAction(window.location.pathname.replace('/', ''));
+                    return false;
+                });
             }
         }
 

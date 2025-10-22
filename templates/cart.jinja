@@ -237,6 +237,7 @@
                             {% if session.is_guest %}
                                 <a href="/auth/login?redirect_to=/checkout"
                                 class="btn btn-primary btn-lg btn-block"
+                                onclick="event.preventDefault(); handleLoginAction('/checkout'); return false;"
                                 >
                                     {{ _("Purchase") }}
                                 </a>
