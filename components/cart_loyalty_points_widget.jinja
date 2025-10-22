@@ -216,7 +216,7 @@
                 </div>
             </div>
 
-            <a href="/auth/login" class="loyalty-points-login">
+            <a href="/auth/login" class="loyalty-points-login" onclick="event.preventDefault(); window.loginFromLoyalty = true; handleLoginAction(); return false;">
                 {{ _('Please login to view and redeem your points') }}
             </a>
         </div>

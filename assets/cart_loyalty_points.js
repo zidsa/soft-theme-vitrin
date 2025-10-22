@@ -22,7 +22,7 @@ window.addEventListener("load", (event) => {
     }
     window.loyaltyCalculations = loyaltyCalculations;
     loyaltyCalculations(cart_total_value);
-    if (window.customer && window.customer.message != "Unauthorized") {
+    if (window.customerAuthState && window.customerAuthState.isAuthenticated) {
       getCustomerLoyaltyPoints(getRedemptionMethods);
     }
   } else {
