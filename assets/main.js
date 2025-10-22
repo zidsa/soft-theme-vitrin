@@ -27,6 +27,17 @@ function handleLoginAction(redirectTo = '', addToUrl = true) {
   }
 }
 
+function handleGiftCardClick() {
+  if (!window.customerAuthState || !window.customerAuthState.isAuthenticated) {
+    handleLoginAction('', false);
+    return;
+  }
+
+  if (window.gift_dialog && window.gift_dialog.open && typeof window.gift_dialog.open === 'function') {
+    window.gift_dialog.open();
+  }
+}
+
 window.onscroll = () => fixed_header_to_top();
 
 function menuFiixedHeader() {
@@ -828,6 +839,12 @@ function updateUIAfterLogin(customer) {
   }
 
   if (window.loginFromLoyalty) {
+    location.reload();
+    return;
+  }
+
+  const loyaltySection = document.querySelector('.loyalty-points-section');
+  if (loyaltySection && !loyaltySection.classList.contains('loyalty-points-section-d-none')) {
     location.reload();
     return;
   }

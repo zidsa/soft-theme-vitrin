@@ -1,4 +1,4 @@
-{% set ver = '0.1.025' %}
+{% set ver = '0.1.026' %}
 <!doctype html>
 <html class="no-js" lang="{{ session.lang }}" dir="{{ session.locale.language.direction }}">
 
@@ -247,7 +247,7 @@
 <script src="{{ 'slick.min.js' | asset_url }}"></script>
 <script src="{{ 'slide-menu.ie.js?v=1.06' | asset_url }}"></script>
 
-<script type="text/javascript" src="{{ ('main.js?v=' ~ ver) | asset_url }}" defer></script>
+<script type="text/javascript" src="http://localhost:5300/src/theme/main.js" defer></script>
 <script type="text/javascript" src="{{ ('bundle-offers.js?v=' ~ ver) | asset_url }}" defer></script>
 
 {% vitrin_body %}
@@ -261,7 +261,7 @@
         var store_currency_code = '{{ session.currency }}';
     </script>
 
-    <script type='text/javascript' src="{{ ('layout_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
+    <script type='text/javascript' src="http://localhost:5300/src/theme/layout_loyalty_points.js"></script>
 
 {% endif %}
 
