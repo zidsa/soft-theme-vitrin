@@ -11,7 +11,7 @@ window.addEventListener("load", (event) => {
 
   showLoyaltyProgram();
   getRedemptionMethods();
-  if (window.customer && window.customer.message != "Unauthorized") {
+  if (window.customerAuthState && window.customerAuthState.isAuthenticated) {
     getCustomerLoyaltyPoints()
   }
 
@@ -19,7 +19,7 @@ window.addEventListener("load", (event) => {
 
 const showLoyaltyProgram = () => {
   $('body').append(`
-        <div class="loyalty_button_footer" style="position: fixed; z-index: 99999999; display: inline-block; bottom: 50px; ${loyalty_button_direction === 'rtl' ?
+        <div class="loyalty_button_footer" style="position: fixed; z-index: 999; display: inline-block; bottom: 50px; ${loyalty_button_direction === 'rtl' ?
       `left: 40px; right: unset;`
       : 'right: 40px; left: unset;'}">
     <style>

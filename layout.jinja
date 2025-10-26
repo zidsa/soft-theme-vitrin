@@ -1,4 +1,4 @@
-{% set ver = '0.1.024' %}
+{% set ver = '0.1.026' %}
 <!doctype html>
 <html class="no-js" lang="{{ session.lang }}" dir="{{ session.locale.language.direction }}">
 
@@ -260,8 +260,7 @@
         var text_loyalty_options = '{{ _('For {points} get a discount {percentage}') }}';
         var store_currency_code = '{{ session.currency }}';
     </script>
-
-    <script type='text/javascript' src="{{ ('layout_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
+            <script type='text/javascript' src="{{ ('layout_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
 
 {% endif %}
 
