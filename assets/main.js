@@ -6,6 +6,38 @@ var fixed_header;
 var sticky;
 var cart_products = [];
 
+function handleLoginAction(redirectTo = '', addToUrl = true) {
+  if (window.customerAuthState && window.customerAuthState.isAuthenticated) {
+    return;
+  }
+
+  if (window.auth_dialog && window.auth_dialog.open && typeof window.auth_dialog.open === 'function') {
+    if (redirectTo && addToUrl) {
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set('redirect_to', redirectTo);
+      window.history.replaceState({}, '', currentUrl.toString());
+    }
+
+    window.auth_dialog.open();
+  } else {
+    const redirectUrl = redirectTo
+      ? `/auth/login?redirect_to=${encodeURIComponent(redirectTo)}`
+      : '/auth/login';
+    window.location.href = redirectUrl;
+  }
+}
+
+function handleGiftCardClick() {
+  if (!window.customerAuthState || !window.customerAuthState.isAuthenticated) {
+    handleLoginAction('', false);
+    return;
+  }
+
+  if (window.gift_dialog && window.gift_dialog.open && typeof window.gift_dialog.open === 'function') {
+    window.gift_dialog.open();
+  }
+}
+
 window.onscroll = () => fixed_header_to_top();
 
 function menuFiixedHeader() {
@@ -190,15 +222,34 @@ function removeFromCart(product_id) {
 
 function fillWishlistItems(items) {
   items.forEach(product => {
-    $(`.add-to-wishlist[data-wishlist-id=${product.id}]`)
-      .find('.icon-heart-mask')
-      .addClass('filled icon-heart-mask');
+    const container = $(`.add-to-wishlist[data-wishlist-id=${product.id}]`)[0];
+    if (!container) return;
+
+    // Find the filled button (with zid-visible-wishlist attribute)
+    const filledButton = container.querySelector(`[zid-visible-wishlist="${product.id}"]`);
+    // Find the empty button (with zid-hidden-wishlist attribute or without filled class)
+    const emptyButton = container.querySelector(`[zid-hidden-wishlist="${product.id}"]`) ||
+                        container.querySelector('.icon-heart-mask:not(.filled)');
+
+    // Show filled button, hide empty button
+    if (filledButton) {
+      filledButton.style.setProperty('display', 'inline-block', 'important');
+      filledButton.classList.add('filled');
+    }
+    if (emptyButton) {
+      emptyButton.style.setProperty('display', 'none', 'important');
+    }
   });
 }
 
 function addToWishlist(elm, productId) {
-  $(elm).closest('.add-to-wishlist').find('.loader').removeClass('d-none');
-  $(elm).addClass('d-none');
+  const container = $(elm).closest('.add-to-wishlist');
+
+  // Hide ALL heart buttons and show loader
+  container.find('.icon-heart-mask').each(function() {
+    this.style.setProperty('display', 'none', 'important');
+  });
+  container.find('.loader').removeClass('d-none');
 
   // Remove From Wishlist if added
   if ($(elm).hasClass('filled')) {
@@ -207,27 +258,74 @@ function addToWishlist(elm, productId) {
 
   zid.account.addToWishlists({ product_ids: [productId] }, { showErrorNotification: true }).then(response => {
     if (response) {
-      $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
-      $(elm).addClass('filled icon-heart-mask').removeClass('d-none');
+      container.find('.loader').addClass('d-none');
+
+      // Hide the empty button, show the filled button
+      const filledButton = container.find(`[zid-visible-wishlist="${productId}"]`)[0];
+      const emptyButton = container.find(`[zid-hidden-wishlist="${productId}"]`)[0] ||
+                          container.find('.icon-heart-mask:not([zid-visible-wishlist])')[0];
+
+      if (filledButton) {
+        filledButton.style.setProperty('display', 'inline-block', 'important');
+        filledButton.classList.add('filled');
+      } else {
+        elm.style.setProperty('display', 'inline-block', 'important');
+        $(elm).addClass('filled');
+      }
+
+      if (emptyButton) {
+        emptyButton.style.setProperty('display', 'none', 'important');
+      }
 
       // toastr.success(response.data.message);
     } else {
       // toastr.error(response.data.message);
+      // Show the original button back on error
+      elm.style.setProperty('display', 'inline-block', 'important');
+      container.find('.loader').addClass('d-none');
     }
   });
 }
 
 function removeFromWishlist(elm, productId) {
-  $(elm).closest('.add-to-wishlist').find('.loader').removeClass('d-none');
-  $(elm).addClass('d-none');
+  const container = $(elm).closest('.add-to-wishlist');
+
+  // Hide ALL heart buttons and show loader
+  container.find('.icon-heart-mask').each(function() {
+    this.style.setProperty('display', 'none', 'important');
+  });
+  container.find('.loader').removeClass('d-none');
 
   zid.account.removeFromWishlist(productId, { showErrorNotification: true }).then(response => {
-    $(elm).closest('.add-to-wishlist').find('.loader').addClass('d-none');
-    $(elm).removeClass('d-none filled');
+    container.find('.loader').addClass('d-none');
 
     if (location.pathname === '/account-wishlist') {
       location.reload();
+      return;
     }
+
+    // Hide the filled button, show the empty button
+    const filledButton = container.find(`[zid-visible-wishlist="${productId}"]`)[0];
+    const emptyButton = container.find(`[zid-hidden-wishlist="${productId}"]`)[0] ||
+                        container.find('.icon-heart-mask:not([zid-visible-wishlist])')[0];
+
+    if (emptyButton) {
+      emptyButton.style.setProperty('display', 'inline-block', 'important');
+      emptyButton.classList.remove('filled');
+    } else {
+      elm.style.setProperty('display', 'inline-block', 'important');
+      $(elm).removeClass('filled');
+    }
+
+    if (filledButton) {
+      filledButton.style.setProperty('display', 'none', 'important');
+      filledButton.classList.remove('filled');
+    }
+  }).catch(error => {
+    console.error('Failed to remove from wishlist:', error);
+    // Show the original button back on error
+    elm.style.setProperty('display', 'inline-block', 'important');
+    container.find('.loader').addClass('d-none');
   });
 }
 
@@ -681,13 +779,13 @@ class ProductsQuestions {
 
   checkAddQuestionPossibility() {
     $('#addQuestionButton').click(function () {
-      if (window.customer) {
+      if (window.customerAuthState && window.customerAuthState.isAuthenticated) {
         $('#addProductQuestionModal').modal('show');
         productsQuestions.fillCustomerData();
       } else {
-        const currentPathname = location.pathname;
-        const params = location.search;
-        location.href = `/auth/login?redirect_to=${encodeURIComponent(currentPathname + params)}`;
+        // Open login popup without adding redirect_to URL (stays on same page)
+        // After login, user can click the button again to open the modal
+        handleLoginAction('', false);
 
         return;
       }
@@ -727,3 +825,224 @@ class ProductsQuestions {
 }
 
 const productsQuestions = new ProductsQuestions();
+
+
+
+function updateUIAfterLogin(customer) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectTo = urlParams.get('redirect_to');
+
+  if (redirectTo) {
+    window.isRedirecting = true;
+    window.location.href = redirectTo;
+    return;
+  }
+
+  if (window.loginFromLoyalty) {
+    location.reload();
+    return;
+  }
+
+  const loyaltySection = document.querySelector('.loyalty-points-section');
+  if (loyaltySection && !loyaltySection.classList.contains('loyalty-points-section-d-none')) {
+    location.reload();
+    return;
+  }
+
+  if (window.customerAuthState) {
+    window.customerAuthState.isAuthenticated = true;
+    window.customerAuthState.isGuest = false;
+  }
+
+  window.customer = customer;
+
+  document.dispatchEvent(new CustomEvent('zid-customer-fetched', {
+    detail: { customer: customer }
+  }));
+
+  const loginBtn = document.getElementById('login-btn');
+  const helloBtn = document.getElementById('hello-btn');
+  const customerGreeting = document.getElementById('customer-greeting');
+
+  if (loginBtn && helloBtn && customer && customer.name) {
+    const greetingText = customerGreeting.textContent.trim();
+    const helloWord = greetingText.split(' ')[0];
+    customerGreeting.textContent = `${helloWord} ${customer.name}`;
+    helloBtn.style.display = 'inline-block';
+    loginBtn.style.display = 'none';
+  }
+
+  const loginBtnAlt = document.getElementById('login-btn-alt');
+  const helloBtnAlt = document.getElementById('hello-btn-alt');
+  const customerGreetingAlt = document.getElementById('customer-greeting-alt');
+
+  if (loginBtnAlt && helloBtnAlt && customer && customer.name) {
+    const greetingTextAlt = customerGreetingAlt.textContent.trim();
+    const helloWordAlt = greetingTextAlt.split(' ')[0];
+    customerGreetingAlt.textContent = `${helloWordAlt} ${customer.name}`;
+    helloBtnAlt.style.display = 'inline-block';
+    loginBtnAlt.style.display = 'none';
+  }
+
+  document.querySelectorAll('[zid-visible-guest="true"]').forEach(el => {
+    el.style.setProperty('display', 'none', 'important');
+  });
+
+  document.querySelectorAll('.add-to-wishlist > a.icon-heart-mask').forEach(el => {
+    el.style.setProperty('display', 'none', 'important');
+  });
+
+  document.querySelectorAll('.add-to-wishlist').forEach(container => {
+    const customerSpan = container.querySelector('span:not([zid-visible-guest])');
+    if (customerSpan) {
+      customerSpan.style.setProperty('display', 'inline-block', 'important');
+    }
+  });
+
+  document.querySelectorAll('[zid-visible-customer="true"]').forEach(el => {
+    el.style.setProperty('display', 'inline-block', 'important');
+  });
+
+  const addReviewLink = document.getElementById('add-review-link');
+  const addReviewBtn = document.getElementById('add-review-btn');
+
+  if (addReviewLink && addReviewBtn) {
+    addReviewLink.classList.add('d-none');
+    addReviewBtn.style.display = 'block';
+  }
+
+  if (typeof fetchCart === 'function') {
+    fetchCart();
+  }
+
+  // Fetch wishlist and update button states
+  if (window.zid?.account?.wishlists) {
+    window.zid.account.wishlists().then(wishlistResponse => {
+      let wishlistProductIds = [];
+
+      if (wishlistResponse && wishlistResponse.results && Array.isArray(wishlistResponse.results)) {
+        wishlistProductIds = wishlistResponse.results.map(item => item.id);
+      } else if (Array.isArray(wishlistResponse)) {
+        wishlistProductIds = wishlistResponse;
+      }
+
+      if (wishlistProductIds.length > 0) {
+        fillWishlistItems(wishlistProductIds.map(id => ({ id: id })));
+      }
+
+      document.querySelectorAll('.add-to-wishlist').forEach(container => {
+        const productId = container.getAttribute('data-wishlist-id');
+        if (!productId) return;
+
+        const isInWishlist = wishlistProductIds.includes(productId);
+        const filledButton = container.querySelector(`[zid-visible-wishlist="${productId}"]`);
+        const emptyButton = container.querySelector(`[zid-hidden-wishlist="${productId}"]`) ||
+                            container.querySelector('.icon-heart-mask:not([zid-visible-wishlist])');
+
+        if (isInWishlist) {
+          if (filledButton) {
+            filledButton.style.setProperty('display', 'inline-block', 'important');
+            filledButton.classList.add('filled');
+          }
+          if (emptyButton) {
+            emptyButton.style.setProperty('display', 'none', 'important');
+          }
+        } else {
+          if (filledButton) {
+            filledButton.style.setProperty('display', 'none', 'important');
+            filledButton.classList.remove('filled');
+          }
+          if (emptyButton) {
+            emptyButton.style.setProperty('display', 'inline-block', 'important');
+            emptyButton.classList.remove('filled');
+          }
+        }
+      });
+    }).catch(error => {
+      console.error('Failed to fetch wishlist:', error);
+    });
+  }
+
+  // Retry loop to ensure wishlist visibility (handles race conditions with Zid scripts)
+  let retryCount = 0;
+  const maxRetries = 10;
+  const forceWishlistVisibility = () => {
+    document.querySelectorAll('[zid-visible-guest="true"]').forEach(el => {
+      el.style.setProperty('display', 'none', 'important');
+    });
+
+    document.querySelectorAll('.add-to-wishlist > a.icon-heart-mask').forEach(el => {
+      el.style.setProperty('display', 'none', 'important');
+    });
+
+    document.querySelectorAll('.add-to-wishlist').forEach(container => {
+      const customerSpan = container.querySelector('span:not([zid-visible-guest])');
+      if (customerSpan) {
+        customerSpan.style.setProperty('display', 'inline-block', 'important');
+      }
+    });
+
+    document.querySelectorAll('[zid-visible-customer="true"]').forEach(el => {
+      el.style.setProperty('display', 'inline-block', 'important');
+    });
+  };
+
+  forceWishlistVisibility();
+
+  const retryInterval = setInterval(() => {
+    retryCount++;
+    forceWishlistVisibility();
+
+    if (retryCount >= maxRetries) {
+      clearInterval(retryInterval);
+    }
+  }, 100);
+
+  setTimeout(() => {
+    const guestElements = document.querySelectorAll('[zid-visible-guest="true"]');
+    guestElements.forEach(el => {
+      if (window.getComputedStyle(el).display !== 'none') {
+        el.style.setProperty('display', 'none', 'important');
+      }
+    });
+
+    document.querySelectorAll('.add-to-wishlist > a.icon-heart-mask').forEach(el => {
+      if (window.getComputedStyle(el).display !== 'none') {
+        el.style.setProperty('display', 'none', 'important');
+      }
+    });
+
+    document.querySelectorAll('.add-to-wishlist').forEach(container => {
+      const customerSpan = container.querySelector('span:not([zid-visible-guest])');
+      if (customerSpan && window.getComputedStyle(customerSpan).display === 'none') {
+        customerSpan.style.setProperty('display', 'inline-block', 'important');
+      }
+    });
+
+    const customerElements = document.querySelectorAll('[zid-visible-customer="true"]');
+    customerElements.forEach(el => {
+      if (window.getComputedStyle(el).display === 'none') {
+        el.style.setProperty('display', 'inline-block', 'important');
+      }
+    });
+  }, 1500);
+}
+
+window.addEventListener('vitrin:auth:success', async event => {
+
+    if (window.zid?.account?.get) {
+      try {
+        const customerData = await window.zid.account.get();
+        if (customerData) {
+          // Update UI without reload
+          updateUIAfterLogin(customerData);
+          return;
+        }
+      } catch (error) {
+        console.error('Failed to fetch customer data:', error);
+      }
+  }
+
+  // Fallback to page reload if zid account get fails
+  window.location.reload();
+});
