@@ -697,13 +697,20 @@
             if (addToCartBtn) {
                 if (!isValid) {
                     addToCartBtn.classList.add('disabled');
+                    addToCartBtn.disabled = true;
+
                 } else {
                     addToCartBtn.classList.remove('disabled');
+                    addToCartBtn.disabled = false;
                 }
             }
         });
 
         window.productAddToCart = function() {
+           const addToCartBtn = document.querySelector('.btn-add-to-cart');
+
+          if(addToCartBtn.disabled) return;
+
           if (typeof $ === 'undefined') {
               return;
           }
@@ -729,6 +736,8 @@
           const addProductOptions = bundlePayload ?
             { ...bundlePayload, form_id: 'product-form' } :
             { form_id: 'product-form' };
+
+            console.log(bundlePayload, '<---')
 
           window.zid.cart.addProduct(addProductOptions, { showErrorNotification: true }).then(function(response) {
               if (response && response.item && response.cart_items_quantity) {
@@ -882,7 +891,7 @@
                     }
 
                     {% if store.settings.products.low_stock_label_enabled %}
-                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_threshold }};
+                    var store_low_stock_limit = 0;
                     var low_stock_message = '{{ _("Remaining %s only") }}';
 
                     if (!selected_product.is_infinite && selected_product.quantity < store_low_stock_limit) {

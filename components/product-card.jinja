@@ -72,13 +72,14 @@
             {% endif %}
 
         </div>
+
         <div style="text-align: center">
             {% if product.is_infinite == false and product.quantity <= 0 %}
                 <a class="btn btn-primary btn-product-card-out-of-stock">
                     <img src="{{ 'u_bell.svg' | asset_url }}" alt="" width="18" height="18" class="d-inline">
                     <span>{{ _("Notify me when available") }}</span>
                 </a>
-            {% elif ( product.has_options or product.has_fields ) %}
+            {% elif ( product.has_options or product.has_fields or product.product_class == 'dynamic_bundle' ) %}
                 <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ _("add to cart") }}</a>
             {% else %}
             <a class="btn btn-primary product-card-add-to-cart" onclick="event.preventDefault(); event.stopPropagation(); productCartAddToCart(this,'{{ product.id }}')">
