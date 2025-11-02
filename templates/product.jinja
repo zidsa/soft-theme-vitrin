@@ -737,8 +737,6 @@
             { ...bundlePayload, form_id: 'product-form' } :
             { form_id: 'product-form' };
 
-            console.log(bundlePayload, '<---')
-
           window.zid.cart.addProduct(addProductOptions, { showErrorNotification: true }).then(function(response) {
               if (response && response.item && response.cart_items_quantity) {
                   
