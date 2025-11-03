@@ -123,7 +123,20 @@
                                 {% if product.badge %}
                                    {% include 'vitrin:products/badge.jinja' %}
                                 {% endif %}
-                                <h1>{{ product.name | safe }}</h1>
+                                <div class="d-flex items-center" style="gap:10px;">
+                                    <h1>{{ product.name | safe }}</h1>
+
+                                    {% if store.settings.products.wishlist_enabled == true %}
+                                        <div class="my-2" data-wishlist-id="{{ product.id }}">
+                                            {% if not session.is_guest %}
+                                            <a class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
+                                            {% else %}
+                                            <a class="icon-heart-mask" href="{{ url_for('login_page', query_params={" redirect_to": session.path} ) }}"></a>
+                                            {% endif %}
+                                            <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20" />
+                                        </div>
+                                    {% endif %}
+                                </div>
                                 <div class="d-flex flex-column flex-lg-row product-features">
                                     {% if product.rating %}
                                         <div>
@@ -270,25 +283,26 @@
 
 
                             </form>
+
                             <div class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
                                 <div class="border-product"></div>
-                                <div class="d-flex align-center">
-                                  <button style="margin-bottom: 20px"
-                                          class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+                                <div class="d-flex align-center" style="gap: 10px;">
+                                  <button class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
                                       <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
                                       <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
                                       <span>{{ _("add to cart") }}</span>
                                   </button>
-                                  {% if store.settings.products.wishlist_enabled == true %}
-                                    <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
-                                        {% if not session.is_guest %}
-                                        <a class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
-                                        {% else %}
-                                        <a class="icon-heart-mask" href="{{ url_for('login_page', query_params={"redirect_to": session.path} ) }}"></a>
-                                        {% endif %}
-                                        <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
-                                    </span>
-                                  {% endif %}
+
+                                <!-- Checkout dialog -->
+                                {% include 'vitrin:checkout/checkout_dialog.jinja' %}
+
+                                  <button class="btn btn-buy-now" type="button" onclick="productBuyNow()">
+                                      <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+                                      <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
+                                      <span>{{ _("Buy now") }}</span>
+                                  </button>
+                                <!-- ------------- -->
+
                                 </div>
 
                                 <div>
@@ -677,7 +691,14 @@
         var productImages = {{ product.selected_product.media | tojson }};
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
 
-        window.productAddToCart = function() {
+        window.productBuyNow = async () => {
+            await window.zid.cart.empty()
+            
+            window.productAddToCart(true);
+
+        }
+
+        window.productAddToCart = function(openCheckoutDialog = false) {
           if (typeof $ === 'undefined') {
               return;
           }
@@ -733,6 +754,10 @@
                   }
               }
               $('.add-to-cart-progress').addClass('d-none');
+
+              if(openCheckoutDialog){
+                  window.checkout_dialog.open();
+              }
           }).catch(function(error) {
               $('.add-to-cart-progress').addClass('d-none');
           });

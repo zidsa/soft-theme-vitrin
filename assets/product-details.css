@@ -484,6 +484,15 @@
     font-size: 1.4rem;
 }
 
+.btn-buy-now {
+    background-color:transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 100%;
+    padding: 10px;
+    font-size: 1.4rem;
+}
+
 .border-product {
     margin-top: 20px;
 }
