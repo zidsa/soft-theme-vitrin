@@ -298,7 +298,7 @@
 
                                   <button class="btn btn-buy-now" type="button" onclick="productBuyNow()">
                                       <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
-                                      <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
+                                      <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
                                       <span>{{ _("Buy now") }}</span>
                                   </button>
                                 <!-- ------------- -->
@@ -692,10 +692,15 @@
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
 
         window.productBuyNow = async () => {
-            await window.zid.cart.empty()
-            
+            $('.btn-buy-now').prop('disabled', true);
+
+            $('.buy-now-progress').toggleClass('d-none');
+
+            await window.zid.cart.empty();
+
             window.productAddToCart(true);
 
+            window.checkout_dialog.open();
         }
 
         window.productAddToCart = function(openCheckoutDialog = false) {
@@ -755,10 +760,19 @@
               }
               $('.add-to-cart-progress').addClass('d-none');
 
+
+              $('.buy-now-progress').addClass('d-none');
+
+              $('.btn-buy-now').prop('disabled', false)
+
               if(openCheckoutDialog){
                   window.checkout_dialog.open();
               }
           }).catch(function(error) {
+                $('.buy-now-progress').addClass('d-none');
+
+              $('.btn-buy-now').prop('disabled', false)
+
               $('.add-to-cart-progress').addClass('d-none');
           });
       };
