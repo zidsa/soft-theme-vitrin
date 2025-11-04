@@ -732,7 +732,7 @@
             }
         });
 
-        window.productAddToCart = function() {
+        window.productAddToCart = function(buyNowDialog=false) {
            const addToCartBtn = document.querySelector('.btn-add-to-cart');
 
           if(addToCartBtn.disabled) return;
