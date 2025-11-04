@@ -278,23 +278,33 @@
 
                             <div class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
                                 <div class="border-product"></div>
-                                <div class="d-flex align-center">
-                                  <button style="margin-bottom: 20px"
-                                          class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
-                                      <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
-                                      <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
-                                      <span>{{ _("add to cart") }}</span>
-                                  </button>
-                                  {% if store.settings.products.wishlist_enabled == true %}
-                                    <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
-                                        {% if not session.is_guest %}
-                                        <a class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
-                                        {% else %}
-                                        <a class="icon-heart-mask" href="{{ url_for('login_page', query_params={"redirect_to": session.path} ) }}"></a>
+                                    <div class="d-flex align-center" style="gap: 10px;">
+                                        <button style="margin-bottom: 20px"
+                                                class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+                                            <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+                                            <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
+                                            <span>{{ _("add to cart") }}</span>
+                                        </button>
+
+                                        <!-- Checkout dialog -->
+                                        {% include 'vitrin:checkout/checkout_dialog.jinja' %}
+                                        
+                                        <button class="btn btn-buy-now d-none" type="button" onclick="productBuyNow()">
+                                            <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+                                            <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25" />
+                                            <span>{{ _("Buy now") }}</span>
+                                        </button>
+
+                                        {% if store.settings.products.wishlist_enabled == true %}
+                                            <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
+                                                {% if not session.is_guest %}
+                                                <a class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
+                                                {% else %}
+                                                <a class="icon-heart-mask" href="{{ url_for('login_page', query_params={"redirect_to": session.path} ) }}"></a>
+                                                {% endif %}
+                                                <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
+                                            </span>
                                         {% endif %}
-                                        <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
-                                    </span>
-                                  {% endif %}
                                 </div>
 
                                 <div>
@@ -683,6 +693,22 @@
         var productImages = {{ product.selected_product.media | tojson }};
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
 
+        $(window).on('load', function () {
+            if (window.checkout_dialog) {
+                $('.btn-buy-now').removeClass('d-none');
+            }
+        });
+
+        window.productBuyNow = async () => {
+            $('.btn-buy-now').prop('disabled', true);
+            $('.buy-now-progress').removeClass('d-none');
+
+            await window.zid.cart.empty()
+
+            window.productAddToCart(true);
+
+        }
+
         // Listen for bundle selection changes and update payload
         window.addEventListener('vitrin:bundle-selections:updated', function(event) {
             const cartData = event?.detail?.data;
@@ -763,6 +789,10 @@
                   if (image.length && cart.length && typeof addToCartAnimation === 'function') {
                       addToCartAnimation(cart, image);
                   }
+                  
+                  if(buyNowDialog) {
+                    window.checkout_dialog.open();
+                  }
 
               } else {
                   if (typeof toastr !== 'undefined') {
@@ -770,8 +800,16 @@
                       toastr.error(errorMessage, '{{ _("Sorry") }}');
                   }
               }
+
               $('.add-to-cart-progress').addClass('d-none');
+
+              $('.btn-buy-now').prop('disabled', false);
+
+              $('.buy-now-progress').addClass('d-none');
+
           }).catch(function(error) {
+              $('.btn-buy-now').prop('disabled', false);
+              $('.buy-now-progress').addClass('d-none');
               $('.add-to-cart-progress').addClass('d-none');
           });
       };
