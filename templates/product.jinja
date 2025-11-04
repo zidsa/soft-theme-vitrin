@@ -3,1377 +3,1286 @@
 {% block header %} {% include 'header.jinja' %} {% endblock %}
 
 {% block top_links %}
-<link rel="stylesheet" type="text/css" href="{{ 'toastr.min.css' | asset_url }}" />
-<link rel="stylesheet" type="text/css" href="{{ 'ekko-lightbox.css' | asset_url }}" />
+    <link rel="stylesheet" type="text/css" href="{{ 'toastr.min.css' | asset_url }}" />
+    <link rel="stylesheet" type="text/css" href="{{ 'ekko-lightbox.css' | asset_url }}" />
 
-<link rel="stylesheet" type="text/css" href="{{ ('product-details.css?v=' ~ ver) | asset_url }}" />
+    <link rel="stylesheet" type="text/css" href="{{ 'product-details.css?v=1.100.30' | asset_url }}" />
 
 {% endblock %}
 
 
 {% block main_content %}
 
-<section class="product products-details-page">
-    <div class="container pb-5">
-        <section class="products-details mb-5">
-            <div>
-                <div class="row">
+    <section class="product products-details-page">
+        <div class="container pb-5">
+            <section class="products-details mb-5">
+                <div>
+                    <div class="row">
 
-                    <div class="col-lg-6">
+                        <div class="col-lg-6">
 
-                        <!--GALLERY-->
-                        <div id="wrap">
-                            <div class="row">
-                                <div class="col-12 col-product-image-wrapper">
+                            <!--GALLERY-->
+                            <div id="wrap">
+                                <div class="row">
+                                    <div class="col-12 col-product-image-wrapper">
 
-                                    <!-- Carousel -->
-                                    <div
-                                        class="box-1-1 product-images-carousel product-images-carousel-init {% if product.selected_product.media | length <= 0 %}d-none{% endif %}">
-                                        <div class="content">
-                                            <div id="product-images" class="product-images slide gallery">
-                                                <div id="product-images-slick">
-                                                    {% for image in product.selected_product.media %}
-                                                    <div>
-                                                        <div class="box-1-1">
-                                                            <div class="content">
-                                                                <a class="image-link"
-                                                                    style="display:block; width: 100%; height: 100%;">
-                                                                    <img src="{{ image.image.full_size }}"
-                                                                        class="carousel-img" alt="{{ image.alt_text }}">
-                                                                    {% if image.provider and image.link %}
-                                                                    <img id="main-video-icon" class="play-icon"
-                                                                        src="{{ 'video-play.svg' | asset_url }}"
-                                                                        alt="play" width="25"
-                                                                        onClick="showIframe(this, '{{ image.link }}')" />
-                                                                    {% endif %}
-                                                                </a>
-                                                                {% if image.provider and image.link %}
-                                                                <div class="iframe-video pt-1 d-none">
-                                                                    <a id="iframe-close-btn" type="button"
-                                                                        class="text-white btn btn-none grow"
-                                                                        onClick="hideIframe(this)">
-                                                                        X
-                                                                    </a>
-                                                                    <iframe width="100%" height="100%" src=""
-                                                                        frameborder="0"
-                                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                        allowfullscreen style="max-width: 100%">
-                                                                    </iframe>
+                                        <!-- Carousel -->
+                                        <div class="box-1-1 product-images-carousel product-images-carousel-init {% if product.selected_product.media | length <= 0 %}d-none{% endif %}">
+                                            <div class="content">
+                                                <div id="product-images" class="product-images slide gallery">
+                                                    <div id="product-images-slick">
+                                                        {% for image in product.selected_product.media %}
+                                                            <div>
+                                                                <div class="box-1-1">
+                                                                    <div class="content">
+                                                                        <a class="image-link"
+                                                                           style="display:block; width: 100%; height: 100%;">
+                                                                            <img src="{{ image.image.full_size }}" class="carousel-img" alt="{{ image.alt_text }}">
+                                                                            {% if image.provider and image.link %}
+                                                                                <img id="main-video-icon"
+                                                                                  class="play-icon"
+                                                                                  src="{{ 'video-play.svg' | asset_url }}"
+                                                                                  alt="play"
+                                                                                  width="25"
+                                                                                  onClick="showIframe(this, '{{ image.link }}')"
+                                                                                />
+                                                                            {% endif %}
+                                                                        </a>
+                                                                        {% if image.provider and image.link %}
+                                                                            <div class="iframe-video pt-1 d-none">
+                                                                                <a
+                                                                                  id="iframe-close-btn"
+                                                                                  type="button"
+                                                                                  class="text-white btn btn-none grow"
+                                                                                  onClick="hideIframe(this)"
+                                                                                >
+                                                                                  X
+                                                                                </a>
+                                                                                <iframe
+                                                                                  width="100%"
+                                                                                  height="100%"
+                                                                                  src=""
+                                                                                  frameborder="0"
+                                                                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                                                  allowfullscreen
+                                                                                  style="max-width: 100%"
+                                                                                >
+                                                                                </iframe>
+                                                                            </div>
+                                                                        {% endif %}
+                                                                    </div>
                                                                 </div>
-                                                                {% endif %}
                                                             </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row lg-thumbs d-lg-flex product-images-carousel-thumbs {% if product.selected_product.media | length <= 1 %}d-none-important{% endif %}">
+                                            {% for image in product.selected_product.media %}
+                                                <div class="col-3">
+                                                    <div class="box-1-1">
+                                                        <div class="content">
+                                                            <a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="{{ loop.index0 }}"
+                                                               style="width: 100%; height: 100%;" >
+                                                                <img src="{{ image.image.medium }}" data-index="{{ loop.index0 }}">
+                                                                {% if image.provider and image.link %}
+                                                                  <img id="video-play-icon" class="play-icon"
+                                                                    src="{{ 'video-play.svg' | asset_url }}" alt="play"
+                                                                    data-index="{{ loop.index0 }}"
+                                                                  />
+                                                                {% endif %}
+                                                            </a>
                                                         </div>
                                                     </div>
-                                                    {% endfor %}
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        class="row lg-thumbs d-lg-flex product-images-carousel-thumbs {% if product.selected_product.media | length <= 1 %}d-none-important{% endif %}">
-                                        {% for image in product.selected_product.media %}
-                                        <div class="col-3">
-                                            <div class="box-1-1">
-                                                <div class="content">
-                                                    <a class="d-flex align-items-center justify-content-center thumb-image-a"
-                                                        data-index="{{ loop.index0 }}"
-                                                        style="width: 100%; height: 100%;">
-                                                        <img src="{{ image.image.medium }}"
-                                                            data-index="{{ loop.index0 }}">
-                                                        {% if image.provider and image.link %}
-                                                        <img id="video-play-icon" class="play-icon"
-                                                            src="{{ 'video-play.svg' | asset_url }}" alt="play"
-                                                            data-index="{{ loop.index0 }}" />
-                                                        {% endif %}
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-
-                                    <!-- No image -->
-                                    <div
-                                        class="box-1-1 product-images-empty {% if product.selected_product.media | length > 0 %}d-none{% endif %}">
-                                        <div class="content">
-                                            <div class="d-flex" style="width: 100%; height: 100%;">
-                                                <img src="{{ 'product-img.svg' | asset_url }}" width="100%"
-                                                    height="auto" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div
-                        class="col-lg-6  col-product-info {% if product.selected_product.media | length <= 1 %}col-product-info-single-image{% endif %}">
-
-
-
-                        <section>
-                            {% if product.badge %}
-                            {% include 'vitrin:products/badge.jinja' %}
-                            {% endif %}
-                            <div class="d-flex items-center" style="gap:10px;">
-                                <h1>{{ product.name | safe }}</h1>
-
-                                {% if store.settings.products.wishlist_enabled == true %}
-                                <div class="my-2" data-wishlist-id="{{ product.id }}">
-                                    {% if not session.is_guest %}
-                                    <a class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
-                                    {% else %}
-                                    <a class="icon-heart-mask" href="{{ url_for('login_page', query_params={"
-                                        redirect_to": session.path} ) }}"></a>
-                                    {% endif %}
-                                    <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20"
-                                        height="20" />
-                                </div>
-                                {% endif %}
-                            </div>
-                            <div class="d-flex flex-column flex-lg-row product-features">
-                                {% if product.rating %}
-                                <div>
-                                    {% set rating=product.rating.average %}{% include 'components/rating-stars.jinja' %}
-                                    {% if product.rating.total_count > 0 %}<span class="product-card-rating-count">({{
-                                        product.rating.total_count }})</span>{% endif %}
-                                </div>
-                                {% endif %}
-                                {% if product.sold_products_count %}
-                                <div class="product-count d-flex align-items-center">
-                                    <span class="icon-military_tech"
-                                        style="color: #FFCF57; font-size: 16px"></span>&nbsp;
-                                    <span class="lang">{{ _("Sold more than %s times") |
-                                        format(product.sold_products_count) }}</span>
-                                </div>
-                                {% elif product.selected_product.sold_products_count %}
-                                <div class="product-count d-flex align-items-center">
-                                    <span class="icon-military_tech"
-                                        style="color: #FFCF57; font-size: 16px"></span>&nbsp;
-                                    <span class="lang">{{ _("Sold more than %s times") |
-                                        format(product.selected_product.sold_products_count) }}</span>
-                                </div>
-                                {% endif %}
-
-
-                                {% if product.low_stock_quantity %}
-                                <div class="low-quantity-section d-inline-block">
-                                    <span class="icon-flag_black" style="color: #EC5550; font-size: 16px"></span>&nbsp;
-                                    <span class="low-quantity">{{ _("Remaining %s only") |
-                                        format(product.low_stock_quantity) }}</span>
-                                </div>
-                                {% endif %}
-
-                                {% if product.bundle_offer %}
-                                <div class="bundle-offer-section">
-                                    <span class="icon-gift" style="color: red; font-size: 14px"></span>&nbsp;
-                                    <span class="bundle-offer-title" style="unicode-bidi: isolate">{{
-                                        product.bundle_offer.name }}</span>
-                                </div>
-                                {% endif %}
-
-
-                            </div>
-
-                            {% if product.short_description %}
-                            <p class="text-short-description">
-                                {{ product.short_description | safe }}
-                                &nbsp;<a id="product-description-a" href="#product-description"
-                                    class="text-color-primary">{{ _("more information") }}</a>
-                            </p>
-                            {% endif %}
-                            <div class="d-flex">
-                                <div>
-                                    <h2 class="product-formatted-price theme-text-primary">{% if
-                                        product.selected_product.formatted_sale_price %}{{
-                                        product.selected_product.formatted_sale_price }}{% else %}{{
-                                        product.selected_product.formatted_price }}{% endif %}</h2>
-                                    <p>
-                                        <del class="product-formatted-price-old">{% if
-                                            product.selected_product.formatted_sale_price %} {{
-                                            product.selected_product.formatted_price }}{% endif %}</del>
-                                        <span class="product-formatted-price-discount" style="color:#f25f5f;">{% if
-                                            product.selected_product.formatted_sale_price %} &nbsp; &nbsp;{{
-                                            _("Discount") }}&nbsp;{{ product.discount_percentage }}%{% endif %}</span>
-                                    </p>
-                                </div>
-
-                            </div>
-
-                            <div>
-                                {% include 'vitrin:products/loyalty_points_widget.jinja' %}
-                            </div>
-
-                            <div>
-                                {% include 'vitrin:products/payment_widgets.jinja' %}
-                            </div>
-                        </section>
-
-
-                        <div class="border-product"></div>
-                        <div style="margin-bottom: 25px"
-                            class="div-product-sku {% if not product.selected_product.sku %}d-none{% endif %}">
-                            <h4 class="product-title">{{ _("product sku") }}</h4>
-                            <div class="product-sku">
-                                {{ product.selected_product.sku }}
-                            </div>
-                        </div>
-
-                        <div style="margin-bottom: 25px"
-                            class="div-product-weight {% if not product.selected_product.weight.value %}d-none{% endif %}">
-                            <h4 class="product-title">{{ _("Weight") }}</h4>
-                            <div class="product-weight">
-                                {{ product.selected_product.weight.value }}&nbsp;{{ product.selected_product.weight.unit
-                                }}
-                            </div>
-                        </div>
-
-                        <form id="product-form">
-                            <input id="product-id" type="hidden" value="{{ product.selected_product.id }}">
-
-                            <div class="size-box">
-
-                                {% include 'vitrin:products/variants_list.jinja' %}
-
-                                <!-- new custom fields update -->
-                                {% if product.custom_input_fields %}
-                                <div class="border-product" style="margin-top: 25px"></div>
-                                {% include 'vitrin:products/custom_input_fields.jinja' %}
-                                {% endif %}
-                            </div>
-
-                            {% if product.selected_product.is_infinite or product.selected_product.quantity > 0 %}
-                            <div class="border-product" style="margin-top: 15px"></div>
-                            <div class="select-quantity-div">
-                                <h4 class="product-title">{{ _("Quantity") }}</h4>
-                                <div class="form-group">
-                                    <div>
-                                        <select id="product-quantity" name="quantity" class="select-quantity">
-                                            {% if product.selected_product.is_infinite or
-                                            product.selected_product.quantity > 100 %}
-                                            {% set maxQuantity = 100 %}
-                                            {% else %}
-                                            {% set maxQuantity = product.selected_product.quantity %}
-                                            {% endif %}
-
-                                            {% for n in range(1, maxQuantity + 1) %}
-                                            <option value="{{ n }}" {% if n==1 %}selected{% endif %}>{{ n }}</option>
                                             {% endfor %}
-                                        </select>
+                                        </div>
+
+                                        <!-- No image -->
+                                        <div class="box-1-1 product-images-empty {% if product.selected_product.media | length > 0 %}d-none{% endif %}">
+                                            <div class="content">
+                                                <div class="d-flex" style="width: 100%; height: 100%;">
+                                                    <img src="{{ 'product-img.svg' | asset_url }}" width="100%" height="auto" />
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            {% endif %}
 
-                            <div
-                                class="section-out-of-stock-notify-me {% if not product.selected_product.in_stock %}d-block{% else %}d-none{% endif %}">
-                                <div class="border-product" style="margin-top: 15px"></div>
-                                <div>
-                                    <h4 class="product-title">{{ _("This product is out of stock") }}</h4>
-                                    <form>
-                                        <input type="hidden" class="send-notify-product-id"
-                                            value="{{ product.selected_product.id }}">
-                                        <div class="form-group form-notify-me">
-                                            <h4>{{ _("Notify me when product is available") }}</h4>
+                        </div>
 
-                                            <input class="form-control send-notify-name" value="" type="text"
-                                                placeholder="{{ _('Enter your name') }}" />
-                                            <input class="form-control send-notify-email" type="email" value=""
-                                                placeholder="{{ _('Enter your email') }}" />
-                                            <div class="d-flex form-notify-me-phone-row">
-                                                <input class="form-control send-notify-country-key" type="number"
-                                                    placeholder="966" maxlength="4" />
-                                                <input class="form-control send-notify-phone" type="number" value=""
-                                                    placeholder="{{ _('Enter your phone (Optional)') }}"
-                                                    maxlength="10" />
-                                            </div>
-                                            <div class="form-notify-me-submit-button-row">
-                                                <button type="button" class="btn btn-primary btn-send-notify"
-                                                    onclick="sendProductNotifyMe()">
-                                                    <img class="send-notify-progress d-none"
-                                                        src="{{ 'spinner.gif' | asset_url }}" width="15" height="15" />
-                                                    {{ _("Send") }}
-                                                </button>
-                                            </div>
+                        <div class="col-lg-6  col-product-info {% if product.selected_product.media | length <= 1 %}col-product-info-single-image{% endif %}">
 
+
+
+                            <section>
+                                {% if product.badge %}
+                                   {% include 'vitrin:products/badge.jinja' %}
+                                {% endif %}
+                                <h1>{{ product.name | safe }}</h1>
+                                <div class="d-flex flex-column flex-lg-row product-features">
+                                    {% if product.rating %}
+                                        <div>
+                                            {% set rating=product.rating.average %}{% include 'components/rating-stars.jinja' %}
+                                            {% if product.rating.total_count > 0 %}<span class="product-card-rating-count">({{ product.rating.total_count }})</span>{% endif %}
                                         </div>
-                                    </form>
+                                    {% endif %}
+                                    {% if product.sold_products_count %}
+                                        <div class="product-count d-flex align-items-center">
+                                            <span class="icon-military_tech" style="color: #FFCF57; font-size: 16px"></span>&nbsp;
+                                            <span class="lang">{{ _("Sold more than %s times") | format(product.sold_products_count) }}</span>
+                                        </div>
+                                    {% elif product.selected_product.sold_products_count %}
+                                        <div class="product-count d-flex align-items-center">
+                                            <span class="icon-military_tech" style="color: #FFCF57; font-size: 16px"></span>&nbsp;
+                                            <span class="lang">{{ _("Sold more than %s times") | format(product.selected_product.sold_products_count) }}</span>
+                                        </div>
+                                    {% endif %}
+
+
+                                    {% if product.low_stock_quantity %}
+                                        <div class="low-quantity-section d-inline-block">
+                                            <span class="icon-flag_black" style="color: #EC5550; font-size: 16px"></span>&nbsp;
+                                            <span class="low-quantity">{{ _("Remaining %s only") | format(product.low_stock_quantity) }}</span>
+                                        </div>
+                                    {% endif %}
+
+                                    {% if product.bundle_offer %}
+                                    <div class="bundle-offer-section">
+                                        <span class="icon-gift" style="color: red; font-size: 14px"></span>&nbsp;
+                                        <span class="bundle-offer-title" style="unicode-bidi: isolate">{{ product.bundle_offer.name }}</span>
+                                    </div>
+                                    {% endif %}
+
+
+                                </div>
+
+                                {% if product.short_description %}
+                                    <p class="text-short-description">
+                                        {{ product.short_description | safe }}
+                                        &nbsp;<a id="product-description-a" href="#product-description" class="text-color-primary">{{ _("more information") }}</a>
+                                    </p>
+                                {% endif %}
+                                <div class="d-flex">
+                                    <div>
+                                        <h2 class="product-formatted-price theme-text-primary">{% if product.selected_product.formatted_sale_price %}{{ product.selected_product.formatted_sale_price }}{% else %}{{ product.selected_product.formatted_price }}{% endif %}</h2>
+                                        <p>
+                                            <del class="product-formatted-price-old">{% if product.selected_product.formatted_sale_price %} {{ product.selected_product.formatted_price }}{% endif %}</del>
+                                            <span class="product-formatted-price-discount" style="color:#f25f5f;">{% if product.selected_product.formatted_sale_price %}  &nbsp;  &nbsp;{{ _("Discount") }}&nbsp;{{ product.discount_percentage }}%{% endif %}</span>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    {% include 'vitrin:products/loyalty_points_widget.jinja' %}
+                                </div>
+
+                                <div>
+                                    {% include 'vitrin:products/payment_widgets.jinja' %}
+                                </div>
+                            </section>
+
+
+                            <div class="border-product"></div>
+                            <div style="margin-bottom: 25px" class="div-product-sku {% if not product.selected_product.sku %}d-none{% endif %}">
+                                <h4 class="product-title">{{ _("product sku") }}</h4>
+                                <div class="product-sku">
+                                    {{ product.selected_product.sku }}
                                 </div>
                             </div>
 
+                            <div style="margin-bottom: 25px" class="div-product-weight {% if not product.selected_product.weight.value %}d-none{% endif %}">
+                                <h4 class="product-title">{{ _("Weight") }}</h4>
+                                <div class="product-weight">
+                                    {{ product.selected_product.weight.value }}&nbsp;{{ product.selected_product.weight.unit }}
+                                </div>
+                            </div>
 
-                        </form>
+                            <form id="product-form">
+                                <input id="product-id" type="hidden" value="{{ product.selected_product.id }}">
 
-                        <div
-                            class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
-                            <div class="border-product"></div>
-                            <div class="d-flex align-center" style="gap: 10px;">
-                                <button class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
-                                    <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
-                                    <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}"
-                                        width="25" height="25" />
-                                    <span>{{ _("add to cart") }}</span>
-                                </button>
+                                <div class="size-box">
 
-                                <!-- Checkout dialog -->
-                                {% include 'vitrin:checkout/checkout_dialog.jinja' %}
+                                    {% include 'vitrin:products/variants_list.jinja' %}
+
+                                    <!-- new custom fields update -->
+                                    {% if product.custom_input_fields  %}
+                                        <div class="border-product" style="margin-top: 25px"></div>
+                                        {% include 'vitrin:products/custom_input_fields.jinja' %}
+                                    {% endif %}
+                                </div>
+
+                                {% if product.selected_product.is_infinite or product.selected_product.quantity > 0 %}
+                                    <div class="border-product" style="margin-top: 15px"></div>
+                                    <div class="select-quantity-div">
+                                        <h4 class="product-title">{{ _("Quantity") }}</h4>
+                                        <div class="form-group">
+                                            <div>
+                                                <select  id="product-quantity" name="quantity" class="select-quantity">
+                                                    {% if product.selected_product.is_infinite or product.selected_product.quantity > 100 %}
+                                                        {% set maxQuantity = 100 %}
+                                                    {% else %}
+                                                        {% set maxQuantity = product.selected_product.quantity %}
+                                                    {% endif %}
+
+                                                    {% for n in range(1, maxQuantity + 1) %}
+                                                        <option value="{{ n }}" {% if n == 1 %}selected{% endif %}>{{ n }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <div class="section-out-of-stock-notify-me {% if not product.selected_product.in_stock %}d-block{% else %}d-none{% endif %}">
+                                    <div class="border-product" style="margin-top: 15px"></div>
+                                    <div>
+                                        <h4 class="product-title">{{ _("This product is out of stock") }}</h4>
+                                        <form>
+                                            <input type="hidden" class="send-notify-product-id" value="{{ product.selected_product.id }}">
+                                            <div class="form-group form-notify-me">
+                                                <h4>{{ _("Notify me when product is available") }}</h4>
+                                                
+                                                <input class="form-control send-notify-name" value="" type="text" placeholder="{{ _('Enter your name') }}" />
+                                                <input class="form-control send-notify-email" type="email" value="" placeholder="{{ _('Enter your email') }}" />
+                                                <div class="d-flex form-notify-me-phone-row">
+                                                    <input class="form-control send-notify-country-key"
+                                                        type="number"
+                                                        placeholder="966" maxlength="4" />
+                                                    <input class="form-control send-notify-phone" type="number"  value="" placeholder="{{ _('Enter your phone (Optional)') }}" maxlength="10" />
+                                                </div>
+                                                <div class="form-notify-me-submit-button-row">
+                                                    <button type="button" class="btn btn-primary btn-send-notify" onclick="sendProductNotifyMe()">
+                                                    <img class="send-notify-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
+                                                    {{ _("Send") }}
+                                                    </button>
+                                                </div>
+                                            
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
 
 
-                                <button class="btn btn-buy-now" type="button" onclick="productBuyNow()">
-                                    <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
-                                    <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}"
-                                        width="25" height="25" />
-                                    <span>{{ _("Buy now") }}</span>
-                                </button>
+                            </form>
+                            <div class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
+                                <div class="border-product"></div>
+                                <div class="d-flex align-center">
+                                  <button style="margin-bottom: 20px"
+                                          class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+                                      <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+                                      <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
+                                      <span>{{ _("add to cart") }}</span>
+                                  </button>
+                                  {% if store.settings.products.wishlist_enabled == true %}
+                                    <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
+                                        {% if not session.is_guest %}
+                                        <a class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
+                                        {% else %}
+                                        <a class="icon-heart-mask" href="{{ url_for('login_page', query_params={"redirect_to": session.path} ) }}"></a>
+                                        {% endif %}
+                                        <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
+                                    </span>
+                                  {% endif %}
+                                </div>
+
+                                <div>
+                                    {{ template_for_product_apple_pay_button }}
+                                </div>
 
                             </div>
 
                             <div>
-                                {{ template_for_product_apple_pay_button }}
+                                <span id="product-view-add-to-cart"></span>
                             </div>
-
-                        </div>
-
-                        <div>
-                            <span id="product-view-add-to-cart"></span>
-                        </div>
-                        <div class="border-product"></div>
-                        <div class="border-product">
-                            <h4 class="product-title">{{ _("share product") }}</h4>
-                            <div class="product-icon">
-                                <div class="product-social d-flex">
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.html_url }}"
-                                        target="_blank"><i class="icon-facebook-f"></i></a>
-                                    <a href="https://www.pinterest.com/pin/create/button/?url={{ product.html_url }}"
-                                        target="_blank"><i class="icon-pinterest"></i></a>
-                                    <a href="https://twitter.com/intent/tweet?text={{ product.name }}: {{ product.html_url }}"
-                                        target="_blank"><i class="icon-twitter"></i></a>
-                                    <a href="https://api.whatsapp.com/send?text={{ _(" Check Out this Product") }} :{{
-                                        product.name }} {{ product.html_url }}" target="_blank">
-                                        <i class="icon-whatsapp"></i>
-                                    </a>
+                            <div class="border-product"></div>
+                            <div class="border-product">
+                                <h4 class="product-title">{{ _("share product") }}</h4>
+                                <div class="product-icon">
+                                    <div class="product-social d-flex">
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.html_url }}" target="_blank"><i class="icon-facebook-f"></i></a>
+                                        <a href="https://www.pinterest.com/pin/create/button/?url={{ product.html_url }}" target="_blank"><i class="icon-pinterest"></i></a>
+                                        <a href="https://twitter.com/intent/tweet?text={{ product.name }}: {{ product.html_url }}" target="_blank"><i class="icon-twitter"></i></a>
+                                        <a href="https://api.whatsapp.com/send?text={{ _("Check Out this Product") }} :{{ product.name }} {{ product.html_url }}" target="_blank">
+                                            <i class="icon-whatsapp"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
 
-        {% if product.bundle_offer %}
-        <section class="bundle-offer-details-section mt-5">
-            <div class="d-flex align-items-center">
-                <div class="description-icon">
-                    <span class="icon-gift"></span>
-                </div>
-                <div class="description-title">
-                    <div class="bundle-offer-title">{{ product.bundle_offer.name }}</div>
-                    <div class="bundle-offer-title-description">{{ product.bundle_offer.description }}</div>
-                </div>
-            </div>
-            <div class="description-paragrah">
-                <div class="bundle-offer-products">
-                    <div class="row bundle-offer-details-products">
-                        {% for product in product.bundle_offer.products.results[:5] %}
-                        <div class="prod-col prod-col-tb">
-                            {% set product=product %}{% set index=loop.index0 %}{% include
-                            'components/product-card.jinja' %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% if product.bundle_offer and product.bundle_offer.products and product.bundle_offer.products.results |
-                length > 5 %}
-                <div class="bundle-offer-more">
-                    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ _("Display all products")
-                        }}</a>
-                </div>
-                {% endif %}
-            </div>
-        </section>
-        {% endif %}
-
-        {{ template_for_product_grouped }}
-
-        {% if product.metafields %}
-        <section id="product-description" class="mt-5">
-            <div class="d-flex align-items-center">
-                <div class="description-icon">
-                    <span class="icon-fact_check_black"></span>
-                </div>
-                <div class="description-title">
-                    {{ _("product information") }}
-                </div>
-            </div>
-            <div class="description-paragrah text-justify description-text-clear">
-                {% set entity = product %}
-                {% include 'vitrin:shared/metafields.jinja' %}
-            </div>
-        </section>
-        {% endif %}
-
-        {% if product.description %}
-        <section id="product-description" class="mt-5">
-            <div class="d-flex align-items-center">
-                <div class="description-icon">
-                    <span class="icon-fact_check_black"></span>
-                </div>
-                <div class="description-title">
-                    {{ _("product description") }}
-                </div>
-            </div>
-            {% autoescape false %}
-            <div class="description-paragrah text-justify description-text-clear">
-                {{ product.description }}
-            </div>
-            {% endautoescape %}
-        </section>
-        {% endif %}
-
-        {% if product.has_variants %}
-        <section class="product-selection mt-5">
-            <div>
+            {% if product.bundle_offer %}
+            <section class="bundle-offer-details-section mt-5">
                 <div class="d-flex align-items-center">
                     <div class="description-icon">
-                        <span class="icon-format_list_bulleted"></span>
+                        <span class="icon-gift"></span>
                     </div>
                     <div class="description-title">
-                        {{ _("product description") }}
+                        <div class="bundle-offer-title">{{ product.bundle_offer.name }}</div>
+                        <div class="bundle-offer-title-description">{{ product.bundle_offer.description }}</div>
                     </div>
                 </div>
-
-                <div class="card-table d-none d-lg-block">
-                    <div class="card">
-                        <div class="card-body card-table-header">
-                            <div class="row">
-                                {% for option in product.options %}
-                                <div class="col">{{option.name}}</div>
-                                {% endfor %}
-                                <div class="col col-price">{{ _("Product images") }}</div>
-                                <div class="col col-price">{{ _("price") }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% for variant in product.variants %}
-                {% if variant.in_stock %}
-                <div class="card-table options-table">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row flex-column flex-lg-row align-items-start align-items-lg-center">
-
-
-                                {% for attribute in variant.attributes %}
-                                <div class="col m-col">
-                                    <span class="variant-name-sm d-inline-block d-lg-none">{{
-                                        product.options[loop.index0].name }}</span>
-                                    <span>{{ attribute.value }}</span>
-                                </div>
-                                {% endfor %}
-
-                                <div class="col">
-                                    {% if variant.images | length > 0 %}
-                                    <div class="d-flex m-col">
-                                        {% for image in variant.images %}
-                                        <div class="variant-image-wrapper" data-var-id="{{ variant.id }}">
-                                            <div class="box-1-1">
-                                                <div class="content">
-                                                    <a data-index="{{ loop.index0 }}"
-                                                        data-link-var-id="{{ variant.id }}"
-                                                        class="d-flex align-items-center justify-content-center"
-                                                        style="width: 100%; height: 100%;">
-                                                        <img src="{{ image.image.medium }}"
-                                                            data-image-url="{{ image.image.full_size }}">
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                    {% else %}
-                                    <span class="d-none d-lg-inline">{{ _("No images") }}</span>
-                                    {% endif %}
-                                </div>
-
-                                <div class="col m-col">
-                                    <span class="variant-name-sm d-inline-block d-lg-none">{{ _("price") }}</span>
-                                    {% if variant.formatted_sale_price %}
-                                    <h4 style="font-size: 1.2rem" class="price-detail d-inline-block">{{
-                                        variant.formatted_sale_price }}
-                                        <del>{{ variant.formatted_price }}</del>
-                                    </h4>
-                                    {% else %}
-                                    <h4 class="d-inline-block" style="font-size: 1.2rem">{{ variant.formatted_price }}
-                                    </h4>
-                                    {% endif %}
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% endfor %}
-
-            </div>
-        </section>
-        {% endif %}
-
-        {% if store.settings.products.reviews_enabled %}
-        <section class="mt-5 review-details">
-            <div>
-                <div class="d-flex flex-wrap align-items-center" style="width: 100%">
-                    <div class="description-icon">
-                        <span class="icon-reviews_black"></span>
-                    </div>
-                    <div class="description-title">
-                        {{ _("Reviews") }}
-                    </div>
-                    {% if product.rating %}
-                    <div class="rating-section">
-                        <div>
-                            {% set rating=product.rating.average %}{% include 'components/rating-stars.jinja' %}
-                            <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
-                        </div>
-                    </div>
-                    {% endif %}
-
-                    &nbsp;
-                    <!-- Button trigger modal -->
-                    {% if session.is_guest %}
-                    <a href="/auth/login?redirect_to={{ url_for('add_product_review', slug=product.id) }}"
-                        class="btn btn-primary add-review-btn"
-                        onclick="event.preventDefault(); handleLoginAction('{{ url_for('add_product_review', slug=product.id) }}'); return false;"><span
-                            class="icon-add_circle"></span>{{ _("Add Comment ") }} </a>
-                    {% else %}
-                    <a href="{{ url_for('add_product_review', slug=product.slug) }}"
-                        class="btn btn-primary add-review-btn" id="add-review-btn"><span
-                            class="icon-add_circle"></span>{{ _("Add Comment ") }}</a>
-                    {% endif %}
-                </div>
-                <div class="reviews-break-down-div description-paragrah">
-                    <div class="d-flex align-items-center mt-3 mb-4">
-                        {% if product.rating %}
-                        <h4 class="rating-average">{{ product.rating.average }}</h4>
-                        <div class="d-flex flex-column">
-
-
-                            <div class="row card-rate">
-                                <span class="rating_count_5">{{ product.rating['ratings_5'].count }}</span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span> &nbsp; &nbsp;
-                                <span>{{ _("Great") }}</span>
-                            </div>
-                            <div class="row card-rate">
-                                <span class="rating_count_4">{{ product.rating['ratings_4'].count }}</span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1 deactive"></span> &nbsp; &nbsp;
-                                <span>{{ _("Excellent") }}</span>
-                            </div>
-                            <div class="row card-rate">
-                                <span class="rating_count_3">{{ product.rating['ratings_3'].count }}</span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1 deactive"></span>
-                                <span class="icon-star1 deactive"></span> &nbsp; &nbsp;
-                                <span>{{ _("Good") }}</span>
-                            </div>
-                            <div class="row card-rate">
-                                <span class="rating_count_2">{{ product.rating['ratings_2'].count }}</span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1 deactive"></span>
-                                <span class="icon-star1 deactive"></span>
-                                <span class="icon-star1 deactive"></span> &nbsp; &nbsp;
-                                <span>{{ _("Dislike") }}</span>
-                            </div>
-                            <div class="row card-rate">
-                                <span class="rating_count_1">{{ product.rating['ratings_1'].count }}</span>
-                                <span class="icon-star1"></span>
-                                <span class="icon-star1 deactive"></span>
-                                <span class="icon-star1 deactive"></span>
-                                <span class="icon-star1 deactive"></span>
-                                <span class="icon-star1 deactive"></span> &nbsp; &nbsp;
-                                <span>{{ _("Bad") }}</span>
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="reviews-break-down-empty description-paragrah d-none">
-                    <div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
-                        <span>{{ _("No reviews, add yours") }}</span>
-                    </div>
-                </div>
-
-                <div class="comment-section description-paragrah bg-transparent">
-                    {% set reviews=product.reviews.results %}{% include 'components/customer-reviews.jinja' %}
-
-                    {% if product.reviews.pages_count > 1 %}
-                    <div class="text-right">
-                        <a href="{{ url_for('product_reviews', slug=product.id) }} " type="button"
-                            class="btn all-reviews-btn">
-                            {{ _("All reviews") }}
-                        </a>
-                    </div>
-                    {% endif %}
-                </div>
-
-            </div>
-        </section>
-        {% endif %}
-        {% if store.settings.products.questions_enabled %}
-        <section class="mt-5 review-details">
-            <div>
-                <div class="d-flex flex-wrap align-items-center" style="width: 100%">
-                    <div class="description-icon">
-                        <span class="icon-reviews_black"></span>
-                    </div>
-                    <div class="description-title">
-                        {{ _("Questions") }}
-                    </div>
-                    {% if product.questions %}
-                    <button type="button" class="btn btn-primary add-review-btn" id="addQuestionButton"><span
-                            class="icon-add_circle"></span>{{ _("Add your question") }}</button>
-                    {% endif %}
-                </div>
-            </div>
-            {% set questions=product.questions %}{% include 'components/product-questions.jinja' %}
-            {% set product=product %}{% include 'components/product-question-add.jinja' %}
-        </section>
-        {% endif %}
-
-        {% if (product.related_products | length) > 0 %}
-        <section class="mt-5 mb-5">
-            <div class="d-flex align-items-center">
-                <div class="description-icon" style="font-size: 24px; height: 24px">
-                    <span class="icon-uniE011"></span>
-                </div>
-                <div class="description-title">
-                    <div class="">{{ _("You may also like") }}</div>
-                </div>
-            </div>
-            <div class="description-paragrah">
-                <div class="">
-                    <div class="products-slider-wrapper" style="position: relative">
-
-                        <div id="related-products" class="products-slider s-slider d-block">
-                            {% for rProduct in product.related_products %}
-                            <div class="prod-col">
-                                {% set product=rProduct %}{% set index=loop.index0 %}{% include
-                                'components/product-card.jinja' %}
-                            </div>
-                            {% endfor %}
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                if (typeof showRelatedProducts === 'function') {
-                    showRelatedProducts();
-                }
-            });
-        </script>
-        {% endif %}
-
-    </div>
-
-    {% if product.bundle_offer and product.bundle_offer.products.results | length > 5 %}
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable bundle-offer-products-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="bundle-offer-title"></div>
-                    <div class="bundle-offer-title-description"></div>
+                <div class="description-paragrah">
                     <div class="bundle-offer-products">
-                        <div class="row bundle-offer-details-products-all">
-                            {% for product in product.bundle_offer.products.results %}
-                            <div class="prod-col prod-col-tb">
-                                {% set product=product %}{% set index=loop.index0 %}{% include
-                                'components/product-card.jinja' %}
-                            </div>
+                        <div class="row bundle-offer-details-products">
+                            {% for product in product.bundle_offer.products.results[:5] %}
+                                <div class="prod-col prod-col-tb">
+                                    {% set product=product %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
+                                </div>
                             {% endfor %}
+                        </div>
+                    </div>
+                    {% if product.bundle_offer and product.bundle_offer.products and product.bundle_offer.products.results | length > 5 %}
+                    <div class="bundle-offer-more">
+                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">{{ _("Display all products") }}</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+            {% endif %}
+
+            {{ template_for_product_grouped }}
+
+            {% if product.metafields %}
+                <section id="product-description" class="mt-5">
+                    <div class="d-flex align-items-center">
+                        <div class="description-icon">
+                            <span class="icon-fact_check_black"></span>
+                        </div>
+                        <div class="description-title">
+                           {{ _("product information") }}
+                        </div>
+                    </div>
+                    <div class="description-paragrah text-justify description-text-clear">
+                          {% set entity = product %}
+                          {% include 'vitrin:shared/metafields.jinja' %}
+                    </div>
+                </section>
+            {% endif %}
+
+            {% if product.description %}
+                <section id="product-description" class="mt-5">
+                    <div class="d-flex align-items-center">
+                        <div class="description-icon">
+                            <span class="icon-fact_check_black"></span>
+                        </div>
+                        <div class="description-title">
+                            {{ _("product description") }}
+                        </div>
+                    </div>
+                    {% autoescape false %}
+                        <div class="description-paragrah text-justify description-text-clear">
+                            {{ product.description }}
+                        </div>
+                    {% endautoescape %}
+                </section>
+            {% endif %}
+
+            {% if product.has_variants %}
+                <section class="product-selection mt-5">
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <div class="description-icon">
+                                <span class="icon-format_list_bulleted"></span>
+                            </div>
+                            <div class="description-title">
+                                {{ _("product description") }}
+                            </div>
+                        </div>
+
+                        <div class="card-table d-none d-lg-block">
+                            <div class="card">
+                                <div class="card-body card-table-header">
+                                    <div class="row">
+                                        {% for option in product.options %}
+                                            <div class="col">{{option.name}}</div>
+                                        {% endfor %}
+                                        <div class="col col-price">{{ _("Product images") }}</div>
+                                        <div class="col col-price">{{ _("price") }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% for variant in product.variants %}
+                            {% if variant.in_stock %}
+                                <div  class="card-table options-table">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row flex-column flex-lg-row align-items-start align-items-lg-center">
+
+
+                                                {% for attribute in variant.attributes %}
+                                                    <div class="col m-col">
+                                                        <span class="variant-name-sm d-inline-block d-lg-none">{{ product.options[loop.index0].name }}</span>
+                                                        <span>{{ attribute.value }}</span>
+                                                    </div>
+                                                {% endfor %}
+
+                                                <div class="col">
+                                                    {% if variant.images | length > 0 %}
+                                                        <div class="d-flex m-col">
+                                                            {% for image in variant.images %}
+                                                                <div class="variant-image-wrapper" data-var-id="{{ variant.id }}">
+                                                                    <div class="box-1-1">
+                                                                        <div class="content">
+                                                                            <a data-index="{{ loop.index0 }}" data-link-var-id="{{ variant.id }}" class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;" >
+                                                                                <img src="{{ image.image.medium }}" data-image-url="{{ image.image.full_size }}">
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% else %}
+                                                        <span class="d-none d-lg-inline">{{ _("No images") }}</span>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="col m-col">
+                                                    <span class="variant-name-sm d-inline-block d-lg-none">{{ _("price") }}</span>
+                                                    {% if variant.formatted_sale_price %}
+                                                        <h4 style="font-size: 1.2rem" class="price-detail d-inline-block">{{ variant.formatted_sale_price }}
+                                                            <del>{{ variant.formatted_price }}</del>
+                                                        </h4>
+                                                    {% else %}
+                                                        <h4 class="d-inline-block" style="font-size: 1.2rem">{{ variant.formatted_price }}</h4>
+                                                    {% endif %}
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>
+                </section>
+            {% endif %}
+
+            {% if store.settings.products.reviews_enabled %}
+                <section class="mt-5 review-details">
+                    <div>
+                        <div class="d-flex flex-wrap align-items-center" style="width: 100%">
+                            <div class="description-icon">
+                                <span class="icon-reviews_black"></span>
+                            </div>
+                            <div class="description-title">
+                                {{ _("Reviews") }}
+                            </div>
+                            {% if product.rating %}
+                            <div class="rating-section">
+                                    <div>
+                                        {% set rating=product.rating.average %}{% include 'components/rating-stars.jinja' %}
+                                        <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
+                                    </div>
+                            </div>
+                            {% endif %}
+
+                            &nbsp;
+                            <!-- Button trigger modal -->
+                            {% if session.is_guest %}
+                            <a href="/auth/login?redirect_to={{ url_for('add_product_review', slug=product.id) }}" class="btn btn-primary add-review-btn" onclick="event.preventDefault(); handleLoginAction('{{ url_for('add_product_review', slug=product.id) }}'); return false;"><span class="icon-add_circle"></span>{{ _("Add Comment ") }} </a>
+                            {% else %}
+                            <a href="{{ url_for('add_product_review', slug=product.slug) }}" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }}</a>
+                            {% endif %}
+                        </div>
+                        <div class="reviews-break-down-div description-paragrah">
+                            <div class="d-flex align-items-center mt-3 mb-4">
+                                {% if product.rating %}
+                                <h4 class="rating-average">{{ product.rating.average }}</h4>
+                                <div class="d-flex flex-column">
+
+
+                                    <div class="row card-rate">
+                                        <span class="rating_count_5">{{ product.rating['ratings_5'].count }}</span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span> &nbsp;  &nbsp;
+                                        <span>{{ _("Great") }}</span>
+                                    </div>
+                                    <div class="row card-rate">
+                                        <span class="rating_count_4">{{ product.rating['ratings_4'].count }}</span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
+                                        <span>{{ _("Excellent") }}</span>
+                                    </div>
+                                    <div class="row card-rate">
+                                        <span class="rating_count_3">{{ product.rating['ratings_3'].count }}</span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1 deactive"></span>
+                                        <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
+                                        <span>{{ _("Good") }}</span>
+                                    </div>
+                                    <div class="row card-rate">
+                                        <span class="rating_count_2">{{ product.rating['ratings_2'].count }}</span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1 deactive"></span>
+                                        <span class="icon-star1 deactive"></span>
+                                        <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
+                                        <span>{{ _("Dislike") }}</span>
+                                    </div>
+                                    <div class="row card-rate">
+                                        <span class="rating_count_1">{{ product.rating['ratings_1'].count }}</span>
+                                        <span class="icon-star1"></span>
+                                        <span class="icon-star1 deactive"></span>
+                                        <span class="icon-star1 deactive"></span>
+                                        <span class="icon-star1 deactive"></span>
+                                        <span class="icon-star1 deactive"></span> &nbsp;  &nbsp;
+                                        <span>{{ _("Bad") }}</span>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="reviews-break-down-empty description-paragrah d-none">
+                            <div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
+                                <span>{{ _("No reviews, add yours") }}</span>
+                            </div>
+                        </div>
+
+                        <div class="comment-section description-paragrah bg-transparent">
+                            {% set reviews=product.reviews.results %}{% include 'components/customer-reviews.jinja' %}
+
+                            {% if product.reviews.pages_count > 1 %}
+                            <div class="text-right">
+                                <a href="{{ url_for('product_reviews', slug=product.id) }} " type="button" class="btn all-reviews-btn">
+                                    {{ _("All reviews") }}
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </section>
+            {% endif %}
+            {% if store.settings.products.questions_enabled %}
+            <section class="mt-5 review-details">
+                <div>
+                    <div class="d-flex flex-wrap align-items-center" style="width: 100%">
+                        <div class="description-icon">
+                            <span class="icon-reviews_black"></span>
+                        </div>
+                        <div class="description-title">
+                            {{ _("Questions") }}
+                        </div>
+                          {% if product.questions %}
+                          <button type="button" class="btn btn-primary add-review-btn" id="addQuestionButton"><span class="icon-add_circle"></span>{{ _("Add your question") }}</button>
+                          {% endif %}
+                    </div>
+                </div>
+                {% set questions=product.questions %}{% include 'components/product-questions.jinja' %}
+                {% set product=product %}{% include 'components/product-question-add.jinja' %}
+            </section>
+             {% endif %}
+
+            {% if (product.related_products | length) >  0 %}
+                <section class="mt-5 mb-5">
+                    <div class="d-flex align-items-center">
+                        <div class="description-icon" style="font-size: 24px; height: 24px">
+                            <span class="icon-uniE011"></span>
+                        </div>
+                        <div class="description-title">
+                            <div class="">{{ _("You may also like") }}</div>
+                        </div>
+                    </div>
+                    <div class="description-paragrah">
+                        <div class="">
+                            <div class="products-slider-wrapper" style="position: relative">
+
+                                <div id="related-products" class="products-slider s-slider d-block">
+                                    {% for rProduct in product.related_products %}
+                                        <div class="prod-col">
+                                            {% set product=rProduct %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function(){
+                        if (typeof showRelatedProducts === 'function') {
+                            showRelatedProducts();
+                        }
+                    });
+                </script>
+            {% endif %}
+
+        </div>
+
+        {% if product.bundle_offer and product.bundle_offer.products.results | length > 5 %}
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable bundle-offer-products-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="bundle-offer-title"></div>
+                        <div class="bundle-offer-title-description"></div>
+                        <div class="bundle-offer-products">
+                            <div class="row bundle-offer-details-products-all">
+                                {% for product in product.bundle_offer.products.results %}
+                                    <div class="prod-col prod-col-tb">
+                                        {% set product=product %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    {% endif %}
-</section>
+        {% endif %}
+    </section>
 {% endblock %}
 
 {% block footer %}
-{% include 'footer.jinja' %}
+    {% include 'footer.jinja' %}
 {% endblock %}
 
 
 
 {% block footer_scripts %}
 
-<script type="text/javascript" src="{{ 'ekko-lightbox.min.js' | asset_url }}" defer></script>
-<script type="text/javascript" src="{{ 'product-details.js' | asset_url }}" defer></script>
-<script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
-<script>
-    var productImages = {{ product.selected_product.media | tojson }};
-    var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
+    <script type="text/javascript" src="{{ 'ekko-lightbox.min.js' | asset_url }}" defer></script>
+    <script type="text/javascript" src="{{ 'product-details.js' | asset_url }}" defer></script>
+    <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
+    <script>
+        var productImages = {{ product.selected_product.media | tojson }};
+        var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
 
-    window.productBuyNow = async () => {
-        $('.btn-buy-now').prop('disabled', true);
+        window.productAddToCart = function() {
+          if (typeof $ === 'undefined') {
+              return;
+          }
+          
+          if (!$('.add-to-cart-progress').hasClass('d-none')) {
+              return;
+          }
 
-        $('.buy-now-progress').toggleClass('d-none');
+          $('.add-to-cart-progress').removeClass('d-none');
 
-        await window.zid.cart.empty();
+          var quantity = parseInt($('#product-quantity').val()) || 1;
+          var productId = $('#product-id').val() || '{{ product.selected_product.id }}';
 
-        window.productAddToCart(true);
+          if (!window.zid || !window.zid.cart || !window.zid.cart.addProduct) {
+              $('.add-to-cart-progress').addClass('d-none');
+              if (typeof toastr !== 'undefined') {
+                  toastr.error('{{ _("Cart service not available") }}', '{{ _("Sorry") }}');
+              }
+              return;
+          }
 
-        window.checkout_dialog.open();
-    }
+          window.zid.cart.addProduct({ form_id:'product-form' }, { showErrorNotification: true }).then(function(response) {
+              if (response && response.item && response.cart_items_quantity) {
+                  
+                  if (response.cart_items_quantity) {
+                      $('.cart-badge').removeClass('d-none').text(response.cart_items_quantity);
+                  }
+                  
+                  if (typeof fetchCart === 'function') {
+                      fetchCart()
+                  }
 
-    window.productAddToCart = function (openCheckoutDialog = false) {
-        if (typeof $ === 'undefined') {
-            return;
-        }
+                  $('.added-notification').addClass("show");
+                  setTimeout(function() {
+                      $('.added-notification').removeClass("show");
+                  }, 5000);
+                  
+                  if (typeof toastr !== 'undefined') {
+                      toastr.success('{{ _("Added to cart successfully") }}', '{{ _("Success") }}');
+                  }
 
-        if (!$('.add-to-cart-progress').hasClass('d-none')) {
-            return;
-        }
+                  var image = $('#product-images-slick .slick-slide.slick-active img');
+                  var cart = $('.a-shopping-cart');
 
-        $('.add-to-cart-progress').removeClass('d-none');
+                  if (image.length && cart.length && typeof addToCartAnimation === 'function') {
+                      addToCartAnimation(cart, image);
+                  }
 
-        var quantity = parseInt($('#product-quantity').val()) || 1;
-        var productId = $('#product-id').val() || '{{ product.selected_product.id }}';
+              } else {
+                  if (typeof toastr !== 'undefined') {
+                      var errorMessage = response && response.message ? response.message : '{{ _("Failed to add to cart") }}';
+                      toastr.error(errorMessage, '{{ _("Sorry") }}');
+                  }
+              }
+              $('.add-to-cart-progress').addClass('d-none');
+          }).catch(function(error) {
+              $('.add-to-cart-progress').addClass('d-none');
+          });
+      };
 
-        if (!window.zid || !window.zid.cart || !window.zid.cart.addProduct) {
-            $('.add-to-cart-progress').addClass('d-none');
-            if (typeof toastr !== 'undefined') {
-                toastr.error('{{ _("Cart service not available") }}', '{{ _("Sorry") }}');
-            }
-            return;
-        }
+      async function sendProductNotifyMe() {
+          $('.send-notify-progress').removeClass('d-none');
 
-        window.zid.cart.addProduct({ form_id: 'product-form' }, { showErrorNotification: true }).then(function (response) {
-            if (response && response.item && response.cart_items_quantity) {
+          const countryCode = '+' + ($('.send-notify-country-key').val() || '966');
+          const productId = $('.send-notify-product-id').val();
+          const email = $('.send-notify-email').val();
+          const name = $('.send-notify-name').val();
 
-                if (response.cart_items_quantity) {
-                    $('.cart-badge').removeClass('d-none').text(response.cart_items_quantity);
-                }
+          let phone = '';
+          const rawPhone = $('.send-notify-phone').val();
+          if (rawPhone) {
+              phone = countryCode + rawPhone;
+          }
 
-                if (typeof fetchCart === 'function') {
-                    fetchCart()
-                }
+          const baseUrl = "{{ store.permalink }}";
+          const payload = {
+              customer_email: email,
+              customer_phone_number: phone,
+              customer_name: name
+          };
 
-                $('.added-notification').addClass("show");
-                setTimeout(function () {
-                    $('.added-notification').removeClass("show");
-                }, 5000);
+          const url = baseUrl + 'api/v1/products/' + encodeURIComponent(productId) + '/stock-alerts';
 
-                if (typeof toastr !== 'undefined') {
-                    toastr.success('{{ _("Added to cart successfully") }}', '{{ _("Success") }}');
-                }
+          try {
+              const res = await fetch(url, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(payload)
+              });
 
-                var image = $('#product-images-slick .slick-slide.slick-active img');
-                var cart = $('.a-shopping-cart');
+              if (res.ok) {
+                  let data = null;
+                  try {
+                      data = await res.json();
+                  } catch (e) {
+                      // Ignore JSON parse errors
+                  }
 
-                if (image.length && cart.length && typeof addToCartAnimation === 'function') {
-                    addToCartAnimation(cart, image);
-                }
+                  if (!data || (data && data.status === 'success')) {
+                      if (typeof toastr !== 'undefined') {
+                          toastr.success('{{ _("Send Successfully") }}');
+                      }
+                  } else if (data && data.data && data.data.message) {
+                      if (typeof toastr !== 'undefined') {
+                          toastr.error(JSON.stringify(data.data.message), '{{ _("Sorry") }}');
+                      }
+                  } else {
+                      if (typeof toastr !== 'undefined') {
+                          toastr.error('{{ _("failed to send") }}', '{{ _("Sorry") }}');
+                      }
+                  }
+              } else {
+                  let errData = null;
+                  try {
+                      errData = await res.json();
+                  } catch (e) {
+                      // Ignore JSON parse errors
+                  }
+                  
+                  const msg = (errData && errData.data && errData.data.message) 
+                      || (errData && errData.detail) 
+                      || 'HTTP ' + res.status;
+                      
+                  if (typeof toastr !== 'undefined') {
+                      toastr.error(msg, '{{ _("Sorry") }}');
+                  }
+              }
 
-            } else {
-                if (typeof toastr !== 'undefined') {
-                    var errorMessage = response && response.message ? response.message : '{{ _("Failed to add to cart") }}';
-                    toastr.error(errorMessage, '{{ _("Sorry") }}');
-                }
-            }
-            $('.add-to-cart-progress').addClass('d-none');
+          } catch (error) {                                        
+              var errorMessage = '{{ _("Failed to send alert request") }}';
 
+              if (typeof toastr !== 'undefined') {
+                  toastr.error(errorMessage, '{{ _("Sorry") }}');
+              }
+          } finally {
+              $('.send-notify-progress').addClass('d-none');
+          }
+      };
 
-            $('.buy-now-progress').addClass('d-none');
+        function productOptionsChanged(selected_product) {
+            if (selected_product) {
+                $('#product-id').val(selected_product.id);
+                $('.send-notify-product-id').val(selected_product.id);
 
-            $('.btn-buy-now').prop('disabled', false)
-
-            if (openCheckoutDialog) {
-                window.checkout_dialog.open();
-            }
-        }).catch(function (error) {
-            $('.buy-now-progress').addClass('d-none');
-
-            $('.btn-buy-now').prop('disabled', false)
-
-            $('.add-to-cart-progress').addClass('d-none');
-        });
-    };
-
-    async function sendProductNotifyMe() {
-        $('.send-notify-progress').removeClass('d-none');
-
-        const countryCode = '+' + ($('.send-notify-country-key').val() || '966');
-        const productId = $('.send-notify-product-id').val();
-        const email = $('.send-notify-email').val();
-        const name = $('.send-notify-name').val();
-
-        let phone = '';
-        const rawPhone = $('.send-notify-phone').val();
-        if (rawPhone) {
-            phone = countryCode + rawPhone;
-        }
-
-        const baseUrl = "{{ store.permalink }}";
-        const payload = {
-            customer_email: email,
-            customer_phone_number: phone,
-            customer_name: name
-        };
-
-        const url = baseUrl + 'api/v1/products/' + encodeURIComponent(productId) + '/stock-alerts';
-
-        try {
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (res.ok) {
-                let data = null;
-                try {
-                    data = await res.json();
-                } catch (e) {
-                    // Ignore JSON parse errors
-                }
-
-                if (!data || (data && data.status === 'success')) {
-                    if (typeof toastr !== 'undefined') {
-                        toastr.success('{{ _("Send Successfully") }}');
+                if (selected_product.in_stock) {
+                    // Selected a valid variant that is available.
+                    if (selected_product.formatted_sale_price) {
+                        $('.product-formatted-price').html(selected_product.formatted_sale_price);
+                        $('.product-formatted-price-old').html(selected_product.formatted_price);
+                        $('.product-formatted-price-discount').html('{{ _("Discount") }}' + ' ' + selected_product.discount_percentage + '%');
+                    } else {
+                        $('.product-formatted-price').html(selected_product.formatted_price);
+                        $('.product-formatted-price-old').html('');
+                        $('.product-formatted-price-discount').html('');
                     }
-                } else if (data && data.data && data.data.message) {
-                    if (typeof toastr !== 'undefined') {
-                        toastr.error(JSON.stringify(data.data.message), '{{ _("Sorry") }}');
+
+                    if (selected_product.weight && selected_product.weight.value) {
+                        $('.div-product-weight').removeClass('d-none');
+                        $('.div-product-weight .product-weight').html(selected_product.weight.value + ' ' + selected_product.weight.unit);
+                    } else {
+                        $('.div-product-weight').addClass('d-none');
                     }
-                } else {
-                    if (typeof toastr !== 'undefined') {
-                        toastr.error('{{ _("failed to send") }}', '{{ _("Sorry") }}');
+
+                    if (selected_product.sku) {
+                        $('.div-product-sku').removeClass('d-none');
+                        $('.div-product-sku .product-sku').html(selected_product.sku);
+                    } else {
+                        $('.div-product-sku').addClass('d-none');
                     }
+
+                    {% if store.settings.products.low_stock_label_enabled %}
+                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_threshold }};
+                    var low_stock_message = '{{ _("Remaining %s only") }}';
+
+                    if (!selected_product.is_infinite && selected_product.quantity < store_low_stock_limit) {
+                        $('.low-quantity-section').removeClass('d-none').addClass('d-inline-block');
+                        $('.low-quantity-section .low-quantity').html(low_stock_message.replace('%s', selected_product.quantity));
+                    } else {
+                        $('.low-quantity-section').removeClass('d-inline-block').addClass('d-none');
+                    }
+                    {% endif %}
+
+                    var sold_product_count_message = '{{ _("Sold more than %s times") }}';
+                    if (selected_product.sold_products_count) {
+                        $('.product-count').removeClass('d-none').addClass('d-flex');
+                        $('.product-count .lang').html(sold_product_count_message.replace('%s', selected_product.sold_products_count));
+                    } else {
+                        $('.product-count').removeClass('d-flex').addClass('d-none');
+                    }
+
+                    var selectQuantity = '';
+
+                    if (selected_product.is_infinite) {
+                        selected_product.quantity = 100;
+                    }
+
+                    if (selected_product.quantity > 0) {
+                        $('.select-quantity-div').removeClass('d-none');
+                        var quantityMax;
+                        if (selected_product.quantity > 100) {
+                            quantityMax = 100;
+                        } else {
+                            quantityMax = selected_product.quantity;
+                        }
+                        selectQuantity = '<option value="1" selected>1</option>';
+                        for (var i = 2; i <= quantityMax; i++) {
+                            selectQuantity += '<option value="' + i + '">' + i + '</option>';
+                        }
+                    } else {
+                        $('.select-quantity-div').addClass('d-none');
+                    }
+
+                    $('.select-quantity').html(selectQuantity);
+
+                    $('.product-buttons').removeClass('d-none');
+                    $('.section-out-of-stock-notify-me').addClass('d-none');
+
+                    $('.btn-add-to-cart span').html('{{ _("add to cart") }}');
+
+                    updateProductImages(selected_product);
+                } else {
+                    // Variant is sold out.
+                    if (selected_product.formatted_sale_price) {
+                        $('.product-formatted-price').html(selected_product.formatted_sale_price);
+                        $('.product-formatted-price-old').html(selected_product.formatted_price);
+                        $('.product-formatted-price-discount').html('{{ _("Discount") }}' + ' ' + selected_product.discount_percentage + '%');
+                    } else {
+                        $('.product-formatted-price').html(selected_product.formatted_price);
+                        $('.product-formatted-price-old').html('');
+                        $('.product-formatted-price-discount').html('');
+                    }
+                    $('.select-quantity-div').addClass('d-none');
+                    $('.product-buttons').addClass('d-none');
+                    $('.section-out-of-stock-notify-me').removeClass('d-none');
+
+                    $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
+
+                    if (selected_product.sku) {
+                        $('.div-product-sku').removeClass('d-none');
+                        $('.div-product-sku .product-sku').html(selected_product.sku);
+                    } else {
+                        $('.div-product-sku').addClass('d-none');
+                    }
+                    updateProductImages(selected_product);
                 }
             } else {
-                let errData = null;
-                try {
-                    errData = await res.json();
-                } catch (e) {
-                    // Ignore JSON parse errors
-                }
-
-                const msg = (errData && errData.data && errData.data.message)
-                    || (errData && errData.detail)
-                    || 'HTTP ' + res.status;
-
-                if (typeof toastr !== 'undefined') {
-                    toastr.error(msg, '{{ _("Sorry") }}');
-                }
-            }
-
-        } catch (error) {
-            var errorMessage = '{{ _("Failed to send alert request") }}';
-
-            if (typeof toastr !== 'undefined') {
-                toastr.error(errorMessage, '{{ _("Sorry") }}');
-            }
-        } finally {
-            $('.send-notify-progress').addClass('d-none');
-        }
-    };
-
-    function productOptionsChanged(selected_product) {
-        if (selected_product) {
-            $('#product-id').val(selected_product.id);
-            $('.send-notify-product-id').val(selected_product.id);
-
-            if (selected_product.in_stock) {
-                // Selected a valid variant that is available.
-                if (selected_product.formatted_sale_price) {
-                    $('.product-formatted-price').html(selected_product.formatted_sale_price);
-                    $('.product-formatted-price-old').html(selected_product.formatted_price);
-                    $('.product-formatted-price-discount').html('{{ _("Discount") }}' + ' ' + selected_product.discount_percentage + '%');
-                } else {
-                    $('.product-formatted-price').html(selected_product.formatted_price);
-                    $('.product-formatted-price-old').html('');
-                    $('.product-formatted-price-discount').html('');
-                }
-
-                if (selected_product.weight && selected_product.weight.value) {
-                    $('.div-product-weight').removeClass('d-none');
-                    $('.div-product-weight .product-weight').html(selected_product.weight.value + ' ' + selected_product.weight.unit);
-                } else {
-                    $('.div-product-weight').addClass('d-none');
-                }
-
-                if (selected_product.sku) {
-                    $('.div-product-sku').removeClass('d-none');
-                    $('.div-product-sku .product-sku').html(selected_product.sku);
-                } else {
-                    $('.div-product-sku').addClass('d-none');
-                }
-
-                {% if store.settings.products.low_stock_label_enabled %}
-                var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_threshold }};
-            };
-            var low_stock_message = '{{ _("Remaining %s only") }}';
-
-            if (!selected_product.is_infinite && selected_product.quantity < store_low_stock_limit) {
-                $('.low-quantity-section').removeClass('d-none').addClass('d-inline-block');
-                $('.low-quantity-section .low-quantity').html(low_stock_message.replace('%s', selected_product.quantity));
-            } else {
-                $('.low-quantity-section').removeClass('d-inline-block').addClass('d-none');
-            }
-            {% endif %}
-
-            var sold_product_count_message = '{{ _("Sold more than %s times") }}';
-            if (selected_product.sold_products_count) {
-                $('.product-count').removeClass('d-none').addClass('d-flex');
-                $('.product-count .lang').html(sold_product_count_message.replace('%s', selected_product.sold_products_count));
-            } else {
-                $('.product-count').removeClass('d-flex').addClass('d-none');
-            }
-
-            var selectQuantity = '';
-
-            if (selected_product.is_infinite) {
-                selected_product.quantity = 100;
-            }
-
-            if (selected_product.quantity > 0) {
-                $('.select-quantity-div').removeClass('d-none');
-                var quantityMax;
-                if (selected_product.quantity > 100) {
-                    quantityMax = 100;
-                } else {
-                    quantityMax = selected_product.quantity;
-                }
-                selectQuantity = '<option value="1" selected>1</option>';
-                for (var i = 2; i <= quantityMax; i++) {
-                    selectQuantity += '<option value="' + i + '">' + i + '</option>';
-                }
-            } else {
+                // variant doesn't exist.
                 $('.select-quantity-div').addClass('d-none');
+                $('.product-buttons').addClass('d-none');
+                $('.section-out-of-stock-notify-me').removeClass('d-none');
+
+                $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
+
+                updateProductImages(selected_product);
             }
-
-            $('.select-quantity').html(selectQuantity);
-
-            $('.product-buttons').removeClass('d-none');
-            $('.section-out-of-stock-notify-me').addClass('d-none');
-
-            $('.btn-add-to-cart span').html('{{ _("add to cart") }}');
-
-            updateProductImages(selected_product);
-        } else {
-            // Variant is sold out.
-            if (selected_product.formatted_sale_price) {
-                $('.product-formatted-price').html(selected_product.formatted_sale_price);
-                $('.product-formatted-price-old').html(selected_product.formatted_price);
-                $('.product-formatted-price-discount').html('{{ _("Discount") }}' + ' ' + selected_product.discount_percentage + '%');
-            } else {
-                $('.product-formatted-price').html(selected_product.formatted_price);
-                $('.product-formatted-price-old').html('');
-                $('.product-formatted-price-discount').html('');
-            }
-            $('.select-quantity-div').addClass('d-none');
-            $('.product-buttons').addClass('d-none');
-            $('.section-out-of-stock-notify-me').removeClass('d-none');
-
-            $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
-
-            if (selected_product.sku) {
-                $('.div-product-sku').removeClass('d-none');
-                $('.div-product-sku .product-sku').html(selected_product.sku);
-            } else {
-                $('.div-product-sku').addClass('d-none');
-            }
-            updateProductImages(selected_product);
-        }
-    } else {
-        // variant doesn't exist.
-        $('.select-quantity-div').addClass('d-none');
-        $('.product-buttons').addClass('d-none');
-        $('.section-out-of-stock-notify-me').removeClass('d-none');
-
-        $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
-
-        updateProductImages(selected_product);
-    }
         }
 
-    function updateProductImages(selected_product) {
-        if (selected_product && selected_product.media && selected_product.media.length > 0) {
-            $('.product-images-carousel').removeClass('d-none');
-            $('.product-images-carousel-thumbs').removeClass('d-none-important');
-            $('.product-images-empty').addClass('d-none');
-
-            if ($('#product-images-slick').hasClass('slick-initialized')) {
-                $('#product-images-slick').slick('unslick');
-            }
-
-            $('.product-images-carousel').addClass('product-images-carousel-init');
-
-            productImages = selected_product.media;
-
-            $('#product-images-slick').html('');
-            $('.product-images-carousel-thumbs').html('');
-
-            for (var z = 0; z < productImages.length; z++) {
-                var prImage = productImages[z];
-                var imageHtml = '<div>' +
-                    '<div class="box-1-1">' +
-                    '<div class="content">' +
-                    '<a class="image-link" style="display:block; width: 100%; height: 100%;">' +
-                    '<img src="' + (prImage.image && prImage.image.full_size ? prImage.image.full_size : '') + '" class="carousel-img" alt="' + (selected_product.name || '') + '">';
-
-                if (prImage.provider && prImage.link) {
-                    imageHtml += '<img id="main-video-icon" class="play-icon" src="{{ "video-play.svg" | asset_url }}" alt="play" onclick="showIframe(this, \'' + prImage.link.replace(/'/g, '\\\'') + '\')"/>';
+        function updateProductImages(selected_product) {
+            if (selected_product && selected_product.media && selected_product.media.length > 0) {
+                $('.product-images-carousel').removeClass('d-none');
+                $('.product-images-carousel-thumbs').removeClass('d-none-important');
+                $('.product-images-empty').addClass('d-none');
+                
+                if ($('#product-images-slick').hasClass('slick-initialized')) {
+                    $('#product-images-slick').slick('unslick');
                 }
+                
+                $('.product-images-carousel').addClass('product-images-carousel-init');
 
-                imageHtml += '</a>' +
-                    '<div class="iframe-video pt-1 d-none">' +
-                    '<a id="iframe-close-btn" type="button" class="text-white btn btn-none grow" onClick="hideIframe(this)">X</a>' +
-                    '<iframe width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%">' +
-                    '</iframe>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>';
+                productImages = selected_product.media;
 
-                $('#product-images-slick').append(imageHtml);
+                $('#product-images-slick').html('');
+                $('.product-images-carousel-thumbs').html('');
 
-                var thumbHtml = '<div class="col-3">' +
-                    '<div class="box-1-1">' +
-                    '<div class="content">' +
-                    '<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="' + z + '" style="width: 100%; height: 100%;">' +
-                    '<img src="' + (prImage.image && prImage.image.medium ? prImage.image.medium : '') + '" data-index="' + z + '">';
-
-                if (prImage.provider && prImage.link) {
-                    thumbHtml += '<img id="video-play-icon" class="play-icon" src="{{ "video-play.svg" | asset_url }}" alt="play" data-index="' + z + '">';
-                }
-
-                thumbHtml += '</a>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>';
-
-                $('.product-images-carousel-thumbs').append(thumbHtml);
-            }
-
-            initSlick(productImages);
-        } else {
-            $('.product-images-carousel').addClass('d-none');
-            $('.product-images-carousel-thumbs').addClass('d-none-important');
-            $('.product-images-empty').removeClass('d-none');
-        }
-    }
-
-    $('#product-description-a').click(function (event) {
-        event.preventDefault();
-
-        var scrollOffset;
-        if (window.matchMedia('(max-width: 768px)').matches) {
-            scrollOffset = 15;
-        } else {
-            scrollOffset = 150;
-        }
-
-        var targetElement = $($(this).attr('href'));
-        if (targetElement.length) {
-            $('html, body').animate({
-                scrollTop: targetElement.offset().top - scrollOffset
-            }, 500);
-        }
-    });
-
-    function addReviewButtonChecks() {
-        if (!window.customerAuthState || !window.customerAuthState.isAuthenticated) {
-            $('#add-review-btn').css('display', 'none');
-            $('#add-review-link').removeClass('d-none');
-            $('#add-review-link').attr('href', '/auth/login?redirect_to=' + window.location.pathname.replace('/', ''));
-            $('#add-review-link').on('click', function (e) {
-                e.preventDefault();
-                handleLoginAction(window.location.pathname.replace('/', ''));
-                return false;
-            });
-        }
-    }
-
-    $(document).ready(function () {
-        if (productImages && productImages.length > 0) {
-            initSlick(productImages);
-        }
-        if (customerWishlistIds && Array.isArray(customerWishlistIds)) {
-            fillWishlistItems(customerWishlistIds.map(function (id) { return { id: id }; }));
-        }
-    });
-
-    $(document).on('click', '.thumb-image-a, #video-play-icon', function (event) {
-        var target = event.target;
-        var dataIndex = $(target).attr('data-index');
-
-        if (dataIndex && $('#product-images-slick').hasClass('slick-initialized')) {
-            $('#product-images-slick').slick('slickGoTo', parseInt(dataIndex), true);
-        }
-    });
-
-    $(document).on('click', '#product-images-slick .image-link :not(#main-video-icon)', function (event) {
-        $('.pswp').removeClass('d-hide');
-        $('.app').addClass('d-hide');
-
-        var images = productImages.map(function (image) {
-            return image.image && image.image.full_size ? image.image.full_size : '';
-        }).filter(function (url) { return url; });
-
-        var currentIndex = $('#product-images-slick .slick-active').attr('data-slick-index');
-        if (typeof openPhotoSwiper === 'function') {
-            openPhotoSwiper(images, parseInt(currentIndex) || 0);
-        }
-    });
-
-    $(document).on('click', '.variant-image-wrapper a', function (event) {
-        $('.pswp').removeClass('d-hide');
-        $('.app').addClass('d-hide');
-
-        var elm = event.currentTarget;
-        var varId = $(elm).attr('data-link-var-id');
-        var images = [];
-
-        $("div[data-var-id='" + varId + "'] img").each(function () {
-            var imageUrl = $(this).attr('data-image-url');
-            if (imageUrl) {
-                images.push(imageUrl);
-            }
-        });
-
-        var index = parseInt($(elm).attr('data-index')) || 0;
-        if (typeof openPhotoSwiper === 'function') {
-            openPhotoSwiper(images, index);
-        }
-    });
-
-    function initSlick(productImages) {
-        if (!productImages || !Array.isArray(productImages)) {
-            return;
-        }
-
-        var arrowNextClass, arrowPrevClass;
-        if (window.appDirection === 'ltr') {
-            arrowNextClass = 'icon-keyboard_arrow_right';
-            arrowPrevClass = 'icon-keyboard_arrow_left';
-        } else {
-            arrowNextClass = 'icon-keyboard_arrow_left';
-            arrowPrevClass = 'icon-keyboard_arrow_right';
-        }
-
-        $('#product-images-slick').slick({
-            infinite: false,
-            autoplay: false,
-            arrows: (productImages.length > 1),
-            dots: (productImages.length > 1),
-            rtl: !(window.appDirection === 'ltr'),
-            nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
-            prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>'
-        });
-    }
-
-    $('#product-images-slick').on('init', function (event, slick) {
-        $('.product-images-carousel').removeClass('product-images-carousel-init');
-    });
-
-    function openPhotoSwipe(productImages, index) {
-        if (!productImages || !Array.isArray(productImages) || productImages.length === 0) {
-            return;
-        }
-
-        var pswpElement = document.querySelectorAll('.pswp')[0];
-        if (!pswpElement) {
-            return;
-        }
-
-        // build items array
-        var items = productImages.map(function (image) {
-            return {
-                src: image,
-                w: 1200,
-                h: 900
-            };
-        });
-
-        var options = {
-            history: false,
-            focus: false,
-            showAnimationDuration: 0,
-            hideAnimationDuration: 0,
-            index: parseInt(index) || 0
-        };
-
-        if (typeof PhotoSwipe !== 'undefined' && typeof PhotoSwipeUI_Default !== 'undefined') {
-            var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-
-            gallery.listen('close', function () {
-                $('.pswp').addClass('d-hide');
-                $('.app').removeClass('d-hide');
-            });
-
-            gallery.init();
-        }
-    }
-
-    function showRelatedProducts() {
-        var arrowNextClass, arrowPrevClass;
-        if (window.appDirection === 'ltr') {
-            arrowNextClass = 'icon-keyboard_arrow_right';
-            arrowPrevClass = 'icon-keyboard_arrow_left';
-        } else {
-            arrowNextClass = 'icon-keyboard_arrow_left';
-            arrowPrevClass = 'icon-keyboard_arrow_right';
-        }
-
-        var screenWidth = window.screen.width;
-        var editingMode = {% if store.editing_mode %} true{% else %} false{% endif %};
-
-    if (screenWidth >= 768 || editingMode) {
-        $('#related-products.products-slider').slick({
-            slidesToShow: 5,
-            slidesToScroll: 5,
-            infinite: false,
-            autoplay: false,
-            arrows: true,
-            dots: false,
-            rtl: !(window.appDirection === 'ltr'),
-            nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
-            prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>',
-            responsive: [
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 5,
-                        slidesToScroll: 5
+                for (var z = 0; z < productImages.length; z++) {
+                    var prImage = productImages[z];
+                    var imageHtml = '<div>' +
+                        '<div class="box-1-1">' +
+                        '<div class="content">' +
+                        '<a class="image-link" style="display:block; width: 100%; height: 100%;">' +
+                        '<img src="' + (prImage.image && prImage.image.full_size ? prImage.image.full_size : '') + '" class="carousel-img" alt="' + (selected_product.name || '') + '">';
+                    
+                    if (prImage.provider && prImage.link) {
+                        imageHtml += '<img id="main-video-icon" class="play-icon" src="{{ "video-play.svg" | asset_url }}" alt="play" onclick="showIframe(this, \'' + prImage.link.replace(/'/g, '\\\'') + '\')"/>';
                     }
-                },
-                {
-                    breakpoint: 768,
-                    settings: "unslick"
+                    
+                    imageHtml += '</a>' +
+                        '<div class="iframe-video pt-1 d-none">' +
+                        '<a id="iframe-close-btn" type="button" class="text-white btn btn-none grow" onClick="hideIframe(this)">X</a>' +
+                        '<iframe width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%">' +
+                        '</iframe>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+
+                    $('#product-images-slick').append(imageHtml);
+
+                    var thumbHtml = '<div class="col-3">' +
+                        '<div class="box-1-1">' +
+                        '<div class="content">' +
+                        '<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="' + z + '" style="width: 100%; height: 100%;">' +
+                        '<img src="' + (prImage.image && prImage.image.medium ? prImage.image.medium : '') + '" data-index="' + z + '">';
+                    
+                    if (prImage.provider && prImage.link) {
+                        thumbHtml += '<img id="video-play-icon" class="play-icon" src="{{ "video-play.svg" | asset_url }}" alt="play" data-index="' + z + '">';
+                    }
+                    
+                    thumbHtml += '</a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+
+                    $('.product-images-carousel-thumbs').append(thumbHtml);
                 }
-            ]
-        });
-    }
-        }
 
-    document.addEventListener('zid-customer-fetched', function (event) {
-        var customer = event.detail.customer;
-        if (customer && customer.mobile) {
-            $('.send-notify-name').val(customer.name || '');
-            $('.send-notify-email').val(customer.email || '');
-            $('.send-notify-country-key').val(customer.mobile.substring(0, 3) || '966');
-            $('.send-notify-phone').val(customer.mobile.substring(3) || '');
-        }
-    });
-
-    // Product Image Video  
-    function getIframeLink(videoLink) {
-        if (!videoLink || typeof videoLink !== 'string') {
-            return null;
-        }
-
-        const videoIdMatch = videoLink.match(
-            /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|.*[?&]v=)|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-        );
-
-        if (videoIdMatch && videoIdMatch[1]) {
-            const videoLinkId = videoIdMatch[1];
-            return 'https://www.youtube.com/embed/' + videoLinkId + '?autoplay=1&enablejsapi=1';
-        }
-
-        return null;
-    }
-
-    function showIframe(elm, imageVideoSrc) {
-        if (!elm || !imageVideoSrc) {
-            return;
-        }
-
-        const iframeLink = getIframeLink(imageVideoSrc);
-        if (!iframeLink) {
-            return;
-        }
-
-        const iframeElem = $(elm).parent(".image-link").siblings(".iframe-video").children("iframe");
-        $(elm).parent(".image-link").siblings(".iframe-video").removeClass("d-none");
-
-        if ($(iframeElem).attr("src") !== iframeLink) {
-            $(iframeElem).attr("src", iframeLink);
-        }
-    }
-
-    function hideIframe(elm) {
-        if (!elm) {
-            return;
-        }
-
-        $(elm).parent(".iframe-video").addClass("d-none");
-        $(elm).siblings("iframe").attr("src", "");
-    }
-
-    $('#product-images-slick').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-        if (slick && slick.$slides && slick.$slides[currentSlide]) {
-            const iframeContainers = slick.$slides[currentSlide].querySelector(".iframe-video");
-            if (iframeContainers) {
-                $(iframeContainers).addClass("d-none");
-                $(iframeContainers).children("iframe").attr("src", "");
+                initSlick(productImages);
+            } else {
+                $('.product-images-carousel').addClass('d-none');
+                $('.product-images-carousel-thumbs').addClass('d-none-important');
+                $('.product-images-empty').removeClass('d-none');
             }
         }
-    });
 
-    $('#product-images-slick').on('afterChange', function (event, slick, currentSlide, nextSlide) {
-        if (slick && slick.$slides && slick.$slides[currentSlide]) {
-            const iframeContainers = slick.$slides[currentSlide].querySelector(".iframe-video");
-            if (iframeContainers) {
-                const playIcon = $(iframeContainers).siblings(".image-link").children("#main-video-icon");
+        $('#product-description-a').click(function(event) {
+            event.preventDefault();
+
+            var scrollOffset;
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                scrollOffset = 15;
+            } else {
+                scrollOffset = 150;
+            }
+            
+            var targetElement = $($(this).attr('href'));
+            if (targetElement.length) {
+                $('html, body').animate({
+                    scrollTop: targetElement.offset().top - scrollOffset
+                }, 500);
+            }
+        });
+
+        function addReviewButtonChecks() {
+            if (!window.customerAuthState || !window.customerAuthState.isAuthenticated) {
+                $('#add-review-btn').css('display', 'none');
+                $('#add-review-link').removeClass('d-none');
+                $('#add-review-link').attr('href', '/auth/login?redirect_to=' + window.location.pathname.replace('/', ''));
+                $('#add-review-link').on('click', function(e) {
+                    e.preventDefault();
+                    handleLoginAction(window.location.pathname.replace('/', ''));
+                    return false;
+                });
+            }
+        }
+
+        $(document).ready(function() {
+            if (productImages && productImages.length > 0) {
+                initSlick(productImages);
+            }
+            if (customerWishlistIds && Array.isArray(customerWishlistIds)) {
+                fillWishlistItems(customerWishlistIds.map(function(id) { return { id: id }; }));
+            }
+        });
+
+        $(document).on('click', '.thumb-image-a, #video-play-icon', function(event) {
+            var target = event.target;
+            var dataIndex = $(target).attr('data-index');
+            
+            if (dataIndex && $('#product-images-slick').hasClass('slick-initialized')) {
+                $('#product-images-slick').slick('slickGoTo', parseInt(dataIndex), true);
+            }
+        });
+
+        $(document).on('click', '#product-images-slick .image-link :not(#main-video-icon)', function(event) {
+            $('.pswp').removeClass('d-hide');
+            $('.app').addClass('d-hide');
+
+            var images = productImages.map(function(image) {
+                return image.image && image.image.full_size ? image.image.full_size : '';
+            }).filter(function(url) { return url; });
+
+            var currentIndex = $('#product-images-slick .slick-active').attr('data-slick-index');
+            if (typeof openPhotoSwiper === 'function') {
+                openPhotoSwiper(images, parseInt(currentIndex) || 0);
+            }
+        });
+
+        $(document).on('click', '.variant-image-wrapper a', function(event) {
+            $('.pswp').removeClass('d-hide');
+            $('.app').addClass('d-hide');
+            
+            var elm = event.currentTarget;
+            var varId = $(elm).attr('data-link-var-id');
+            var images = [];
+
+            $("div[data-var-id='" + varId + "'] img").each(function() {
+                var imageUrl = $(this).attr('data-image-url');
+                if (imageUrl) {
+                    images.push(imageUrl);
+                }
+            });
+
+            var index = parseInt($(elm).attr('data-index')) || 0;
+            if (typeof openPhotoSwiper === 'function') {
+                openPhotoSwiper(images, index);
+            }
+        });
+
+        function initSlick(productImages) {
+            if (!productImages || !Array.isArray(productImages)) {
+                return;
+            }
+
+            var arrowNextClass, arrowPrevClass;
+            if (window.appDirection === 'ltr') {
+                arrowNextClass = 'icon-keyboard_arrow_right';
+                arrowPrevClass = 'icon-keyboard_arrow_left';
+            } else {
+                arrowNextClass = 'icon-keyboard_arrow_left';
+                arrowPrevClass = 'icon-keyboard_arrow_right';
+            }
+
+            $('#product-images-slick').slick({
+                infinite: false,
+                autoplay: false,
+                arrows: (productImages.length > 1),
+                dots: (productImages.length > 1),
+                rtl: !(window.appDirection === 'ltr'),
+                nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
+                prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>'
+            });
+        }
+
+        $('#product-images-slick').on('init', function(event, slick) {
+            $('.product-images-carousel').removeClass('product-images-carousel-init');
+        });
+
+        function openPhotoSwipe(productImages, index) {
+            if (!productImages || !Array.isArray(productImages) || productImages.length === 0) {
+                return;
+            }
+
+            var pswpElement = document.querySelectorAll('.pswp')[0];
+            if (!pswpElement) {
+                return;
+            }
+
+            // build items array
+            var items = productImages.map(function(image) {
+                return {
+                    src: image,
+                    w: 1200,
+                    h: 900
+                };
+            });
+
+            var options = {
+                history: false,
+                focus: false,
+                showAnimationDuration: 0,
+                hideAnimationDuration: 0,
+                index: parseInt(index) || 0
+            };
+
+            if (typeof PhotoSwipe !== 'undefined' && typeof PhotoSwipeUI_Default !== 'undefined') {
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+
+                gallery.listen('close', function() {
+                    $('.pswp').addClass('d-hide');
+                    $('.app').removeClass('d-hide');
+                });
+
+                gallery.init();
+            }
+        }
+
+        function showRelatedProducts() {
+            var arrowNextClass, arrowPrevClass;
+            if (window.appDirection === 'ltr') {
+                arrowNextClass = 'icon-keyboard_arrow_right';
+                arrowPrevClass = 'icon-keyboard_arrow_left';
+            } else {
+                arrowNextClass = 'icon-keyboard_arrow_left';
+                arrowPrevClass = 'icon-keyboard_arrow_right';
+            }
+
+            var screenWidth = window.screen.width;
+            var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
+
+            if (screenWidth >= 768 || editingMode) {
+                $('#related-products.products-slider').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 5,
+                    infinite: false,
+                    autoplay: false,
+                    arrows: true,
+                    dots: false,
+                    rtl: !(window.appDirection === 'ltr'),
+                    nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
+                    prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>',
+                    responsive: [
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                slidesToShow: 5,
+                                slidesToScroll: 5
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: "unslick"
+                        }
+                    ]
+                });
+            }
+        }
+
+        document.addEventListener('zid-customer-fetched', function(event) {
+            var customer = event.detail.customer;
+            if (customer && customer.mobile) {
+                $('.send-notify-name').val(customer.name || '');
+                $('.send-notify-email').val(customer.email || '');
+                $('.send-notify-country-key').val(customer.mobile.substring(0, 3) || '966');
+                $('.send-notify-phone').val(customer.mobile.substring(3) || '');
+            }
+        });
+
+        // Product Image Video  
+        function getIframeLink(videoLink) {
+            if (!videoLink || typeof videoLink !== 'string') {
+                return null;
+            }
+
+            const videoIdMatch = videoLink.match(
+                /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|.*[?&]v=)|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+            );
+
+            if (videoIdMatch && videoIdMatch[1]) {
+                const videoLinkId = videoIdMatch[1];
+                return 'https://www.youtube.com/embed/' + videoLinkId + '?autoplay=1&enablejsapi=1';
+            }
+
+            return null;
+                }
+
+        function showIframe(elm, imageVideoSrc) {
+            if (!elm || !imageVideoSrc) {
+                return;
+            }
+
+            const iframeLink = getIframeLink(imageVideoSrc);
+            if (!iframeLink) {
+                return;
+            }
+
+            const iframeElem = $(elm).parent(".image-link").siblings(".iframe-video").children("iframe");
+            $(elm).parent(".image-link").siblings(".iframe-video").removeClass("d-none");
+            
+            if ($(iframeElem).attr("src") !== iframeLink) {
+                $(iframeElem).attr("src", iframeLink);
+            }
+        }
+
+        function hideIframe(elm) {
+            if (!elm) {
+                return;
+            }
+
+            $(elm).parent(".iframe-video").addClass("d-none");
+            $(elm).siblings("iframe").attr("src", "");
+        }
+
+        $('#product-images-slick').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+            if (slick && slick.$slides && slick.$slides[currentSlide]) {
+                const iframeContainers = slick.$slides[currentSlide].querySelector(".iframe-video");
+                if (iframeContainers) {
+                    $(iframeContainers).addClass("d-none");
+                    $(iframeContainers).children("iframe").attr("src", "");
+                }
+            }
+        });
+
+        $('#product-images-slick').on('afterChange', function(event, slick, currentSlide, nextSlide) {
+            if (slick && slick.$slides && slick.$slides[currentSlide]) {
+                const iframeContainers = slick.$slides[currentSlide].querySelector(".iframe-video");
+                if (iframeContainers) {
+                    const playIcon = $(iframeContainers).siblings(".image-link").children("#main-video-icon");
+                    if (playIcon.length) {
+                        playIcon.click();
+                    }
+                }
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                const activeSlide = $("#product-images-slick .slick-slide.slick-active .image-link");
+                const playIcon = $(activeSlide).children("#main-video-icon");
                 if (playIcon.length) {
                     playIcon.click();
                 }
-            }
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(function () {
-            const activeSlide = $("#product-images-slick .slick-slide.slick-active .image-link");
-            const playIcon = $(activeSlide).children("#main-video-icon");
-            if (playIcon.length) {
-                playIcon.click();
-            }
-        }, 250);
-    });
-</script>
+            }, 250);
+        });
+    </script>
 
 {% endblock %}
