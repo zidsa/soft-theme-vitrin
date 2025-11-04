@@ -297,11 +297,11 @@
                                 {% include 'vitrin:checkout/checkout_dialog.jinja' %}
 
 
-                                  <button class="btn btn-buy-now" type="button" onclick="productBuyNow()">
-                                      <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
-                                      <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
-                                      <span>{{ _("Buy now") }}</span>
-                                  </button>
+                                <button class="btn btn-buy-now" type="button" onclick="productBuyNow()">
+                                    <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+                                    <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
+                                    <span>{{ _("Buy now") }}</span>
+                                </button>
                                 <!-- ------------- -->
 
                                 </div>
@@ -693,6 +693,8 @@
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
 
         window.productBuyNow = async () => {
+            alert('buy now');
+            
             $('.btn-buy-now').prop('disabled', true);
 
             $('.buy-now-progress').toggleClass('d-none');
