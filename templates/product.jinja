@@ -270,6 +270,12 @@
 
 
                             </form>
+                            
+                            <!-- Bundle Product Selection Container -->
+                            {% if product.product_class == 'dynamic_bundle' %}
+                                {% include 'vitrin:products/bundle-products.jinja' %}
+                            {% endif %}
+
                             <div class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
                                 <div class="border-product"></div>
                                 <div class="d-flex align-center">
@@ -677,7 +683,34 @@
         var productImages = {{ product.selected_product.media | tojson }};
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
 
+        // Listen for bundle selection changes and update payload
+        window.addEventListener('vitrin:bundle-selections:updated', function(event) {
+            const cartData = event?.detail?.data;
+            const bundlePayload = cartData?.cartPayload;
+            const isValid = cartData?.isSelectionsValid;
+
+            // Store the bundle payload globally so productAddToCart can use it
+            window.bundleCartPayload = bundlePayload;
+
+            // cart button is initially disabled until bundle selections are valid
+            const addToCartBtn = document.querySelector('.btn-add-to-cart');
+            if (addToCartBtn) {
+                if (!isValid) {
+                    addToCartBtn.classList.add('disabled');
+                    addToCartBtn.disabled = true;
+
+                } else {
+                    addToCartBtn.classList.remove('disabled');
+                    addToCartBtn.disabled = false;
+                }
+            }
+        });
+
         window.productAddToCart = function() {
+           const addToCartBtn = document.querySelector('.btn-add-to-cart');
+
+          if(addToCartBtn.disabled) return;
+
           if (typeof $ === 'undefined') {
               return;
           }
@@ -699,7 +732,12 @@
               return;
           }
 
-          window.zid.cart.addProduct({ form_id:'product-form' }, { showErrorNotification: true }).then(function(response) {
+          const bundlePayload = window.bundleCartPayload;
+          const addProductOptions = bundlePayload ?
+            { ...bundlePayload, form_id: 'product-form' } :
+            { form_id: 'product-form' };
+
+          window.zid.cart.addProduct(addProductOptions, { showErrorNotification: true }).then(function(response) {
               if (response && response.item && response.cart_items_quantity) {
                   
                   if (response.cart_items_quantity) {

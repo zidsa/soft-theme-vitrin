@@ -1523,3 +1523,102 @@
     justify-content: flex-end;
   }
 }
+
+
+/* Bundle Accordion Styles */
+.product-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.product-title-row h1 {
+    margin: 0;
+    flex: 1;
+}
+
+.bundle-toggle-btn {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+.bundle-toggle-btn:hover {
+    background-color: #f8f9fa;
+}
+
+.bundle-toggle-btn .accordion-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s ease;
+    color: #6c757d;
+}
+
+.bundle-toggle-btn.expanded .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.bundle-accordion {
+    margin-top: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.bundle-accordion-content {
+    padding: 12px 16px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.bundle-accordion-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.bundle-accordion-content::-webkit-scrollbar-track {
+    background: #e9ecef;
+    border-radius: 10px;
+}
+
+.bundle-accordion-content::-webkit-scrollbar-thumb {
+    background: #adb5bd;
+    border-radius: 10px;
+}
+
+.bundle-accordion-content::-webkit-scrollbar-thumb:hover {
+    background: #868e96;
+}
+
+.bundle-accordion .sub-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #495057;
+}
+
+.bundle-accordion .sub-item:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.bundle-accordion .sub-item-name {
+    flex: 1;
+    text-align: right;
+}
+
+.bundle-accordion .sub-item-quantity {
+    font-weight: normal;
+    color: #212529;
+    margin-right: 12px;
+}
