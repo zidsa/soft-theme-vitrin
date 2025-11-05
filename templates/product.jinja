@@ -700,12 +700,26 @@
         });
 
         window.productBuyNow = async () => {
-            $('.btn-buy-now').prop('disabled', true);
-            $('.buy-now-progress').removeClass('d-none');
+            const buyNowLoading = (isLoading) => {
+                const $button = $('.btn-buy-now');
+                const $loader = $('.buy-now-progress');
 
-            await window.zid.cart.empty()
+                $button.prop('disabled', isLoading);
+                $loader.toggleClass('d-none', !isLoading);
+            };
 
-            window.productAddToCart(true);
+            buyNowLoading(true);
+
+            try {
+                const response = await window.zid.cart.buyNow({ form_id:'product-form' }, { showErrorNotification: true });
+
+                if(response){
+                    buyNowLoading(false)
+                }
+
+            }catch(error){
+                buyNowLoading(false);
+            }
 
         }
 
@@ -808,8 +822,7 @@
               $('.buy-now-progress').addClass('d-none');
 
           }).catch(function(error) {
-              $('.btn-buy-now').prop('disabled', false);
-              $('.buy-now-progress').addClass('d-none');
+
               $('.add-to-cart-progress').addClass('d-none');
           });
       };
