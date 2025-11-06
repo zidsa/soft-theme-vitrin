@@ -231,7 +231,7 @@
                                 <a href="#"
                                 class="btn btn-lg btn-block btn-disabled"
                                 >
-                                    {{ _("Purchase") }}
+                                    {{ _("Complete Order") }}
                                 </a>
                             {% else %}
                             {% if session.is_guest %}
@@ -239,13 +239,13 @@
                                 class="btn btn-primary btn-lg btn-block"
                                 onclick="event.preventDefault(); handleLoginAction('/checkout'); return false;"
                                 >
-                                    {{ _("Purchase") }}
+                                    {{ _("Complete Order") }}
                                 </a>
                             {% else %}
                                 <a href="/checkout"
                                 class="btn btn-primary btn-lg btn-block"
                                 >
-                                    {{ _("Purchase") }}
+                                    {{ _("Complete Order") }}
                                 </a>
 
                                 <div style="margin-top: 1rem">
