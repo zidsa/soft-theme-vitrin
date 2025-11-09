@@ -247,11 +247,10 @@
                                 >
                                     {{ _("Complete Order") }}
                                 </a>
-
-                                <div style="margin-top: 1rem">
-                                    {{ template_for_cart_apple_pay_button }}
-                                </div>
                             {% endif %}
+                            <div style="margin-top: 1rem">
+                              {% include 'vitrin:checkout/apple-pay-quick-checkout.jinja' %}
+                            </div>
                             {% endif %}
                     
                         </div>
