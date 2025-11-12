@@ -49,7 +49,7 @@
 
               <div>
                 <p class="cities-result lead">
-                  {% for city in cart.free_shipping_rule.shipping_cities_condition %}
+                  {% for city in safeget(cart, "free_shipping_rule.shipping_cities_condition", []) %}
                     {{ city.name }}
                     {% if not loop.last %} {{ _(",") }} {% endif %}
                   {% endfor %}
