@@ -7,7 +7,7 @@
 
                     {% for menu in store.settings.menus.main_menu.items %}
                         {% if menu.url %}
-                            <li class="top-level-link {% if safeget(menu, "url") == '/c/' %} all-categories {% endif %}" >
+                            <li class="top-level-link {% if safeget(menu, "url") == '/c/' or safeget(menu, "url") == '/categories/' %} all-categories {% endif %}" >
                                 <a href="{{ menu.url }}"
                                         {% if menu.items | length > 0 %} class="mega-menu" {% endif %} ><span>{{ menu.label }}</span></a>
                                 {% if menu.items | length > 0 %}

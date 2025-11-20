@@ -713,9 +713,7 @@
             try {
                 const response = await window.zid.cart.buyNow({ form_id:'product-form' }, { showErrorNotification: true });
 
-                if(response){
-                    buyNowLoading(false)
-                }
+                buyNowLoading(false);
 
             }catch(error){
                 buyNowLoading(false);
