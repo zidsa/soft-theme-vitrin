@@ -97,7 +97,7 @@ msgid "add to cart"
 msgstr "أضف إلى السلة"
 
 msgid "Buy now"
-msgstr "اشتري الآن"
+msgstr "اشترِ الآن"
 
 msgid "Add your question"
 msgstr "أضف سؤالك"
