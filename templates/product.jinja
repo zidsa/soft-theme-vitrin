@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{{ 'toastr.min.css' | asset_url }}" />
     <link rel="stylesheet" type="text/css" href="{{ 'ekko-lightbox.css' | asset_url }}" />
 
-    <link rel="stylesheet" type="text/css" href="{{ 'product-details.css?v=1.100.30' | asset_url }}" />
+    <link rel="stylesheet" type="text/css" href="{{ ('product-details.css?v=' ~ ver)  | asset_url }}" />
 
 {% endblock %}
 
@@ -279,10 +279,11 @@
                             <div class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
                                 <div class="border-product"></div>
                                     <div class="d-flex align-center" style="gap: 10px;">
-                                        <button style="margin-bottom: 20px"
-                                                class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
-                                            <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
+                                        <button style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+                                            <div class="add-to-cart-icon fa fa-shopping-cart" style="mask: url({{ 'shopping-cart.svg' | asset_url }}) no-repeat center;"></div>
+
                                             <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
+
                                             <span>{{ _("add to cart") }}</span>
                                         </button>
 
@@ -290,7 +291,10 @@
                                         {% include 'vitrin:checkout/checkout_dialog.jinja' %}
                                         
                                         <button class="btn btn-buy-now d-none" type="button" onclick="zidProductBuyNow()">
+                                            <div class="buy-now-icon" style="mask: url({{ 'buy-now.svg' | asset_url }}) no-repeat center;"></div>
+                                            
                                             <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25" />
+                                            
                                             <span>{{ _("Buy now") }}</span>
                                         </button>
 
@@ -703,9 +707,11 @@
             const buyNowLoading = (isLoading) => {
                 const $button = $('.btn-buy-now');
                 const $loader = $('.buy-now-progress');
+                const $icon = $('.buy-now-icon');
 
                 $button.prop('disabled', isLoading);
                 $loader.toggleClass('d-none', !isLoading);
+                $icon.toggleClass('d-none', isLoading);
             };
 
             try {
@@ -761,12 +767,14 @@
           }
 
           $('.add-to-cart-progress').removeClass('d-none');
+          $('.add-to-cart-icon').addClass('d-none');
 
           var quantity = parseInt($('#product-quantity').val()) || 1;
           var productId = $('#product-id').val() || '{{ product.selected_product.id }}';
 
           if (!window.zid || !window.zid.cart || !window.zid.cart.addProduct) {
-              $('.add-to-cart-progress').addClass('d-none');
+               $('.add-to-cart-progress').addClass('d-none');
+               $('.add-to-cart-icon').removeClass('d-none');
               if (typeof toastr !== 'undefined') {
                   toastr.error('{{ _("Cart service not available") }}', '{{ _("Sorry") }}');
               }
@@ -817,14 +825,11 @@
               }
 
               $('.add-to-cart-progress').addClass('d-none');
-
-              $('.btn-buy-now').prop('disabled', false);
-
-              $('.buy-now-progress').addClass('d-none');
-
+              $('.add-to-cart-icon').removeClass('d-none');
           }).catch(function(error) {
 
               $('.add-to-cart-progress').addClass('d-none');
+              $('.add-to-cart-icon').removeClass('d-none');
           });
       };
 
