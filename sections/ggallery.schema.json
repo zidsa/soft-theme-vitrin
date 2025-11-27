@@ -16,6 +16,19 @@
       }
     },
     {
+      "id": "num_of_cols",
+      "type": "number",
+      "label": {
+        "ar": "عدد الأعمدة",
+        "en": "Number of columns"
+      },
+      "default": 2,
+      "info": {
+        "ar": "استخدم فقط ارقام صحيحة, مثلا 1, 2, 3, 4",
+        "en": "Only use integer numbers, e.g. 1, 2, 3, 4"
+      }
+    },
+    {
       "id": "gallery",
       "type": "list",
       "label": {
