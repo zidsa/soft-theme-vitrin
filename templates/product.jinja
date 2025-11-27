@@ -705,13 +705,13 @@
         window.zidProductBuyNow = async () => {
 
             const buyNowLoading = (isLoading) => {
-                const $button = $('.btn-buy-now');
-                const $loader = $('.buy-now-progress');
-                const $icon = $('.buy-now-icon');
+                const buttonElement = $('.btn-buy-now');
+                const loaderElement = $('.buy-now-progress');
+                const iconElement = $('.buy-now-icon');
 
-                $button.prop('disabled', isLoading);
-                $loader.toggleClass('d-none', !isLoading);
-                $icon.toggleClass('d-none', isLoading);
+                buttonElement.prop('disabled', isLoading);
+                loaderElement.toggleClass('d-none', !isLoading);
+                iconElement.toggleClass('d-none', isLoading);
             };
 
             try {
@@ -722,8 +722,8 @@
 
                 buyNowLoading(false);
 
-            }catch(error){
-                console.log(error,'<---')
+            } catch(error) {
+                console.error(error, 'Buy Now failed');
             }
 
             buyNowLoading(false);
@@ -811,10 +811,6 @@
 
                   if (image.length && cart.length && typeof addToCartAnimation === 'function') {
                       addToCartAnimation(cart, image);
-                  }
-                  
-                  if(buyNowDialog) {
-                    window.checkout_dialog.open();
                   }
 
               } else {
