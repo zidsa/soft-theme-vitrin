@@ -45,6 +45,11 @@
                     <p style="font-size: 2rem">
                         {{ slide.des }}
                     </p>
+                    {% if slide.display_button %}
+                      <button class="btn btn-primary" onclick="event.preventDefault(); event.stopPropagation(); window.location.href = '{% if slide.button_url %}{{ slide.button_url }}{% else %}/{% endif %}'; return false;">
+                        {{ slide.button_text }}
+                      </button>
+                    {% endif %}
                   </div>
                 </a>
               </div>
