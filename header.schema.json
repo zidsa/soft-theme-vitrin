@@ -27,7 +27,7 @@
         },
         {
           "id": "options",
-          "type": "checkboxes",
+          "type": "checkbox",
           "label": {
             "ar": "الخيارات",
             "en": "Options"
