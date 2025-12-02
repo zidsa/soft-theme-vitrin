@@ -13,7 +13,7 @@
   <section class="mt-5">
     <div class="container pb-5 product">
       <div class="row">
-        {% if product.images is not none and product.images[0].image.medium is defined %}
+        {% if product.images and product.images[0].image.medium is defined %}
           <div class="col-md-3">
             <img src="{{ product.main_image.image.medium if product.main_image else '' }}" alt="product-image" class="img-fluid" />
           </div>

@@ -31,8 +31,8 @@
     {% set menu_settings=settings %}{% include 'components/header-sliding-menu.jinja' %}
     {% set menu_settings=settings %}{% include 'components/header-mega-menu.jinja' %}
 
-    {% set show_country = 'hide_country' not in settings.header_options %}
-    {% set show_language = 'hide_language' not in settings.header_options %}
+    {% set show_country = 'hide_country' not in safeget(settings, "header_options", []) %}
+    {% set show_language = 'hide_language' not in safeget(settings, "header_options", []) %}
     
 
     {% if (show_country and multiple_countries) or (show_language and multiple_languages) %}
