@@ -17,7 +17,7 @@
 
         {% set multiple_countries = store.countries | length > 1 %}
         {% set multiple_languages = store.languages | length > 1 %}
-        {% if (multiple_countries and 'hide_country' not in settings.header_options) or (multiple_languages and 'hide_language' not in settings.header_options) %}
+        {% if (multiple_countries and 'hide_country' not in safeget(settings, "header_options", [])) or (multiple_languages and 'hide_language' not in safeget(settings, "header_options", [])) %}
         <div class="language-currency d-flex justify-content-between" data-toggle="modal" data-target="#langCurrecyModal">
 
             {% if session.lang == 'en' %}
@@ -28,15 +28,15 @@
                 {% set change_to_lang_name = 'English' %}
             {% endif %}
 
-            {% if multiple_countries and 'hide_country' not in settings.header_options %}
+            {% if multiple_countries and 'hide_country' not in safeget(settings, "header_options", []) %}
             <div class="currency-button-area d-flex justify-content-center">
                 <button class="c-btn currency-btn">{{ session.country.name }} {% if session.country.city %} - {{ session.country.city.name }} {% endif %}</button>
             </div>
             {% endif %}
-            {% if (multiple_countries and 'hide_country' not in settings.header_options) and (multiple_languages and 'hide_language' not in settings.header_options) %}
+            {% if (multiple_countries and 'hide_country' not in safeget(settings, "header_options", [])) and (multiple_languages and 'hide_language' not in safeget(settings, "header_options", [])) %}
             <div class="vertical-line"></div>
             {% endif %}
-            {% if multiple_languages and 'hide_language' not in settings.header_options %}
+            {% if multiple_languages and 'hide_language' not in safeget(settings, "header_options", []) %}
             <div class="language-button-area d-flex justify-content-between">
                 <button type="submit" class='c-btn language-btn d-flex justify-content-between align-items-center'>
                     <span class="px-2">{{ change_to_lang_name }}</span>&nbsp;
