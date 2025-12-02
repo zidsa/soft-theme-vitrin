@@ -35,7 +35,7 @@
                 {% set count=products.count %}{% set has_products_filtration=(products.filters|length > 0) %}{% include 'components/products-filter.jinja' %}
             </div>
             <div id="products-list" class="row products-list">
-                {% for product in products.results %}
+                {% for product in safeget(products, "results", []) %}
 
                     <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
                         {% set product=product %}{% set index=key %}{% include 'components/product-card.jinja' %}
