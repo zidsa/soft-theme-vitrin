@@ -1,6 +1,6 @@
 {
   "section_id": "uuid",
-  "template": "sections/slider-section.jinja",
+  "template": "sections/cards-slider-section.jinja",
   "icon": "fal fa-cabinet-filing",
   "name": {
     "ar": "شرائح البطاقات",
