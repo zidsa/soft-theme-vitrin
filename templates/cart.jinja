@@ -188,9 +188,9 @@
                             <div class="d-flex align-items-center">
                             <div class="message flex-grow-1 free-shipping-rule-message">
                                 {% if status == 'min_not_reached' %}
-                                    {{ _("Add products with total of %(total)s to get free shipping") | format(total=subtotal_condition.remaining_to_min_total | default("0")) }}
+                                    {{ _("Add products with total of %(total)s to get free shipping") | format(total=subtotal_condition.remaining | default("0")) }}
                                 {% elif status == 'max_exceed' %}
-                                    {{ _("Free shipping applied for cart total between %(min)s and %(max)s") | format(min=subtotal_condition.min_total | default("0"), max=subtotal_condition.max_total | default("0")) }}
+                                    {{ _("Free shipping applied for cart total between %(min)s and %(max)s") | format(min=subtotal_condition.min_string | default("0"), max=subtotal_condition.max_string | default("0")) }}
                                 {% elif status == 'applied' %}
                                     {{  _("Free shipping applied") }}
                                 {% endif %}
