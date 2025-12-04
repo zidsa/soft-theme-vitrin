@@ -175,7 +175,7 @@
     color: black;
 }
 
-.categories-slider {
+.categories-slider, .cards-slider {
     height: auto;
 }
 
@@ -183,11 +183,11 @@
     height: 330px;
 }
 
-.products-slider, .categories-slider {
+.products-slider, .categories-slider, .cards-slider {
     display: none;
 }
 
-.products-slider.slick-initialized, .categories-slider.slick-initialized {
+.products-slider.slick-initialized, .categories-slider.slick-initialized, .cards-slider.slick-initialized {
     display: block;
     height: auto;
 }
