@@ -51,6 +51,30 @@
             "ar": "العنوان",
             "en": "text"
           }
+        },
+        {
+          "id": "display_button",
+          "type": "checkbox",
+          "label": {
+            "ar": "اظهار الزر",
+            "en": "Display button"
+          }
+        },
+        {
+          "id": "button_text",
+          "type": "text",
+          "label": {
+            "ar": "نص الزر",
+            "en": "Button text"
+          }
+        },
+        {
+          "id": "button_url",
+          "type": "url",
+          "label": {
+            "ar": "رابط الزر",
+            "en": "Button link"
+          }
         }
       ]
     },
