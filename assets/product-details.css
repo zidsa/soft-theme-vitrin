@@ -478,10 +478,41 @@
 .btn-add-to-cart {
     background-color:var(  --primary-color);
     color: var(--text-color-primary-bg);
-
     width: 100%;
     padding: 10px;
     font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.add-to-cart-icon {
+  width: 20px;
+  height: 20px;
+  background-color: var(--text-color-primary-bg);
+  mask-size: contain !important;
+}
+
+.buy-now-icon {
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary-color);
+  mask-size: contain !important;
+}
+
+.btn-buy-now {
+    background-color:transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
 .border-product {

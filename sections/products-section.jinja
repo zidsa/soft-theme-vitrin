@@ -9,7 +9,7 @@
 
             <div class="products-slider-wrapper" style="position: relative">
                     <div class="products-slider s-slider">
-                        {% for product in settings.products.results %}
+                        {% for product in safeget(settings, "products.results", []) %}
                             <div class="prod-col">
                                 {% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                             </div>

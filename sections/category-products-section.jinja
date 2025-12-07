@@ -4,14 +4,14 @@
      data-sm-scroll-offset="94"
      class="home-products-section section-padding-space">
     <div class="container slider-container">
-        <h2 class="section-title theme-title-primary" >{{ settings.category.name }}</h2>
+        <h2 class="section-title theme-title-primary" >{{ safeget(settings, "category.name", "") }}</h2>
         <div class="d-flex flex-column">
 
             <div class="products-slider-wrapper" style="position: relative">
 
 
                     <div class="products-slider s-slider">
-                        {% for product in settings.category.results %}
+                        {% for product in safeget(settings, "category.products.results", []) %}
                             <div class="prod-col">
                                 {% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                             </div>
@@ -21,7 +21,7 @@
 
                 {% if settings.display_more %}
                     <div class="text-center mt-5 category-products-display-more-section">
-                        <a href="/categories/{{ settings.category.id }}/{{ settings.category.slug }}"
+                        <a href="/categories/{{ safeget(settings, "category.id") }}/{{ safeget(settings, "category.slug" ) }}"
                            class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
                     </div>
                 {% endif %}
