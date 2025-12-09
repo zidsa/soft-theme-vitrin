@@ -56,6 +56,8 @@
 
                         {% set multiple_countries = store.countries | length > 1 %}
                         {% set multiple_languages = store.languages | length > 1 %}
+                        
+
                         {% if (multiple_countries and 'hide_country' not in safeget(settings, "header_options", [])) or (multiple_languages and 'hide_language' not in safeget(settings, "header_options", [])) %}
                             <div class="language-currency language-currency-menu d-flex justify-content-between" onclick="zidOpenRegionSettingDialog()">
 
@@ -146,7 +148,4 @@ document.addEventListener('zid-customer-fetched', function (event) {
 });
 
 
-window.zidOpenRegionSettingDialog = () => {
-    region_settings_dialog.open()
-}
 </script>
