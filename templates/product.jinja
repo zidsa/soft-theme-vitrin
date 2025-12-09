@@ -370,7 +370,7 @@
             </section>
             {% endif %}
 
-            {{ template_for_product_grouped }}
+            {% include 'vitrin:products/grouped-product.jinja' %}
 
             {% if product.metafields %}
                 <section id="product-description" class="mt-5">
