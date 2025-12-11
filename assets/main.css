@@ -2002,7 +2002,7 @@ hr {
         padding: 0px;
     }
 
-    .products-slider, .categories-slider {
+    .products-slider, .categories-slider, .cards-slider {
         display: block;
     }
 

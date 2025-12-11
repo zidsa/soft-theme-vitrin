@@ -1,0 +1,58 @@
+{
+  "section_id": "uuid",
+  "template": "sections/cards-slider-section.jinja",
+  "icon": "fal fa-cabinet-filing",
+  "name": {
+    "ar": "شرائح البطاقات",
+    "en": "Cards Slider"
+  },
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": {
+        "ar": "العنوان",
+        "en": "text"
+      }
+    },
+    {
+      "id": "slider",
+      "type": "list",
+      "label": {
+        "ar": "البطاقة",
+        "en": "Card"
+      },
+      "max_items": 10,
+      "settings": [
+        {
+          "id": "image",
+          "type": "image",
+          "label": {
+            "ar": "الصورة",
+            "en": "Image"
+          },
+          "info": {
+            "ar": "ارفع صورة بحجم ٢٠٠ * ٢٠٠",
+            "en": "This is an info text sample here"
+          }
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": {
+            "ar": "العنوان",
+            "en": "Title"
+          }
+        },
+        {
+          "id": "url",
+          "type": "url",
+          "label": {
+            "ar": "الرابط",
+            "en": "Link"
+          }
+        }
+      ]
+    }
+  ]
+}
