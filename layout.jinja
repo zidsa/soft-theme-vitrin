@@ -259,11 +259,20 @@
         var text_loyalty_options = '{{ _('For {points} get a discount {percentage}') }}';
         var store_currency_code = '{{ session.currency }}';
     </script>
-            <script type='text/javascript' src="{{ ('layout_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
+    <script type='text/javascript' src="{{ ('layout_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
 
 {% endif %}
 
 {% block footer_scripts %}{% endblock %}
+
+
+{% include "vitrin:shared/region_settings_dialog.jinja" %}
+
+<script>
+  window.zidOpenRegionSettingDialog = () => {
+      region_settings_dialog.open()
+  }
+</script>
 
 </body>
 

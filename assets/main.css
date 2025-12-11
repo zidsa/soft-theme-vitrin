@@ -2100,3 +2100,16 @@ hr {
 .product-card-bundle-offer.bundle-offer-product-tag {
     display: inline-block;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .language-currency, .currency-button-area{
+        max-height: unset;
+    }
+    .c-btn{
+        height: unset;
+    }
+    .vertical-line{
+        height: 100%;
+    }
+}
