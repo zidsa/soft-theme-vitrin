@@ -16,6 +16,70 @@
       }
     },
     {
+      "id": "num_of_cols",
+      "type": "number",
+      "label": {
+        "ar": "عدد الأعمدة",
+        "en": "Number of columns"
+      },
+      "default": 2,
+      "info": {
+        "ar": "استخدم فقط ارقام صحيحة, مثلا 1, 2, 3, 4",
+        "en": "Only use integer numbers, e.g. 1, 2, 3, 4"
+      }
+    },
+    {
+      "id": "border_radius",
+      "type": "number",
+      "label": {
+        "ar": "حافة الصورة",
+        "en": "Image Radius"
+      },
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_height",
+      "label": {
+        "ar": "ارتفاع مخصص",
+        "en": "Enable Custom height"
+      },
+      "default": false
+    },
+    {
+      "id": "custom_height",
+      "type": "number",
+      "label": {
+        "ar": "ارتفاع الصورة",
+        "en": "Image Height"
+      },
+      "default": 200,
+      "visible_if": {
+        "enable_custom_height": true
+      }
+    },
+    {
+      "id": "enable_no_gutters",
+      "type": "checkbox",
+      "label": {
+        "ar": "فعَل تصميم الحافة",
+        "en": "Enable edge-to-edge design"
+      },
+      "default": false
+    },
+    {
+      "id": "gap",
+      "type": "number",
+      "label": {
+        "ar": "الفاصلة بين الصور",
+        "en": "Gap between images"
+      },
+      "default": 30,
+      "visible_if": {
+        "enable_no_gutters": true
+      }
+    },
+    {
       "id": "gallery",
       "type": "list",
       "label": {

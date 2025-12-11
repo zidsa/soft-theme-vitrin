@@ -1,3 +1,19 @@
+<style>
+  {% if settings.enable_no_gutters and settings.gap %}
+    {% set gap_value = settings.gap | int %}
+    {% set half_gap = (gap_value / 2) | int %}
+    .gallery-section .gallery.no-gutters {
+      margin-left: -{{ half_gap }}px;
+      margin-right: -{{ half_gap }}px;
+    }
+    .gallery-section .gallery.no-gutters>.gallery-item {
+      padding-left: {{ half_gap }}px;
+      padding-right: {{ half_gap }}px;
+      margin-bottom: {{ gap_value }}px;
+    }
+  {% endif %}
+</style>
+
 <div id="{{ sectionId }}" section-id="{{ sectionId }}"
      data-lg-scroll-offset="130"
      data-md-scroll-offset="130"
@@ -6,14 +22,27 @@
     {% if settings.title %}
       <h2 class="section-title p-0 theme-text-primary">{{ settings.title }}</h2>
     {% endif %}
-    <div class="gallery row">
+
+    {% set num_cols = settings.num_of_cols | default(2) | int %}
+    {% set col_class_map = {
+        1: 'col-12',
+        2: 'col-6',
+        3: 'col-4',
+        4: 'col-3',
+        6: 'col-2'
+    } %}
+    {% set col_class = col_class_map.get(num_cols, 'col-6') %}
+    {% set max_width_percent = (100 / num_cols) %}
+
+    <div class="gallery row {% if settings.enable_no_gutters %}no-gutters{% endif %}">
         {% for galler in safeget(settings, "gallery", []) %}
         {% set key=loop.index0 %}
-        <div class="gallery-item col-6 {% if (key == 2) or (key == 3) %} bottom-row {% endif %}">
-          <div class="box-1-1">
+        <div class="gallery-item {{ col_class }} {% if key > num_cols - 1 and not settings.enable_no_gutters %}bottom-row{% endif %}" 
+          {% if settings.enable_custom_height %} style="height: {{ settings.custom_height }}px;" {% endif %}>
+          <div class="box-1-1" style="height: 100%;">
             <div class="content">
               <a href="{{ galler.url }}" style="width: 100%; height: 100%; display: block">
-                <img style="width: 100%; height: 100%; object-fit: cover"
+                <img style="width: 100%; height: 100%; object-fit: cover; border-radius: {{ settings.border_radius }}px;"
                      srcset="
                              {{ image_url(galler.image, w=400, q=100, f='auto') }} 200w,
                              {{ image_url(galler.image, w=640, q=100, f='auto') }} 320w,
@@ -21,9 +50,9 @@
                              {{ image_url(galler.image, w=960, q=100, f='auto') }} 480w,
                              {{ image_url(galler.image, w=1700, q=100, f='auto') }} 850w,
                             "
-                     sizes="calc(50vw - 30px)"
+                     sizes="calc({{ 100 / num_cols }}vw - 30px)"
                      src="{{ image_url(galler.image, w=1700, q=100, f='auto') }}"
-                     {% if key != 0 %}
+                     {% if key !=0 %}
                      loading="lazy"
                      {% endif %}
                      alt="">
