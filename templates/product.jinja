@@ -606,9 +606,7 @@
                         <div class="description-title">
                             {{ _("Questions") }}
                         </div>
-                          {% if product.questions %}
                           <button type="button" class="btn btn-primary add-review-btn" id="addQuestionButton"><span class="icon-add_circle"></span>{{ _("Add your question") }}</button>
-                          {% endif %}
                     </div>
                 </div>
                 {% set questions=product.questions %}{% include 'components/product-questions.jinja' %}
