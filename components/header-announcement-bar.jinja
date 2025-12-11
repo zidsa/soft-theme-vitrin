@@ -3,7 +3,33 @@
         or (template == 'home' and settings.announcement_bar_page_display == 'home')
         or settings.announcement_bar_page_display == 'all'
     %}
-<div class="announcement-bar" style="z-index: 4; {% if settings.announcement_bar_background_color %}background: {{ settings.announcement_bar_background_color }} {% endif %}">
+{% set enable_animation = settings.announcement_bar_enable_animation %}
+{% set animation_speed = settings.announcement_bar_animation_speed | default(50) | int %}
+{% set pause_on_hover = settings.announcement_bar_pause_on_hover %}
+
+<div class="announcement-bar" style="z-index: 4; {% if settings.announcement_bar_background_color %}background: {{ settings.announcement_bar_background_color }}{% endif %}; overflow: hidden; position: relative; width: 100%;">
+    {% if enable_animation %}
+    <div class="announcement-ticker" data-speed="{{ animation_speed }}" data-pause-hover="{{ pause_on_hover }}">
+        <div class="ticker-wrap">
+            <!-- inject the content multiple times via JS -->
+        </div>
+    </div>
+
+    <!-- Hidden template for the ticker item -->
+    <template id="ticker-item-template">
+        <div class="ticker-item">
+            {% if settings.announcement_bar_icon %}
+            <span class="ticker-icon">{{ settings.announcement_bar_icon }}</span>
+            {% endif %}
+            <a href="{{ store.settings.announcement_bar.url }}" class="ticker-link">
+                <h2 class="announcement-text mb-0 py-1"
+                    style="{% if settings.announcement_bar_text_color %}color: {{ settings.announcement_bar_text_color }}{% endif %}">
+                    {{ settings.announcement_bar_text }}
+                </h2>
+            </a>
+        </div>
+    </template>
+    {% else %}
     <div class="container d-flex justify-content-center position-relative">
         <a href="{{ store.settings.announcement_bar.url }}">
             <h2 class="announcement-text mb-0 text-center py-1" style="{% if settings.announcement_bar_text_color %}color: {{ settings.announcement_bar_text_color }}{% endif %}">
@@ -12,7 +38,173 @@
         </a>
         <span class="icon-times-circle2 ab-close" style="{% if settings.announcement_bar_text_color %}color: {{ settings.announcement_bar_text_color }}{% endif %}" onclick="hideAnnouncementBar()"></span>
     </div>
+    {% endif %}
 </div>
+
+<style>
+    .announcement-bar {
+        width: 100%;
+    }
+
+    .announcement-ticker {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .ticker-wrap {
+        display: flex;
+        width: fit-content;
+        will-change: transform;
+    }
+
+    .ticker-item {
+        display: inline-flex;
+        align-items: center;
+        flex-shrink: 0;
+        padding: 0 2rem;
+        white-space: nowrap;
+    }
+
+    .ticker-icon {
+        margin-right: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    .ticker-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .ticker-item .announcement-text {
+        color: inherit;
+    }
+
+    @media (max-width: 768px) {
+        .ticker-item {
+            padding: 0 1.5rem;
+        }
+
+        .ticker-item .announcement-text {
+            font-size: 0.875rem;
+        }
+    }
+</style>
+
+<script>
+    (function () {
+        const ticker = document.querySelector('.announcement-bar .announcement-ticker');
+        if (!ticker) return;
+
+        const wrap = ticker.querySelector('.ticker-wrap');
+        const template = document.getElementById('ticker-item-template');
+        const speed = parseInt(ticker.getAttribute('data-speed')) || 50;
+        const pauseOnHover = ticker.getAttribute('data-pause-hover') === 'true' || ticker.getAttribute('data-pause-hover') === 'True';
+
+        if (!template) return;
+
+        let animationId;
+        let currentPosition = 0;
+        let isPaused = false;
+        let lastTimestamp = null;
+        let itemWidth = 0;
+
+        // Detect direction
+        const isRTL = document.documentElement.dir === 'rtl' ||
+            document.body.dir === 'rtl' ||
+            getComputedStyle(document.documentElement).direction === 'rtl';
+        const direction = isRTL ? 1 : -1; // 1 for right (RTL), -1 for left (LTR)
+
+        function createTickerItems() {
+            wrap.innerHTML = '';
+
+            const itemContent = template.content.cloneNode(true);
+            const tempDiv = document.createElement('div');
+            tempDiv.appendChild(itemContent);
+            const singleItem = tempDiv.firstElementChild;
+
+            wrap.appendChild(singleItem.cloneNode(true));
+
+            setTimeout(function () {
+                itemWidth = wrap.firstElementChild.offsetWidth;
+
+                if (itemWidth === 0) {
+                    console.error('Item width is 0, retrying...');
+                    setTimeout(createTickerItems, 100);
+                    return;
+                }
+
+                const viewportWidth = window.innerWidth;
+                const itemsNeeded = Math.ceil(viewportWidth / itemWidth) + 8; // Increased buffer
+
+                wrap.innerHTML = '';
+                for (let i = 0; i < itemsNeeded; i++) {
+                    wrap.appendChild(singleItem.cloneNode(true));
+                }
+
+                lastTimestamp = null;
+                animationId = requestAnimationFrame(animate);
+            }, 100);
+        }
+
+        function animate(timestamp) {
+            if (!lastTimestamp) lastTimestamp = timestamp;
+            const delta = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
+
+            if (!isPaused && itemWidth > 0) {
+                currentPosition += (speed * delta * direction) / 1000;
+
+                if (isRTL) {
+                    if (currentPosition >= itemWidth) {
+                        currentPosition -= itemWidth;
+                    }
+                } else {
+                    if (currentPosition <= -itemWidth) {
+                        currentPosition += itemWidth;
+                    }
+                }
+
+                wrap.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
+            }
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // Initialize
+        createTickerItems();
+
+        if (pauseOnHover) {
+            ticker.addEventListener('mouseenter', function () {
+                isPaused = true;
+            });
+            ticker.addEventListener('mouseleave', function () {
+                isPaused = false;
+                lastTimestamp = null;
+            });
+        }
+
+        let resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+                currentPosition = 0;
+                createTickerItems();
+            }, 250);
+        });
+
+        window.addEventListener('beforeunload', function () {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        });
+    })();
+</script>
     {% endif %}
 {% endif %}
 
