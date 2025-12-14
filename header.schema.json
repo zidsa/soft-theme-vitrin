@@ -163,6 +163,33 @@
             "ar": "لون الخلفية",
             "en": "Text color"
           }
+        },
+        {
+          "id": "enable_animation",
+          "type": "checkbox",
+          "label": {
+            "ar": "تمكين التحريك",
+            "en": "Enable animation"
+          },
+          "default": false
+        },
+        {
+          "id": "animation_speed",
+          "type": "number",
+          "label": {
+            "ar": "سرعة التحريك",
+            "en": "Animation speed"
+          },
+          "default": 50
+        },
+        {
+          "id": "pause_on_hover",
+          "type": "checkbox",
+          "label": {
+            "ar": "ايقاف التحريك عند النقر",
+            "en": "Pause on hover"
+          },
+          "default": false
         }
       ]
     }
