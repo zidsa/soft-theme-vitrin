@@ -75,6 +75,15 @@
             "ar": "تلميح شريط البحث",
             "en": "Search placeholder"
           }
+        },
+        {
+          "id": "sticky",
+          "type": "checkbox",
+          "label": {
+            "ar": "رأس ثابت مع التمرير",
+            "en": "Sticky header"
+          },
+          "default": true
         }
       ]
     },

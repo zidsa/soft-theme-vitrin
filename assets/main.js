@@ -42,7 +42,7 @@ window.onscroll = () => fixed_header_to_top();
 
 function menuFiixedHeader() {
   fixed_header = document.getElementById('fixed-header');
-  sticky = fixed_header.offsetTop;
+  sticky = fixed_header?.offsetTop;
 }
 
 function fixed_header_to_top() {

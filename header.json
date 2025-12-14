@@ -2,6 +2,7 @@
   "ar": {
     "header_logo": "https://media.zid.store/9fc92996-ffbe-4bca-9b8e-6682137fe7b6/4de6bbde-8a30-434e-ac04-5beaedd1653a.png",
     "header_options": [],
+    "header_sticky": true,
     "announcement_bar_text": "a",
     "announcement_bar_display": true,
     "header_search_placeholder": "a",
