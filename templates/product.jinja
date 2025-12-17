@@ -711,12 +711,15 @@
                 loaderElement.toggleClass('d-none', !isLoading);
                 iconElement.toggleClass('d-none', isLoading);
             };
+            
+            const bundlePayload = window.bundleCartPayload;
+            const addProductOptions = bundlePayload ? { ...bundlePayload, form_id: 'product-form' } : { form_id: 'product-form' };
 
             try {
 
                 buyNowLoading(true);
 
-                const response = await window.zid.cart.buyNow({ form_id:'product-form' }, { showErrorNotification: true });
+                const response = await window.zid.cart.buyNow(addProductOptions, { showErrorNotification: true });
 
                 buyNowLoading(false);
 
@@ -738,15 +741,20 @@
             window.bundleCartPayload = bundlePayload;
 
             // cart button is initially disabled until bundle selections are valid
+            const buyNowButton = $('.btn-buy-now');
             const addToCartBtn = document.querySelector('.btn-add-to-cart');
+            
+
             if (addToCartBtn) {
                 if (!isValid) {
                     addToCartBtn.classList.add('disabled');
                     addToCartBtn.disabled = true;
-
+                    buyNowButton.prop('disabled', true);
                 } else {
                     addToCartBtn.classList.remove('disabled');
                     addToCartBtn.disabled = false;
+                    buyNowButton.disabled = false;
+                    buyNowButton.prop('disabled', false);
                 }
             }
         });
