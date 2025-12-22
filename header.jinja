@@ -30,20 +30,4 @@
 
     {% set menu_settings=settings %}{% include 'components/header-sliding-menu.jinja' %}
     {% set menu_settings=settings %}{% include 'components/header-mega-menu.jinja' %}
-
-    {% set show_country = 'hide_country' not in safeget(settings, "header_options", []) %}
-    {% set show_language = 'hide_language' not in safeget(settings, "header_options", []) %}
-    
-
-    {% if (show_country and multiple_countries) or (show_language and multiple_languages) %}
-      <div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body" style="padding: 10px">
-              {% include 'vitrin:shared/locale_modal.jinja' %}
-            </div>
-          </div>
-        </div>
-      </div>
-    {% endif %}
 </header>
