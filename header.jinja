@@ -1,6 +1,6 @@
 <header id="{{ sectionId }}" section-id="{{ sectionId }}" class='d-flex flex-column'>
 
-    {# {% include 'template_for_store_messages' %} #}
+    {% include 'vitrin:shared/store_messages.jinja' %}
     {% set ab_settings=settings %}{% include 'components/header-announcement-bar.jinja' %}
     {% set multiple_countries = store.countries | length > 1 %}
     {% set multiple_languages = store.languages | length > 1 %}
