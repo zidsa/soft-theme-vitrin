@@ -203,37 +203,6 @@
 
 <script>
     window.appDirection = '{{ session.locale.language.direction }}';
-
-    window.loadToasterScriptIfNotLoaded = function (onCompleted) {
-        var list = document.getElementsByTagName('script');
-        var i = list.length, flag = false;
-        while (i--) {
-            if (list[i].src === "{{ 'toastr.min.js' | asset_url }}") {
-                flag = true;
-                break;
-            }
-        }
-
-        if (!flag) {
-            var script = document.createElement('script');
-            script.src = "{{ 'toastr.min.js' | asset_url }}";
-            document.getElementsByTagName('head')[0].appendChild(script);
-
-            var fileref = document.createElement("link");
-            fileref.rel = "stylesheet";
-            fileref.type = "text/css";
-            fileref.href = "{{ 'toastr.min.css' | asset_url }}";
-            document.getElementsByTagName("head")[0].appendChild(fileref)
-
-            script.onload = function () {
-                if(onCompleted)
-                    onCompleted();
-            }
-        }else{
-            if(onCompleted)
-                onCompleted();
-        }
-    }
 </script>
 
 <script src="{{ 'jquery-3.6.0.min.js?v=1.0.0' | asset_url }}"></script>

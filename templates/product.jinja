@@ -781,9 +781,7 @@
           if (!window.zid || !window.zid.cart || !window.zid.cart.addProduct) {
                $('.add-to-cart-progress').addClass('d-none');
                $('.add-to-cart-icon').removeClass('d-none');
-              if (typeof toastr !== 'undefined') {
-                  toastr.error('{{ _("Cart service not available") }}', '{{ _("Sorry") }}');
-              }
+              window.zid?.toaster?.showError('{{ _("Cart service not available") }}');
               return;
           }
 
@@ -807,10 +805,8 @@
                   setTimeout(function() {
                       $('.added-notification').removeClass("show");
                   }, 5000);
-                  
-                  if (typeof toastr !== 'undefined') {
-                      toastr.success('{{ _("Added to cart successfully") }}', '{{ _("Success") }}');
-                  }
+
+                  window.zid?.toaster?.showSuccess('{{ _("Added to cart successfully") }}');
 
                   var image = $('#product-images-slick .slick-slide.slick-active img');
                   var cart = $('.a-shopping-cart');
@@ -820,10 +816,8 @@
                   }
 
               } else {
-                  if (typeof toastr !== 'undefined') {
-                      var errorMessage = response && response.message ? response.message : '{{ _("Failed to add to cart") }}';
-                      toastr.error(errorMessage, '{{ _("Sorry") }}');
-                  }
+                  var errorMessage = response && response.message ? response.message : '{{ _("Failed to add to cart") }}';
+                  window.zid?.toaster?.showError(errorMessage);
               }
 
               $('.add-to-cart-progress').addClass('d-none');
@@ -876,17 +870,11 @@
                   }
 
                   if (!data || (data && data.status === 'success')) {
-                      if (typeof toastr !== 'undefined') {
-                          toastr.success('{{ _("Send Successfully") }}');
-                      }
+                      window.zid?.toaster?.showSuccess('{{ _("Send Successfully") }}');
                   } else if (data && data.data && data.data.message) {
-                      if (typeof toastr !== 'undefined') {
-                          toastr.error(JSON.stringify(data.data.message), '{{ _("Sorry") }}');
-                      }
+                      window.zid?.toaster?.showError(JSON.stringify(data.data.message));
                   } else {
-                      if (typeof toastr !== 'undefined') {
-                          toastr.error('{{ _("failed to send") }}', '{{ _("Sorry") }}');
-                      }
+                      window.zid?.toaster?.showError('{{ _("failed to send") }}');
                   }
               } else {
                   let errData = null;
@@ -896,21 +884,17 @@
                       // Ignore JSON parse errors
                   }
                   
-                  const msg = (errData && errData.data && errData.data.message) 
-                      || (errData && errData.detail) 
+                  const msg = (errData && errData.data && errData.data.message)
+                      || (errData && errData.detail)
                       || 'HTTP ' + res.status;
-                      
-                  if (typeof toastr !== 'undefined') {
-                      toastr.error(msg, '{{ _("Sorry") }}');
-                  }
+
+                  window.zid?.toaster?.showError(msg);
               }
 
-          } catch (error) {                                        
+          } catch (error) {
               var errorMessage = '{{ _("Failed to send alert request") }}';
 
-              if (typeof toastr !== 'undefined') {
-                  toastr.error(errorMessage, '{{ _("Sorry") }}');
-              }
+              window.zid?.toaster?.showError(errorMessage);
           } finally {
               $('.send-notify-progress').addClass('d-none');
           }
