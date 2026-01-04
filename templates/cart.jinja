@@ -336,7 +336,7 @@
             $('.send-coupon-progress').removeClass('d-none');
             zid.cart.applyCoupon({coupon_code: $('.send-coupon').val()}, { showErrorNotification: true })
                 .then(function (response) {
-                    toastr.success('{{ _("Send Successfully") }}', null)
+                    window.zid?.toaster?.showSuccess('{{ _("Send Successfully") }}');
                     window.location.reload();
                     $('.send-coupon-progress').addClass('d-none');
                 }).catch(function (err) {

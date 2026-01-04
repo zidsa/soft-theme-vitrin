@@ -21,7 +21,7 @@
             {% if settings.announcement_bar_icon %}
             <span class="ticker-icon">{{ settings.announcement_bar_icon }}</span>
             {% endif %}
-            <a href="{{ store.settings.announcement_bar.url }}" class="ticker-link">
+            <a href="{{ settings.announcement_bar_url }}" class="ticker-link">
                 <h2 class="announcement-text mb-0 py-1"
                     style="{% if settings.announcement_bar_text_color %}color: {{ settings.announcement_bar_text_color }}{% endif %}">
                     {{ settings.announcement_bar_text }}
@@ -31,7 +31,7 @@
     </template>
     {% else %}
     <div class="container d-flex justify-content-center position-relative">
-        <a href="{{ store.settings.announcement_bar.url }}">
+        <a href="{{ settings.announcement_bar_url }}">
             <h2 class="announcement-text mb-0 text-center py-1" style="{% if settings.announcement_bar_text_color %}color: {{ settings.announcement_bar_text_color }}{% endif %}">
                 {{ settings.announcement_bar_text }}
             </h2>
