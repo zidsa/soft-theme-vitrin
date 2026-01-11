@@ -9,7 +9,7 @@
 
 
 
-  <div {% if settings.header_sticky %} id="fixed-header" {% endif %} style="z-index: 3">
+  <div {% if safeget(settings, "header_sticky", true) %} id="fixed-header" {% endif %} style="z-index: 3">
     <!-- input search for mobile view -->
     <div style="z-index: 3">
         {% set header_settings=settings %}{% include 'components/header-search-header.jinja' %}
