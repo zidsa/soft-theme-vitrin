@@ -619,3 +619,6 @@ msgstr "هدية"
 
 msgid "Free"
 msgstr "مجاني"
+
+msgid "The commercial register number:"
+msgstr "رقم السجل التجاري:"
