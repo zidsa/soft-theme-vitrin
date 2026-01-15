@@ -127,7 +127,7 @@ window.addRedemption = function (element) {
   let id = $(".loyalty-points-redemption-methods").val();
   let redemptionMethod = redemptionMethods.filter((dRedemptionMethod) => dRedemptionMethod.id === id);
   if (redemptionMethod.length <= 0) {
-    toastr.error('redemptionMethod not found', null)
+    window.zid?.toaster?.showError('redemptionMethod not found');
     $('.loyalty-points-redemption-send-progress').addClass('d-none');
     return;
   }
@@ -141,7 +141,7 @@ window.addRedemption = function (element) {
     }
   }).then(response => {
     if (response) {
-      toastr.error(response.message.description, null);
+      window.zid?.toaster?.showError(response.message.description);
       $('.loyalty-points-redemption-remove-progress').addClass('d-none');
     }
   })
@@ -161,7 +161,7 @@ window.removeRedemption = function (event) {
     }
   }).then(response => {
     if (response) {
-      toastr.error(response.message.description, null);
+      window.zid?.toaster?.showError(response.message.description);
       $('.loyalty-points-redemption-remove-progress').addClass('d-none');
     }
   })

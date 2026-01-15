@@ -31,9 +31,7 @@ function deleteGiftCard() {
       const successMessage =
         $('.cart-gift-card').data('gift-removed-success') || 'Gift card removed successfully';
 
-      if (typeof toastr !== 'undefined') {
-        toastr.success(successMessage);
-      }
+      window.zid?.toaster?.showSuccess(successMessage);
     })
     .catch(() => {
       // Do nothing
@@ -113,10 +111,7 @@ window.addEventListener('vitrin:gift:submitted', async event => {
   if (giftData) {
     updateGiftCardDisplay(giftData);
     const successMessage = $('.cart-gift-card').data('gift-added-success') || 'Send Successfully';
-    const successTitle = null;
 
-    if (typeof toastr !== 'undefined') {
-      toastr.success(successMessage, successTitle);
-    }
+    window.zid?.toaster?.showSuccess(successMessage);
   }
 });

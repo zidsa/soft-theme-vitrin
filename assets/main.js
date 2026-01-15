@@ -339,13 +339,13 @@ function shareWishlist() {
       if (response.data.link) {
         try {
           await navigator.clipboard.writeText(response.data.link);
-          toastr.success(response.data.message);
+          window.zid?.toaster?.showSuccess(response.data.message);
         } catch (error) {
           console.log(error);
         }
       }
     } else {
-      toastr.error(response.data.message);
+      window.zid?.toaster?.showError(response.data.message);
     }
   });
 }
@@ -808,7 +808,7 @@ class ProductsQuestions {
         }, { showErrorNotification: true });
 
         if (response) {
-          toastr.success(locales_messages.success, locales_messages.success_header);
+          window.zid?.toaster?.showSuccess(locales_messages.success);
 
           $('textarea[name="question"]').val('');
         }
