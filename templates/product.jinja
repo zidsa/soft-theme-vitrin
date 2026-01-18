@@ -290,13 +290,15 @@
                                         <!-- Checkout dialog -->
                                         {% include 'vitrin:checkout/checkout_dialog.jinja' %}
                                         
+                                        {% if not safeget(store, 'settings.general.availability.closed_now') %}
                                         <button class="btn btn-buy-now d-none" type="button" onclick="zidProductBuyNow()">
                                             <div class="buy-now-icon" style="mask: url({{ 'buy-now.svg' | asset_url }}) no-repeat center;"></div>
-                                            
+
                                             <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25" />
-                                            
+
                                             <span>{{ _("Buy now") }}</span>
                                         </button>
+                                        {% endif %}
 
                                         {% if store.settings.products.wishlist_enabled == true %}
                                             <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
