@@ -622,3 +622,6 @@ msgstr "مجاني"
 
 msgid "The commercial register number:"
 msgstr "رقم السجل التجاري:"
+
+msgid "Free shipping applied"
+msgstr "تم تطبيق الشحن المجاني"
