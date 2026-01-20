@@ -35,7 +35,15 @@
             </div>
             <div class="p-2 d-none d-lg-flex align-items-center bd-highlight search-input lg-search-div flex-grow-1">
 
-                {% if not ('hide_search_bar' in safeget(settings, "header_options", [])) %}
+                {% set header_options_raw = safeget(settings, "header_options", []) %}
+                {% set header_options =
+                    header_options_raw
+                    if header_options_raw is iterable and header_options_raw is not boolean and header_options_raw is not string
+                    else []
+                %}
+
+
+                {% if not ('hide_search_bar' in header_options) %}
                 <div class="form-group" style="position: relative; margin: 0px">
                     <span class="icon-search search-input-icon" style="z-index: 1"></span>
                     <div class="autocomplete" style="position: relative">
@@ -51,7 +59,7 @@
 
             </div>
             <div class="bd-highlight d-flex align-items-center justify-content-end header-cart">
-                {% if not ('hide_search_bar' in safeget(settings, "header_options", [])) %}
+                {% if not ('hide_search_bar' in header_options) %}
                 <div class="d-block d-lg-none sm-search-icon">
                     <span class="icon-search header-theme-icon-primary"></span>
                 </div>

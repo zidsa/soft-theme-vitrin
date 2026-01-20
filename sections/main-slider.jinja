@@ -67,7 +67,7 @@
             infinite: false,
             autoplay: true,
             arrows: false,
-            dots: {% if (settings.hide_dots or (settings.slider | length <= 1)) %}false{% else %}true{% endif %},
+            dots: {% if (settings.hide_dots or (safeget(settings, "slider", []) | length <= 1)) %}false{% else %}true{% endif %},
             rtl: !(window.appDirection === 'ltr')
         });
 

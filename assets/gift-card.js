@@ -87,7 +87,7 @@ function updateGiftCardDisplay(giftData) {
 }
 
 function updateGiftButtonText(hasGift) {
-  const giftButton = $('button[onclick="window.gift_dialog.open()"]');
+  const giftButton = $('#gift-btn');
 
   if (giftButton.length > 0) {
     giftButton.removeClass('gift-added gift-send');
