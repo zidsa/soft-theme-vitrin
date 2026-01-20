@@ -23,7 +23,7 @@
       <h2 class="section-title p-0 theme-text-primary">{{ settings.title }}</h2>
     {% endif %}
 
-    {% set num_cols = settings.num_of_cols | default(2) | int %}
+    {% set num_cols = (settings.num_of_cols | default(2) | int) or 2 %}
     {% set col_class_map = {
         1: 'col-12',
         2: 'col-6',
