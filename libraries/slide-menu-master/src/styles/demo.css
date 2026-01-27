@@ -1,0 +1,167 @@
+@charset "UTF-8";
+*:active,
+*:focus {
+  outline: none !important;
+}
+
+html {
+  font-size: 20px;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.94);
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+h1 small {
+  margin-left: 0.3rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 60%;
+}
+
+h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: hsl(206, 44%, 36%);
+}
+
+a,
+.btn {
+  transition: background-color 0.15s ease-in-out;
+  will-change: background-color;
+}
+
+p {
+  margin: 0 0 0.5rem;
+}
+
+p:last-of-type {
+  margin: 0 0 2rem;
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 90%;
+}
+footer a {
+  font-style: italic;
+}
+footer path {
+  fill: hsl(356, 62%, 38%);
+}
+
+.btn {
+  padding: 0.6rem 0.8rem 0.64rem 0.8rem;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 85%;
+  line-height: 1;
+}
+
+.icon {
+  height: 0.6rem;
+  margin: 0 0.1rem;
+}
+
+main {
+  display: block;
+  width: 90%;
+  margin: 2.5rem auto;
+}
+main .btn {
+  width: 100%;
+  display: block;
+  margin: 0 0.25rem 0.75rem 0;
+  background-color: hsl(206, 36%, 28%);
+  border-radius: 0.2rem;
+  font-size: 70%;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  main {
+    max-width: 40rem;
+  }
+  main .btn {
+    width: auto;
+    display: inline-block;
+  }
+  main .btn:hover {
+    background-color: hsl(206, 36%, 20%);
+  }
+  main .btn-danger {
+    background-color: hsl(356, 62%, 38%);
+  }
+  main .btn-danger:hover {
+    background-color: hsl(356, 62%, 30%);
+  }
+}
+main #events {
+  font-family: monospace;
+  font-size: 80%;
+}
+
+.slide-menu {
+  width: 340px;
+  background-color: hsl(206, 36%, 20%);
+}
+.slide-menu,
+.slide-menu a {
+  font-size: 0.8rem;
+  color: #fff;
+}
+.slide-menu a {
+  padding: 0.9rem 1.5rem;
+  border-bottom: solid 1px hsl(206, 36%, 12%);
+  text-decoration: none;
+}
+.slide-menu a:hover {
+  background-color: hsl(206, 36%, 14%);
+}
+.slide-menu .controls {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.slide-menu .btn {
+  padding: 0.75rem 1.5rem;
+  flex: 1 0 auto;
+  font-size: 90%;
+  color: #fff;
+  background-color: hsl(206, 36%, 14%);
+  text-transform: uppercase;
+}
+.slide-menu .btn:first-of-type {
+  text-align: left;
+}
+.slide-menu .btn:first-of-type:before {
+  content: "⮜";
+  margin-right: 0.5rem;
+}
+.slide-menu .btn:last-of-type {
+  text-align: right;
+}
+.slide-menu .btn:last-of-type:before {
+  content: "✕";
+  margin-right: 0.5rem;
+}
+.slide-menu .slide-menu__backlink {
+  text-transform: uppercase;
+}
+
+#test-menu-left p {
+  font-size: 110%;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}/*# sourceMappingURL=demo.css.map */
