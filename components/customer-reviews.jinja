@@ -48,22 +48,34 @@
     {% endfor %}
 
 <script>
-$('.card-review .icon-account_circle').each(function() {
-        var name =  $( 'span', this ).text();
-        $('span', this).text(name.substring(0, 1));
-        $( 'span', this ).removeClass( 'd-none' );
+document.addEventListener('DOMContentLoaded', function() {
+    // Show first letter of customer name in avatar
+    document.querySelectorAll('.card-review .icon-account_circle').forEach(function(el) {
+        var span = el.querySelector('span');
+        if (span) {
+            var name = span.textContent || '';
+            span.textContent = name.substring(0, 1);
+            span.classList.remove('d-none');
+        }
+    });
 
+    // Review images click handler - open in lightbox
+    document.addEventListener('click', function(e) {
+        var img = e.target.closest('.card-review .review-images-container img');
+        if (!img) return;
+
+        var container = img.parentElement;
+        var index = parseInt(img.getAttribute('attr-index')) || 0;
+        var images = [];
+
+        container.querySelectorAll('img').forEach(function(imgEl) {
+            images.push(imgEl.getAttribute('src'));
+        });
+
+        if (typeof openPhotoSwiper === 'function') {
+            openPhotoSwiper(images, index);
+        }
+    });
 });
-
-$('.card-review .review-images-container img').on( "click", function() {
-        var parent = $( this ).parent();
-        var index = $( this ).attr('attr-index');
-        var images = []
-        $('img', parent).each(function(idx, itm) {
-                images.push($(itm).attr('src'));
-        });        
-        openPhotoSwiper(images, index);
-});
-
 </script>
 {% endif %}

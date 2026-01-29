@@ -945,14 +945,6 @@
                     }
                     {% endif %}
 
-                    var sold_product_count_message = '{{ _("Sold more than %s times") }}';
-                    if (selected_product.sold_products_count) {
-                        $('.product-count').removeClass('d-none').addClass('d-flex');
-                        $('.product-count .lang').html(sold_product_count_message.replace('%s', selected_product.sold_products_count));
-                    } else {
-                        $('.product-count').removeClass('d-flex').addClass('d-none');
-                    }
-
                     var selectQuantity = '';
 
                     if (selected_product.is_infinite) {
