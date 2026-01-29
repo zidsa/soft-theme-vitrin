@@ -77,11 +77,5 @@
             }
         }
 
-        {% if  products.data|length > 0 %}
-        document.addEventListener("DOMContentLoaded", function(){
-            var productsObj = {{ products.data | tojson }}
-                window.sendGaProductsViewItemsListEvent('all_products', productsObj);
-        });
-        {% endif %}
     </script>
 {% endblock %}

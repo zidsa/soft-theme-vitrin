@@ -166,12 +166,5 @@
             }
         }
 
-        {% if  products.data|length > 0 %}
-        document.addEventListener("DOMContentLoaded", function(){
-            var productsObj = {{ products.data | tojson }}
-                window.sendGaProductsViewItemsListEvent('{{ category.name }}', productsObj);
-        });
-        {% endif %}
-
     </script>
 {% endblock %}
