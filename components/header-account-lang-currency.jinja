@@ -83,4 +83,33 @@ document.addEventListener('zid-customer-fetched', function (event) {
         document.getElementById('login-btn').style.display = 'none';
     }
 });
+
+{% if store.settings.products.filter_by_nearest_inventory %}
+document.addEventListener('DOMContentLoaded', function() {
+    const storedData = localStorage.getItem('zid_kit_select_branch');
+    if (!storedData) return;
+
+    const lang = '{{ session.lang }}';
+    const data = JSON.parse(storedData);
+    const branchData = data.branchData;
+    const buttons = document.querySelectorAll('.currency-btn');
+    
+    if (!buttons.length) return;
+
+    let displayText = '';
+    if (branchData.type === 'pickup' && branchData.pickup) {
+        displayText = branchData.pickup.name;
+    } else if (branchData.type === 'delivery' && branchData.address) {
+        const addr = branchData.address;
+        const countryName = lang === 'ar' ? addr.country_name_ar : addr.country_name_en;
+        const cityName = lang === 'ar' ? addr.city_name_ar : addr.city_name_en;
+        displayText = [countryName, cityName].filter(Boolean).join(' - ');
+    }
+
+    if (displayText) {
+        buttons.forEach(btn => btn.textContent = displayText);
+    }
+
+});
+{% endif %}
 </script>
