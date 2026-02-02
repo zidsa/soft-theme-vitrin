@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!storedData) return;
 
     const lang = '{{ session.lang }}';
+    const deliveryToText = '{{ _("Delivery to:") }}';
+    const pickupFromText = '{{ _("Pickup from:") }}';
     const data = JSON.parse(storedData);
     const branchData = data.branchData;
     const buttons = document.querySelectorAll('.currency-btn');
@@ -98,12 +100,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let displayText = '';
     if (branchData.type === 'pickup' && branchData.pickup) {
-        displayText = branchData.pickup.name;
+        displayText = `${pickupFromText} ${branchData.pickup.name}`;
     } else if (branchData.type === 'delivery' && branchData.address) {
         const addr = branchData.address;
-        const countryName = lang === 'ar' ? addr.country_name_ar : addr.country_name_en;
         const cityName = lang === 'ar' ? addr.city_name_ar : addr.city_name_en;
-        displayText = [countryName, cityName].filter(Boolean).join(' - ');
+        displayText = `${deliveryToText} ${cityName}`;
     }
 
     if (displayText) {
