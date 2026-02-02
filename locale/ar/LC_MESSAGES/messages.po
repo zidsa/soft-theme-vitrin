@@ -625,3 +625,9 @@ msgstr "رقم السجل التجاري:"
 
 msgid "Free shipping applied"
 msgstr "تم تطبيق الشحن المجاني"
+
+msgid "Delivery to:"
+msgstr "التوصيل إلى:"
+
+msgid "Pickup from:"
+msgstr "الاستلام من:"
