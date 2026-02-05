@@ -12,7 +12,9 @@
       </span>
     {% endif %}
     
-    <a href="/products/{{ product.slug }}" class="d-flex flex-column justify-content-start">
+    <a onclick="onProductClick(this)" data-product='{{ product | tojson | safe }}'
+       data-list-name="{{ listName }}" data-list-id="{{ listId }}" data-index="{{ index }}" href="#"
+       class="d-flex flex-column justify-content-start">
 
         <div class="box-1-1">
             <div class="content">

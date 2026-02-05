@@ -38,7 +38,10 @@
                 {% for product in safeget(products, "results", []) %}
 
                     <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
-                        {% set product=product %}{% set index=key %}{% include 'components/product-card.jinja' %}
+                        {% set index=loop.index0 %}
+                        {% set listName="products" %}
+                        {% set listId="products" %}
+                        {% set product=product %}{% include 'components/product-card.jinja' %}
                     </div>
 
                 {% endfor %}

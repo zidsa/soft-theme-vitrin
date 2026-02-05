@@ -826,7 +826,22 @@ class ProductsQuestions {
 
 const productsQuestions = new ProductsQuestions();
 
+function onProductClick(el) {
+  const product = JSON.parse(el.dataset.product);
+  const listName = el.dataset.listName;
+  const listId = el.dataset.listId;
+  const index = Number(el.dataset.index);
 
+  window.zidTracking?.sendGaSelectItemEvent({
+    product: product,
+    listName: listName,
+    listId: listId,
+    index: index
+  });
+
+  // Navigate to product page
+  window.location.href = '/p/' + product.slug;
+}
 
 function updateUIAfterLogin(customer) {
   const urlParams = new URLSearchParams(window.location.search);
