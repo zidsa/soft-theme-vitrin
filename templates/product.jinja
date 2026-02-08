@@ -358,6 +358,9 @@
                         <div class="row bundle-offer-details-products">
                             {% for product in product.bundle_offer.products.results[:5] %}
                                 <div class="prod-col prod-col-tb">
+                                    {% set index=loop.index0 %}
+                                    {% set listName= "Bundle Offer: " ~ product.bundle_offer.name %}
+                                    {% set listId= ("bundle_offer_pdp_" ~ product.bundle_offer.name) | lower %}
                                     {% set product=product %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                                 </div>
                             {% endfor %}
@@ -633,7 +636,11 @@
                                 <div id="related-products" class="products-slider s-slider d-block">
                                     {% for rProduct in product.related_products %}
                                         <div class="prod-col">
-                                            {% set product=rProduct %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
+                                            {% set listName= "Related Products" %}
+                                            {% set listId= "related_products_pdp" %}
+                                            {% set product=rProduct %}
+                                            {% set index=loop.index0 %}
+                                            {% include 'components/product-card.jinja' %}
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -668,7 +675,11 @@
                             <div class="row bundle-offer-details-products-all">
                                 {% for product in product.bundle_offer.products.results %}
                                     <div class="prod-col prod-col-tb">
-                                        {% set product=product %}{% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
+                                        {% set index=loop.index0 %}
+                                        {% set listName= "Bundle Offer: " ~ product.bundle_offer.name %}
+                                        {% set listId= ("bundle_offer_pdp_" ~ product.bundle_offer.name) | lower %}
+                                        {% set product=product %}
+                                        {% include 'components/product-card.jinja' %}
                                     </div>
                                 {% endfor %}
                             </div>
