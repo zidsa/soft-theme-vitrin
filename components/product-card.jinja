@@ -12,8 +12,8 @@
       </span>
     {% endif %}
     
-    <a onclick="onProductClick(this)" data-product='{{ product | tojson | safe }}'
-       data-list-name="{{ listName }}" data-list-id="{{ listId }}" data-index="{{ index }}" href="#"
+    <a onclick="onProductClick(event, this)" data-product='{{ product | tojson | safe }}'
+       data-list-name="{{ listName }}" data-list-id="{{ listId }}" data-index="{{ index }}" href="/p/{{ product.slug }}"
        class="d-flex flex-column justify-content-start">
 
         <div class="box-1-1">

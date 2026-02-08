@@ -826,7 +826,8 @@ class ProductsQuestions {
 
 const productsQuestions = new ProductsQuestions();
 
-function onProductClick(el) {
+function onProductClick(event, el) {
+  event.preventDefault();
   const product = JSON.parse(el.dataset.product);
   const listName = el.dataset.listName;
   const listId = el.dataset.listId;
