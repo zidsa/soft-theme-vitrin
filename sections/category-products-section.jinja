@@ -9,9 +9,10 @@
 
             <div class="products-slider-wrapper" style="position: relative">
 
-
+                {% set categoryProducts = safeget(settings, "category.products.results", [])
+                    or safeget(settings, "category.results", []) %}
                     <div class="products-slider s-slider">
-                        {% for product in safeget(settings, "category.products.results", []) %}
+                        {% for product in categoryProducts %}
                             <div class="prod-col">
                                 {% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
                             </div>
@@ -21,7 +22,7 @@
 
                 {% if settings.display_more %}
                     <div class="text-center mt-5 category-products-display-more-section">
-                        <a href="/categories/{{ safeget(settings, "category.id") }}/{{ safeget(settings, "category.slug" ) }}"
+                        <a href="/{{ safeget(settings, "category.url" ) }}"
                            class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
                     </div>
                 {% endif %}
