@@ -124,7 +124,11 @@
                 {% for product in products.results %}
 
                     <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
-                        {% set product=product %}{% set index=key %}{% include 'components/product-card.jinja' %}
+                        {% set product=product %}
+                        {% set index=loop.index0 %}
+                        {% set listName= "Category: " ~ safeget(settings, "category.name", "") %}
+                        {% set listId= ("Category_" ~ safeget(settings, "category.name", "")) | lower %}
+                        {% include 'components/product-card.jinja' %}
                     </div>
 
                 {% endfor %}
