@@ -841,7 +841,7 @@ function onProductClick(event, el) {
   });
 
   // Navigate to product page
-  window.location.href = '/p/' + product.slug;
+  window.location.href = '/products/' + product.slug;
 }
 
 function updateUIAfterLogin(customer) {
