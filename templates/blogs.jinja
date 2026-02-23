@@ -3,6 +3,14 @@
 {% block header %} {% include 'header.jinja' %} {% endblock %}
 
 {% block main_content %}
+    <style>
+        .blog-card {
+            transition: .2s ease-in-out;
+        }
+        .blog-card:hover {
+            border-color: var(--primary-color) !important;
+        }
+    </style>
     <section class="blog mt-5 mb-5">
         <div class="container">
 
@@ -19,41 +27,48 @@
                     </div>
                 </div>
             {% else %}
+                <script>console.log('blogs API response:', {{ blogs | tojson }});</script>
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="text-muted">
+                    <div class="text-muted d-flex align-items-center" style="font-size: 1rem">
                         <span>{{ _("Total Posts") }}</span>
-                        <span class="badge badge-primary rounded-pill ml-1">{{ blogs|length }}</span>
+                        <span class="badge badge-pill ml-2 d-inline-flex align-items-center justify-content-center" style="background-color: var(--primary-color); color: var(--text-color-primary-bg); font-size: 0.85rem; min-width: 20px; height: 20px">{{ blogs|length }}</span>
                     </div>
                 </div>
 
                 <div class="row">
                     {% for blog in blogs %}
                         <div class="col-md-6 mb-4">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-header py-3">
+                            <div class="card shadow-sm h-100 blog-card">
+                                <div class="card-header py-3" >
                                     <h6 class="card-title font-weight-bold mb-0">
                                         <a href="/blogs/{{ blog.slug }}" title="{{ blog.title }}" class="text-secondary">
-                                            {{ blog.title }}
+                                            <span class="icon-file-alt align-middle d-none d-sm-inline-block" style="font-size: 1.1rem" aria-hidden="true"></span>
+                                            <span class="px-0 px-sm-1">{{ blog.title }}</span>
                                         </a>
                                     </h6>
                                 </div>
-                                {% if blog.SEO_page_description %}
-                                    <div class="card-body text-muted py-2 d-none d-sm-block">
-                                        {{ blog.SEO_page_description | safe }}
-                                    </div>
-                                {% endif %}
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a href="/blogs/{{ blog.slug }}" class="text-color-primary">
+                                <div class="card-body text-muted py-2">
+                                    {% if blog.i18n_SEO_page_description and blog.i18n_SEO_page_description != '[]' %}
+                                        {{ blog.i18n_SEO_page_description | safe }}
+                                    {% endif %}
+                                    ...
+                                </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between py-1" style="background-color: rgba(33,37,41, 0.01)">
+                                    <a href="/blogs/{{ blog.slug }}" class="text-color-primary d-inline-flex align-items-center">
                                         <span>{{ _("Read More") }}</span>
-                                        <span class="icon-arrow-{% if session.lang == 'ar' %}left{% else %}right{% endif %}-primary" aria-hidden="true"></span>
+                                        {% if session.lang == 'ar' %}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                                        {% else %}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                        {% endif %}
                                     </a>
                                     <div class="dropdown">
-                                        <button class="btn btn-link px-0 text-secondary" type="button"
+                                        <button class="btn btn-link px-0 text-secondary text-decoration-none" type="button"
                                                 data-toggle="dropdown" aria-expanded="false">
-                                            <span class="icon-import_contacts" aria-hidden="true"></span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
                                             <span class="sr-only">{{ _("Share") }}</span>
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-right shadow border-0 rounded">
+                                        <ul class="dropdown-menu {% if session.lang == 'ar' %}dropdown-menu-left{% else %}dropdown-menu-right{% endif %} shadow border-0 rounded">
                                             <li>
                                                 <a class="dropdown-item py-2 d-flex align-items-center" target="_blank"
                                                    href="https://api.whatsapp.com/send?text={{ blog.title }}%20{{ store.permalink }}blogs/{{ blog.slug }}">

@@ -333,6 +333,15 @@ msgstr "أدخل قسيمة الخصم"
 msgid "Read More"
 msgstr "اقرأ المزيد"
 
+msgid "Blog"
+msgstr "المدونة"
+
+msgid "Total Posts"
+msgstr "مجموع التدوينات"
+
+msgid "No posts found, please visit this page later"
+msgstr "لا توجد تدوينات، يرجى زيارة هذه الصفحة لاحقاً"
+
 msgid "Free Shipping"
 msgstr "شحن مجاني"
 
