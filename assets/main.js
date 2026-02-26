@@ -436,7 +436,11 @@ function setCartTotalAndBadge(cart) {
 }
 
 function setCartIconTotal(total) {
-  $('.cart-header-total').html(total);
+  if (parseFloat(total) > 0) {
+    $('.cart-header-total').html(total);
+  } else {
+    $('.cart-header-total').html('');
+  }
 }
 
 function setCartBadge(badge) {
