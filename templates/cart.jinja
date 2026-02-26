@@ -362,6 +362,7 @@
             if(cart.products_count <= 0){
                 $('.cart-products-with-totals').addClass('d-none');
                 $('.cart-empty').removeClass('d-none');
+                $('.cart-header-total').html('');
                 return;
             }else{
                 $('.cart-products-with-totals').removeClass('d-none');
