@@ -1168,13 +1168,19 @@
             }
         });
 
-        function initSlick(productImages) {
+        function initSlick(productImages, retryCount) {
             if (!productImages || !Array.isArray(productImages)) {
                 return;
             }
 
             if (!$.fn.slick) {
-                $('.product-images-carousel').removeClass('product-images-carousel-init');
+                if (!retryCount || retryCount < 10) {
+                    setTimeout(function() {
+                        initSlick(productImages, (retryCount || 0) + 1);
+                    }, 200);
+                } else {
+                    $('.product-images-carousel').removeClass('product-images-carousel-init');
+                }
                 return;
             }
 
