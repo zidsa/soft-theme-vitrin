@@ -1184,13 +1184,9 @@
             }
 
             if (!$.fn.slick) {
-                if (!retryCount || retryCount < 10) {
-                    initSlickTimer = setTimeout(function() {
-                        initSlick(productImages, (retryCount || 0) + 1);
-                    }, 200);
-                } else {
-                    $('.product-images-carousel').removeClass('product-images-carousel-init');
-                }
+                initSlickTimer = setTimeout(function() {
+                    initSlick(productImages, (retryCount || 0) + 1);
+                }, 200);
                 return;
             }
 
