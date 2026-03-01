@@ -1022,6 +1022,8 @@
                     $('#product-images-slick').slick('unslick');
                 }
 
+                $('#product-images-slick').removeClass('slick-initialized slick-slider slick-dotted');
+
                 $('.product-images-carousel').addClass('product-images-carousel-init');
 
                 productImages = selected_product.media;
