@@ -1071,7 +1071,9 @@
                     $('.product-images-carousel-thumbs').append(thumbHtml);
                 }
 
-                initSlick(productImages);
+                requestAnimationFrame(function() {
+                    initSlick(productImages);
+                });
             } else {
                 $('.product-images-carousel').addClass('d-none');
                 $('.product-images-carousel-thumbs').addClass('d-none-important');
