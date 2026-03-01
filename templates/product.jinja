@@ -1018,16 +1018,19 @@
                 $('.product-images-carousel-thumbs').removeClass('d-none-important');
                 $('.product-images-empty').addClass('d-none');
                 
-                if ($('#product-images-slick').hasClass('slick-initialized')) {
+                if ($.fn.slick && $('#product-images-slick').hasClass('slick-initialized')) {
                     $('#product-images-slick').slick('unslick');
                 }
-                
+
                 $('.product-images-carousel').addClass('product-images-carousel-init');
 
                 productImages = selected_product.media;
 
-                $('#product-images-slick').html('');
-                $('.product-images-carousel-thumbs').html('');
+                // Use native innerHTML to avoid jQuery.cleanData issues with Slick remnants in Safari
+                var slickEl = document.getElementById('product-images-slick');
+                if (slickEl) { slickEl.innerHTML = ''; }
+                var thumbsEl = document.querySelector('.product-images-carousel-thumbs');
+                if (thumbsEl) { thumbsEl.innerHTML = ''; }
 
                 for (var z = 0; z < productImages.length; z++) {
                     var prImage = productImages[z];
@@ -1167,6 +1170,11 @@
 
         function initSlick(productImages) {
             if (!productImages || !Array.isArray(productImages)) {
+                return;
+            }
+
+            if (!$.fn.slick) {
+                $('.product-images-carousel').removeClass('product-images-carousel-init');
                 return;
             }
 
