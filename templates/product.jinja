@@ -1184,9 +1184,11 @@
             }
 
             if (!$.fn.slick) {
-                initSlickTimer = setTimeout(function() {
-                    initSlick(productImages, (retryCount || 0) + 1);
-                }, 200);
+                if (!retryCount || retryCount < 50) {
+                    initSlickTimer = setTimeout(function() {
+                        initSlick(productImages, (retryCount || 0) + 1);
+                    }, 200);
+                }
                 return;
             }
 
