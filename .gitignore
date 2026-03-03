@@ -1,3 +1,38 @@
-*.zip
-*/.DS_Store
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Editor directories and files
+/.idea
+/.vscode
+
+# dependencies
+/node_modules
+
+# misc
 .DS_Store
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env
+.env*.local
+.env*.dev
+.env*.development
+.env*.production
+
+#theme
+*.zip
+.vitrin/dist/
+assets/styles.css
+
+# build
+dist/
+
+
+# Translations
+*.mo
+*.pot
+
+/build
