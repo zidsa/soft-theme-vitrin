@@ -371,6 +371,12 @@ msgstr "تم بيعه أكثر من %s مرة"
 msgid "Remaining %s only"
 msgstr "يتبقى %s فقط"
 
+msgid "Add products with total of %s to get free shipping"
+msgstr "أضف منتجات بقيمة %s لتحصل على شحن مجاني"
+
+msgid "Free shipping applied for cart total between %min and %max"
+msgstr "الشحن المجاني يتم تطبيقه من %min الي %max"
+
 msgid "more information"
 msgstr "مزيد من المعلومات"
 
@@ -640,3 +646,9 @@ msgstr "التوصيل إلى:"
 
 msgid "Pickup from:"
 msgstr "الاستلام من:"
+
+msgid "Preorder"
+msgstr "الطلب المسبق"
+
+msgid "Preorder now"
+msgstr "اطلب مسبقاً"
