@@ -646,3 +646,9 @@ msgstr "التوصيل إلى:"
 
 msgid "Pickup from:"
 msgstr "الاستلام من:"
+
+msgid "Preorder"
+msgstr "الطلب المسبق"
+
+msgid "Preorder now"
+msgstr "اطلب مسبقاً"
