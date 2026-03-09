@@ -13,7 +13,20 @@
 
 {% block main_content %}
 
-    <section class="product products-details-page" data-has-preorder="{{ 'true' if product.preorder_campaign else 'false' }}">
+    {# Shared preorder flags for easy reuse across themes #}
+    {% set has_preorder = product.preorder_campaign is not none %}
+    {% if has_preorder %}
+        {% set preorder_slot = product.preorder_campaign.slot %}
+        {% set preorder_slots_exhausted = (not preorder_slot.is_unlimited) and (preorder_slot.available is not none) and (preorder_slot.available <= 0) %}
+        {% set can_preorder = has_preorder and not preorder_slots_exhausted %}
+    {% else %}
+        {% set preorder_slots_exhausted = false %}
+        {% set can_preorder = false %}
+    {% endif %}
+
+    <section class="product products-details-page"
+             data-has-preorder="{{ 'true' if has_preorder else 'false' }}"
+             data-can-preorder="{{ 'true' if can_preorder else 'false' }}">
         <div class="container pb-5">
             <section class="products-details mb-5">
                 <div>
@@ -245,7 +258,7 @@
                                     </div>
                                 {% endif %}
 
-                                <div class="section-out-of-stock-notify-me {% if not product.selected_product.in_stock %}d-block{% else %}d-none{% endif %}">
+                                <div class="section-out-of-stock-notify-me {% if (not product.selected_product.in_stock) or preorder_slots_exhausted %}d-block{% else %}d-none{% endif %}">
                                     <div class="border-product" style="margin-top: 15px"></div>
                                     <div>
                                         <h4 class="product-title">{{ _("This product is out of stock") }}</h4>
@@ -282,7 +295,7 @@
                                 {% include 'vitrin:products/bundle-products.jinja' %}
                             {% endif %}
 
-                            <div class="product-buttons {% if product.preorder_campaign %}d-block{% elif not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
+                            <div class="product-buttons {% if can_preorder or product.selected_product.in_stock %}d-block{% else %}d-none{% endif %}">
                                 <div class="border-product"></div>
                                     <div class="d-flex align-center" style="gap: 10px;">
                                         <button style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
@@ -841,7 +854,7 @@
           });
       };
 
-      async function sendProductNotifyMe() {
+        async function sendProductNotifyMe() {
           $('.send-notify-progress').removeClass('d-none');
 
           const countryCode = '+' + ($('.send-notify-country-key').val() || '966');
@@ -910,15 +923,20 @@
           } finally {
               $('.send-notify-progress').addClass('d-none');
           }
-      };
+        };
 
         function productOptionsChanged(selected_product) {
+            var hasPreorder = $('[data-has-preorder]').attr('data-has-preorder') === 'true';
+            var canPreorder = $('[data-can-preorder]').attr('data-can-preorder') === 'true';
+
             if (selected_product) {
                 $('#product-id').val(selected_product.id);
                 $('.send-notify-product-id').val(selected_product.id);
 
-                if (selected_product.in_stock) {
-                    // Selected a valid variant that is available.
+                var isBuyable = selected_product.in_stock || canPreorder;
+
+                if (isBuyable) {
+                    // Selected a variant that can be ordered (in stock OR preorder allowed).
                     if (selected_product.formatted_sale_price) {
                         $('.product-formatted-price').html(selected_product.formatted_sale_price);
                         $('.product-formatted-price-old').html(selected_product.formatted_price);
@@ -979,7 +997,6 @@
 
                     $('.select-quantity').html(selectQuantity);
 
-                    var hasPreorder = $('[data-has-preorder]').attr('data-has-preorder') === 'true';
                     $('.product-buttons').removeClass('d-none');
                     $('.section-out-of-stock-notify-me').addClass('d-none');
 
@@ -987,7 +1004,7 @@
 
                     updateProductImages(selected_product);
                 } else {
-                    // Variant is sold out.
+                    // Variant is sold out and preorder is not allowed (or exhausted).
                     if (selected_product.formatted_sale_price) {
                         $('.product-formatted-price').html(selected_product.formatted_sale_price);
                         $('.product-formatted-price-old').html(selected_product.formatted_price);
@@ -998,17 +1015,10 @@
                         $('.product-formatted-price-discount').html('');
                     }
                     $('.select-quantity-div').addClass('d-none');
-                    var hasPreorder = $('[data-has-preorder]').attr('data-has-preorder') === 'true';
-                    if (hasPreorder) {
-                        // Preorder products stay available even when variant is out of stock
-                        $('.product-buttons').removeClass('d-none');
-                        $('.section-out-of-stock-notify-me').addClass('d-none');
-                        $('.btn-add-to-cart span').html('{{ _("Preorder now") }}');
-                    } else {
-                        $('.product-buttons').addClass('d-none');
-                        $('.section-out-of-stock-notify-me').removeClass('d-none');
-                        $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
-                    }
+
+                    $('.product-buttons').addClass('d-none');
+                    $('.section-out-of-stock-notify-me').removeClass('d-none');
+                    $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
 
                     if (selected_product.sku) {
                         $('.div-product-sku').removeClass('d-none');
@@ -1019,10 +1029,9 @@
                     updateProductImages(selected_product);
                 }
             } else {
-                // variant doesn't exist.
-                var hasPreorder = $('[data-has-preorder]').attr('data-has-preorder') === 'true';
+                // Variant doesn't exist.
                 $('.select-quantity-div').addClass('d-none');
-                if (hasPreorder) {
+                if (canPreorder) {
                     $('.product-buttons').removeClass('d-none');
                     $('.section-out-of-stock-notify-me').addClass('d-none');
                     $('.btn-add-to-cart span').html('{{ _("Preorder now") }}');
