@@ -13,7 +13,7 @@
 
 {% block main_content %}
 
-    <section class="product products-details-page">
+    <section class="product products-details-page" data-has-preorder="{{ 'true' if product.preorder_campaign else 'false' }}">
         <div class="container pb-5">
             <section class="products-details mb-5">
                 <div>
@@ -123,6 +123,9 @@
                                 {% if product.badge %}
                                    {% include 'vitrin:products/badge.jinja' %}
                                 {% endif %}
+                                {% if product.preorder_campaign %}
+                                    {% include 'vitrin:products/preorder_badge.jinja' %}
+                                {% endif %}
                                 <h1>{{ product.name | safe }}</h1>
                                 <div class="d-flex flex-column flex-lg-row product-features">
                                     {% if product.rating %}
@@ -184,6 +187,9 @@
 
                                 <div>
                                     {% include 'vitrin:products/payment_widgets.jinja' %}
+                                </div>
+                                <div>
+                                    {% include 'vitrin:products/preorder_countdown.jinja' %}
                                 </div>
                             </section>
 
@@ -276,7 +282,7 @@
                                 {% include 'vitrin:products/bundle-products.jinja' %}
                             {% endif %}
 
-                            <div class="product-buttons {% if not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
+                            <div class="product-buttons {% if product.preorder_campaign %}d-block{% elif not product.selected_product.in_stock %}d-none{% else %}d-block{% endif %}">
                                 <div class="border-product"></div>
                                     <div class="d-flex align-center" style="gap: 10px;">
                                         <button style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
@@ -284,13 +290,13 @@
 
                                             <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
 
-                                            <span>{{ _("add to cart") }}</span>
+                                        {% if product.preorder_campaign %}{{ _("Preorder now") }}{% else %}{{ _("add to cart") }}{% endif %}
                                         </button>
 
                                         <!-- Checkout dialog -->
                                         {% include 'vitrin:checkout/checkout_dialog.jinja' %}
                                         
-                                        {% if not safeget(store, 'settings.general.availability.closed_now') %}
+                                        {% if not safeget(store, 'settings.general.availability.closed_now') and not product.preorder_campaign %}
                                         <button class="btn btn-buy-now d-none" type="button" onclick="zidProductBuyNow()">
                                             <div class="buy-now-icon" style="mask: url({{ 'buy-now.svg' | asset_url }}) no-repeat center;"></div>
 
@@ -969,10 +975,11 @@
 
                     $('.select-quantity').html(selectQuantity);
 
+                    var hasPreorder = $('[data-has-preorder]').attr('data-has-preorder') === 'true';
                     $('.product-buttons').removeClass('d-none');
                     $('.section-out-of-stock-notify-me').addClass('d-none');
 
-                    $('.btn-add-to-cart span').html('{{ _("add to cart") }}');
+                    $('.btn-add-to-cart span').html(hasPreorder ? '{{ _("Preorder now") }}' : '{{ _("add to cart") }}');
 
                     updateProductImages(selected_product);
                 } else {
@@ -987,10 +994,17 @@
                         $('.product-formatted-price-discount').html('');
                     }
                     $('.select-quantity-div').addClass('d-none');
-                    $('.product-buttons').addClass('d-none');
-                    $('.section-out-of-stock-notify-me').removeClass('d-none');
-
-                    $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
+                    var hasPreorder = $('[data-has-preorder]').attr('data-has-preorder') === 'true';
+                    if (hasPreorder) {
+                        // Preorder products stay available even when variant is out of stock
+                        $('.product-buttons').removeClass('d-none');
+                        $('.section-out-of-stock-notify-me').addClass('d-none');
+                        $('.btn-add-to-cart span').html('{{ _("Preorder now") }}');
+                    } else {
+                        $('.product-buttons').addClass('d-none');
+                        $('.section-out-of-stock-notify-me').removeClass('d-none');
+                        $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
+                    }
 
                     if (selected_product.sku) {
                         $('.div-product-sku').removeClass('d-none');
@@ -1002,11 +1016,17 @@
                 }
             } else {
                 // variant doesn't exist.
+                var hasPreorder = $('[data-has-preorder]').attr('data-has-preorder') === 'true';
                 $('.select-quantity-div').addClass('d-none');
-                $('.product-buttons').addClass('d-none');
-                $('.section-out-of-stock-notify-me').removeClass('d-none');
-
-                $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
+                if (hasPreorder) {
+                    $('.product-buttons').removeClass('d-none');
+                    $('.section-out-of-stock-notify-me').addClass('d-none');
+                    $('.btn-add-to-cart span').html('{{ _("Preorder now") }}');
+                } else {
+                    $('.product-buttons').addClass('d-none');
+                    $('.section-out-of-stock-notify-me').removeClass('d-none');
+                    $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
+                }
 
                 updateProductImages(selected_product);
             }
