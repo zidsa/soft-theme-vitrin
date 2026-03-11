@@ -13,20 +13,19 @@
 
 {% block main_content %}
 
-    {# Shared preorder flags for easy reuse across themes #}
-    {% set has_preorder = product.preorder_campaign is not none %}
-    {% if has_preorder %}
-        {% set preorder_slot = product.preorder_campaign.slot %}
-        {% set preorder_slots_exhausted = (not preorder_slot.is_unlimited) and (preorder_slot.available is not none) and (preorder_slot.available <= 0) %}
-        {% set can_preorder = has_preorder and not preorder_slots_exhausted %}
+    {% import 'vitrin:products/preorder_state.jinja' as preorder %}
+
+    {% if product %}
+        {{ preorder.compute(product, selected_product if selected_product is defined else none) }}
+        {% set can_buy = (preorder.state.selected_product and (preorder.state.selected_product.in_stock or preorder.state.can_preorder)) %}
     {% else %}
-        {% set preorder_slots_exhausted = false %}
-        {% set can_preorder = false %}
+        {% set can_buy = false %}
     {% endif %}
 
     <section class="product products-details-page"
-             data-has-preorder="{{ 'true' if has_preorder else 'false' }}"
-             data-can-preorder="{{ 'true' if can_preorder else 'false' }}">
+             data-has-preorder="{{ 'true' if preorder.state.has_preorder else 'false' }}"
+             data-can-preorder="{{ 'true' if preorder.state.can_preorder else 'false' }}"
+             data-stock-behavior="{{ preorder.state.stock_behavior or '' }}">
         <div class="container pb-5">
             <section class="products-details mb-5">
                 <div>
@@ -258,7 +257,7 @@
                                     </div>
                                 {% endif %}
 
-                                <div class="section-out-of-stock-notify-me {% if (not product.selected_product.in_stock) or preorder_slots_exhausted %}d-block{% else %}d-none{% endif %}">
+                                <div class="section-out-of-stock-notify-me {% if not can_buy %}d-block{% else %}d-none{% endif %}">
                                     <div class="border-product" style="margin-top: 15px"></div>
                                     <div>
                                         <h4 class="product-title">{{ _("This product is out of stock") }}</h4>
@@ -298,13 +297,13 @@
                             <div class="product-buttons {% if can_preorder or product.selected_product.in_stock %}d-block{% else %}d-none{% endif %}">
                                 <div class="border-product"></div>
                                     <div class="d-flex align-center" style="gap: 10px;">
-                                        <button style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
-                                            <div class="add-to-cart-icon fa fa-shopping-cart" style="mask: url({{ 'shopping-cart.svg' | asset_url }}) no-repeat center;"></div>
+                                            <button style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+                                                <div class="add-to-cart-icon fa fa-shopping-cart" style="mask: url({{ 'shopping-cart.svg' | asset_url }}) no-repeat center;"></div>
 
-                                            <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
+                                                <img class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25"/>
 
                                         {% if product.preorder_campaign %}{{ _("Preorder now") }}{% else %}{{ _("add to cart") }}{% endif %}
-                                        </button>
+                                            </button>
 
                                         <!-- Checkout dialog -->
                                         {% include 'vitrin:checkout/checkout_dialog.jinja' %}
@@ -928,12 +927,18 @@
         function productOptionsChanged(selected_product) {
             var hasPreorder = $('[data-has-preorder]').attr('data-has-preorder') === 'true';
             var canPreorder = $('[data-can-preorder]').attr('data-can-preorder') === 'true';
+            var stockBehavior = $('[data-stock-behavior]').attr('data-stock-behavior') || '';
 
             if (selected_product) {
                 $('#product-id').val(selected_product.id);
                 $('.send-notify-product-id').val(selected_product.id);
 
-                var isBuyable = selected_product.in_stock || canPreorder;
+                var isBuyable;
+                if (stockBehavior === 'IN_STOCK_ONLY') {
+                    isBuyable = selected_product.in_stock;
+                } else {
+                    isBuyable = selected_product.in_stock || canPreorder;
+                }
 
                 if (isBuyable) {
                     // Selected a variant that can be ordered (in stock OR preorder allowed).
