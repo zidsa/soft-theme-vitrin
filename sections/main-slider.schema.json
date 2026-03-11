@@ -102,5 +102,8 @@
         "en": "Text color"
       }
     }
-  ]
+  ],
+  "meta": {
+    "type": "slider"
+  }
 }
