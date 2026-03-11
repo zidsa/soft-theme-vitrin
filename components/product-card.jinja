@@ -1,6 +1,19 @@
 {% if product %}
 
-<div class="product-item position-relative {% if product.is_infinite == false and product.quantity <= 0 %}product-item-out-of-stock{% endif %}">
+{% import 'vitrin:products/preorder_state.jinja' as preorder %}
+
+{{ preorder.compute(product, none) }}
+
+{% set selected_product = preorder.state.selected_product %}
+{% set has_preorder = preorder.state.has_preorder %}
+{% set can_preorder = preorder.state.can_preorder %}
+{% set stock_behavior = preorder.state.stock_behavior %}
+
+{% set can_buy = (selected_product.in_stock or can_preorder) %}
+{% set is_in_stock_or_preorderable = product.is_infinite or product.quantity > 0 or can_preorder %}
+{% set is_out_of_stock = (product.is_infinite == false and product.quantity <= 0) and not can_preorder  %}
+
+<div class="product-item position-relative {% if is_out_of_stock %}product-item-out-of-stock{% endif %}">
     {% if store.settings.products.wishlist_enabled == true %}
       <span class="add-to-wishlist" data-wishlist-id="{{ product.id }}">
         <span zid-visible-customer="true">
@@ -22,7 +35,12 @@
                    {% if product.badge %}
                         {% set positionProductCard = true %}
                         {% include 'vitrin:products/badge.jinja' %}
-                  {% endif %}
+                   {% endif %}
+                   {% if has_preorder %}
+                        <div style="position: absolute; top: 8px; inset-inline-end: 8px; z-index: 1;">
+                            {% include 'vitrin:products/preorder_badge.jinja' %}
+                        </div>
+                   {% endif %}
                     <img id="product-card-img-{{ product.id }}"
                             {% if product.images or product.videos %}
                                     src="{{ product.main_image.image.small if product.main_image else '' }}"
@@ -58,7 +76,7 @@
                 <div class="product-price section-product-price theme-title-primary" ><span>{{ product.formatted_price }}</span></div>
             {% endif %}
 
-            {% if product.is_infinite or product.quantity > 0 %}
+            {% if is_in_stock_or_preorderable %}
 
                 {% if (product.has_options or product.has_fields) %}
                     <small style="font-size: 1.1rem; white-space: break-spaces">{{ _("Available in several options") }}</small>
@@ -70,24 +88,26 @@
 
             {% endif %}
 
-            {% if product.is_infinite == false and product.quantity <= 0 %}
+            {% if is_out_of_stock %}
                 <small style="font-size: 1.1rem; white-space: break-spaces">{{ _("This product is out of stock") }}</small>
             {% endif %}
 
         </div>
 
         <div style="text-align: center">
-            {% if product.is_infinite == false and product.quantity <= 0 %}
+            {% if is_out_of_stock %}
                 <a href="/products/{{ product.slug }}" class="btn btn-primary btn-product-card-out-of-stock">
                     <img src="{{ 'u_bell.svg' | asset_url }}" alt="" width="18" height="18" class="d-inline">
                     <span>{{ _("Notify me when available") }}</span>
                 </a>
             {% elif ( product.has_options or product.has_fields or product.product_class == 'dynamic_bundle' ) %}
-                <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ _("add to cart") }}</a>
+                <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">
+                    {{ _("Preorder now") if has_preorder else _("add to cart") }}
+                </a>
             {% else %}
             <a class="btn btn-primary product-card-add-to-cart" onclick="event.preventDefault(); event.stopPropagation(); productCartAddToCart(this,'{{ product.id }}')">
                 <img style="display: inline" class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
-                {{ _("add to cart") }}
+                {{ _("Preorder now") if has_preorder else _("add to cart") }}
             </a>
             {% endif %}
         </div>
