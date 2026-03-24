@@ -126,6 +126,12 @@
                 <div class="col-12 col-lg-4">
 
                     <h2 class="section-title ">{{ _("Total summary") }}</h2>
+
+                    <div class="mb-3">
+                        {% include 'vitrin:cart/customer_wallet_preview.jinja' %}
+                    </div>
+                    
+
                     <div class="header-wrapper">
                         <div class="section-cart-products-row section-cart-totals-row  d-flex">
                             <div class="flex-grow-1">{{ _("name") }}</div>
