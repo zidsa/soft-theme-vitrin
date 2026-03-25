@@ -235,7 +235,7 @@
           "type": "fieldset",
           "label": {
             "ar": "اسفل الصفحة",
-            "en": "Header"
+            "en": "Footer"
           },
           "expandable": true,
           "settings": [

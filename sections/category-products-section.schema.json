@@ -31,5 +31,8 @@
         "en": "Display button more products"
       }
     }
-  ]
+  ],
+  "meta": {
+    "type": "category"
+  }
 }

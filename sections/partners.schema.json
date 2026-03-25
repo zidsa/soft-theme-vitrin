@@ -50,5 +50,8 @@
         }
       ]
     }
-  ]
+  ],
+  "meta": {
+    "type": "partners"
+  }
 }
