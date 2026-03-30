@@ -406,17 +406,24 @@
             }
 
             if(cart.free_shipping_rule){
+                const subtotalCondition = cart.free_shipping_rule.subtotal_condition;
                 $('.free-shipping-rule-section').removeClass('d-none')
-                $('.free-shipping-rule-message').html(cart.free_shipping_rule.subtotal_condition.status)
-                $('.free-shipping-rule-progress').css('width', `${cart.free_shipping_rule.subtotal_condition.products_subtotal_percentage_from_min}%`)
-                if (cart.free_shipping_rule.subtotal_condition.status === 'applied') {
+                $('.free-shipping-rule-progress').css('width', `${subtotalCondition.products_subtotal_percentage_from_min}%`)
+                if (subtotalCondition.status === 'applied') {
+                    $('.free-shipping-rule-message').html('{{ _("Free Shipping Applied") }}')
                     $('.free-shipping-rule-done').removeClass('d-none')
                     $('.free-shipping-rule-read-more').addClass('d-none')
-                    $('.free-shipping-rule-progress').html('{{ _("Free Shipping") }}')
+                    $('.free-shipping-rule-read-more').removeClass('d-inline-block')
+                    $('.discount-progress-linear').addClass('d-none')
+                    $('.discount-progress-linear').removeClass('d-block')
                 }else {
+                    const remaining = subtotalCondition.remaining_string || subtotalCondition.remaining || '0';
+                    const message = '{{ _("Add products with total of %s to get free shipping") }}'.replace('%s', remaining);
+                    $('.free-shipping-rule-message').html(message)
                     $('.free-shipping-rule-done').addClass('d-none')
                     $('.free-shipping-rule-read-more').removeClass('d-none')
-                    $('.free-shipping-rule-progress').html(`${cart.free_shipping_rule.subtotal_condition.products_subtotal_percentage_from_min}%`)
+                    $('.discount-progress-linear').removeClass('d-none')
+                    $('.free-shipping-rule-progress').css('width', `${subtotalCondition.products_subtotal_percentage_from_min}%`).html(`${subtotalCondition.products_subtotal_percentage_from_min}%`)
                 }
             }else{
                 $('.free-shipping-rule-section').addClass('d-none')
