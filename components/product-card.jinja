@@ -1,5 +1,8 @@
 {% if product %}
 
+{# Reset each card so preorder_badge variant does not leak between list items #}
+{% set preorder_badge_variant = 'default' %}
+
 {% import 'vitrin:products/preorder_state.jinja' as preorder %}
 
 {{ preorder.compute(product, none) }}
@@ -35,11 +38,6 @@
                    {% if product.badge %}
                         {% set positionProductCard = true %}
                         {% include 'vitrin:products/badge.jinja' %}
-                   {% endif %}
-                   {% if has_preorder %}
-                        <div style="position: absolute; top: 8px; inset-inline-end: 8px; z-index: 1;">
-                            {% include 'vitrin:products/preorder_badge.jinja' %}
-                        </div>
                    {% endif %}
                     <img id="product-card-img-{{ product.id }}"
                             {% if product.images or product.videos %}
@@ -94,7 +92,13 @@
 
         </div>
 
-        <div style="text-align: center">
+        <div class="product-card-footer" style="text-align: center">
+            {% if has_preorder %}
+            <div style="margin-bottom: 8px; text-align: start;">
+                {% set preorder_badge_variant = 'product_card' %}
+                {% include 'vitrin:products/preorder_badge.jinja' %}
+            </div>
+            {% endif %}
             {% if is_out_of_stock %}
                 <a href="/products/{{ product.slug }}" class="btn btn-primary btn-product-card-out-of-stock">
                     <img src="{{ 'u_bell.svg' | asset_url }}" alt="" width="18" height="18" class="d-inline">
