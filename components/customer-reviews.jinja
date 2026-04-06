@@ -48,6 +48,65 @@
     {% endfor %}
 
 <script>
+    function timeAgo(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+        let yearAgo = '{{ _("year %s ago") }}';
+        let monthAgo = '{{ _("month %s ago") }}';
+        let dayAgo = '{{ _("day %s ago") }}';
+        let hourAgo = '{{ _("hour %s ago") }}';
+        let minuteAgo = '{{ _("minute %s ago") }}';
+        let lang = "{{ session.lang }}";
+        let interval = Math.floor(seconds / 31536000);
+
+        if (interval >= 1) {
+            if (lang === "ar") {
+                yearAgo = yearAgo.replace('%s', interval);
+                return (interval === 1 ? " {{ _('year ago') }}" : yearAgo);
+            }
+            return interval + " " + (interval === 1 ? " {{ _('year ago') }}" : " {{ _('year ago') }}");
+        }
+
+        interval = Math.floor(seconds / 2592000);
+        if (interval >= 1) {
+            if (lang === "ar") {
+                monthAgo = monthAgo.replace('%s', interval);
+                return (interval === 1 ? " {{ _('month ago') }}" : monthAgo);
+            }
+            return interval + " " + (interval === 1 ? "{{ _('month ago') }}" : "{{ _('months ago') }}");
+        }
+
+        interval = Math.floor(seconds / 86400);
+        if (interval >= 1) {
+            if (lang === "ar") {
+                dayAgo = dayAgo.replace('%s', interval);
+                return (interval === 1 ? " {{ _('day ago') }}" : dayAgo);
+            }
+            return interval + " " + (interval === 1 ? " {{ _('day ago') }}" : " {{ _('days ago') }}");
+        }
+
+        interval = Math.floor(seconds / 3600);
+        if (interval >= 1) {
+            if (lang === "ar") {
+                hourAgo = hourAgo.replace('%s', interval);
+                return (interval === 1 ? " {{ _('hour ago') }}" : hourAgo);
+            }
+            return interval + " " + (interval === 1 ? "{{ _('hour ago') }}" : " {{ _('hours ago') }}");
+        }
+
+        interval = Math.floor(seconds / 60);
+        if (interval >= 1) {
+            if (lang === "ar") {
+                minuteAgo = minuteAgo.replace('%s', interval);
+                return (interval === 1 ? " {{ _('minute ago') }}" : minuteAgo);
+            }
+            return interval + " " + (interval === 1 ? " {{ _('minute ago') }}" : " {{ _('minutes ago') }}");
+        }
+
+        return "{{ _('Just now') }}";
+    }
+
 document.addEventListener('DOMContentLoaded', function() {
     // Show first letter of customer name in avatar
     document.querySelectorAll('.card-review .icon-account_circle').forEach(function(el) {
@@ -74,6 +133,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (typeof openPhotoSwiper === 'function') {
             openPhotoSwiper(images, index);
+        }
+    });
+
+    const timeElements = document.querySelectorAll('.user-review-date');
+    timeElements.forEach(function(element) {
+        const timeString = element.getAttribute('data-time-ago-date');
+        if (timeString) {
+            element.textContent = timeAgo(timeString);
         }
     });
 });

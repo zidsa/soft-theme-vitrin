@@ -646,3 +646,36 @@ msgstr "التوصيل إلى:"
 
 msgid "Pickup from:"
 msgstr "الاستلام من:"
+
+msgid "year %s ago"
+msgstr "منذ %s سنوات"
+
+msgid "month %s ago"
+msgstr "منذ %s أشهر"
+
+msgid "day %s ago"
+msgstr "منذ %s أيام"
+
+msgid "hour %s ago"
+msgstr "منذ %s ساعات"
+
+msgid "minute %s ago"
+msgstr "منذ %s دقائق"
+
+msgid "year ago"
+msgstr "منذ سنة"
+
+msgid "month ago"
+msgstr "منذ شهر"
+
+msgid "day ago"
+msgstr "منذ يوم"
+
+msgid "hour ago"
+msgstr "منذ ساعة"
+
+msgid "minute ago"
+msgstr "منذ دقيقة"
+
+msgid "Just now"
+msgstr "الأن"
