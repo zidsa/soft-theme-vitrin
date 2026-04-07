@@ -68,8 +68,13 @@
         <div class="cart-view">
             <div class="row cart-products-with-totals {% if cart.products_count <= 0 %}d-none{% endif %}">
                 <div class="col-12 col-lg-8">
+
                     <div class="section-cart-products">
                         <h2 class="section-title ">{{ _("Products") }}</h2>
+                        
+                        <div class="mb-3">
+                            {% include 'vitrin:cart/progressive_discount.jinja' %}
+                        </div>
                         <div class="header-wrapper">
                             <div class="section-cart-products-row d-flex">
                                 <div class="section-cart-products-col-1"></div>
