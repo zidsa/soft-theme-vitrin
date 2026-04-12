@@ -1213,25 +1213,25 @@
                 dots: (productImages.length > 1),
                 rtl: !(window.appDirection === 'ltr'),
                 nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
-                prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>',
-                dotsClass: 'slick-dots',
-                customPaging: function(slider, index) {
-                    return '<button type="button" role="tab"></button>';
-                }
+                prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>'
             });
         }
 
-            $('#product-images-slick').on('init', function(event, slick) {
-                $('.product-images-carousel').removeClass('product-images-carousel-init');
+        $('#product-images-slick').on('init', function(event, slick) {
+            $('.product-images-carousel').removeClass('product-images-carousel-init');
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                var $dots = $('#product-images-slick .slick-dots');
+                const $hiddenItems = $dots.find('li').filter(function () {
+                    return $(this).css('display') === 'none';
+                });
 
-                // Show dots on mobile devices - iOS Safari compatibility
-                if (window.matchMedia('(max-width: 768px)').matches) {
-                    var $dots = $('#product-images-slick .slick-dots');
-                    if ($dots.length) {
-                        $dots.find('li').attr('style', 'display: inline-block !important;');
-                    }
+                if ($dots.length && $hiddenItems.length) {
+                    $hiddenItems.each(function () {
+                        this.style.setProperty('display', 'inline-block', 'important');
+                    });
                 }
-            });
+            }
+        });
 
         function openPhotoSwipe(productImages, index) {
             if (!productImages || !Array.isArray(productImages) || productImages.length === 0) {
