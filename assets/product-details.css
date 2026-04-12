@@ -740,21 +740,6 @@
     display: none !important;
 }
 
-.products-details-page .slick-dots li button {
-    -webkit-appearance: none;
-    appearance: none;
-    background: #ccc;
-    border: none;
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    cursor: pointer;
-    margin: 0 3px;
-}
-
-.products-details-page .slick-dots li.slick-active button {
-    background: var(--primary-color);
-}
 
 .products-details-page .slick-arrow {
     background-color: rgba(204,204,204,0.7);
