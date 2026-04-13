@@ -647,12 +647,6 @@ msgstr "التوصيل إلى:"
 msgid "Pickup from:"
 msgstr "الاستلام من:"
 
-msgid "Preorder"
-msgstr "الطلب المسبق"
-
-msgid "Preorder now"
-msgstr "اطلب مسبقاً"
-
 msgid "year %s ago"
 msgstr "منذ %s سنوات"
 
@@ -685,3 +679,9 @@ msgstr "منذ دقيقة"
 
 msgid "Just now"
 msgstr "الأن"
+
+msgid "Preorder"
+msgstr "الطلب المسبق"
+
+msgid "Preorder now"
+msgstr "اطلب مسبقاً"
