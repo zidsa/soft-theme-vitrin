@@ -193,7 +193,7 @@
                     </div>
                 {% endif %}
 
-                {% if store.settings.general.commercial_registration_number %}
+                {% if store.settings.general.commercial_registration_number and store.settings.general.tax_settings.is_certificate_visible %}
                     <div class="maroof-icon">
                         <span>{{ _("The commercial register number:") }}</span>
                         <span>{{ store.settings.general.commercial_registration_number }}</span>
