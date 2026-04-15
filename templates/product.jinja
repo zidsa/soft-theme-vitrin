@@ -696,6 +696,10 @@
         var productImages = {{ product.selected_product.media | tojson }};
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
 
+        // SDKs loaded later may replace window.$ / window.jQuery with a different instance
+        // that doesn't have Slick attached. Capture the original jQuery for carousel ops.
+        var $slick = (window.jQuery && window.jQuery.fn && window.jQuery.fn.slick) ? window.jQuery : null;
+
         $(window).on('load', function () {
             if (window.checkout_dialog) {
                 $('.btn-buy-now').removeClass('d-none');
@@ -1017,9 +1021,9 @@
                 $('.product-images-carousel').removeClass('d-none');
                 $('.product-images-carousel-thumbs').removeClass('d-none-important');
                 $('.product-images-empty').addClass('d-none');
-                
-                if ($.fn.slick && $('#product-images-slick').hasClass('slick-initialized')) {
-                    $('#product-images-slick').slick('unslick');
+
+                if ($slick && $slick('#product-images-slick').hasClass('slick-initialized')) {
+                    $slick('#product-images-slick').slick('unslick');
                 }
 
                 $('#product-images-slick').removeClass('slick-initialized slick-slider slick-dotted');
@@ -1028,7 +1032,9 @@
 
                 productImages = selected_product.media;
 
-                // Use native innerHTML to avoid jQuery.cleanData issues with Slick remnants in Safari
+                // Use native innerHTML to avoid jQuery.cleanData issues with Slick remnants in Safari.
+                // Also remove stale dots explicitly — appendDots places them in .product-images-carousel.
+                $('.product-images-carousel .slick-dots').remove();
                 var slickEl = document.getElementById('product-images-slick');
                 if (slickEl) { slickEl.innerHTML = ''; }
                 var thumbsEl = document.querySelector('.product-images-carousel-thumbs');
@@ -1173,7 +1179,6 @@
         var initSlickTimer = null;
 
         function initSlick(productImages, retryCount) {
-            // Cancel any pending retry from a previous call
             if (initSlickTimer) {
                 clearTimeout(initSlickTimer);
                 initSlickTimer = null;
@@ -1183,17 +1188,18 @@
                 return;
             }
 
-            if (!$.fn.slick) {
+            // slick may not be loaded yet; retry for up to ~10s
+            if (!$slick) {
                 if (!retryCount || retryCount < 50) {
                     initSlickTimer = setTimeout(function() {
+                        $slick = (window.jQuery && window.jQuery.fn && window.jQuery.fn.slick) ? window.jQuery : null;
                         initSlick(productImages, (retryCount || 0) + 1);
                     }, 200);
                 }
                 return;
             }
 
-            // Prevent double initialization
-            if ($('#product-images-slick').hasClass('slick-initialized')) {
+            if ($slick('#product-images-slick').hasClass('slick-initialized')) {
                 return;
             }
 
@@ -1206,11 +1212,12 @@
                 arrowPrevClass = 'icon-keyboard_arrow_right';
             }
 
-            $('#product-images-slick').slick({
+            $slick('#product-images-slick').slick({
                 infinite: false,
                 autoplay: false,
                 arrows: (productImages.length > 1),
                 dots: (productImages.length > 1),
+                appendDots: $slick('.product-images-carousel'),
                 rtl: !(window.appDirection === 'ltr'),
                 nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
                 prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>'
