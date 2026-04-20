@@ -13,19 +13,23 @@
 
 {% block main_content %}
 
-    {% import 'vitrin:products/preorder_state.jinja' as preorder %}
-
     {% if product %}
-        {{ preorder.compute(product, selected_product if selected_product is defined else none) }}
-        {% set can_buy = (preorder.state.selected_product and (preorder.state.selected_product.in_stock or preorder.state.can_preorder)) %}
+        {% set selected_product = selected_product if selected_product is defined else product.selected_product %}
+        {% set has_preorder = product.effective_preorder_campaign is not none %}
+        {% set can_preorder = product.can_be_preordered %}
+        {% set preorder_stock_behavior = product.preorder_stock_behavior %}
+        {% set can_buy = (selected_product and (selected_product.in_stock or can_preorder)) %}
     {% else %}
+        {% set has_preorder = false %}
+        {% set can_preorder = false %}
+        {% set preorder_stock_behavior = '' %}
         {% set can_buy = false %}
     {% endif %}
 
     <section class="product products-details-page"
-             data-has-preorder="{{ 'true' if preorder.state.has_preorder else 'false' }}"
-             data-can-preorder="{{ 'true' if preorder.state.can_preorder else 'false' }}"
-             data-stock-behavior="{{ preorder.state.stock_behavior or '' }}">
+             data-has-preorder="{{ 'true' if has_preorder else 'false' }}"
+             data-can-preorder="{{ 'true' if can_preorder else 'false' }}"
+             data-stock-behavior="{{ preorder_stock_behavior or '' }}">
         <div class="container pb-5">
             <section class="products-details mb-5">
                 <div>

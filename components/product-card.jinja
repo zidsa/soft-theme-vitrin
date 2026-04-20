@@ -3,14 +3,9 @@
 {# Reset each card so preorder_badge variant does not leak between list items #}
 {% set preorder_badge_variant = 'default' %}
 
-{% import 'vitrin:products/preorder_state.jinja' as preorder %}
-
-{{ preorder.compute(product, none) }}
-
-{% set selected_product = preorder.state.selected_product %}
-{% set has_preorder = preorder.state.has_preorder %}
-{% set can_preorder = preorder.state.can_preorder %}
-{% set stock_behavior = preorder.state.stock_behavior %}
+{% set selected_product = product.selected_product %}
+{% set has_preorder = product.effective_preorder_campaign is not none %}
+{% set can_preorder = product.can_be_preordered %}
 
 {% set can_buy = (selected_product.in_stock or can_preorder) %}
 {% set is_in_stock_or_preorderable = product.is_infinite or product.quantity > 0 or can_preorder %}
