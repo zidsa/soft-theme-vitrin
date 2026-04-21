@@ -147,7 +147,7 @@
                                     {% if product.low_stock_quantity %}
                                         <div class="low-quantity-section d-inline-block">
                                             <span class="icon-flag_black" style="color: #EC5550; font-size: 16px"></span>&nbsp;
-                                            <span class="low-quantity">{{ _("Remaining %s only") | format(product.low_stock_quantity) }}</span>
+                                            <span class="low-quantity">{{ product.low_stock_quantity }}</span>
                                         </div>
                                     {% endif %}
 
@@ -943,7 +943,7 @@
 
                     if (!selected_product.is_infinite && selected_product.quantity < store_low_stock_limit) {
                         $('.low-quantity-section').removeClass('d-none').addClass('d-inline-block');
-                        $('.low-quantity-section .low-quantity').html(low_stock_message.replace('%s', selected_product.quantity));
+                        $('.low-quantity-section .low-quantity').html(selected_product.low_stock_quantity);
                     } else {
                         $('.low-quantity-section').removeClass('d-inline-block').addClass('d-none');
                     }
