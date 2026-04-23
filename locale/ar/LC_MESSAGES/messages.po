@@ -679,3 +679,9 @@ msgstr "منذ دقيقة"
 
 msgid "Just now"
 msgstr "الأن"
+
+msgid "Preorder"
+msgstr "الطلب المسبق"
+
+msgid "Preorder now"
+msgstr "اطلب مسبقاً"

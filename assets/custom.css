@@ -276,6 +276,32 @@
     width: 25%;
 }
 
+/* Propagate Bootstrap row's stretch height so all action buttons align */
+.products-list .prod-col,
+.bundle-offer-products .prod-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.products-list .prod-col .product-item,
+.bundle-offer-products .prod-col .product-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.products-list .prod-col .product-item > a,
+.bundle-offer-products .prod-col .product-item > a {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.products-list .product-card-footer,
+.bundle-offer-products .product-card-footer {
+    margin-top: auto;
+}
+
 .sort-block-width {
     margin-left: 30px;
 }
@@ -623,6 +649,24 @@
 
 .btn-product-card-out-of-stock {
   width: max-content;
+}
+
+.preorder-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+  background-color: var(--primary-color);
+  color: var(--text-color-primary-bg, #ffffff);
+  white-space: nowrap;
+  margin-bottom: 8px;
+}
+
+.preorder-badge.preorder-badge--product-card {
+  border-radius: 10px;
+  margin-bottom: 0;
 }
 
 .add-to-wishlist {
