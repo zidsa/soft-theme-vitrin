@@ -2,12 +2,12 @@
 # Copyright (C) 2025 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-29 12:55+0300\n"
+"POT-Creation-Date: 2026-04-29 10:27+0000\n"
 "PO-Revision-Date: 2025-03-10 08:08+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ar\n"
@@ -18,182 +18,117 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-msgid "Search"
-msgstr "بحث"
+msgid ","
+msgstr "،"
 
-msgid "Rewards"
-msgstr "المكافآت"
-
-#, python-brace-format
-msgid "For {points} get a discount {percentage}"
-msgstr " احصل على {percentage} لكل {points} نقطة/نقاط"
-
-msgid "Cart items"
-msgstr "عناصر السلة"
-
-msgid "Cart is empty"
-msgstr "السلة فارغة"
-
-msgid "Points Earned"
-msgstr ""
-
-msgid "Points"
-msgstr "نقاط"
-
-#, fuzzy
-msgid "have"
-msgstr "حفظ"
-
-msgid "Redeem points for rewards on this order"
-msgstr "استخدم نقاطك للحصول على مكافآت لهذا الطلب"
-
-msgid "Choose"
-msgstr "اختر"
-
-msgid "Use"
-msgstr "استخدم"
-
-#, python-brace-format
-msgid "Use {} points to get {} discount"
-msgstr ""
-
-msgid "Cancel"
-msgstr "إلغاء"
-
-msgid "Please login to view and redeem your points"
-msgstr "سجل الدخول لاستخدام نقاط الولاء"
+msgid "Add Comment "
+msgstr "أضف تعليقًا"
 
 #, python-format
-msgid "year %s ago"
-msgstr "منذ %s سنوات"
-
-#, python-format
-msgid "month %s ago"
-msgstr "منذ %s أشهر"
-
-#, python-format
-msgid "day %s ago"
-msgstr "منذ %s أيام"
-
-#, python-format
-msgid "hour %s ago"
-msgstr "منذ %s ساعات"
-
-#, python-format
-msgid "minute %s ago"
-msgstr "منذ %s دقائق"
-
-msgid "year ago"
-msgstr "منذ سنة"
-
-msgid "month ago"
-msgstr "منذ شهر"
-
-#, fuzzy
-msgid "months ago"
-msgstr "منذ شهر"
-
-msgid "day ago"
-msgstr "منذ يوم"
-
-#, fuzzy
-msgid "days ago"
-msgstr "منذ يوم"
-
-msgid "hour ago"
-msgstr "منذ ساعة"
-
-#, fuzzy
-msgid "hours ago"
-msgstr "منذ ساعة"
-
-msgid "minute ago"
-msgstr "منذ دقيقة"
-
-#, fuzzy
-msgid "minutes ago"
-msgstr "منذ دقائق"
-
-msgid "Just now"
-msgstr "الآن"
-
-msgid "Our place"
-msgstr "موقعنا"
-
-msgid "Contact us"
-msgstr "تواصل معنا"
-
-msgid "The VAT number:"
-msgstr "الرقم الضريبي:"
-
-msgid "The commercial register number:"
-msgstr "رقم السجل التجاري:"
-
-msgid "Login"
-msgstr "تسجيل الدخول"
-
-msgid "Hello"
-msgstr "أهلا"
-
-msgid "Delivery to:"
-msgstr "التوصيل إلى:"
-
-msgid "Pickup from:"
-msgstr "الاستلام من:"
-
-msgid "You have an active payment session in another browser, you can't edit the cart contents"
-msgstr "لديك جلسة دفع نشطة في متصفح آخر، لا يمكنك تعديل محتويات السلة"
-
-msgid "Discard cart & continue shopping"
-msgstr "تجاهل السلة وواصل التسوق"
-
-msgid "Send as gift"
-msgstr "أرسل كهدية"
-
-msgid "continue"
-msgstr "متابعة"
-
-msgid "Payment and delivery options"
-msgstr "خيارات الدفع والتسليم"
-
-msgid "Prev"
-msgstr "السابق"
-
-msgid "Next"
-msgstr "التالي"
-
-msgid "Discount"
-msgstr "خصم"
-
-msgid "Available in several options"
-msgstr "متوفر بعدة خيارات"
-
-msgid "Tax free"
-msgstr "مُعفى من الضريبة"
-
-msgid "This product is out of stock"
-msgstr "هذا المنتج غير متوفر في المخزون"
-
-msgid "Notify me when available"
-msgstr "أعلمني عند التوفر"
-
-msgid "Preorder now"
-msgstr "اطلب مسبقاً"
-
-msgid "add to cart"
-msgstr "أضف إلى السلة"
+msgid "Add products with total of %s to get free shipping"
+msgstr "أضف منتجات بقيمة %s لتحصل على شحن مجاني"
 
 msgid "Add your question"
 msgstr "أضف سؤالك"
 
-msgid "Name"
-msgstr "الاسم"
+msgid "Added to cart successfully"
+msgstr "تم إضافة المنتج للسلة بنجاح"
 
-msgid "This field is required"
-msgstr "هذا الحقل مطلوب"
+msgid "All products"
+msgstr "جميع المنتجات"
 
-msgid "Write your question here"
-msgstr "اكتب سؤالك هنا"
+msgid "All reviews"
+msgstr "جميع التقييمات"
+
+msgid "And"
+msgstr "و"
+
+msgid "Available in several options"
+msgstr "متوفر بعدة خيارات"
+
+msgid "Bad"
+msgstr "سيئ"
+
+msgid "Bank Accounts"
+msgstr "الحسابات البنكية"
+
+msgid "Bank accounts for regular transfers"
+msgstr "الحسابات البنكية للتحويلات الاعتيادية"
+
+msgid "Blog"
+msgstr "المدونة"
+
+msgid "Buy now"
+msgstr "اشترِ الآن"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Cart"
+msgstr "السلة"
+
+msgid "Cart is empty"
+msgstr "السلة فارغة"
+
+msgid "Cart items"
+msgstr "عناصر السلة"
+
+msgid "Cart service not available"
+msgstr "خدمة السلة غير متوفرة"
+
+msgid "Categories"
+msgstr "التصنيفات"
+
+msgid "Check Out this Product"
+msgstr "اطلع على هذا المنتج"
+
+msgid "Choose"
+msgstr "اختر"
+
+msgid "Cities"
+msgstr "المدن"
+
+msgid "Clear"
+msgstr "مسح"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Complete Order"
+msgstr "إتمام الطلب"
+
+msgid "Contact us"
+msgstr "تواصل معنا"
+
+msgid "Covered Cities"
+msgstr "المدن المغطاة"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Delivery to:"
+msgstr "التوصيل إلى:"
+
+msgid "Discard cart & continue shopping"
+msgstr "تجاهل السلة وواصل التسوق"
+
+msgid "Discount"
+msgstr "خصم"
+
+msgid "Discount coupon"
+msgstr "قسيمة الخصم"
+
+msgid "Dislike"
+msgstr "لا يعجبني"
+
+msgid "Display all products"
+msgstr "عرض جميع المنتجات"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Edit details"
+msgstr "تعديل التفاصيل"
 
 msgid "Email"
 msgstr "البريد الإلكتروني"
@@ -201,344 +136,26 @@ msgstr "البريد الإلكتروني"
 msgid "Email is incorrect"
 msgstr "البريد الإلكتروني غير صالح"
 
-msgid "Send as anonymous"
-msgstr "أرسل كمجهول"
-
-msgid "Send"
-msgstr "إرسال"
-
-msgid "Your question has been sent successfully. You will receive a notification if it is answered."
-msgstr "تم إرسال سؤالك بنجاح. ستتلقى إشعارًا عند الإجابة عليه."
-
-msgid "Send Successfully"
-msgstr "تم الإرسال بنجاح"
-
-msgid "failed to send"
-msgstr "فشل في الإرسال"
-
-msgid "View all questions"
-msgstr "عرض جميع الأسئلة"
-
-msgid "There is no questions,"
-msgstr "لا توجد أسئلة،"
-
-msgid "you can ask for this product"
-msgstr "يمكنك طرح سؤال عن هذا المنتج"
-
-msgid "Price"
-msgstr "السعر"
-
-msgid "From"
-msgstr "من"
-
-msgid "To"
-msgstr "إلى"
-
-msgid "Show discounted only"
-msgstr "عرض المخفضة فقط"
-
-msgid "Clear"
-msgstr "مسح"
-
-msgid "Save"
-msgstr "حفظ"
-
-msgid "Filter"
-msgstr "تصفية"
-
-msgid "Sort by"
-msgstr "ترتيب حسب"
-
-msgid "Most popular"
-msgstr "الأكثر شيوعًا"
-
-msgid "Low to high"
-msgstr "من الأقل إلى الأعلى"
-
-msgid "High to low"
-msgstr "من الأعلى إلى الأقل"
-
-msgid "Newest"
-msgstr "الأحدث"
-
-msgid "Total "
-msgstr "إجمالي "
-
-msgid "products"
-msgstr "منتجات"
-
-msgid "No products"
-msgstr "لا توجد منتجات"
-
-msgid "Shipping Option"
-msgstr "خيار الشحن"
-
-msgid "Payment Options"
-msgstr "خيارات الدفع"
-
-msgid "Bank Accounts"
-msgstr "الحسابات البنكية"
-
-msgid "List of supported shipping options"
-msgstr "قائمة خيارات الشحن المدعومة"
-
-msgid "List of supported payment options"
-msgstr "قائمة خيارات الدفع المدعومة"
-
-msgid "Bank accounts for regular transfers"
-msgstr "الحسابات البنكية للتحويلات الاعتيادية"
-
-msgid "Covered Cities"
-msgstr "المدن المغطاة"
-
-msgid "Shipping Charges "
-msgstr "رسوم الشحن"
-
-msgid "Payment Upon Receipt"
-msgstr "الدفع عند الاستلام"
-
-msgid "Package"
-msgstr "الطرد"
-
-msgid "Riyadh"
-msgstr "الرياض"
-
-msgid "Inside Merchant City"
-msgstr "داخل مدينة التاجر"
-
-msgid "Outside Merchant City"
-msgstr "خارج مدينة التاجر"
-
-msgid "Page not found"
-msgstr "الصفحة غير موجودة"
-
-msgid "Go to Home"
-msgstr "الانتقال إلى الصفحة الرئيسية"
-
-msgid "You will be redirected to the home page in"
-msgstr "سيتم تحويلك إلى الصفحة الرئيسية خلال"
-
-msgid "seconds"
-msgstr "ثوانٍ"
-
-msgid "Blog"
-msgstr "المدونة"
-
-msgid "No posts found, please visit this page later"
-msgstr "لا توجد تدوينات، يرجى زيارة هذه الصفحة لاحقاً"
-
-msgid "Total Posts"
-msgstr "مجموع التدوينات"
-
-msgid "Read More"
-msgstr "اقرأ المزيد"
-
-msgid "Share"
-msgstr "مشاركة"
-
-msgid "Whatsapp"
-msgstr "واتس آب"
-
-msgid "Telegram"
-msgstr "تلجرام"
-
-msgid "Facebook"
-msgstr "فيسبوك"
-
-msgid "Twitter"
-msgstr "تويتر"
-
-msgid "Mail"
-msgstr "البريد"
-
-msgid "Cart"
-msgstr "السلة"
-
 msgid "Enjoy free shipping for the cities"
 msgstr "استمتع بالشحن المجاني للمدن"
-
-msgid ","
-msgstr "،"
-
-msgid "Products"
-msgstr "المنتجات"
-
-msgid "Product"
-msgstr "منتج"
-
-msgid "Quantity"
-msgstr "الكمية"
-
-msgid "Gift card removed successfully"
-msgstr "تم حذف بطاقة الهدية بنجاح"
-
-msgid "Gift"
-msgstr "هدية"
-
-msgid "Free"
-msgstr "مجاني"
-
-msgid "Sender"
-msgstr "المرسل"
-
-msgid "Recipient"
-msgstr "المستلم"
-
-#, fuzzy
-msgid "Edit"
-msgstr "تعديل"
-
-#, fuzzy
-msgid "Delete"
-msgstr "حذف الحساب"
-
-msgid "Total summary"
-msgstr "ملخص الإجمالي"
-
-msgid "name"
-msgstr "الاسم"
-
-msgid "value"
-msgstr "القيمة"
-
-#, python-format
-msgid "Includes TAX %(percentage)s"
-msgstr "شامل الضريبة %(percentage)s"
-
-msgid "Discount coupon"
-msgstr "قسيمة الخصم"
 
 msgid "Enter discount coupon"
 msgstr "أدخل قسيمة الخصم"
 
-#, python-format
-msgid "Add products with total of %s to get free shipping"
-msgstr "أضف منتجات بقيمة %s لتحصل على شحن مجاني"
-
-msgid "Free shipping applied for cart total between %min and %max"
-msgstr "الشحن المجاني يتم تطبيقه من %min الي %max"
-
-msgid "Free shipping applied"
-msgstr "تم تطبيق الشحن المجاني"
-
-msgid "Free Shipping"
-msgstr "شحن مجاني"
-
-msgid "Complete Order"
-msgstr "إتمام الطلب"
-
-msgid "Make it a gift"
-msgstr "اجعلها هدية"
-
-msgid "Edit details"
-msgstr "تعديل التفاصيل"
-
-msgid "continue shopping"
-msgstr "متابعة التسوق"
-
-msgid "No Result Found"
-msgstr "لم يتم العثور على نتائج"
-
-#, fuzzy
-msgid "Free Shipping Applied"
-msgstr "تم تطبيق الشحن المجاني"
-
-msgid "Home"
-msgstr "الرئيسية"
-
-msgid "Categories"
-msgstr "التصنيفات"
-
-#, python-format
-msgid "Sold more than %s times"
-msgstr "تم بيعه أكثر من %s مرة"
-
-msgid "more information"
-msgstr "مزيد من المعلومات"
-
-msgid "product sku"
-msgstr "رقم المنتج (sku)"
-
-msgid "Weight"
-msgstr "الوزن"
-
-msgid "Notify me when product is available"
-msgstr "أعلمني عندما يتوفر المنتج"
+msgid "Enter your email"
+msgstr "أدخل بريدك الإلكتروني"
 
 msgid "Enter your name"
 msgstr "أدخل اسمك"
 
-msgid "Enter your email"
-msgstr "أدخل بريدك الإلكتروني"
-
 msgid "Enter your phone (Optional)"
 msgstr "أدخل رقم هاتفك (اختياري)"
-
-msgid "Buy now"
-msgstr "اشترِ الآن"
-
-msgid "share product"
-msgstr "مشاركة المنتج"
-
-msgid "Check Out this Product"
-msgstr "اطلع على هذا المنتج"
-
-msgid "Display all products"
-msgstr "عرض جميع المنتجات"
-
-msgid "product information"
-msgstr "معلومات المنتج"
-
-msgid "product description"
-msgstr "وصف المنتج"
-
-msgid "Product images"
-msgstr "صور المنتج"
-
-msgid "price"
-msgstr "السعر"
-
-msgid "No images"
-msgstr "لا توجد صور"
-
-msgid "Reviews"
-msgstr "المراجعات"
-
-msgid "Add Comment "
-msgstr "أضف تعليقًا"
-
-msgid "Great"
-msgstr "رائع"
 
 msgid "Excellent"
 msgstr "ممتاز"
 
-msgid "Good"
-msgstr "جيد"
-
-msgid "Dislike"
-msgstr "لا يعجبني"
-
-msgid "Bad"
-msgstr "سيء"
-
-msgid "No reviews, add yours"
-msgstr "لا توجد مراجعات، أضف مراجعتك"
-
-msgid "All reviews"
-msgstr "جميع التقييمات"
-
-msgid "Questions"
-msgstr "أسئلة"
-
-msgid "You may also like"
-msgstr "قد يعجبك أيضًا"
-
-msgid "Cart service not available"
-msgstr "خدمة السلة غير متوفرة"
-
-msgid "Added to cart successfully"
-msgstr "تم إضافة المنتج للسلة بنجاح"
+msgid "Facebook"
+msgstr "فيسبوك"
 
 msgid "Failed to add to cart"
 msgstr "فشل في إضافة المنتج للسلة"
@@ -546,220 +163,405 @@ msgstr "فشل في إضافة المنتج للسلة"
 msgid "Failed to send alert request"
 msgstr "فشل في الإرسال"
 
-#, python-format
-msgid "Remaining %s only"
-msgstr "يتبقى %s فقط"
+msgid "Filter"
+msgstr "تصفية"
 
-msgid "Option not available"
-msgstr "الخيار غير متوفر"
+#, python-brace-format
+msgid "For {points} get a discount {percentage}"
+msgstr " احصل على {percentage} لكل {points} نقطة/نقاط"
 
-msgid "All products"
-msgstr "جميع المنتجات"
+msgid "Free"
+msgstr "مجاني"
 
-msgid "And"
-msgstr "و"
+msgid "Free Shipping"
+msgstr "شحن مجاني"
 
-msgid "Cities"
-msgstr "المدن"
+msgid "Free Shipping Applied"
+msgstr "تم تطبيق الشحن المجاني"
 
-msgid "Close"
-msgstr "إغلاق"
+msgid "Free shipping applied"
+msgstr "تم تطبيق الشحن المجاني"
+
+msgid "Free shipping applied for cart total between %min and %max"
+msgstr "يتم تطبيق الشحن المجاني للسلة بإجمالي بين %min و %max"
+
+msgid "From"
+msgstr "من"
+
+msgid "Gift"
+msgstr "هدية"
+
+msgid "Gift card removed successfully"
+msgstr "تم حذف بطاقة الهدية بنجاح"
+
+msgid "Go to Home"
+msgstr "الانتقال إلى الصفحة الرئيسية"
+
+msgid "Good"
+msgstr "جيد"
+
+msgid "Great"
+msgstr "رائع"
+
+msgid "Hello"
+msgstr "أهلا"
+
+msgid "High to low"
+msgstr "من الأعلى إلى الأقل"
+
+msgid "Home"
+msgstr "الرئيسية"
 
 msgid "IBAN Number"
 msgstr "رقم الآيبان"
 
+#, python-format
+msgid "Includes TAX %(percentage)s"
+msgstr "شامل الضريبة %(percentage)s"
+
+msgid "Inside Merchant City"
+msgstr "داخل مدينة التاجر"
+
+msgid "Just now"
+msgstr "الآن"
+
+msgid "List of supported payment options"
+msgstr "قائمة خيارات الدفع المدعومة"
+
+msgid "List of supported shipping options"
+msgstr "قائمة خيارات الشحن المدعومة"
+
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+msgid "Low to high"
+msgstr "من الأقل إلى الأعلى"
+
+msgid "Mail"
+msgstr "البريد"
+
+msgid "Make it a gift"
+msgstr "اجعلها هدية"
+
+msgid "Most popular"
+msgstr "الأكثر شيوعًا"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Newest"
+msgstr "الأحدث"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No Result Found"
+msgstr "لم يتم العثور على نتائج"
+
+msgid "No images"
+msgstr "لا توجد صور"
+
+msgid "No posts found, please visit this page later"
+msgstr "لا توجد تدوينات، يرجى زيارة هذه الصفحة لاحقاً"
+
+msgid "No products"
+msgstr "لا توجد منتجات"
+
+msgid "No reviews, add yours"
+msgstr "لا توجد مراجعات، أضف مراجعتك"
+
+msgid "Notify me when available"
+msgstr "أعلمني عند التوفر"
+
+msgid "Notify me when product is available"
+msgstr "أعلمني عندما يتوفر المنتج"
+
+msgid "Option not available"
+msgstr "الخيار غير متوفر"
+
+msgid "Our place"
+msgstr "موقعنا"
+
+msgid "Outside Merchant City"
+msgstr "خارج مدينة التاجر"
+
+msgid "Package"
+msgstr "الطرد"
+
+msgid "Page not found"
+msgstr "الصفحة غير موجودة"
+
+msgid "Payment Options"
+msgstr "خيارات الدفع"
+
+msgid "Payment Upon Receipt"
+msgstr "الدفع عند الاستلام"
+
+msgid "Payment and delivery options"
+msgstr "خيارات الدفع والتسليم"
+
+msgid "Pickup from:"
+msgstr "الاستلام من:"
+
+msgid "Please login to view and redeem your points"
+msgstr "سجل الدخول لاستخدام نقاط الولاء"
+
+msgid "Points"
+msgstr "نقاط"
+
+msgid "Points Earned"
+msgstr "النقاط المكتسبة"
+
+msgid "Preorder now"
+msgstr "اطلب مسبقاً"
+
+msgid "Prev"
+msgstr "السابق"
+
+msgid "Price"
+msgstr "السعر"
+
+msgid "Product"
+msgstr "منتج"
+
+msgid "Product images"
+msgstr "صور المنتج"
+
+msgid "Products"
+msgstr "المنتجات"
+
+msgid "Quantity"
+msgstr "الكمية"
+
+msgid "Questions"
+msgstr "أسئلة"
+
+msgid "Read More"
+msgstr "اقرأ المزيد"
+
+msgid "Recipient"
+msgstr "المستلم"
+
+msgid "Redeem points for rewards on this order"
+msgstr "استخدم نقاطك للحصول على مكافآت لهذا الطلب"
+
+#, python-format
+msgid "Remaining %s only"
+msgstr "يتبقى %s فقط"
+
+msgid "Reviews"
+msgstr "المراجعات"
+
+msgid "Rewards"
+msgstr "المكافآت"
+
+msgid "Riyadh"
+msgstr "الرياض"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Send"
+msgstr "إرسال"
+
+msgid "Send Successfully"
+msgstr "تم الإرسال بنجاح"
+
+msgid "Send as anonymous"
+msgstr "أرسل كمجهول"
+
+msgid "Send as gift"
+msgstr "أرسل كهدية"
+
+msgid "Sender"
+msgstr "المرسل"
+
+msgid "Share"
+msgstr "مشاركة"
+
+msgid "Shipping Charges "
+msgstr "رسوم الشحن"
+
+msgid "Shipping Option"
+msgstr "خيار الشحن"
+
+msgid "Show discounted only"
+msgstr "عرض المخفضة فقط"
+
+#, python-format
+msgid "Sold more than %s times"
+msgstr "تم بيعه أكثر من %s مرة"
+
+msgid "Sort by"
+msgstr "ترتيب حسب"
+
+msgid "Tax free"
+msgstr "مُعفى من الضريبة"
+
+msgid "Telegram"
+msgstr "تلجرام"
+
+msgid "The VAT number:"
+msgstr "الرقم الضريبي:"
+
+msgid "The commercial register number:"
+msgstr "رقم السجل التجاري:"
+
+msgid "There is no questions,"
+msgstr "لا توجد أسئلة،"
+
+msgid "This field is required"
+msgstr "هذا الحقل مطلوب"
+
+msgid "This product is out of stock"
+msgstr "هذا المنتج غير متوفر في المخزون"
+
+msgid "To"
+msgstr "إلى"
+
+msgid "Total "
+msgstr "إجمالي "
+
+msgid "Total Posts"
+msgstr "مجموع التدوينات"
+
+msgid "Total summary"
+msgstr "ملخص الإجمالي"
+
+msgid "Twitter"
+msgstr "تويتر"
+
+msgid "Use"
+msgstr "استخدم"
+
+#, python-brace-format
+msgid "Use {} points to get {} discount"
+msgstr "استخدم {} نقطة للحصول على خصم {}"
+
+msgid "View all questions"
+msgstr "عرض جميع الأسئلة"
+
+msgid "Weight"
+msgstr "الوزن"
+
+msgid "Whatsapp"
+msgstr "واتس آب"
+
+msgid "Write your question here"
+msgstr "اكتب سؤالك هنا"
+
+msgid "You have an active payment session in another browser, you can't edit the cart contents"
+msgstr "لديك جلسة دفع نشطة في متصفح آخر، لا يمكنك تعديل محتويات السلة"
+
+msgid "You may also like"
+msgstr "قد يعجبك أيضًا"
+
+msgid "You will be redirected to the home page in"
+msgstr "سيتم تحويلك إلى الصفحة الرئيسية خلال"
+
+msgid "Your question has been sent successfully. You will receive a notification if it is answered."
+msgstr "تم إرسال سؤالك بنجاح. ستتلقى إشعارًا عند الإجابة عليه."
+
 msgid "account number"
 msgstr "رقم الحساب"
 
-#~ msgid "Commercial registeration number:"
-#~ msgstr "الرقم التجارى:"
+msgid "add to cart"
+msgstr "أضف إلى السلة"
 
-#~ msgid "The order has been added as a gift"
-#~ msgstr "تم إضافة الطلب كهدية"
+msgid "cart_loyalty_points_points_balance"
+msgstr "رصيد نقاط الولاء"
 
-#~ msgid "Personal Information"
-#~ msgstr "المعلومات الشخصية"
+msgid "continue"
+msgstr "متابعة"
 
-#~ msgid "Addresses"
-#~ msgstr "العناوين"
+msgid "continue shopping"
+msgstr "متابعة التسوق"
 
-#~ msgid "Orders"
-#~ msgstr "الطلبات"
+#, python-format
+msgid "day %s ago"
+msgstr "منذ %s أيام"
 
-#~ msgid "Wishlist"
-#~ msgstr "قائمة الرغبات"
+msgid "day ago"
+msgstr "منذ يوم"
 
-#~ msgid "Your contact information"
-#~ msgstr "معلومات الاتصال الخاصة بك"
+msgid "days ago"
+msgstr "منذ أيام"
 
-#~ msgid "Through the address book, you can add and edit your favorite addresses"
-#~ msgstr "من خلال دفتر العناوين، يمكنك إضافة وتعديل عناوينك المفضلة"
+msgid "failed to send"
+msgstr "فشل في الإرسال"
 
-#~ msgid "Through the list of orders, you can view previous and current orders"
-#~ msgstr "من خلال قائمة الطلبات، يمكنك عرض الطلبات السابقة والحالية"
+msgid "have"
+msgstr "لديك"
 
-#~ msgid "Through the wish list you can browse products and delete favorite products"
-#~ msgstr "من خلال قائمة الرغبات يمكنك تصفح المنتجات وحذف المنتجات المفضلة"
+#, python-format
+msgid "hour %s ago"
+msgstr "منذ %s ساعات"
 
-#~ msgid "Add new Address"
-#~ msgstr "إضافة عنوان جديد"
+msgid "hour ago"
+msgstr "منذ ساعة"
 
-#~ msgid "location on map"
-#~ msgstr "الموقع على الخريطة"
+msgid "hours ago"
+msgstr "منذ ساعات"
 
-#~ msgid "Order ID"
-#~ msgstr "معرّف الطلب"
+#, python-format
+msgid "minute %s ago"
+msgstr "منذ %s دقائق"
 
-#~ msgid "Status"
-#~ msgstr "الحالة"
+msgid "minute ago"
+msgstr "منذ دقيقة"
 
-#~ msgid "Date"
-#~ msgstr "التاريخ"
+msgid "minutes ago"
+msgstr "منذ دقائق"
 
-#~ msgid "Total"
-#~ msgstr "الإجمالي"
+#, python-format
+msgid "month %s ago"
+msgstr "منذ %s أشهر"
 
-#~ msgid "Logout"
-#~ msgstr "تسجيل الخروج"
+msgid "month ago"
+msgstr "منذ شهر"
 
-#~ msgid "The following products will be sent as a gift"
-#~ msgstr "سيتم إرسال المنتجات التالية كهدية"
+msgid "months ago"
+msgstr "منذ أشهر"
 
-#~ msgid "Message"
-#~ msgstr "الرسالة"
+msgid "more information"
+msgstr "مزيد من المعلومات"
 
-#~ msgid "Sorry"
-#~ msgstr "عذرًا"
+msgid "name"
+msgstr "الاسم"
 
-#~ msgid "Success"
-#~ msgstr "نجاح"
+msgid "price"
+msgstr "السعر"
 
-#~ msgid "Full name"
-#~ msgstr "الاسم الكامل"
+msgid "product description"
+msgstr "وصف المنتج"
 
-#~ msgid "Mobile"
-#~ msgstr "الجوال"
+msgid "product information"
+msgstr "معلومات المنتج"
 
-#~ msgid "Subscribe to our newsletter"
-#~ msgstr "اشترك في نشرتنا الإخبارية"
+msgid "product sku"
+msgstr "رقم المنتج (sku)"
 
-#~ msgid "Delete my account"
-#~ msgstr "حذف حسابي"
+msgid "products"
+msgstr "منتجات"
 
-#~ msgid "Are you sure?"
-#~ msgstr "هل أنت متأكد؟"
+msgid "seconds"
+msgstr "ثوانٍ"
 
-#~ msgid "Yes"
-#~ msgstr "نعم"
+msgid "share product"
+msgstr "مشاركة المنتج"
 
-#~ msgid "No"
-#~ msgstr "لا"
+msgid "value"
+msgstr "القيمة"
 
-#~ msgid "Affiliate Report"
-#~ msgstr "تقرير الإحالة"
+#, python-format
+msgid "year %s ago"
+msgstr "منذ %s سنوات"
 
-#~ msgid "Back to store"
-#~ msgstr "العودة إلى المتجر"
+msgid "year ago"
+msgstr "منذ سنة"
 
-#~ msgid "Creation Date"
-#~ msgstr "تاريخ الإنشاء"
-
-#~ msgid "Account Status"
-#~ msgstr "حالة الحساب"
-
-#~ msgid "Active"
-#~ msgstr "نشط"
-
-#~ msgid "Inactive"
-#~ msgstr "غير نشط"
-
-#~ msgid "From Date"
-#~ msgstr "من تاريخ"
-
-#~ msgid "To Date"
-#~ msgstr "إلى تاريخ"
-
-#~ msgid "Affiliate link report"
-#~ msgstr "تقرير رابط الإحالة"
-
-#~ msgid "Total Donations"
-#~ msgstr "إجمالي التبرعات"
-
-#~ msgid "Orders Count"
-#~ msgstr "عدد الطلبات"
-
-#~ msgid "Total Donation Value"
-#~ msgstr "إجمالي قيمة التبرعات"
-
-#~ msgid "Total Sales"
-#~ msgstr "إجمالي المبيعات"
-
-#~ msgid "Total Commissions"
-#~ msgstr "إجمالي العمولات"
-
-#~ msgid "Affiliate coupon report"
-#~ msgstr "تقرير قسيمة الإحالة"
-
-#~ msgid "Number of Usages"
-#~ msgstr "عدد مرات الاستخدام"
-
-#~ msgid "Number of Benefiting Customers"
-#~ msgstr "عدد العملاء المستفيدين"
-
-#~ msgid "Affiliate not found"
-#~ msgstr "الإحالة غير موجودة"
-
-#~ msgid "Download"
-#~ msgstr "تحميل"
-
-#~ msgid "per item"
-#~ msgstr "للحبة"
-
-#~ msgid "404 Not Found"
-#~ msgstr "٤٠٤ غير موجود"
-
-#~ msgid "The page you are looking for cannot be found."
-#~ msgstr "لا يمكن العثور على الصفحة التي تبحث عنها."
-
-#~ msgid "The store you're looking for cannot be found."
-#~ msgstr "لا يمكن العثور على المتجر الذي تبحث عنه."
-
-#~ msgid "500 Server Error"
-#~ msgstr "٥٠٠ خطأ في الخادم"
-
-#~ msgid "An unexpected error occurred. Please try again later."
-#~ msgstr "حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى لاحقًا."
-
-#~ msgid "close"
-#~ msgstr "إغلاق"
-
-#~ msgid "loading"
-#~ msgstr "تحميل"
-
-#~ msgid "success"
-#~ msgstr "نجاح"
-
-#~ msgid "ok"
-#~ msgstr "نعم"
-
-#~ msgid "GET"
-#~ msgstr "GET"
-
-#~ msgid "Discover new products and stores, and stay updated on the status of your orders, all while enjoying a unique shopping experience with Mazeed"
-#~ msgstr "اكتشف منتجات ومتاجر جديدة، وتابع حالة طلباتك، واستمتع بتجربة تسوق فريدة مع مزيد"
-
-#~ msgid "Download now"
-#~ msgstr "حمّل الآن"
-
-#~ msgid "All categories"
-#~ msgstr "جميع التصنيفات"
-
-#~ msgid "Products cart"
-#~ msgstr "سلة المنتجات"
-
-#~ msgid "Checkout"
-#~ msgstr "إتمام الشراء"
-
-#~ msgid "Preorder"
-#~ msgstr "الطلب المسبق"
-
+msgid "you can ask for this product"
+msgstr "يمكنك طرح سؤال عن هذا المنتج"
