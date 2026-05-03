@@ -1,0 +1,72 @@
+{# Blog shared scripts: date formatter + copy link handler #}
+<script>
+  (function () {
+    // Format ISO dates using the page's locale (e.g., "13 أبريل 2026" for Arabic, "13 Apr 2026" for English)
+    var locale = document.documentElement.lang || 'en';
+    var formatter;
+    try {
+      formatter = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric' });
+    } catch (e) {
+      formatter = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+    document.querySelectorAll('[data-blog-date]').forEach(function (el) {
+      try {
+        var d = new Date(el.getAttribute('data-blog-date'));
+        if (!isNaN(d)) {
+          el.textContent = formatter.format(d);
+        }
+      } catch (e) {}
+    });
+
+    // Sync --header-h to the actual sticky-header height so position-sticky offsets
+    // (e.g., the blog category pills) sit flush below the header on any viewport.
+    var headerEl = document.querySelector('header');
+    var stickyHeader = headerEl ? headerEl.parentElement : null;
+    if (stickyHeader) {
+      var sync = function () {
+        document.documentElement.style.setProperty('--header-h', stickyHeader.offsetHeight + 'px');
+      };
+      sync();
+      window.addEventListener('resize', sync);
+      if (window.ResizeObserver) {
+        new ResizeObserver(sync).observe(stickyHeader);
+      }
+    }
+
+    // Per-page selector — reload with new page_size in URL
+    document.querySelectorAll('[data-blog-per-page]').forEach(function (select) {
+      select.addEventListener('change', function (e) {
+        var value = e.target.value || select.value;
+        if (!value) return;
+        var url = new window.URL(window.location.href);
+        url.searchParams.set('page_size', value);
+        url.searchParams.set('page', '1');
+        window.location.assign(url.toString());
+      });
+    });
+
+    // Copy link buttons with checkmark feedback
+    document.querySelectorAll('[data-copy-link]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var url = window.location.href;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function () {
+            var icon = btn.querySelector('svg');
+            var original = icon.innerHTML;
+            icon.innerHTML = '<polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+            setTimeout(function () { icon.innerHTML = original; }, 2000);
+          });
+        } else {
+          var input = document.createElement('input');
+          input.value = url;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          document.body.removeChild(input);
+        }
+      });
+    });
+
+  })();
+</script>

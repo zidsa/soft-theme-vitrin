@@ -1,0 +1,103 @@
+{#
+  Blog Posts Carousel Component
+
+  Props:
+  - posts: array of BlogPost objects
+  - title: string (optional) - section title
+  - more_url: string (optional) - URL for "View all" link
+  - more_text: string (optional) - text for "View all" link
+  - carousel_id: string (required) - unique ID for the carousel
+#}
+
+{% set carousel_id = carousel_id or 'product-slider-' ~ range(1000, 9999) | random %}
+
+{% if posts and posts | length > 0 %}
+  <section class="mt-5 mb-5">
+    <div class="d-flex align-items-center mb-4">
+      {% if title %}
+      <div class="product-slider-icon" style="font-size: 24px; height: 24px">
+        <span class="icon-uniE011"></span>
+      </div>
+      <div class="product-slider-title">
+        <div class="">{{ title }}</div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="product-slider-paragrah">
+      <div class="">
+        <div class="products-slider-wrapper" style="position: relative">
+
+          <div id="{{ carousel_id }}" class="products-slider s-slider loading d-block">
+            {% for rProduct in posts %}
+              <div class="prod-col">
+                {% set product=rProduct %}{% set index=loop.index0 %}
+                {% include 'components/product-card.jinja' %}
+              </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    window.addEventListener("load", function () {
+      var $slider = $('#{{ carousel_id }}');
+
+      if (!$slider.length || $slider.hasClass('slick-initialized')) {
+        $slider.removeClass('loading');
+        return;
+      }
+      var arrowNextClass, arrowPrevClass;
+      if (window.appDirection === 'ltr') {
+        arrowNextClass = 'icon-keyboard_arrow_right';
+        arrowPrevClass = 'icon-keyboard_arrow_left';
+      } else {
+        arrowNextClass = 'icon-keyboard_arrow_left';
+        arrowPrevClass = 'icon-keyboard_arrow_right';
+      }
+
+      $slider.slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: false,
+        arrows: false,
+        dots: false,
+        rtl: !(window.appDirection === 'ltr'),
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+              arrows: false
+            }
+          },
+          {
+            breakpoint: 992,
+            settings: {
+              slidesToShow: 2,
+              arrows: true,
+              nextArrow: '<button class="slick-next slick-arrow" type="button"><span class="' + arrowNextClass + '"></span></button>',
+              prevArrow: '<button class="slick-prev slick-arrow" type="button"><span class="' + arrowPrevClass + '"></span></button>'
+            }
+          },
+          {
+            breakpoint: 99999, // desktop fallback
+            settings: {
+              slidesToShow: 3,
+              arrows: true,
+              nextArrow: '<button class="slick-next slick-arrow" type="button"><span class="' + arrowNextClass + '"></span></button>',
+              prevArrow: '<button class="slick-prev slick-arrow" type="button"><span class="' + arrowPrevClass + '"></span></button>'
+            }
+          }
+        ]
+      });
+      $slider.removeClass('loading');
+    });
+    $(window).on('resize', function () {
+      if ($('#{{ carousel_id }}').hasClass('slick-initialized')) {
+        $('#{{ carousel_id }}').slick('setPosition');
+      }
+    });
+  </script>
+{% endif %}

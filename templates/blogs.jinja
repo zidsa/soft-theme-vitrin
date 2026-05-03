@@ -1,41 +1,68 @@
 {% extends "layout.jinja" %}
+{# Data binding — backend provides posts (PaginatedBlogPosts) and categories (PaginatedBlogCategories) #}
+{% set blog_list = posts.results if posts is defined and posts.results else [] %}
+{% set blog_categories = categories.results if categories is defined and categories.results else [] %}
+{% set active_category_slug = session.query_params.get('category', '') if session is defined else '' %}
 
+{# When no category param is set, the backend defaults to the first category #}
+{% set effective_category_slug = active_category_slug or (blog_categories[0].slug if blog_categories | length > 0 else '') %}
+{% set ns = namespace(active_category_obj=none) %}
+{% for category in blog_categories %}
+    {% if category.slug == effective_category_slug %}
+        {% set ns.active_category_obj = category %}
+    {% endif %}
+{% endfor %}
+{% set active_category_obj = ns.active_category_obj %}
+
+{# Pagination #}
+{% set page_size = posts.page_size | default(12) if posts is defined else 12 %}
+{% set totalPages = ((posts.count / page_size) | round(0, 'ceil')) | int if posts is defined and posts.count else 1 %}
+{% set currentPage = posts.page | default(1) if posts is defined else 1 %}
+
+{% block title %}{{ store.name }} – {{ _('Blog') }}{% endblock %}
 {% block header %} {% include 'header.jinja' %} {% endblock %}
+{% block top_links %}
+    <link rel="stylesheet" type="text/css" href="{{ ('blogs.css?v=' ~ ver)  | asset_url }}" />
+{% endblock %}
 
 {% block main_content %}
-    <style>
-        .blog-card {
-            transition: .2s ease-in-out;
-        }
-        .blog-card:hover {
-            border-color: var(--primary-color) !important;
-        }
-    </style>
+    {% set breadcrumb_items = [{'href': url_for('home'), 'label': _("Home")}] %}
+    {% if active_category_obj %}
+        {% set breadcrumb_items = breadcrumb_items + [{'href': '/blogs', 'label': _("Blog")}, {'label': active_category_obj.name}] %}
+    {% else %}
+        {% set breadcrumb_items = breadcrumb_items + [{'label': _("Blog")}] %}
+    {% endif %}
+    {% with items=breadcrumb_items %}
+        {% include 'components/breadcrumb.jinja' %}
+    {% endwith %}
+
     <section class="blog mt-5 mb-5">
         <div class="container">
-
             <div class="blog-title mt-5 mb-3">
                 <h1>{{ _("Blog") }}</h1>
             </div>
+            {% if blog_categories | length > 0 %}
+                <div class="bg-light d-flex flex-nowrap align-items-center overflow-auto px-3 py-2 blog-categories">
+                    {% for category in blog_categories %}
+                        <a
+                                href="/blogs?category={{ category.slug }}"
+                                class="btn d-inline-flex align-items-center justify-content-center py-3 mx-1 blog-category-title {{ 'btn-dark' if effective_category_slug == category.slug else 'btn-outline-dark' }}"
+                                >
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
 
-            {% if blogs is none %}
-                <div class="card shadow-sm mb-4">
-                    <div class="card-body">
-                        <p class="card-title mb-0 text-muted">
-                            {{ _("No posts found, please visit this page later") }}
-                        </p>
-                    </div>
                 </div>
-            {% else %}
-                <script>console.log('blogs API response:', {{ blogs | tojson }});</script>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="text-muted d-flex align-items-center" style="font-size: 1rem">
+            {% endif %}
+
+            {% if blog_list | length > 0 %}
+                <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+                    <div class="text-muted d-flex align-items-center blog-list">
                         <span>{{ _("Total Posts") }}</span>
-                        <span class="badge badge-pill ml-2 d-inline-flex align-items-center justify-content-center" style="background-color: var(--primary-color); color: var(--text-color-primary-bg); font-size: 0.85rem; min-width: 20px; height: 20px">{{ blogs|length }}</span>
+                        <span class="badge blog-count badge-pill ml-2 d-inline-flex align-items-center justify-content-center">{{ blogs|length }}</span>
                     </div>
                 </div>
-
-                <div class="row">
+               {# <div class="row">
                     {% for blog in blogs %}
                         <div class="col-md-6 mb-4">
                             <div class="card shadow-sm h-100 blog-card">
@@ -113,11 +140,30 @@
                             </div>
                         </div>
                     {% endfor %}
+                </div>#}
+                <div class="row blog-grid">
+                    {% for blog in blog_list %}
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            {% include 'components/blogs/blog-card.jinja' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <p class="card-title mb-0 text-muted">
+                            {{ _("No posts found, please visit this page later") }}
+                        </p>
+                    </div>
                 </div>
             {% endif %}
-
+            {# Pagination #}
+            {% set totalPages=totalPages %}{% set currentPage=currentPage %}
+            {% include 'components/pagination.jinja' %}
         </div>
     </section>
+
+    {% include 'components/blogs/blog-scripts.jinja' %}
 {% endblock %}
 
 {% block footer %} {% include 'footer.jinja' %} {% endblock %}
