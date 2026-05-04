@@ -1,24 +1,75 @@
 {% extends "layout.jinja" %}
+{# Data binding — backend provides posts (PaginatedBlogPosts) and categories (PaginatedBlogCategories) #}
+{% set blog_list = posts.results if posts is defined and posts.results else [] %}
+{% set blog_count = posts.count if posts is defined and posts.count else 0 %}
+{% set blog_categories = categories.results if categories is defined and categories.results else [] %}
+{% set active_category_slug = session.query_params.get('category', '') if session is defined else '' %}
+
+{# When no category param is set, the backend defaults to the first category #}
+{% set effective_category_slug = active_category_slug or (blog_categories[0].slug if blog_categories | length > 0 else '') %}
+{% set ns = namespace(active_category_obj=none) %}
+{% for category in blog_categories %}
+    {% if category.slug == effective_category_slug %}
+        {% set ns.active_category_obj = category %}
+    {% endif %}
+{% endfor %}
+{% set active_category_obj = ns.active_category_obj %}
+
+{# Pagination #}
+{% set page_size = posts.page_size | default(12) if posts is defined else 12 %}
+{% set totalPages = ((posts.count / page_size) | round(0, 'ceil')) | int if posts is defined and posts.count else 1 %}
+{% set currentPage = posts.page | default(1) if posts is defined else 1 %}
 
 {% block header %} {% include 'header.jinja' %} {% endblock %}
+{% block top_links %}
+    <link rel="stylesheet" type="text/css" href="{{ ('blogs.css?v=' ~ ver)  | asset_url }}" />
+{% endblock %}
 
 {% block main_content %}
-    <style>
-        .blog-card {
-            transition: .2s ease-in-out;
-        }
-        .blog-card:hover {
-            border-color: var(--primary-color) !important;
-        }
-    </style>
+    {% set breadcrumb_items = [{'href': url_for('home'), 'label': _("Home")}] %}
+    {% if active_category_obj %}
+        {% set breadcrumb_items = breadcrumb_items + [{'href': '/blogs', 'label': _("Blog")}, {'label': active_category_obj.name}] %}
+    {% else %}
+        {% set breadcrumb_items = breadcrumb_items + [{'label': _("Blog")}] %}
+    {% endif %}
+    {% with items=breadcrumb_items %}
+        {% include 'components/breadcrumb.jinja' %}
+    {% endwith %}
+
     <section class="blog mt-5 mb-5">
         <div class="container">
-
             <div class="blog-title mt-5 mb-3">
                 <h1>{{ _("Blog") }}</h1>
             </div>
+            {% if blog_categories | length > 0 %}
+                <div class="bg-light d-flex flex-nowrap align-items-center overflow-auto px-3 py-2 blog-categories">
+                    {% for category in blog_categories %}
+                        <a
+                                href="/blogs?category={{ category.slug }}"
+                                class="btn d-inline-flex align-items-center justify-content-center py-3 mx-1 blog-category-title {{ 'btn-dark' if effective_category_slug == category.slug else 'btn-outline-dark' }}"
+                                >
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
 
-            {% if blogs is none %}
+                </div>
+            {% endif %}
+
+            {% if blog_list | length > 0 %}
+                <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+                    <div class="text-muted d-flex align-items-center blog-list">
+                        <span>{{ _("Total Posts") }}</span>
+                        <span class="badge blog-count badge-pill ml-2 d-inline-flex align-items-center justify-content-center">{{ blog_count }}</span>
+                    </div>
+                </div>
+                <div class="row blog-grid">
+                    {% for blog in blog_list %}
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            {% include 'components/blogs/blog-card.jinja' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
                         <p class="card-title mb-0 text-muted">
@@ -26,98 +77,14 @@
                         </p>
                     </div>
                 </div>
-            {% else %}
-                <script>console.log('blogs API response:', {{ blogs | tojson }});</script>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="text-muted d-flex align-items-center" style="font-size: 1rem">
-                        <span>{{ _("Total Posts") }}</span>
-                        <span class="badge badge-pill ml-2 d-inline-flex align-items-center justify-content-center" style="background-color: var(--primary-color); color: var(--text-color-primary-bg); font-size: 0.85rem; min-width: 20px; height: 20px">{{ blogs|length }}</span>
-                    </div>
-                </div>
-
-                <div class="row">
-                    {% for blog in blogs %}
-                        <div class="col-md-6 mb-4">
-                            <div class="card shadow-sm h-100 blog-card">
-                                <div class="card-header py-3" >
-                                    <h6 class="card-title font-weight-bold mb-0">
-                                        <a href="/blogs/{{ blog.slug }}" title="{{ blog.title }}" class="text-secondary">
-                                            <span class="icon-file-alt align-middle d-none d-sm-inline-block" style="font-size: 1.1rem" aria-hidden="true"></span>
-                                            <span class="px-0 px-sm-1">{{ blog.title }}</span>
-                                        </a>
-                                    </h6>
-                                </div>
-                                <div class="card-body text-muted py-2">
-                                    {% if blog.i18n_SEO_page_description and blog.i18n_SEO_page_description != '[]' %}
-                                        {{ blog.i18n_SEO_page_description | safe }}
-                                    {% endif %}
-                                    ...
-                                </div>
-                                <div class="card-footer d-flex align-items-center justify-content-between py-1" style="background-color: rgba(33,37,41, 0.01)">
-                                    <a href="/blogs/{{ blog.slug }}" class="text-color-primary d-inline-flex align-items-center">
-                                        <span>{{ _("Read More") }}</span>
-                                        {% if session.lang == 'ar' %}
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-                                        {% else %}
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                                        {% endif %}
-                                    </a>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link px-0 text-secondary text-decoration-none" type="button"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                                            <span class="sr-only">{{ _("Share") }}</span>
-                                        </button>
-                                        <ul class="dropdown-menu {% if session.lang == 'ar' %}dropdown-menu-left{% else %}dropdown-menu-right{% endif %} shadow border-0 rounded">
-                                            <li>
-                                                <a class="dropdown-item py-2 d-flex align-items-center" target="_blank"
-                                                   href="https://api.whatsapp.com/send?text={{ blog.title }}%20{{ store.permalink }}blogs/{{ blog.slug }}">
-                                                    <span class="icon-whatsapp" style="display:inline-block;width:20px;text-align:center" aria-hidden="true"></span>
-                                                    <span class="px-1">{{ _("Whatsapp") }}</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item py-2 d-flex align-items-center" target="_blank"
-                                                   href="https://t.me/share/url?url={{ store.permalink }}blogs/{{ blog.slug }}&amp;text={{ blog.title }}">
-                                                    <span style="display:inline-block;width:20px;text-align:center" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span>
-                                                    <span class="px-1">{{ _("Telegram") }}</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item py-2 d-flex align-items-center" target="_blank"
-                                                   href="https://www.facebook.com/sharer/sharer.php?u={{ store.permalink }}blogs/{{ blog.slug }}">
-                                                    <span class="icon-facebook-f" style="display:inline-block;width:20px;text-align:center" aria-hidden="true"></span>
-                                                    <span class="px-1">{{ _("Facebook") }}</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item py-2 d-flex align-items-center" target="_blank"
-                                                   href="https://twitter.com/intent/tweet?text={{ blog.title }}&amp;url={{ store.permalink }}blogs/{{ blog.slug }}">
-                                                    <span class="icon-twitter" style="display:inline-block;width:20px;text-align:center" aria-hidden="true"></span>
-                                                    <span class="px-1">{{ _("Twitter") }}</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <div class="dropdown-divider"></div>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item py-2 d-flex align-items-center" target="_blank"
-                                                   href="mailto:?subject={{ blog.title }}&amp;body={{ store.permalink }}blogs/{{ blog.slug }}">
-                                                    <span style="display:inline-block;width:20px;text-align:center" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-                                                    <span class="px-1">{{ _("Mail") }}</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
             {% endif %}
-
+            {# Pagination #}
+            {% set totalPages=totalPages %}{% set currentPage=currentPage %}
+            {% include 'components/pagination.jinja' %}
         </div>
     </section>
+
+    {% include 'components/blogs/blog-scripts.jinja' %}
 {% endblock %}
 
 {% block footer %} {% include 'footer.jinja' %} {% endblock %}

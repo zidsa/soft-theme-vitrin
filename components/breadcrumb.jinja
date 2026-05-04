@@ -1,12 +1,19 @@
 <section class="breadcrumb-section">
     <nav aria-label="breadcrumb">
-       
         <ol class="breadcrumb">
-          <div class="container d-flex flex-wrap">
-              {% block breadcrumb_items %}{% endblock %}
-          </div>
-     
+            <div class="container d-flex flex-wrap">
+                {% for item in items %}
+                    <li class="breadcrumb-item {{ item.class|default('') }} active " aria-current="page">
+                        {% if item.href %}
+                            <a href="{{ item.href }}" class="{{ item.link_class|default('') }}">
+                                {{ item.label|safe }}
+                            </a>
+                        {% else %}
+                            {{ item.label|safe }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </div>
         </ol>
-  
-      </nav>
+    </nav>
 </section>

@@ -565,3 +565,21 @@ msgstr "منذ سنة"
 
 msgid "you can ask for this product"
 msgstr "يمكنك طرح سؤال عن هذا المنتج"
+
+msgid "Read more"
+msgstr "اقرأ المزيد"
+
+msgid "Blog categories"
+msgstr "تصنيفات المدونة"
+
+msgid "posts"
+msgstr "تدوينة"
+
+msgid "Featured products"
+msgstr "منتجات مميزة"
+
+msgid "Related posts"
+msgstr "تدوينات ذات صلة"
+
+msgid "Share on X"
+msgstr "المشاركة على X"
