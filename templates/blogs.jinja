@@ -1,6 +1,7 @@
 {% extends "layout.jinja" %}
 {# Data binding — backend provides posts (PaginatedBlogPosts) and categories (PaginatedBlogCategories) #}
 {% set blog_list = posts.results if posts is defined and posts.results else [] %}
+{% set blog_count = posts.count if posts is defined and posts.count else 0 %}
 {% set blog_categories = categories.results if categories is defined and categories.results else [] %}
 {% set active_category_slug = session.query_params.get('category', '') if session is defined else '' %}
 
@@ -19,7 +20,6 @@
 {% set totalPages = ((posts.count / page_size) | round(0, 'ceil')) | int if posts is defined and posts.count else 1 %}
 {% set currentPage = posts.page | default(1) if posts is defined else 1 %}
 
-{% block title %}{{ store.name }} – {{ _('Blog') }}{% endblock %}
 {% block header %} {% include 'header.jinja' %} {% endblock %}
 {% block top_links %}
     <link rel="stylesheet" type="text/css" href="{{ ('blogs.css?v=' ~ ver)  | asset_url }}" />
@@ -59,7 +59,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
                     <div class="text-muted d-flex align-items-center blog-list">
                         <span>{{ _("Total Posts") }}</span>
-                        <span class="badge blog-count badge-pill ml-2 d-inline-flex align-items-center justify-content-center">{{ blogs|length }}</span>
+                        <span class="badge blog-count badge-pill ml-2 d-inline-flex align-items-center justify-content-center">{{ blog_count }}</span>
                     </div>
                 </div>
                 <div class="row blog-grid">

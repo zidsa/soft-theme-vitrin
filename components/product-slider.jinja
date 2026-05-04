@@ -11,7 +11,7 @@
 
 {% set carousel_id = carousel_id or 'product-slider-' ~ range(1000, 9999) | random %}
 
-{% if posts and posts | length > 0 %}
+{% if products and products | length > 0 %}
   <section class="mt-5 mb-5">
     <div class="d-flex align-items-center mb-4">
       {% if title %}
@@ -28,7 +28,7 @@
         <div class="products-slider-wrapper" style="position: relative">
 
           <div id="{{ carousel_id }}" class="products-slider s-slider loading d-block">
-            {% for rProduct in posts %}
+            {% for rProduct in products %}
               <div class="prod-col">
                 {% set product=rProduct %}{% set index=loop.index0 %}
                 {% include 'components/product-card.jinja' %}
