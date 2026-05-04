@@ -29,7 +29,7 @@ Props:
                     <div id="{{ carousel_id }}" class="products-slider s-slider loading  d-block">
                         {% for rProduct in posts %}
                             <div class="prod-col">
-                                {% set product=rProduct %}{% set index=loop.index0 %}
+                                {% set blog=rProduct %}{% set index=loop.index0 %}
                                 {% include 'components/blogs/blog-card.jinja' %}
                             </div>
                         {% endfor %}
