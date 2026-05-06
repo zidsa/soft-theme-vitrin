@@ -237,14 +237,8 @@ h1.blog-title {
 }
 
 .product-slider-paragrah {
-    margin-left: 72px;
     font-size: 1.1rem;
     font-weight: 400;
-    color:var(--secondary-color-alt8);
+    color: var(--secondary-color-alt8);
     line-height: 1.6;
-}
-
-.rtl .product-slider-paragrah {
-    margin-left: unset;
-    margin-right: 72px;
 }

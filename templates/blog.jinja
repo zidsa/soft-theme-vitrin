@@ -95,7 +95,10 @@
                     with
                     products=featured_products,
                     title=_("Featured Products"),
-                    carousel_id='blog-featured-products'
+                    carousel_id='blog-featured-products',
+                    slides_desktop=5,
+                    slides_tablet=3,
+                    slides_mobile=2.25
                 %}
                     {% include 'components/product-slider.jinja' %}
                 {% endwith %}
