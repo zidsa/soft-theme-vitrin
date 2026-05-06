@@ -42,16 +42,15 @@
                 <h1>{{ _("Blog") }}</h1>
             </div>
             {% if blog_categories | length > 0 %}
-                <div class="bg-light d-flex flex-nowrap align-items-center overflow-auto px-3 py-2 blog-categories">
+                <div class="d-flex flex-nowrap align-items-center overflow-auto py-2 blog-categories">
                     {% for category in blog_categories %}
                         <a
                                 href="/blogs?category={{ category.slug }}"
-                                class="btn d-inline-flex align-items-center justify-content-center py-3 mx-1 blog-category-title {{ 'btn-dark' if effective_category_slug == category.slug else 'btn-outline-dark' }}"
+                                class="btn d-inline-flex align-items-center justify-content-center py-3 {{ "mx-1" if loop.index0 == 0 else 'mx-3' }} blog-category-title {{ 'btn-dark' if effective_category_slug == category.slug else 'btn-outline-dark' }}"
                                 >
                             {{ category.name }}
                         </a>
                     {% endfor %}
-
                 </div>
             {% endif %}
 

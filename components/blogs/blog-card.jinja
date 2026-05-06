@@ -20,7 +20,7 @@
 {% set visible_badges = ns.badges[:max_visible_badges] %}
 {% set remaining_count = ns.badges | length - max_visible_badges %}
 
-<article class="h-100 d-flex flex-column blog-card position-relative border">
+<article class="h-100 d-flex flex-column blog-card position-relative border rounded">
 
   {# Click overlay #}
   <a href="/blogs/{{ blog.slug }}" class="blog-overlay-link" aria-label="{{ blog.title }}"></a>
