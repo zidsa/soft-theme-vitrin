@@ -38,20 +38,19 @@
 
     <section class="blog mt-5 mb-5">
         <div class="container">
-            <div class="blog-title mt-5 mb-3">
-                <h1>{{ _("Blog") }}</h1>
+            <div class="mt-5 mb-3">
+                <h1 class="blog-page-title">{{ _("Blog") }}</h1>
             </div>
             {% if blog_categories | length > 0 %}
-                <div class="bg-light d-flex flex-nowrap align-items-center overflow-auto px-3 py-2 blog-categories">
+                <div class="d-flex flex-nowrap align-items-center overflow-auto py-2 blog-categories">
                     {% for category in blog_categories %}
                         <a
                                 href="/blogs?category={{ category.slug }}"
-                                class="btn d-inline-flex align-items-center justify-content-center py-3 mx-1 blog-category-title {{ 'btn-dark' if effective_category_slug == category.slug else 'btn-outline-dark' }}"
+                                class="btn d-inline-flex align-items-center justify-content-center blog-category-title {{ 'btn-dark' if effective_category_slug == category.slug else 'btn-outline-dark' }}"
                                 >
                             {{ category.name }}
                         </a>
                     {% endfor %}
-
                 </div>
             {% endif %}
 
@@ -64,7 +63,7 @@
                 </div>
                 <div class="row blog-grid">
                     {% for blog in blog_list %}
-                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="col-12 col-md-6 col-lg-3 mb-4">
                             {% include 'components/blogs/blog-card.jinja' %}
                         </div>
                     {% endfor %}

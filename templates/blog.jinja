@@ -95,7 +95,10 @@
                     with
                     products=featured_products,
                     title=_("Featured Products"),
-                    carousel_id='blog-featured-products'
+                    carousel_id='blog-featured-products',
+                    slides_desktop=5,
+                    slides_tablet=3,
+                    slides_mobile=2.25
                 %}
                     {% include 'components/product-slider.jinja' %}
                 {% endwith %}
@@ -111,7 +114,10 @@
                     with
                     posts=related_posts,
                     title=_("You may also like"),
-                    carousel_id='blog-related-posts'
+                    carousel_id='blog-related-posts',
+                    slides_desktop=4,
+                    slides_tablet=3,
+                    slides_mobile=1.25
                 %}
                     {% include 'components/blogs/blogs-slider.jinja' %}
                 {% endwith %}

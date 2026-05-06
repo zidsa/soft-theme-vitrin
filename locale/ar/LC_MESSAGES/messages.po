@@ -163,6 +163,9 @@ msgstr "فشل في إضافة المنتج للسلة"
 msgid "Failed to send alert request"
 msgstr "فشل في الإرسال"
 
+msgid "Featured Products"
+msgstr "منتجات مميزة"
+
 msgid "Filter"
 msgstr "تصفية"
 
