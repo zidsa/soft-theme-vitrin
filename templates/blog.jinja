@@ -114,7 +114,10 @@
                     with
                     posts=related_posts,
                     title=_("You may also like"),
-                    carousel_id='blog-related-posts'
+                    carousel_id='blog-related-posts',
+                    slides_desktop=4,
+                    slides_tablet=3,
+                    slides_mobile=1.25
                 %}
                     {% include 'components/blogs/blogs-slider.jinja' %}
                 {% endwith %}

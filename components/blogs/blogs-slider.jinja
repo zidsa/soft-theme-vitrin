@@ -6,10 +6,16 @@ Props:
 - title: string (optional) - section title
 - more_url: string (optional) - URL for "View all" link
 - more_text: string (optional) - text for "View all" link
-- carousel_id: string (required) - unique ID for the carousel
+- carousel_id: string (optional) - unique ID for the carousel
+- slides_mobile: number (optional, default 1) - slides shown below 768px
+- slides_tablet: number (optional, default 2) - slides shown between 768px and 991px
+- slides_desktop: number (optional, default 3) - slides shown at 992px and above
 #}
 
 {% set carousel_id = carousel_id or 'blog-slider-' ~ range(1000, 9999) | random %}
+{% set slides_mobile = slides_mobile if slides_mobile is defined else 1 %}
+{% set slides_tablet = slides_tablet if slides_tablet is defined else 2 %}
+{% set slides_desktop = slides_desktop if slides_desktop is defined else 3 %}
 
 {% if posts and posts | length > 0 %}
     <section class="mt-5 mb-5">
@@ -57,7 +63,7 @@ Props:
             }
 
             $slider.slick({
-                slidesToShow: 3,
+                slidesToShow: {{ slides_desktop }},
                 slidesToScroll: 1,
                 infinite: false,
                 arrows: false,
@@ -67,14 +73,14 @@ Props:
                 {
                   breakpoint: 768,
                   settings: {
-                    slidesToShow: 1,
+                    slidesToShow: {{ slides_mobile }},
                     arrows: false
                   }
                 },
                 {
                   breakpoint: 992,
                   settings: {
-                    slidesToShow: 2,
+                    slidesToShow: {{ slides_tablet }},
                     arrows: true,
                     nextArrow: '<button class="slick-next slick-arrow" type="button"><span class="' + arrowNextClass + '"></span></button>',
                     prevArrow: '<button class="slick-prev slick-arrow" type="button"><span class="' + arrowPrevClass + '"></span></button>'
@@ -83,7 +89,7 @@ Props:
                 {
                   breakpoint: 99999, // desktop fallback
                   settings: {
-                    slidesToShow: 3,
+                    slidesToShow: {{ slides_desktop }},
                     arrows: true,
                     nextArrow: '<button class="slick-next slick-arrow" type="button"><span class="' + arrowNextClass + '"></span></button>',
                     prevArrow: '<button class="slick-prev slick-arrow" type="button"><span class="' + arrowPrevClass + '"></span></button>'
