@@ -350,7 +350,7 @@ msgstr "استخدم نقاطك للحصول على مكافآت لهذا الط
 
 #, python-format
 msgid "Remaining %s only"
-msgstr "يتبقى %s فقط"
+msgstr "متبقي %s فقط"
 
 msgid "Reviews"
 msgstr "المراجعات"
