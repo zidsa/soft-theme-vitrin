@@ -2113,3 +2113,13 @@ hr {
         height: 100%;
     }
 }
+
+.description-title,
+.section-title,
+.blog-category-title,
+.product-slider-title,
+.top-level-link,
+.sub-menu-head,
+.breadcrumb-item {
+    text-transform: capitalize;
+}
