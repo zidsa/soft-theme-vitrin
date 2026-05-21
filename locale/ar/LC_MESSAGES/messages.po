@@ -541,6 +541,9 @@ msgstr "السعر"
 msgid "product description"
 msgstr "وصف المنتج"
 
+msgid "product options"
+msgstr "خيارات المنتج"
+
 msgid "product information"
 msgstr "معلومات المنتج"
 
