@@ -1,7 +1,7 @@
 {
   "section_id": "uuid",
   "template": "sections/ggallery.jinja",
-  "icon": "fal fa-images",
+  "icon": "gallery-line",
   "name": {
     "ar": "مجموعة الصور",
     "en": "Gallery"

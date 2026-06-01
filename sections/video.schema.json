@@ -1,7 +1,7 @@
 {
   "section_id": "uuid",
   "template": "sections/video.jinja",
-  "icon": "fa fa-play",
+  "icon": "video-line",
   "name": {
     "ar": "فيديو",
     "en": "Video"
