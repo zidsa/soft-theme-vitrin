@@ -1,7 +1,7 @@
 {
   "section_id": "uuid",
   "template": "sections/category-products-section.jinja",
-  "icon": "fal fa-box",
+  "icon": "shopping-bag-line",
   "name": {
     "ar": "منتجات التصنيف",
     "en": "Category products"
