@@ -1,7 +1,7 @@
 {
   "section_id": "uuid",
   "template": "sections/main-slider.jinja",
-  "icon": "fal fa-presentation",
+  "icon": "slideshow-2-line",
   "name": {
     "ar": "شرائح الصور",
     "en": "Slider"

@@ -1,7 +1,7 @@
 {
   "section_id": "uuid",
   "template": "sections/testimonials.jinja",
-  "icon": "fal fa-user",
+  "icon": "chat-quote-line",
   "name": {
     "ar": "أراء العملاء",
     "en": "Testimonials"
