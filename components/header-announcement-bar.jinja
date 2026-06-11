@@ -1,6 +1,6 @@
-{% if settings.announcement_bar_display %}
-    {% if not (settings.announcement_bar_page_display)
-        or (template == 'home' and settings.announcement_bar_page_display == 'home')
+{% set displayAnnouncebar = settings.announcement_bar_display | default(false) %}
+{% if displayAnnouncebar %}
+    {% if (template == 'home' and settings.announcement_bar_page_display == 'home')
         or settings.announcement_bar_page_display == 'all'
     %}
 {% set enable_animation = settings.announcement_bar_enable_animation %}
