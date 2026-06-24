@@ -8,7 +8,9 @@
             {% if menu.url %}
             <li class="slide-menu-ul-li {% if menu.slug == 'all_categories' %} all-categories {% endif %}"  onclick="scrollToSubMenu(this)">
                 <a href="{{ menu.url | localized_url if menu.resource_type != 'url' else menu.url }}" title="{{ menu.label }}" class="menu-link">
-                    <span class="px-1 clickable-span">{{ menu.label }}</span>
+                    <span class="px-1 clickable-span">
+                    {{ _("All Products") if menu.url == "/products/" else _("All Categories") if menu.url == "/categories/" else menu.label }}
+                    </span>
                 </a>
                 {% if menu.items | length > 0 %}
                     <ul>
