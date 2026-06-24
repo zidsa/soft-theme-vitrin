@@ -589,3 +589,9 @@ msgstr "تدوينات ذات صلة"
 
 msgid "Share on X"
 msgstr "المشاركة على X"
+
+msgid "All Products"
+msgstr "جميع المنتجات"
+
+msgid "All Categories"
+msgstr "جميع التصنيفات"
