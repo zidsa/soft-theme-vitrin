@@ -13,7 +13,10 @@
                     <div class="products-slider s-slider">
                         {% for product in safeget(settings, "category.products.results", []) %}
                             <div class="prod-col">
-                                {% set index=loop.index0 %}{% include 'components/product-card.jinja' %}
+                                {% set index=loop.index0 %}
+                                {% set listName= "Category: " ~ safeget(settings, "category.name", "") %}
+                                {% set listId= ("Category_" ~ safeget(settings, "category.name", "")) | lower %}
+                                {% include 'components/product-card.jinja' %}
                             </div>
                         {% endfor %}
                     </div>
