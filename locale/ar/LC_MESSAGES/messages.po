@@ -300,7 +300,7 @@ msgstr "خيارات الدفع"
 msgid "Payment Upon Receipt"
 msgstr "الدفع عند الاستلام"
 
-msgid "Payment and delivery options"
+msgid "Payment and Delivery Options"
 msgstr "خيارات الدفع والتسليم"
 
 msgid "Pickup from:"
