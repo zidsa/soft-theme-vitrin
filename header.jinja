@@ -27,7 +27,6 @@
         </div>
     </div>
   </div>
-  <h1 class="d-none">{{ store.settings.branding.seo.title if store.settings.branding.seo and store.settings.branding.seo.title and store.settings.branding.seo.title is defined else store.name }}</h1>
     {% set menu_settings=settings %}{% include 'components/header-sliding-menu.jinja' %}
     {% set menu_settings=settings %}{% include 'components/header-mega-menu.jinja' %}
 </header>
