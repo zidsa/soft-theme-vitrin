@@ -557,9 +557,6 @@ $('.search-input-input').on('keyup', function (e) {
 
 //$( document ).ready(function() {
 document.addEventListener('DOMContentLoaded', function () {
-  if (window.checkout_dialog) {
-    $(".btn-buy-now").removeClass("d-none");
-  }
   fetchCart();
   productsQuestions.checkAddQuestionPossibility();
 

@@ -717,6 +717,9 @@
     <script type="text/javascript" src="{{ 'product-details.js' | asset_url }}" defer></script>
     <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
     <script>
+        if (window.checkout_dialog) {
+            $(".btn-buy-now").removeClass("d-none");
+        }
         var productImages = {{ product.selected_product.media | tojson }};
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
 
