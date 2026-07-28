@@ -724,12 +724,6 @@
         // that doesn't have Slick attached. Capture the original jQuery for carousel ops.
         var $slick = (window.jQuery && window.jQuery.fn && window.jQuery.fn.slick) ? window.jQuery : null;
 
-        $(window).on('load', function () {
-            if (window.checkout_dialog) {
-                $('.btn-buy-now').removeClass('d-none');
-            }
-        });
-
         window.zidProductBuyNow = async () => {
 
             const buyNowLoading = (isLoading) => {

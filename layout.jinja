@@ -1,4 +1,4 @@
-{% set ver = '0.1.041' %}
+{% set ver = '0.1.042' %}
 <!doctype html>
 <html class="no-js" lang="{{ session.lang }}" dir="{{ session.locale.language.direction }}">
 <head>
@@ -35,6 +35,16 @@
         
     
   <link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
+    <script src="{{ 'jquery-3.6.0.min.js?v=1.0.0' | asset_url }}"></script>
+
+    <script src="{{ 'jquery-ui.min.js' | asset_url }}"></script>
+
+    <script src="{{ 'popper.min.js?v=1.0' | asset_url }}"></script>
+    <script src="{{ 'bootstrap.min.js' | asset_url }}"></script>
+
+    <script src="{{ 'slick.min.js' | asset_url }}"></script>
+    <script src="{{ 'slide-menu.ie.js?v=1.06' | asset_url }}"></script>
+
     {#<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa">#}
     <!--jquery UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,16 +215,6 @@
 <script>
     window.appDirection = '{{ session.locale.language.direction }}';
 </script>
-
-<script src="{{ 'jquery-3.6.0.min.js?v=1.0.0' | asset_url }}"></script>
-
-<script src="{{ 'jquery-ui.min.js' | asset_url }}"></script>
-
-<script src="{{ 'popper.min.js?v=1.0' | asset_url }}"></script>
-<script src="{{ 'bootstrap.min.js' | asset_url }}"></script>
-
-<script src="{{ 'slick.min.js' | asset_url }}"></script>
-<script src="{{ 'slide-menu.ie.js?v=1.06' | asset_url }}"></script>
 
 <script type="text/javascript" src="{{ ('main.js?v=' ~ ver) | asset_url }}" defer></script>
 <script type="text/javascript" src="{{ ('bundle-offers.js?v=' ~ ver) | asset_url }}" defer></script>
