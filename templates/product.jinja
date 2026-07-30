@@ -314,8 +314,8 @@
                                         <!-- Checkout dialog -->
                                         {% include 'vitrin:checkout/checkout_dialog.jinja' %}
                                         
-                                        {% if not safeget(store, 'settings.general.availability.closed_now') and not product.preorder_campaign %}
-                                        <button class="btn btn-buy-now d-none" type="button" onclick="zidProductBuyNow()">
+                                        {% if not safeget(store, 'settings.general.availability.closed_now') and store.settings.checkout.show_checkout_as_popup and not product.preorder_campaign %}
+                                        <button class="btn btn-buy-now" type="button" onclick="zidProductBuyNow()">
                                             <div class="buy-now-icon" style="mask: url({{ 'buy-now.svg' | asset_url }}) no-repeat center;"></div>
 
                                             <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25" />
@@ -712,24 +712,33 @@
 
 
 {% block footer_scripts %}
-
     <script type="text/javascript" src="{{ 'ekko-lightbox.min.js' | asset_url }}" defer></script>
     <script type="text/javascript" src="{{ 'product-details.js' | asset_url }}" defer></script>
     <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
     <script>
+
         var productImages = {{ product.selected_product.media | tojson }};
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
+        function buyNowLoadingControl(isLoading) {
+            const buttonElement = $('.btn-buy-now');
+            const loaderElement = $('.buy-now-progress');
+            const iconElement = $('.buy-now-icon');
 
+            buttonElement.prop('disabled', isLoading);
+            loaderElement.toggleClass('d-none', !isLoading);
+            iconElement.toggleClass('d-none', isLoading);
+        }
         // SDKs loaded later may replace window.$ / window.jQuery with a different instance
         // that doesn't have Slick attached. Capture the original jQuery for carousel ops.
         var $slick = (window.jQuery && window.jQuery.fn && window.jQuery.fn.slick) ? window.jQuery : null;
 
+        buyNowLoadingControl(true);
         $(window).on('load', function () {
             if (window.checkout_dialog) {
+                buyNowLoadingControl(false);
                 $('.btn-buy-now').removeClass('d-none');
             }
         });
-
         window.zidProductBuyNow = async () => {
 
             const buyNowLoading = (isLoading) => {
