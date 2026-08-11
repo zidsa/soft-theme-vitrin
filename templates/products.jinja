@@ -2,10 +2,6 @@
 
 {% block header %} {% include 'header.jinja' %} {% endblock %}
 
-{% block top_links %}
-	<link rel="stylesheet" type="text/css" href="{{ 'toastr.min.css' | asset_url }}"/>
-{% endblock %}
-
 
 {% block main_content %}
 
@@ -53,7 +49,6 @@
 {% block footer %} {% include 'footer.jinja' %} {% endblock %}
 
 {% block footer_scripts %}
-    <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
     <script>
         window.onProductAttributesTriggered = function(){
             $('#products-list').css('opacity', '0.4');
