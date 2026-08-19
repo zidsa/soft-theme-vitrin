@@ -15,7 +15,7 @@
                                     <div class="card-date user-review-date" data-time-ago-date="{{ review.created_at }}">    
                                     </div>
                             </div>
-                            <div class="card-paragraph text-justify mt-2 user-review-text">{{ review.comment | safe }}</div>
+                            <div class="card-paragraph text-justify mt-2 user-review-text">{{ review.comment }}</div>
                             {% if review.images %}
                             <div class="d-flex review-images-container mt-3 ">
                                 {% for image in review.images %}
@@ -33,7 +33,7 @@
                                             <p class="card-name-customer">{{ store.name }}</p>
                                     </div>
                                 </div>
-                                <div class="card-paragraph text-justify mt-2 user-review-text">{{ review.reply.text | safe }}</div>
+                                <div class="card-paragraph text-justify mt-2 user-review-text">{{ review.reply.text }}</div>
                                 {% if review.reply.images %}
                                 <div class="d-flex review-images-container mt-3 ">
                                         {% for image in review.reply.images %}
@@ -52,59 +52,59 @@
         const date = new Date(dateString);
         const now = new Date();
         const seconds = Math.floor((now - date) / 1000);
-        let yearAgo = '{{ _("year %s ago") }}';
-        let monthAgo = '{{ _("month %s ago") }}';
-        let dayAgo = '{{ _("day %s ago") }}';
-        let hourAgo = '{{ _("hour %s ago") }}';
-        let minuteAgo = '{{ _("minute %s ago") }}';
-        let lang = "{{ session.lang }}";
+        let yearAgo = {{ _("year %s ago") | tojson }};
+        let monthAgo = {{ _("month %s ago") | tojson }};
+        let dayAgo = {{ _("day %s ago") | tojson }};
+        let hourAgo = {{ _("hour %s ago") | tojson }};
+        let minuteAgo = {{ _("minute %s ago") | tojson }};
+        let lang = {{ session.lang | tojson }};
         let interval = Math.floor(seconds / 31536000);
 
         if (interval >= 1) {
             if (lang === "ar") {
                 yearAgo = yearAgo.replace('%s', interval);
-                return (interval === 1 ? " {{ _('year ago') }}" : yearAgo);
+                return (interval === 1 ? {{ _('year ago') | tojson }} : yearAgo);
             }
-            return interval + " " + (interval === 1 ? " {{ _('year ago') }}" : " {{ _('year ago') }}");
+            return interval + " " + (interval === 1 ? {{ _('year ago') | tojson }} : {{ _('year ago') | tojson }});
         }
 
         interval = Math.floor(seconds / 2592000);
         if (interval >= 1) {
             if (lang === "ar") {
                 monthAgo = monthAgo.replace('%s', interval);
-                return (interval === 1 ? " {{ _('month ago') }}" : monthAgo);
+                return (interval === 1 ? {{ _('month ago') | tojson }} : monthAgo);
             }
-            return interval + " " + (interval === 1 ? "{{ _('month ago') }}" : "{{ _('months ago') }}");
+            return interval + " " + (interval === 1 ? {{ _('month ago') | tojson }} : {{ _('months ago') | tojson }});
         }
 
         interval = Math.floor(seconds / 86400);
         if (interval >= 1) {
             if (lang === "ar") {
                 dayAgo = dayAgo.replace('%s', interval);
-                return (interval === 1 ? " {{ _('day ago') }}" : dayAgo);
+                return (interval === 1 ? {{ _('day ago') | tojson }} : dayAgo);
             }
-            return interval + " " + (interval === 1 ? " {{ _('day ago') }}" : " {{ _('days ago') }}");
+            return interval + " " + (interval === 1 ? {{ _('day ago') | tojson }} : {{ _('days ago') | tojson }});
         }
 
         interval = Math.floor(seconds / 3600);
         if (interval >= 1) {
             if (lang === "ar") {
                 hourAgo = hourAgo.replace('%s', interval);
-                return (interval === 1 ? " {{ _('hour ago') }}" : hourAgo);
+                return (interval === 1 ? {{ _('hour ago') | tojson }} : hourAgo);
             }
-            return interval + " " + (interval === 1 ? "{{ _('hour ago') }}" : " {{ _('hours ago') }}");
+            return interval + " " + (interval === 1 ? {{ _('hour ago') | tojson }} : {{ _('hours ago') | tojson }});
         }
 
         interval = Math.floor(seconds / 60);
         if (interval >= 1) {
             if (lang === "ar") {
                 minuteAgo = minuteAgo.replace('%s', interval);
-                return (interval === 1 ? " {{ _('minute ago') }}" : minuteAgo);
+                return (interval === 1 ? {{ _('minute ago') | tojson }} : minuteAgo);
             }
-            return interval + " " + (interval === 1 ? " {{ _('minute ago') }}" : " {{ _('minutes ago') }}");
+            return interval + " " + (interval === 1 ? {{ _('minute ago') | tojson }} : {{ _('minutes ago') | tojson }});
         }
 
-        return "{{ _('Just now') }}";
+        return {{ _('Just now') | tojson }};
     }
 
 document.addEventListener('DOMContentLoaded', function() {

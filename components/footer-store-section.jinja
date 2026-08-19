@@ -4,7 +4,7 @@
             <div class="col-12 col-lg-5">
                 <div class="footer-about-us-links-div footer-about-us-div">
                     <h2 class="pb-2">{{ settings.about_us_title }}</h2>
-                    <p>{{ settings.about_us_des | safe }}</p>
+                    <p class="footer-about-us-description">{{ settings.about_us_des }}</p>
                 </div>
             </div>
             <div class="col-12 col-lg-7">
@@ -166,7 +166,8 @@
     <div class="container">
         <div class="d-flex flex-column-reverse flex-lg-row flex-wrap align-items-center justify-content-between footer-store-section-bars" style="border-bottom: 0px;">
             <div class="d-flex justify-content-center align-items-center">
-                <span class="text-center footer-copyrights">{{ store.settings.branding.copyrights | safe}}</span>
+                {# Platform branding copyrights intentionally contain the provider's link markup. #}
+                <span class="text-center footer-copyrights">{{ store.settings.branding.copyrights | safe }}</span>
             </div>
             <div class="vat-crn-sections py-4 d-flex flex-row flex-wrap justify-content-end align-items-center">
                 {% if store.settings.general.tax_settings.is_certificate_visible %}

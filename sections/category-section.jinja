@@ -43,6 +43,7 @@
 <script>
 
     document.addEventListener("DOMContentLoaded", function(){
+        var sectionRoot = document.getElementById(String({{ sectionId | tojson }}));
         var arrowNextClass, arrowPrevClass;
         if (window.appDirection === 'ltr') {
             arrowNextClass = 'icon-keyboard_arrow_right';
@@ -58,7 +59,7 @@
 
         if(screenWidth >= 768 || editingMode) {
 
-            $('[section-id={{ sectionId }}] .categories-slider').slick({
+            $(sectionRoot).find('.categories-slider').slick({
                 slidesToShow: 5,
                 slidesToScroll: 5,
                 infinite: false,
@@ -85,5 +86,3 @@
         }
     });
 </script>
-
-

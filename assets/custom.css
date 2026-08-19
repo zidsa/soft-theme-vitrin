@@ -169,6 +169,10 @@
     padding-right: 20%;
 }
 
+.footer-about-us-description {
+    white-space: pre-wrap;
+}
+
 .rtl .footer-about-us-div {
     padding-right: unset;
     padding-left: 20%;

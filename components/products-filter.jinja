@@ -59,16 +59,16 @@
                         </button>
                         <div class="dropdown-menu select-dropdown">
 
-                                <a class="dropdown-item" onclick="this.href = this.getAttribute('data-href')" data-href="{{ session.url.include_query_params(sort_by='created_at', order='desc') }}">
+                                <a class="dropdown-item" href="{{ session.url.include_query_params(sort_by='created_at', order='desc') }}">
                                     {{ _("Newest") }}
                                 </a>
-                                <a class="dropdown-item" onclick="this.href = this.getAttribute('data-href')" data-href="{{ session.url.include_query_params(sort_by='popularity_order', order='asc') }}">
+                                <a class="dropdown-item" href="{{ session.url.include_query_params(sort_by='popularity_order', order='asc') }}">
                                     {{ _("Most popular") }}
                                 </a>
-                                <a class="dropdown-item" onclick="this.href = this.getAttribute('data-href')" data-href="{{ session.url.include_query_params(sort_by='price', order='asc') }}">
+                                <a class="dropdown-item" href="{{ session.url.include_query_params(sort_by='price', order='asc') }}">
                                     {{ _("Low to high") }}
                                 </a>
-                                <a class="dropdown-item" onclick="this.href = this.getAttribute('data-href')" data-href="{{ session.url.include_query_params(sort_by='price', order='desc') }}">
+                                <a class="dropdown-item" href="{{ session.url.include_query_params(sort_by='price', order='desc') }}">
                                     {{ _("High to low") }}
                                 </a>
 
@@ -115,4 +115,3 @@
         </div>
     </div>
 </div>
-

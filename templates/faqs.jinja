@@ -24,6 +24,7 @@
 
                         <div id="collapse{{ loop.index0 }}" class="collapse {% if loop.index0 == 0 %}show{% endif %}" aria-labelledby="heading{{ loop.index0 }}" data-parent="#accordion">
                             <div class="card-body text-justify">
+                                {# FAQ answers are intentional rich text supplied by the storefront platform. #}
                                 {{ faq.answer | safe }}
                             </div>
                         </div>
