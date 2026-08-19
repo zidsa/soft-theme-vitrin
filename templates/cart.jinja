@@ -315,8 +315,15 @@
         });
 
         function addDeleteProgressImage(){
-            $('.cart-product-delete a .prefix', document).addClass('d-none');
-            $('.cart-product-delete a .prefix', document).html('<img class="send-coupon-progress" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>');
+            var spinnerUrl = {{ ('spinner.gif' | asset_url) | tojson }};
+            $('.cart-product-delete a .prefix', document).addClass('d-none').each(function () {
+                var image = document.createElement('img');
+                image.className = 'send-coupon-progress';
+                image.src = spinnerUrl;
+                image.width = 15;
+                image.height = 15;
+                this.replaceChildren(image);
+            });
         }
 
         $(document).on('click','.cart-product-delete a', function(event) {
@@ -332,9 +339,9 @@
               filteredCities = mappedCities.filter((name) => name.trim().toLowerCase().includes(searchVal.trim().toLowerCase())).join(' ، ');
             }
             if (filteredCities.length) {
-              $(".cities-result").html(filteredCities);
+              $(".cities-result").text(filteredCities);
             } else {
-              $(".cities-result").html('{{ _("No Result Found") }}');
+              $(".cities-result").text({{ _("No Result Found") | tojson }});
             }
         });
 
@@ -345,7 +352,7 @@
             $('.send-coupon-progress').removeClass('d-none');
             zid.cart.applyCoupon({coupon_code: $('.send-coupon').val()}, { showErrorNotification: true })
                 .then(function (response) {
-                    window.zid?.toaster?.showSuccess('{{ _("Send Successfully") }}');
+                    window.zid?.toaster?.showSuccess({{ _("Send Successfully") | tojson }});
                     window.location.reload();
                     $('.send-coupon-progress').addClass('d-none');
                 }).catch(function (err) {
@@ -371,7 +378,7 @@
             if(cart.products_count <= 0){
                 $('.cart-products-with-totals').addClass('d-none');
                 $('.cart-empty').removeClass('d-none');
-                $('.cart-header-total').html('');
+                $('.cart-header-total').text('');
                 return;
             }else{
                 $('.cart-products-with-totals').removeClass('d-none');
@@ -380,38 +387,37 @@
 
 
             $('.template_for_cart_products_list').html(html);
+            sanitizeRenderedUrls(document.querySelector('.template_for_cart_products_list'));
 
             if(cart &&  cart.totals){
-                var strCartTotlas = '';
+                var totalsContainer = document.querySelector('.cart-totals-div');
+                totalsContainer.replaceChildren();
                 for(var i = 0; i < cart.totals.length; i++){
                     var cartTotal = cart.totals[i];
-
-                    var totalStyle = '';
+                    var row = document.createElement('div');
+                    row.className = 'cart-product-row-wrapper cart-totals-row-wrapper';
+                    var title = document.createElement('div');
+                    title.className = 'flex-grow-1';
+                    title.textContent = cartTotal.title == null ? '' : String(cartTotal.title);
+                    var value = document.createElement('div');
+                    value.className = 'flex-shrink-0';
+                    value.style.width = '30%';
+                    value.textContent = cartTotal.value_string == null ? '' : String(cartTotal.value_string);
 
                     if(cartTotal.code === 'total'){
-                        totalStyle = 'font-weight: bold; color: var( --primary-color)';
-                    }
-
-                    var vat_included = '';
-                    if(cartTotal.code === 'total'){
-
+                        value.style.fontWeight = 'bold';
+                        value.style.color = 'var(--primary-color)';
                         var is_cart_total_vat_included = {% if store.settings.general.tax_settings.tax_percentage_formatted %}true{% else %}false{% endif %};
-                        var local_sys_lbl_cart_includes_vat = "{{ _('Includes TAX %(percentage)s') | format(percentage=store.settings.general.tax_settings.tax_percentage_formatted) }}";
-
                         if(is_cart_total_vat_included){
-                            vat_included = '&nbsp;<small>'+local_sys_lbl_cart_includes_vat+'</small>';
+                            var vatLabel = document.createElement('small');
+                            vatLabel.textContent = {{ (_('Includes TAX %(percentage)s') | format(percentage=store.settings.general.tax_settings.tax_percentage_formatted)) | tojson }};
+                            title.append(document.createTextNode('\u00a0'), vatLabel);
                         }
-
                     }
 
-
-                    strCartTotlas += '<div class="cart-product-row-wrapper cart-totals-row-wrapper">' +
-                        '                                <div class="flex-grow-1">'+cartTotal.title+vat_included+'</div>' +
-                        '                                <div class="flex-shrink-0" style="width: 30%; '+totalStyle+'">'+cartTotal.value_string+'</div>' +
-                        '                            </div>'
+                    row.append(title, value);
+                    totalsContainer.appendChild(row);
                 }
-
-                $('.cart-totals-div').html(strCartTotlas);
             }
 
             if(cart.free_shipping_rule){
@@ -419,7 +425,7 @@
                 $('.free-shipping-rule-section').removeClass('d-none')
                 $('.free-shipping-rule-progress').css('width', `${subtotalCondition.products_subtotal_percentage_from_min}%`)
                 if (subtotalCondition.status === 'applied') {
-                    $('.free-shipping-rule-message').html('{{ _("Free Shipping Applied") }}')
+                    $('.free-shipping-rule-message').text({{ _("Free Shipping Applied") | tojson }})
                     $('.free-shipping-rule-done').removeClass('d-none')
                     $('.free-shipping-rule-read-more').addClass('d-none')
                     $('.free-shipping-rule-read-more').removeClass('d-inline-block')
@@ -427,12 +433,12 @@
                     $('.discount-progress-linear').removeClass('d-block')
                 }else {
                     const remaining = subtotalCondition.remaining_string || subtotalCondition.remaining || '0';
-                    const message = '{{ _("Add products with total of %s to get free shipping") }}'.replace('%s', remaining);
-                    $('.free-shipping-rule-message').html(message)
+                    const message = {{ _("Add products with total of %s to get free shipping") | tojson }}.replace('%s', remaining);
+                    $('.free-shipping-rule-message').text(message)
                     $('.free-shipping-rule-done').addClass('d-none')
                     $('.free-shipping-rule-read-more').removeClass('d-none')
                     $('.discount-progress-linear').removeClass('d-none')
-                    $('.free-shipping-rule-progress').css('width', `${subtotalCondition.products_subtotal_percentage_from_min}%`).html(`${subtotalCondition.products_subtotal_percentage_from_min}%`)
+                    $('.free-shipping-rule-progress').css('width', `${subtotalCondition.products_subtotal_percentage_from_min}%`).text(`${subtotalCondition.products_subtotal_percentage_from_min}%`)
                 }
             }else{
                 $('.free-shipping-rule-section').addClass('d-none')

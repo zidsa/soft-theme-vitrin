@@ -152,12 +152,14 @@
         window.onProductAttributesChanged = function(htmlStr){
             var html = $.parseHTML( htmlStr );
             $('#products-list').html($('#products-list', html).html());
+            sanitizeRenderedUrls(document.getElementById('products-list'));
             $('#products-list').css('opacity', '1');
             $('#product-filter-count').html($('#product-filter-count', html).html());
             $('#product-filter-count').css('opacity', '1');
 
             if($('#product-pagination', html).length>0){
                 $('#product-pagination').html($('#product-pagination', html).html());
+                sanitizeRenderedUrls(document.getElementById('product-pagination'));
                 $('#product-pagination').css('opacity', '1');
             }
         }

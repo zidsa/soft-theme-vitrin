@@ -59,7 +59,7 @@
                                                                                   src="{{ 'video-play.svg' | asset_url }}"
                                                                                   alt="play"
                                                                                   width="25"
-                                                                                  onClick="showIframe(this, '{{ image.link }}')"
+                                                                                  data-video-url="{{ image.link }}"
                                                                                 />
                                                                             {% endif %}
                                                                         </a>
@@ -141,7 +141,7 @@
                                 {% if product.preorder_campaign %}
                                     {% include 'vitrin:products/preorder_badge.jinja' %}
                                 {% endif %}
-                                <h1>{{ product.name | safe }}</h1>
+                                <h1>{{ product.name }}</h1>
                                 <div class="d-flex flex-column flex-lg-row product-features">
                                     {% if product.rating %}
                                         <div>
@@ -183,6 +183,7 @@
 
                                 {% if product.short_description %}
                                     <p class="text-short-description">
+                                        {# Product descriptions are intentional rich text supplied by the storefront platform. #}
                                         {{ product.short_description | safe }}
                                         &nbsp;<a id="product-description-a" href="#product-description" class="text-color-primary">{{ _("more information") }}</a>
                                     </p>
@@ -326,7 +327,7 @@
                                         {% if store.settings.products.wishlist_enabled == true %}
                                             <span class="add-to-wishlist position-relative my-2" data-wishlist-id="{{ product.id }}">
                                                 {% if not session.is_guest %}
-                                                <a class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></a>
+                                                <a class="icon-heart-mask" data-wishlist-product-id="{{ product.id }}"></a>
                                                 {% else %}
                                                 <a class="icon-heart-mask" href="{{ url_for('login_page', query_params={"redirect_to": session.path} ) }}"></a>
                                                 {% endif %}
@@ -424,11 +425,10 @@
                             {{ _("product description") }}
                         </div>
                     </div>
-                    {% autoescape false %}
-                        <div class="description-paragrah text-justify description-text-clear">
-                            {{ product.description }}
-                        </div>
-                    {% endautoescape %}
+                    {# Product descriptions are intentional rich text supplied by the storefront platform. #}
+                    <div class="description-paragrah text-justify description-text-clear">
+                        {{ product.description | safe }}
+                    </div>
                 </section>
             {% endif %}
 
@@ -539,7 +539,7 @@
                             &nbsp;
                             <!-- Button trigger modal -->
                             {% if session.is_guest %}
-                            <a href="/auth/login?redirect_to={{ url_for('add_product_review', slug=product.id) }}" class="btn btn-primary add-review-btn" onclick="event.preventDefault(); handleLoginAction('{{ url_for('add_product_review', slug=product.id) }}'); return false;"><span class="icon-add_circle"></span>{{ _("Add Comment ") }} </a>
+                            <a href="/auth/login?redirect_to={{ url_for('add_product_review', slug=product.id) }}" class="btn btn-primary add-review-btn" data-login-redirect="{{ url_for('add_product_review', slug=product.id) }}"><span class="icon-add_circle"></span>{{ _("Add Comment ") }} </a>
                             {% else %}
                             <a href="{{ url_for('add_product_review', slug=product.slug) }}" class="btn btn-primary add-review-btn" id="add-review-btn"><span class="icon-add_circle"></span>{{ _("Add Comment ") }}</a>
                             {% endif %}
@@ -716,7 +716,8 @@
     <script>
 
         var productImages = {{ product.selected_product.media | tojson }};
-        var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
+        var customerWishlistIds = {{ (customer.wishlist if customer else []) | tojson }};
+        var productMediaPlayIconUrl = {{ ('video-play.svg' | asset_url) | tojson }};
         function buyNowLoadingControl(isLoading) {
             const buttonElement = $('.btn-buy-now');
             const loaderElement = $('.buy-now-progress');
@@ -813,12 +814,12 @@
           $('.add-to-cart-icon').addClass('d-none');
 
           var quantity = parseInt($('#product-quantity').val()) || 1;
-          var productId = $('#product-id').val() || '{{ product.selected_product.id }}';
+          var productId = $('#product-id').val() || {{ product.selected_product.id | tojson }};
 
           if (!window.zid || !window.zid.cart || !window.zid.cart.addProduct) {
                $('.add-to-cart-progress').addClass('d-none');
                $('.add-to-cart-icon').removeClass('d-none');
-              window.zid?.toaster?.showError('{{ _("Cart service not available") }}');
+              window.zid?.toaster?.showError({{ _("Cart service not available") | tojson }});
               return;
           }
 
@@ -843,7 +844,7 @@
                       $('.added-notification').removeClass("show");
                   }, 5000);
 
-                  window.zid?.toaster?.showSuccess('{{ _("Added to cart successfully") }}');
+                  window.zid?.toaster?.showSuccess({{ _("Added to cart successfully") | tojson }});
 
                   var image = $('#product-images-slick .slick-slide.slick-active img');
                   var cart = $('.a-shopping-cart');
@@ -853,7 +854,7 @@
                   }
 
               } else {
-                  var errorMessage = response && response.message ? response.message : '{{ _("Failed to add to cart") }}';
+                  var errorMessage = response && response.message ? response.message : {{ _("Failed to add to cart") | tojson }};
                   window.zid?.toaster?.showError(errorMessage);
               }
 
@@ -880,7 +881,7 @@
               phone = countryCode + rawPhone;
           }
 
-          const baseUrl = "{{ store.permalink }}";
+          const baseUrl = {{ store.permalink | tojson }};
           const payload = {
               customer_email: email,
               customer_phone_number: phone,
@@ -907,11 +908,11 @@
                   }
 
                   if (!data || (data && data.status === 'success')) {
-                      window.zid?.toaster?.showSuccess('{{ _("Send Successfully") }}');
+                      window.zid?.toaster?.showSuccess({{ _("Send Successfully") | tojson }});
                   } else if (data && data.data && data.data.message) {
                       window.zid?.toaster?.showError(JSON.stringify(data.data.message));
                   } else {
-                      window.zid?.toaster?.showError('{{ _("failed to send") }}');
+                      window.zid?.toaster?.showError({{ _("failed to send") | tojson }});
                   }
               } else {
                   let errData = null;
@@ -929,7 +930,7 @@
               }
 
           } catch (error) {
-              var errorMessage = '{{ _("Failed to send alert request") }}';
+              var errorMessage = {{ _("Failed to send alert request") | tojson }};
 
               window.zid?.toaster?.showError(errorMessage);
           } finally {
@@ -956,42 +957,40 @@
                 if (isBuyable) {
                     // Selected a variant that can be ordered (in stock OR preorder allowed).
                     if (selected_product.formatted_sale_price) {
-                        $('.product-formatted-price').html(selected_product.formatted_sale_price);
-                        $('.product-formatted-price-old').html(selected_product.formatted_price);
-                        $('.product-formatted-price-discount').html('{{ _("Discount") }}' + ' ' + selected_product.discount_percentage + '%');
+                        $('.product-formatted-price').text(selected_product.formatted_sale_price);
+                        $('.product-formatted-price-old').text(selected_product.formatted_price);
+                        $('.product-formatted-price-discount').text({{ _("Discount") | tojson }} + ' ' + selected_product.discount_percentage + '%');
                     } else {
-                        $('.product-formatted-price').html(selected_product.formatted_price);
-                        $('.product-formatted-price-old').html('');
-                        $('.product-formatted-price-discount').html('');
+                        $('.product-formatted-price').text(selected_product.formatted_price);
+                        $('.product-formatted-price-old').text('');
+                        $('.product-formatted-price-discount').text('');
                     }
 
                     if (selected_product.weight && selected_product.weight.value) {
                         $('.div-product-weight').removeClass('d-none');
-                        $('.div-product-weight .product-weight').html(selected_product.weight.value + ' ' + selected_product.weight.unit);
+                        $('.div-product-weight .product-weight').text(selected_product.weight.value + ' ' + selected_product.weight.unit);
                     } else {
                         $('.div-product-weight').addClass('d-none');
                     }
 
                     if (selected_product.sku) {
                         $('.div-product-sku').removeClass('d-none');
-                        $('.div-product-sku .product-sku').html(selected_product.sku);
+                        $('.div-product-sku .product-sku').text(selected_product.sku);
                     } else {
                         $('.div-product-sku').addClass('d-none');
                     }
 
                     {% if store.settings.products.low_stock_label_enabled %}
-                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_threshold }};
-                    var low_stock_message = '{{ _("Remaining %s only") }}';
+                    var store_low_stock_limit = {{ store.settings.products.low_stock_quantity_threshold | tojson }};
+                    var low_stock_message = {{ _("Remaining %s only") | tojson }};
 
                     if (!selected_product.is_infinite && selected_product.quantity < store_low_stock_limit) {
                         $('.low-quantity-section').removeClass('d-none').addClass('d-inline-block');
-                        $('.low-quantity-section .low-quantity').html(low_stock_message.replace('%s', selected_product.quantity));
+                        $('.low-quantity-section .low-quantity').text(low_stock_message.replace('%s', selected_product.quantity));
                     } else {
                         $('.low-quantity-section').removeClass('d-inline-block').addClass('d-none');
                     }
                     {% endif %}
-
-                    var selectQuantity = '';
 
                     if (selected_product.is_infinite) {
                         selected_product.quantity = 100;
@@ -1005,42 +1004,45 @@
                         } else {
                             quantityMax = selected_product.quantity;
                         }
-                        selectQuantity = '<option value="1" selected>1</option>';
-                        for (var i = 2; i <= quantityMax; i++) {
-                            selectQuantity += '<option value="' + i + '">' + i + '</option>';
+                        var quantitySelect = document.querySelector('.select-quantity');
+                        quantitySelect.replaceChildren();
+                        for (var i = 1; i <= quantityMax; i++) {
+                            var option = document.createElement('option');
+                            option.value = String(i);
+                            option.textContent = String(i);
+                            option.selected = i === 1;
+                            quantitySelect.appendChild(option);
                         }
                     } else {
                         $('.select-quantity-div').addClass('d-none');
                     }
 
-                    $('.select-quantity').html(selectQuantity);
-
                     $('.product-buttons').removeClass('d-none');
                     $('.section-out-of-stock-notify-me').addClass('d-none');
 
-                    $('.btn-add-to-cart span').html(hasPreorder ? '{{ _("Preorder now") }}' : '{{ _("add to cart") }}');
+                    $('.btn-add-to-cart span').text(hasPreorder ? {{ _("Preorder now") | tojson }} : {{ _("add to cart") | tojson }});
 
                     updateProductImages(selected_product);
                 } else {
                     // Variant is sold out and preorder is not allowed (or exhausted).
                     if (selected_product.formatted_sale_price) {
-                        $('.product-formatted-price').html(selected_product.formatted_sale_price);
-                        $('.product-formatted-price-old').html(selected_product.formatted_price);
-                        $('.product-formatted-price-discount').html('{{ _("Discount") }}' + ' ' + selected_product.discount_percentage + '%');
+                        $('.product-formatted-price').text(selected_product.formatted_sale_price);
+                        $('.product-formatted-price-old').text(selected_product.formatted_price);
+                        $('.product-formatted-price-discount').text({{ _("Discount") | tojson }} + ' ' + selected_product.discount_percentage + '%');
                     } else {
-                        $('.product-formatted-price').html(selected_product.formatted_price);
-                        $('.product-formatted-price-old').html('');
-                        $('.product-formatted-price-discount').html('');
+                        $('.product-formatted-price').text(selected_product.formatted_price);
+                        $('.product-formatted-price-old').text('');
+                        $('.product-formatted-price-discount').text('');
                     }
                     $('.select-quantity-div').addClass('d-none');
 
                     $('.product-buttons').addClass('d-none');
                     $('.section-out-of-stock-notify-me').removeClass('d-none');
-                    $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
+                    $('.btn-add-to-cart span').text({{ _("Option not available") | tojson }});
 
                     if (selected_product.sku) {
                         $('.div-product-sku').removeClass('d-none');
-                        $('.div-product-sku .product-sku').html(selected_product.sku);
+                        $('.div-product-sku .product-sku').text(selected_product.sku);
                     } else {
                         $('.div-product-sku').addClass('d-none');
                     }
@@ -1052,11 +1054,11 @@
                 if (canPreorder) {
                     $('.product-buttons').removeClass('d-none');
                     $('.section-out-of-stock-notify-me').addClass('d-none');
-                    $('.btn-add-to-cart span').html('{{ _("Preorder now") }}');
+                    $('.btn-add-to-cart span').text({{ _("Preorder now") | tojson }});
                 } else {
                     $('.product-buttons').addClass('d-none');
                     $('.section-out-of-stock-notify-me').removeClass('d-none');
-                    $('.btn-add-to-cart span').html('{{ _("Option not available") }}');
+                    $('.btn-add-to-cart span').text({{ _("Option not available") | tojson }});
                 }
 
                 updateProductImages(selected_product);
@@ -1079,54 +1081,104 @@
 
                 productImages = selected_product.media;
 
-                // Use native innerHTML to avoid jQuery.cleanData issues with Slick remnants in Safari.
+                // Avoid jQuery.cleanData issues with Slick remnants in Safari.
                 // Also remove stale dots explicitly — appendDots places them in .product-images-carousel.
                 $('.product-images-carousel .slick-dots').remove();
                 var slickEl = document.getElementById('product-images-slick');
-                if (slickEl) { slickEl.innerHTML = ''; }
                 var thumbsEl = document.querySelector('.product-images-carousel-thumbs');
-                if (thumbsEl) { thumbsEl.innerHTML = ''; }
+                if (!slickEl || !thumbsEl) return;
+                slickEl.replaceChildren();
+                thumbsEl.replaceChildren();
 
                 for (var z = 0; z < productImages.length; z++) {
                     var prImage = productImages[z];
-                    var imageHtml = '<div>' +
-                        '<div class="box-1-1">' +
-                        '<div class="content">' +
-                        '<a class="image-link" style="display:block; width: 100%; height: 100%;">' +
-                        '<img src="' + (prImage.image && prImage.image.full_size ? prImage.image.full_size : '') + '" class="carousel-img" alt="' + (selected_product.name || '') + '">';
-                    
+                    var slide = document.createElement('div');
+                    var slideBox = document.createElement('div');
+                    var slideContent = document.createElement('div');
+                    var imageLink = document.createElement('a');
+                    var image = document.createElement('img');
+
+                    slideBox.className = 'box-1-1';
+                    slideContent.className = 'content';
+                    imageLink.className = 'image-link';
+                    imageLink.style.cssText = 'display:block; width:100%; height:100%;';
+                    image.className = 'carousel-img';
+                    image.alt = selected_product.name == null ? '' : String(selected_product.name);
+
+                    var fullSizeUrl = getSafeNavigationUrl(
+                        prImage.image && prImage.image.full_size ? prImage.image.full_size : '',
+                        false
+                    );
+                    if (fullSizeUrl) image.src = fullSizeUrl;
+                    imageLink.appendChild(image);
+
                     if (prImage.provider && prImage.link) {
-                        imageHtml += '<img id="main-video-icon" class="play-icon" src="{{ "video-play.svg" | asset_url }}" alt="play" onclick="showIframe(this, \'' + prImage.link.replace(/'/g, '\\\'') + '\')"/>';
+                        var playIcon = document.createElement('img');
+                        playIcon.id = 'main-video-icon';
+                        playIcon.className = 'play-icon';
+                        playIcon.src = productMediaPlayIconUrl;
+                        playIcon.alt = 'play';
+                        playIcon.addEventListener('click', (function (videoLink) {
+                            return function () { showIframe(this, videoLink); };
+                        })(prImage.link));
+                        imageLink.appendChild(playIcon);
                     }
-                    
-                    imageHtml += '</a>' +
-                        '<div class="iframe-video pt-1 d-none">' +
-                        '<a id="iframe-close-btn" type="button" class="text-white btn btn-none grow" onClick="hideIframe(this)">X</a>' +
-                        '<iframe width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%">' +
-                        '</iframe>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
 
-                    $('#product-images-slick').append(imageHtml);
+                    var iframeContainer = document.createElement('div');
+                    iframeContainer.className = 'iframe-video pt-1 d-none';
+                    var closeButton = document.createElement('button');
+                    closeButton.type = 'button';
+                    closeButton.id = 'iframe-close-btn';
+                    closeButton.className = 'text-white btn btn-none grow';
+                    closeButton.textContent = 'X';
+                    closeButton.addEventListener('click', function () { hideIframe(this); });
+                    var iframe = document.createElement('iframe');
+                    iframe.width = '100%';
+                    iframe.height = '100%';
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                    iframe.setAttribute('allowfullscreen', '');
+                    iframe.style.maxWidth = '100%';
+                    iframeContainer.append(closeButton, iframe);
+                    slideContent.append(imageLink, iframeContainer);
+                    slideBox.appendChild(slideContent);
+                    slide.appendChild(slideBox);
+                    slickEl.appendChild(slide);
 
-                    var thumbHtml = '<div class="col-3">' +
-                        '<div class="box-1-1">' +
-                        '<div class="content">' +
-                        '<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="' + z + '" style="width: 100%; height: 100%;">' +
-                        '<img src="' + (prImage.image && prImage.image.medium ? prImage.image.medium : '') + '" data-index="' + z + '">';
-                    
+                    var thumb = document.createElement('div');
+                    var thumbBox = document.createElement('div');
+                    var thumbContent = document.createElement('div');
+                    var thumbLink = document.createElement('a');
+                    var thumbImage = document.createElement('img');
+                    thumb.className = 'col-3';
+                    thumbBox.className = 'box-1-1';
+                    thumbContent.className = 'content';
+                    thumbLink.className = 'd-flex align-items-center justify-content-center thumb-image-a';
+                    thumbLink.dataset.index = String(z);
+                    thumbLink.style.cssText = 'width:100%; height:100%;';
+                    thumbImage.dataset.index = String(z);
+
+                    var mediumUrl = getSafeNavigationUrl(
+                        prImage.image && prImage.image.medium ? prImage.image.medium : '',
+                        false
+                    );
+                    if (mediumUrl) thumbImage.src = mediumUrl;
+                    thumbLink.appendChild(thumbImage);
+
                     if (prImage.provider && prImage.link) {
-                        thumbHtml += '<img id="video-play-icon" class="play-icon" src="{{ "video-play.svg" | asset_url }}" alt="play" data-index="' + z + '">';
+                        var thumbPlayIcon = document.createElement('img');
+                        thumbPlayIcon.id = 'video-play-icon';
+                        thumbPlayIcon.className = 'play-icon';
+                        thumbPlayIcon.src = productMediaPlayIconUrl;
+                        thumbPlayIcon.alt = 'play';
+                        thumbPlayIcon.dataset.index = String(z);
+                        thumbLink.appendChild(thumbPlayIcon);
                     }
-                    
-                    thumbHtml += '</a>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
 
-                    $('.product-images-carousel-thumbs').append(thumbHtml);
+                    thumbContent.appendChild(thumbLink);
+                    thumbBox.appendChild(thumbContent);
+                    thumb.appendChild(thumbBox);
+                    thumbsEl.appendChild(thumb);
                 }
 
                 requestAnimationFrame(function() {
@@ -1186,6 +1238,10 @@
             if (dataIndex && $('#product-images-slick').hasClass('slick-initialized')) {
                 $('#product-images-slick').slick('slickGoTo', parseInt(dataIndex), true);
             }
+        });
+
+        $(document).on('click', '[data-video-url]', function() {
+            showIframe(this, $(this).attr('data-video-url'));
         });
 
         $(document).on('click', '#product-images-slick .image-link :not(#main-video-icon)', function(event) {

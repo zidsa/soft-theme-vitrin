@@ -47,9 +47,9 @@
     </div>
   </section>
   <script>
+    (function () {
+    var $slider = $(document.getElementById(String({{ carousel_id | tojson }})));
     window.addEventListener("load", function () {
-      var $slider = $('#{{ carousel_id }}');
-
       if (!$slider.length || $slider.hasClass('slick-initialized')) {
         $slider.removeClass('loading');
         return;
@@ -64,7 +64,7 @@
       }
 
       $slider.slick({
-        slidesToShow: {{ slides_desktop }},
+        slidesToShow: {{ slides_desktop | tojson }},
         slidesToScroll: 1,
         infinite: false,
         arrows: false,
@@ -74,14 +74,14 @@
           {
             breakpoint: 768,
             settings: {
-              slidesToShow: {{ slides_mobile }},
+              slidesToShow: {{ slides_mobile | tojson }},
               arrows: false
             }
           },
           {
             breakpoint: 992,
             settings: {
-              slidesToShow: {{ slides_tablet }},
+              slidesToShow: {{ slides_tablet | tojson }},
               arrows: true,
               nextArrow: '<button class="slick-next slick-arrow" type="button"><span class="' + arrowNextClass + '"></span></button>',
               prevArrow: '<button class="slick-prev slick-arrow" type="button"><span class="' + arrowPrevClass + '"></span></button>'
@@ -90,7 +90,7 @@
           {
             breakpoint: 99999, // desktop fallback
             settings: {
-              slidesToShow: {{ slides_desktop }},
+              slidesToShow: {{ slides_desktop | tojson }},
               arrows: true,
               nextArrow: '<button class="slick-next slick-arrow" type="button"><span class="' + arrowNextClass + '"></span></button>',
               prevArrow: '<button class="slick-prev slick-arrow" type="button"><span class="' + arrowPrevClass + '"></span></button>'
@@ -101,9 +101,10 @@
       $slider.removeClass('loading');
     });
     $(window).on('resize', function () {
-      if ($('#{{ carousel_id }}').hasClass('slick-initialized')) {
-        $('#{{ carousel_id }}').slick('setPosition');
+      if ($slider.hasClass('slick-initialized')) {
+        $slider.slick('setPosition');
       }
     });
+    })();
   </script>
 {% endif %}
