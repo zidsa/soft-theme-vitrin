@@ -3,7 +3,6 @@
 {% block header %} {% include 'header.jinja' %} {% endblock %}
 
 {% block top_links %}
-    <link rel="stylesheet" type="text/css" href="{{ 'toastr.min.css' | asset_url }}" />
     <link rel="stylesheet" type="text/css" href="{{ 'ekko-lightbox.css' | asset_url }}" />
 
     <link rel="stylesheet" type="text/css" href="{{ ('product-details.css?v=' ~ ver)  | asset_url }}" />
@@ -163,10 +162,12 @@
                                     {% endif %}
 
 
-                                    {% if product.low_stock_quantity %}
-                                        <div class="low-quantity-section d-inline-block">
+                                    {% if store.settings.products.low_stock_label_enabled %}
+                                        {% set show_low_stock = not selected_product.is_infinite
+                                                                and selected_product.quantity < store.settings.products.low_stock_quantity_threshold %}
+                                        <div class="low-quantity-section {{ 'd-inline-block' if show_low_stock else 'd-none' }}">
                                             <span class="icon-flag_black" style="color: #EC5550; font-size: 16px"></span>&nbsp;
-                                            <span class="low-quantity">{{ _("Remaining %s only") | format(product.low_stock_quantity) }}</span>
+                                            <span class="low-quantity">{{ _("Remaining %s only") | format(selected_product.quantity) }}</span>
                                         </div>
                                     {% endif %}
 
@@ -313,8 +314,8 @@
                                         <!-- Checkout dialog -->
                                         {% include 'vitrin:checkout/checkout_dialog.jinja' %}
                                         
-                                        {% if not safeget(store, 'settings.general.availability.closed_now') and not product.preorder_campaign %}
-                                        <button class="btn btn-buy-now d-none" type="button" onclick="zidProductBuyNow()">
+                                        {% if not safeget(store, 'settings.general.availability.closed_now') and store.settings.checkout.show_checkout_as_popup and not product.preorder_campaign %}
+                                        <button class="btn btn-buy-now" type="button" onclick="zidProductBuyNow()">
                                             <div class="buy-now-icon" style="mask: url({{ 'buy-now.svg' | asset_url }}) no-repeat center;"></div>
 
                                             <img class="buy-now-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="25" height="25" />
@@ -443,7 +444,7 @@
                                 <span class="icon-format_list_bulleted"></span>
                             </div>
                             <div class="description-title">
-                                {{ _("product description") }}
+                                {{ _("product options") }}
                             </div>
                         </div>
 
@@ -720,20 +721,32 @@
 
 
 {% block footer_scripts %}
-
     <script type="text/javascript" src="{{ 'ekko-lightbox.min.js' | asset_url }}" defer></script>
     <script type="text/javascript" src="{{ 'product-details.js' | asset_url }}" defer></script>
-    <script type="text/javascript" src="{{ 'toastr.min.js' | asset_url }}" defer></script>
     <script>
+
         var productImages = {{ product.selected_product.media | tojson }};
         var customerWishlistIds = {{ customer.wishlist | tojson if customer else '[]' }};
+        function buyNowLoadingControl(isLoading) {
+            const buttonElement = $('.btn-buy-now');
+            const loaderElement = $('.buy-now-progress');
+            const iconElement = $('.buy-now-icon');
 
+            buttonElement.prop('disabled', isLoading);
+            loaderElement.toggleClass('d-none', !isLoading);
+            iconElement.toggleClass('d-none', isLoading);
+        }
+        // SDKs loaded later may replace window.$ / window.jQuery with a different instance
+        // that doesn't have Slick attached. Capture the original jQuery for carousel ops.
+        var $slick = (window.jQuery && window.jQuery.fn && window.jQuery.fn.slick) ? window.jQuery : null;
+
+        buyNowLoadingControl(true);
         $(window).on('load', function () {
             if (window.checkout_dialog) {
+                buyNowLoadingControl(false);
                 $('.btn-buy-now').removeClass('d-none');
             }
         });
-
         window.zidProductBuyNow = async () => {
 
             const buyNowLoading = (isLoading) => {
@@ -1065,9 +1078,9 @@
                 $('.product-images-carousel').removeClass('d-none');
                 $('.product-images-carousel-thumbs').removeClass('d-none-important');
                 $('.product-images-empty').addClass('d-none');
-                
-                if ($.fn.slick && $('#product-images-slick').hasClass('slick-initialized')) {
-                    $('#product-images-slick').slick('unslick');
+
+                if ($slick && $slick('#product-images-slick').hasClass('slick-initialized')) {
+                    $slick('#product-images-slick').slick('unslick');
                 }
 
                 $('#product-images-slick').removeClass('slick-initialized slick-slider slick-dotted');
@@ -1076,7 +1089,9 @@
 
                 productImages = selected_product.media;
 
-                // Use native innerHTML to avoid jQuery.cleanData issues with Slick remnants in Safari
+                // Use native innerHTML to avoid jQuery.cleanData issues with Slick remnants in Safari.
+                // Also remove stale dots explicitly — appendDots places them in .product-images-carousel.
+                $('.product-images-carousel .slick-dots').remove();
                 var slickEl = document.getElementById('product-images-slick');
                 if (slickEl) { slickEl.innerHTML = ''; }
                 var thumbsEl = document.querySelector('.product-images-carousel-thumbs');
@@ -1221,7 +1236,6 @@
         var initSlickTimer = null;
 
         function initSlick(productImages, retryCount) {
-            // Cancel any pending retry from a previous call
             if (initSlickTimer) {
                 clearTimeout(initSlickTimer);
                 initSlickTimer = null;
@@ -1231,17 +1245,18 @@
                 return;
             }
 
-            if (!$.fn.slick) {
+            // slick may not be loaded yet; retry for up to ~10s
+            if (!$slick) {
                 if (!retryCount || retryCount < 50) {
                     initSlickTimer = setTimeout(function() {
+                        $slick = (window.jQuery && window.jQuery.fn && window.jQuery.fn.slick) ? window.jQuery : null;
                         initSlick(productImages, (retryCount || 0) + 1);
                     }, 200);
                 }
                 return;
             }
 
-            // Prevent double initialization
-            if ($('#product-images-slick').hasClass('slick-initialized')) {
+            if ($slick('#product-images-slick').hasClass('slick-initialized')) {
                 return;
             }
 
@@ -1254,11 +1269,12 @@
                 arrowPrevClass = 'icon-keyboard_arrow_right';
             }
 
-            $('#product-images-slick').slick({
+            $slick('#product-images-slick').slick({
                 infinite: false,
                 autoplay: false,
                 arrows: (productImages.length > 1),
                 dots: (productImages.length > 1),
+                appendDots: $slick('.product-images-carousel'),
                 rtl: !(window.appDirection === 'ltr'),
                 nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><span class="' + arrowNextClass + '"></span></button>',
                 prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><span class="' + arrowPrevClass + '"></span></button>'
@@ -1267,6 +1283,18 @@
 
         $('#product-images-slick').on('init', function(event, slick) {
             $('.product-images-carousel').removeClass('product-images-carousel-init');
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                var $dots = $('#product-images-slick .slick-dots');
+                const $hiddenItems = $dots.find('li').filter(function () {
+                    return $(this).css('display') === 'none';
+                });
+
+                if ($dots.length && $hiddenItems.length) {
+                    $hiddenItems.each(function () {
+                        this.style.setProperty('display', 'inline-block', 'important');
+                    });
+                }
+            }
         });
 
         function openPhotoSwipe(productImages, index) {

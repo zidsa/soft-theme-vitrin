@@ -10,7 +10,7 @@
             <div class="col-12 col-lg-7">
                 <div class="row">
                     <div class="col-12 col-lg-4">
-                        {% if not (settings.links_1_hide) %}
+                        {% if not settings.links_1_hide %}
                             <div class="footer-about-us-links-div">
                             {# maybe do links_1 and links_2 with settings menus later #}
                                 <h2 class="pb-2">{{ settings.links_1_title }}</h2>
@@ -21,7 +21,7 @@
                         {% endif %}
                     </div>
                     <div class="col-12 col-lg-4">
-                        {% if not (settings.links_2_hide) %}
+                        {% if not settings.links_2_hide %}
                             <div class="footer-about-us-links-div">
                                 <h2 class="pb-2">{{ settings.links_2_title }}</h2>
                                 {% for link in settings.links_2_links %}

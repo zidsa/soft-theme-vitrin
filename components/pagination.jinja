@@ -2,7 +2,8 @@
 <nav id="product-pagination" class="products-pagination" aria-label="products navigation">
     <ul class="pagination flex-wrap justify-content-center">
         <li class="page-item {% if currentPage == 1 %}disabled{% endif %}">
-            <a class="page-link" href="{{ session.url.include_query_params(page=(currentPage - 1)) }}" tabindex="-1">{{ _("Prev") }}</a>
+            <a class="page-link"  href="{{ session.url.include_query_params(page=currentPage - 1) if currentPage - 1 != 0 else "" }}"
+               tabindex="-1">{{ _("Prev") }}</a>
         </li>
 
         {% if currentPage > 3 and totalPages > 5%}

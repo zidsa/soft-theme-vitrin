@@ -3,6 +3,7 @@
 # Editor directories and files
 /.idea
 /.vscode
+/.vitrin
 
 # dependencies
 /node_modules
