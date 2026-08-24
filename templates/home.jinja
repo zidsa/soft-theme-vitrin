@@ -6,9 +6,9 @@
 {% block main_content %}
 
     <div class="home">
-        <h1 class="d-none">{{ store.settings.branding.seo.title if store.settings.branding.seo and store.settings.branding.seo.title and store.settings.branding.seo.title is defined else store.name }}</h1>
         {% template_components %}
     </div>
+    <h1 class="d-none">{{ store.settings.branding.seo.title if store.settings.branding.seo and store.settings.branding.seo.title and store.settings.branding.seo.title is defined else store.name }}</h1>
 
 {% endblock %}
 
