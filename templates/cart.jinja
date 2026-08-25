@@ -87,7 +87,6 @@
                             {% include 'vitrin:cart/products_list.jinja' %}
                         </div>
 
-                        {% if store.settings.checkout.gift_order_settings.is_gift_order_enabled == '1' and not cart.gift_card_details.card_product_id %}
                         <div class="cart-gift-card" data-gift-removed-success="{{ _('Gift card removed successfully') }}" data-gift-added-success="{{ _('Send Successfully') }}" style="display: {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}block{% else %}none{% endif %};">
                             <div class="d-flex align-items-start">
                                 <span class="gift-card-icon-wrapper">
@@ -113,10 +112,10 @@
                                             </p>
                                         </div>
                                         <div class="gift-card-actions">
-                                            <button type="button" class="btn btn-sm btn-link gift-card-edit-btn" data-action="gift-edit" title="{{ _('Edit') }}">
+                                            <button type="button" class="btn btn-sm btn-link gift-card-edit-btn" onclick="editGiftCard()" title="{{ _('Edit') }}">
                                                 <img src="{{ 'edit-icon.svg' | asset_url }}" alt="Edit" class="gift-card-edit-icon" />
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-link gift-card-delete-btn" data-action="gift-delete" title="{{ _('Delete') }}">
+                                            <button type="button" class="btn btn-sm btn-link gift-card-delete-btn" onclick="deleteGiftCard()" title="{{ _('Delete') }}">
                                                 <span class="icon-trash-alt"></span>
                                                 <img class="delete-gift-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="15" height="15"/>
                                             </button>
@@ -125,7 +124,7 @@
                                 </div>
                             </div>
                         </div>
-                        {% endif %}
+
                     </div>
                 </div>
                 <div class="col-12 col-lg-4">
@@ -269,7 +268,7 @@
 
                         {% if store.settings.checkout.gift_order_settings.is_gift_order_enabled == '1' %}
                           <div class="card border-0 mt-3 text-body">
-                            <button type="button" id="gift-btn" class="btn btn-lg btn-block btn-outline-primary gift-card-toggle-btn d-flex align-items-center justify-content-between {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}gift-added{% else %}gift-send{% endif %}" data-action="gift-open">
+                            <button id="gift-btn" class="btn btn-lg btn-block btn-outline-primary gift-card-toggle-btn d-flex align-items-center justify-content-between {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}gift-added{% else %}gift-send{% endif %}" onclick="handleGiftCardClick()">
                               <span class="icon-gift" style="font-size: 24px;"></span>
                               <span class="flex-grow-1 text-left ml-3">{{ _("Make it a gift") }}</span>
                               <span  class="gift-edit-link {% if cart.gift_card_details and cart.gift_card_details | length > 0 %}d-inline{% else %}d-none{% endif %}">{{ _("Edit details") }}</span>

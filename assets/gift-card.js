@@ -4,60 +4,27 @@
  */
 
 function editGiftCard() {
-  // Goes through the auth guard, so guests get the login dialog instead of nothing
-  if (typeof handleGiftCardClick === 'function') {
-    handleGiftCardClick();
-
-    return;
-  }
-
   window?.gift_dialog?.open();
 }
 
-var GIFT_HIDDEN_CLASSES = 'd-none hidden zid-hidden';
-
-function isGiftElementHidden($el) {
-  return $el.hasClass('d-none') || $el.hasClass('hidden') || $el.hasClass('zid-hidden');
-}
-
-function showGiftElement($el) {
-  $el.removeClass(GIFT_HIDDEN_CLASSES);
-}
-
-function hideGiftElement($el) {
-  $el.addClass('d-none');
-}
-
-function deleteGiftCard(event) {
-  const clickedButton = event?.target instanceof Element
-    ? event.target.closest('.gift-card-delete-btn, [data-gift-delete-btn]')
-    : null;
-  const deleteButton = clickedButton
-    ? $(clickedButton)
-    : $('.gift-card-delete-btn, [data-gift-delete-btn]');
-  const deleteIcon = deleteButton.find('.icon-trash-alt, [data-gift-delete-icon]');
-  const deleteProgress = deleteButton.find('.delete-gift-progress, [data-gift-delete-spinner]');
+function deleteGiftCard() {
+  const deleteButton = $('.gift-card-delete-btn');
+  const deleteIcon = deleteButton.find('.icon-trash-alt');
+  const deleteProgress = deleteButton.find('.delete-gift-progress');
 
   // Prevent multiple clicks
-  if (deleteProgress.length > 0 && !isGiftElementHidden(deleteProgress)) {
-    return;
-  }
-
-  if (typeof window?.zid?.cart?.removeGiftCard !== 'function') {
-    console.error('zid.cart.removeGiftCard is not available');
-
+  if (!deleteProgress.hasClass('d-none')) {
     return;
   }
 
   // Show loading state
-  hideGiftElement(deleteIcon);
-  showGiftElement(deleteProgress);
+  deleteIcon.addClass('d-none');
+  deleteProgress.removeClass('d-none');
 
-  window.zid.cart
-    .removeGiftCard({ showErrorNotification: true })
+  window?.zid?.cart
+    ?.removeGiftCard({ showErrorNotification: true })
     .then(() => {
-      $('.cart-gift-card, [data-gift-card-display]').hide();
-      removeGiftProductRow(clickedButton);
+      $('.cart-gift-card').hide();
       updateGiftButtonText(false);
 
       // Show success alert - get translation from existing element
@@ -66,30 +33,13 @@ function deleteGiftCard(event) {
 
       window.zid?.toaster?.showSuccess(successMessage);
     })
-    .catch(err => {
-      console.error('Failed to remove gift card:', err);
+    .catch(() => {
+      // Do nothing
     })
     .finally(() => {
-      showGiftElement(deleteIcon);
-      hideGiftElement(deleteProgress);
+      deleteIcon.removeClass('d-none');
+      deleteProgress.addClass('d-none');
     });
-}
-
-/**
- * When the gift card is a paid card product it is rendered as a row inside the
- * cart products list, so drop that whole row too, not just the summary card.
- */
-function removeGiftProductRow(deleteButton) {
-  if (!(deleteButton instanceof Element)) {
-    return;
-  }
-
-  // Outer wrapper first - .cart-product-row alone would leave an empty wrapper behind
-  const productRow =
-    deleteButton.closest('.cart-product-item, .cart-product-row-wrapper') ||
-    deleteButton.closest('.cart-product-row');
-
-  productRow?.remove();
 }
 
 function updateGiftCardDisplay(giftData) {
@@ -153,51 +103,15 @@ function updateGiftButtonText(hasGift) {
   }
 }
 
-function onGiftSubmitted() {
-  window.location.reload();
-}
+// Event listener for gift submission
+window.addEventListener('vitrin:gift:submitted', async event => {
+  const cartData = event?.detail?.data;
+  const giftData = cartData?.gift_card_details;
 
-window.addEventListener('vitrin:gift:submitted', onGiftSubmitted);
+  if (giftData) {
+    updateGiftCardDisplay(giftData);
+    const successMessage = $('.cart-gift-card').data('gift-added-success') || 'Send Successfully';
 
-function setupEventDelegation() {
-  document.addEventListener('click', e => {
-    if (!(e.target instanceof Element)) {
-      return;
-    }
-
-    const btn = e.target.closest('[data-action]');
-
-    if (!btn) {
-      if (e.target.closest('.gift-card-delete-btn, [data-gift-delete-btn]')) {
-        e.preventDefault();
-        deleteGiftCard(e);
-      } else if (e.target.closest('.gift-card-edit-btn, [data-gift-edit-link]')) {
-        e.preventDefault();
-        editGiftCard();
-      }
-
-      return;
-    }
-
-    switch (btn.dataset.action) {
-      case 'gift-edit':
-        e.preventDefault();
-        editGiftCard();
-        break;
-
-      case 'gift-delete':
-        e.preventDefault();
-        deleteGiftCard(e);
-        break;
-
-      case 'gift-open':
-        e.preventDefault();
-        handleGiftCardClick();
-        break;
-
-      default:
-        break;
-    }
-  });
-
-setupEventDelegation();
+    window.zid?.toaster?.showSuccess(successMessage);
+  }
+});
