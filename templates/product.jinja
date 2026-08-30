@@ -163,8 +163,11 @@
 
 
                                     {% if store.settings.products.low_stock_label_enabled %}
-                                        {% set show_low_stock = not selected_product.is_infinite
-                                                                and selected_product.quantity < store.settings.products.low_stock_quantity_threshold %}
+                                        {% set show_low_stock =
+                                            product.product_class != 'dynamic_bundle'
+                                            and not selected_product.is_infinite
+                                            and selected_product.quantity < store.settings.products.low_stock_quantity_threshold
+                                        %}
                                         <div class="low-quantity-section {{ 'd-inline-block' if show_low_stock else 'd-none' }}">
                                             <span class="icon-flag_black" style="color: #EC5550; font-size: 16px"></span>&nbsp;
                                             <span class="low-quantity">{{ _("Remaining %s only") | format(selected_product.quantity) }}</span>
