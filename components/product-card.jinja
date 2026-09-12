@@ -36,7 +36,7 @@
                             {% if product.images or product.videos %}
                                     src="{{ product.main_image.image.small if product.main_image else '' }}"
                              {% else %}
-                                 src="{{ image_url(('product-img.svg' | asset_url), w=235, q=100, f='auto') }}"
+                                 src="{{ image_url(('product-img.svg' | asset_url), w=235, q=85, f='auto') }}"
                             {% endif %}
                          alt="{{ product.name }}">
                     <span class="product-card-bundle-offer" data-bundle-offer-product-id="{{ product.id }}"></span>
