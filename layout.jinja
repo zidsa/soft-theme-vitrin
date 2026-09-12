@@ -20,16 +20,16 @@
   {% endif %}
 
   <link rel="preload" as="image"
-        href="{{ image_url(logoUrl, h=175, q=100) }}"
+        href="{{ image_url(logoUrl, h=175, q=85) }}"
         media="(min-width: 992px)">
 
   {% if logoUrlMobile %}
     <link rel="preload" as="image"
-          href="{{ image_url(logoUrlMobile, h=175, q=100) }}"
+          href="{{ image_url(logoUrlMobile, h=175, q=85) }}"
           media="(max-width: 991px)">
   {% else %}
     <link rel="preload" as="image"
-          href="{{ image_url(logoUrl, h=175, q=100) }}"
+          href="{{ image_url(logoUrl, h=175, q=85) }}"
           media="(max-width: 991px)">
   {% endif %}
         
