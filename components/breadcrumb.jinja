@@ -6,10 +6,10 @@
                     <li class="breadcrumb-item {{ item.class|default('') }} active " aria-current="page">
                         {% if item.href %}
                             <a href="{{ item.href }}" class="{{ item.link_class|default('') }}">
-                                {{ item.label|safe }}
+                                {{ item.label }}
                             </a>
                         {% else %}
-                            {{ item.label|safe }}
+                            {{ item.label }}
                         {% endif %}
                     </li>
                 {% endfor %}

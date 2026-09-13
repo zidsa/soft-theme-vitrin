@@ -69,11 +69,12 @@ const showLoyaltyProgram = () => {
               width: auto;
               opacity:  1;
               transition: all 1s ease 1s;
-            ">${text_loyalty_rewards}</span>
+            " class="loyalty-footer-button-text"></span>
             </button>
         </div>
     </div></div>
     `);
+  $('.loyalty-footer-button-text').last().text(text_loyalty_rewards);
 }
 
 const getRedemptionMethods = () => {
@@ -92,9 +93,13 @@ const getRedemptionMethods = () => {
                                     <path d="M3.13245 45.4273C2.75487 45.9125 2.86245 46.6149 3.34761 46.9925L11.3925 52.9325C11.8777 53.31 12.5801 53.2025 12.905 52.7173L16.0901 48.3973L6.37226 41.1073L3.13245 45.4273Z" fill="#000000"/>
                                     <path d="M45.0898 30.7953L37.7998 33.1156V33.6008C37.6922 35.7059 36.2346 37.4884 34.1822 37.9757L33.697 38.0832C30.997 38.6781 28.297 39.0557 25.5419 39.1632L23.3271 39.2708C22.5719 39.3257 21.9771 38.7308 21.9222 38.0284C21.8674 37.2733 22.4622 36.6784 23.1646 36.6235L25.3795 36.516C27.9719 36.4084 30.5095 36.0835 33.047 35.4908L33.5321 35.3832C34.397 35.1681 35.0446 34.4108 35.0973 33.5481C35.0973 33.0081 34.9348 32.523 34.5573 32.0905C34.1797 31.713 33.6924 31.4957 33.1524 31.443L21.4349 31.1181C20.1398 31.0633 18.8974 31.4957 17.8174 32.253L8.31445 39.3259L18.3595 46.7784L28.187 47.6433C29.9146 47.8057 31.5894 47.2657 32.9394 46.2384L47.2494 34.8434C47.7894 34.4109 48.0594 33.8182 48.1143 33.1685C48.1691 32.5209 47.9519 31.8734 47.4667 31.3861C46.8171 30.7406 45.8995 30.5254 45.0895 30.7954L45.0898 30.7953Z" fill="#000000"/>
                                 </svg>
-                                <div> ${text_loyalty_options.replace('{points}', redemptionMethod.points_to_redeem).replace('{percentage}', redemptionMethod.reward.discount_value.toFixed(2)) + ' ' + store_currency_code}</div>
+                                <div class="loyalty-reward-description"></div>
                         </div>
                      `);
+            const description = text_loyalty_options
+              .replace('{points}', redemptionMethod.points_to_redeem)
+              .replace('{percentage}', redemptionMethod.reward.discount_value.toFixed(2)) + ' ' + store_currency_code;
+            $('.loyalty-rewards-popup__rewards_row .loyalty-reward-description').last().text(description);
           }
         });
       }
@@ -110,7 +115,7 @@ const getCustomerLoyaltyPoints = () => {
       response.data.points
     ) {
       customerPoints = response.data.points.available_poitns
-      $('#customerPointsValue').html(customerPoints)
+      $('#customerPointsValue').text(customerPoints)
       $('.loyalty-points__info').removeClass('loyalty-points__info_d_none')
     }
   })
@@ -134,6 +139,5 @@ const insertLoyaltyRewardsWindow = () => {
   $('.loyalty-rewards-popup').removeClass('loyalty-rewards-popup-init');
   $('.loyalty-rewards-popup').removeClass('loyalty-rewards-popup-hidden');
 }
-
 
 

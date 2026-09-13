@@ -15,8 +15,8 @@
     {% if store.settings.products.wishlist_enabled == true %}
       <span class="add-to-wishlist" data-wishlist-id="{{ product.id }}">
         <span zid-visible-customer="true">
-            <button zid-visible-wishlist="{{ product.id }}" class="icon-heart-mask filled" onclick="addToWishlist(this, '{{ product.id }}')"></button>
-            <button zid-hidden-wishlist="{{ product.id }}" class="icon-heart-mask" onclick="addToWishlist(this, '{{ product.id }}')"></button>
+            <button zid-visible-wishlist="{{ product.id }}" data-wishlist-product-id="{{ product.id }}" class="icon-heart-mask filled"></button>
+            <button zid-hidden-wishlist="{{ product.id }}" data-wishlist-product-id="{{ product.id }}" class="icon-heart-mask"></button>
         </span>
         <a zid-visible-guest="true" class="icon-heart-mask" href="/auth/login?redirect_to={{ session.url.path }}" onclick="event.preventDefault(); handleLoginAction('', false); return false;"></a>
         <img class="loader d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="product-title" style="margin-top: 15px"><span>{{ product.name | safe }}</span></div>
+        <div class="product-title" style="margin-top: 15px"><span>{{ product.name }}</span></div>
         {% if store.settings.products.reviews_enabled %}
             <div class="product-card-rating-wrapper" style="height: 18px">
                 {% if product.rating %}
@@ -102,7 +102,7 @@
                     {{ _("Preorder now") if has_preorder else _("add to cart") }}
                 </a>
             {% else %}
-            <a class="btn btn-primary product-card-add-to-cart" onclick="event.preventDefault(); event.stopPropagation(); productCartAddToCart(this,'{{ product.id }}')">
+            <a class="btn btn-primary product-card-add-to-cart" data-cart-product-id="{{ product.id }}">
                 <img style="display: inline" class="add-to-cart-progress d-none" src="{{ 'spinner.gif' | asset_url }}" width="20" height="20"/>
                 {{ _("Preorder now") if has_preorder else _("add to cart") }}
             </a>

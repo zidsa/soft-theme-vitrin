@@ -1,4 +1,4 @@
-{% set ver = '0.1.041' %}
+{% set ver = '0.1.042' %}
 <!doctype html>
 <html class="no-js" lang="{{ session.lang }}" dir="{{ session.locale.language.direction }}">
 <head>
@@ -7,6 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   {% vitrin_head %}
+  <script src="{{ ('theme-security.js?v=' ~ ver) | asset_url }}"></script>
 
   {% if settings.header_logo %}
     {% set logoUrl = settings.header_logo %}
@@ -34,7 +35,7 @@
   {% endif %}
         
     
-  <link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
+  <link rel="shortcut icon" type="image/jpg" href="{{ store.icon }}"/>
     {#<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa">#}
     <!--jquery UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -141,7 +142,16 @@
     {% block top_links %}{% endblock %}
 
   {% if user_custom_css %}
-    <link rel="stylesheet" href="{{ user_custom_css }}">
+    <link id="user-custom-stylesheet" rel="stylesheet" data-stylesheet-url="{{ user_custom_css }}">
+    <script>
+      (function () {
+        var stylesheet = document.getElementById('user-custom-stylesheet');
+        var value = stylesheet.getAttribute('data-stylesheet-url');
+        if (window.ThemeSecurity.isAllowedUrl(value, window.location.origin, ['http:', 'https:'])) {
+          stylesheet.href = value;
+        }
+      })();
+    </script>
   {% endif %}
 
 </head>
@@ -203,7 +213,7 @@
 </div>
 
 <script>
-    window.appDirection = '{{ session.locale.language.direction }}';
+    window.appDirection = {{ session.locale.language.direction | tojson }};
 </script>
 
 <script src="{{ 'jquery-3.6.0.min.js?v=1.0.0' | asset_url }}"></script>
@@ -224,10 +234,10 @@
 {% if session.template not in ['product_details', 'cart_page', 'page_details'] and safeget(store, "settings.checkout.is_loyalty_enabled", False) %}
 
     <script>
-        var loyalty_button_direction = "{{ session.language.direction }}";
-        var text_loyalty_rewards = '{{ _('Rewards') }}';
-        var text_loyalty_options = '{{ _('For {points} get a discount {percentage}') }}';
-        var store_currency_code = '{{ session.currency }}';
+        var loyalty_button_direction = {{ session.language.direction | tojson }};
+        var text_loyalty_rewards = {{ _('Rewards') | tojson }};
+        var text_loyalty_options = {{ _('For {points} get a discount {percentage}') | tojson }};
+        var store_currency_code = {{ session.currency | tojson }};
     </script>
     <script type='text/javascript' src="{{ ('layout_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
 

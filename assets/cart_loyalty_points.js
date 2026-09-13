@@ -51,9 +51,9 @@ const loyaltyCalculations = (total) => {
     ) {
       calculatedPoints = response.points;
       if (calculatedPoints > 0) {
-        $('#calculatedValue').html(calculatedPoints);
+        $('#calculatedValue').text(calculatedPoints);
         $('#calculatedPoints').css("display", "block");
-        $('#noCustomerCalculatedValue').html(calculatedPoints)
+        $('#noCustomerCalculatedValue').text(calculatedPoints)
         $('#calculatedPoints').css("display", "block");
       } else {
         $('#calculatedPoints').css("display", "none");
@@ -73,10 +73,13 @@ const getRedemptionMethods = () => {
       if (redemptionMethods.length > 0) {
         redemptionMethods.forEach((redemptionMethod, index) => {
           if (redemptionMethod.is_active) {
-            let att_dis = (redemptionMethod.points_to_redeem > customerPoints) ? 'disabled' : '';
-            $(".loyalty-points-redemption-methods").append(`
-                            <option ${att_dis} value="${redemptionMethod.id}" > ${text_loyalty_options.replace('{points}', redemptionMethod.points_to_redeem).replace('{percentage}', redemptionMethod.reward.discount_value.toFixed(2)) + ' ' + cart_currency_code}</option>
-                        `);
+            const option = document.createElement('option');
+            option.disabled = redemptionMethod.points_to_redeem > customerPoints;
+            option.value = redemptionMethod.id == null ? '' : String(redemptionMethod.id);
+            option.textContent = text_loyalty_options
+              .replace('{points}', redemptionMethod.points_to_redeem)
+              .replace('{percentage}', redemptionMethod.reward.discount_value.toFixed(2)) + ' ' + cart_currency_code;
+            document.querySelector('.loyalty-points-redemption-methods')?.appendChild(option);
           }
         });
       }
@@ -110,7 +113,7 @@ const getCustomerLoyaltyPoints = (onComplete) => {
       response.balance !== undefined
     ) {
       customerPoints = response.balance;
-      $('#customerPointsValue').html(customerPoints)
+      $('#customerPointsValue').text(customerPoints)
       if (onComplete) {
         onComplete()
       }

@@ -118,7 +118,7 @@
         const direction = isRTL ? 1 : -1; // 1 for right (RTL), -1 for left (LTR)
 
         function createTickerItems() {
-            wrap.innerHTML = '';
+            wrap.replaceChildren();
 
             const itemContent = template.content.cloneNode(true);
             const tempDiv = document.createElement('div');
@@ -139,7 +139,7 @@
                 const viewportWidth = window.innerWidth;
                 const itemsNeeded = Math.ceil(viewportWidth / itemWidth) + 8; // Increased buffer
 
-                wrap.innerHTML = '';
+                wrap.replaceChildren();
                 for (let i = 0; i < itemsNeeded; i++) {
                     wrap.appendChild(singleItem.cloneNode(true));
                 }
@@ -207,4 +207,3 @@
 </script>
     {% endif %}
 {% endif %}
-

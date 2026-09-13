@@ -232,14 +232,14 @@
 
     var loyaltyCashbackRules = {{ safeget(store, "settings.checkout.loyalty_cashback_rules", []) | tojson}};
 
-    var text_loyalty_options = '{{ _('For {points} get a discount {percentage}') }}';
-    var cart_currency_code = '{{ cart.currency.cart_currency.code }}';
-    var cart_total_value = {{ cart.total_value }};
-    var store_currency_code = '{{ session.currency.code }}';
+    var text_loyalty_options = {{ _('For {points} get a discount {percentage}') | tojson }};
+    var cart_currency_code = {{ cart.currency.cart_currency.code | tojson }};
+    var cart_total_value = {{ cart.total_value | tojson }};
+    var store_currency_code = {{ session.currency.code | tojson }};
     var cart_total_discount = 0;
     {% for c_total in cart.totals %}
         {% if c_total.code == 'products_discount' or  c_total.code == 'coupon' %}
-            cart_total_discount = {{ c_total.value }};
+            cart_total_discount = {{ c_total.value | tojson }};
         {% endif %}
     {% endfor %}
 </script>

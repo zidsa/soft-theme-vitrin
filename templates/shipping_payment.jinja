@@ -135,9 +135,8 @@
 
                                                             <div class="form-element" style="position: relative">
                                                                 <i class="icon-search"></i>
-                                                                <input type="text" class="form-control" placeholder="{{ _('Search') }}"
+                                                                <input type="text" class="form-control cities-filter-input" placeholder="{{ _('Search') }}"
                                                                        id="citiesFilter-{{ shipping_method.id }}"
-                                                                       onkeyup="filterCitiesList({{ shipping_method.id }})"
                                                                        name="citiesFilter"
                                                                        v-model="filterCities"
                                                                 >
@@ -262,8 +261,8 @@
             $('.shipping-payment-icon').addClass('d-none');
 
             if(tabId === '#v-pills-home'){
-                $('.page-breadcurmb').html('{{ _("Shipping Option") }}')
-                $('.profile-item-title-top').html('{{ _("Shipping Option") }}')
+                $('.page-breadcurmb').text({{ _("Shipping Option") | tojson }})
+                $('.profile-item-title-top').text({{ _("Shipping Option") | tojson }})
                 $('.shipping-payment-icon.icon-local_shipping').removeClass('d-none')
                 $('.li-pills-home').addClass('d-none')
                 $('.li-pills-profile').removeClass('d-none')
@@ -271,8 +270,8 @@
             }
 
             if(tabId === '#v-pills-profile'){
-                $('.page-breadcurmb').html('{{ _("Payment Options") }}')
-                $('.profile-item-title-top').html('{{ _("Payment Options") }}')
+                $('.page-breadcurmb').text({{ _("Payment Options") | tojson }})
+                $('.profile-item-title-top').text({{ _("Payment Options") | tojson }})
                 $('.shipping-payment-icon.icon-payments_black').removeClass('d-none')
                 $('.li-pills-profile').addClass('d-none')
                 $('.li-pills-home').removeClass('d-none')
@@ -280,8 +279,8 @@
             }
 
             if(tabId === '#v-pills-messages'){
-                $('.page-breadcurmb').html('{{ _("Bank Accounts") }}')
-                $('.profile-item-title-top').html('{{ _("Bank Accounts") }}')
+                $('.page-breadcurmb').text({{ _("Bank Accounts") | tojson }})
+                $('.profile-item-title-top').text({{ _("Bank Accounts") | tojson }})
                 $('.shipping-payment-icon.icon-account_balance').removeClass('d-none')
                 $('.li-pills-message').addClass('d-none')
                 $('.li-pills-home').removeClass('d-none')
@@ -290,17 +289,19 @@
 
         }
 
-        function filterCitiesList(shipping_method_id) {
-            const searchVal = $('#citiesFilter-'+shipping_method_id).val().toLowerCase();
-            var ul = "#shipping-cities-ul-"+shipping_method_id;
-            $(ul+" > li").each(function() {
-                if ($(this).text().toLowerCase().search(searchVal) > -1) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
+        document.querySelectorAll('.cities-filter-input').forEach(function (input) {
+            input.addEventListener('keyup', function () {
+                const searchVal = input.value.toLowerCase();
+                const modal = input.closest('.shipping-cities-modal');
+                modal.querySelectorAll('.modal-body ul > li').forEach(function (city) {
+                    if (city.textContent.toLowerCase().includes(searchVal)) {
+                        city.style.display = '';
+                    } else {
+                        city.style.display = 'none';
+                    }
+                });
             });
-        }
+        });
     </script>
 
 {% endblock %}

@@ -8,10 +8,10 @@
             </button>
 
             <!-- Placeholder for Hello, Customer (hidden initially) -->
-            <button type="button" onclick="window.location.href='{{ url_for("profile") }}'" class="btn btn-dark account-btn" id="hello-btn" style="display: none;">
+            <a href="{{ url_for('profile') }}" class="btn btn-dark account-btn" id="hello-btn" style="display: none;">
                 <span class="icon-account_circle_black_24dp header-theme-icon-primary" style="position: relative; top: 1px"></span>
                 <span id="customer-greeting" style="position: relative; bottom: 2px">{{ _("Hello") }} ...</span>
-            </button>
+            </a>
         </div>
 
         {% set multiple_languages = store.languages | length > 1 %}
@@ -89,9 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const storedData = localStorage.getItem('zid_kit_select_branch');
     if (!storedData) return;
 
-    const lang = '{{ session.lang }}';
-    const deliveryToText = '{{ _("Delivery to:") }}';
-    const pickupFromText = '{{ _("Pickup from:") }}';
+    const lang = {{ session.lang | tojson }};
+    const deliveryToText = {{ _("Delivery to:") | tojson }};
+    const pickupFromText = {{ _("Pickup from:") | tojson }};
     const data = JSON.parse(storedData);
     const branchData = data.branchData;
     const buttons = document.querySelectorAll('.currency-btn');

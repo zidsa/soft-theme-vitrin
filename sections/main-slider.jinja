@@ -46,7 +46,7 @@
                         {{ slide.des }}
                     </p>
                     {% if slide.display_button %}
-                      <button class="btn btn-primary" onclick="event.preventDefault(); event.stopPropagation(); window.location.href = '{% if slide.button_url %}{{ slide.button_url }}{% else %}/{% endif %}'; return false;">
+                      <button class="btn btn-primary" data-navigation-url="{% if slide.button_url %}{{ slide.button_url }}{% else %}/{% endif %}">
                         {{ slide.button_text }}
                       </button>
                     {% endif %}
@@ -63,7 +63,9 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function(){
-        $('[section-id={{ sectionId }}] .main-slider').slick({
+        var sectionRoot = document.getElementById(String({{ sectionId | tojson }}));
+        var $mainSlider = $(sectionRoot).find('.main-slider');
+        $mainSlider.slick({
             infinite: false,
             autoplay: true,
             arrows: false,
@@ -72,8 +74,8 @@
         });
 
 
-        $('[section-id={{ sectionId }}] .main-slider').on('beforeChange', function(event, { slideCount: count }, currentSlide, nextSlide){
-            var currentImage = $('[section-id={{ sectionId }}] .slider-image-'+nextSlide);
+        $mainSlider.on('beforeChange', function(event, { slideCount: count }, currentSlide, nextSlide){
+            var currentImage = $(sectionRoot).find('.slider-image-' + nextSlide);
             if(!currentImage.attr('src')){
                 currentImage.attr('srcset',currentImage.attr('data-srcset'))
                 currentImage.attr('src',currentImage.attr('src'))
