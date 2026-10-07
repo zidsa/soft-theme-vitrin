@@ -34,7 +34,7 @@
                    {% endif %}
                     <img id="product-card-img-{{ product.id }}"
                             {% if product.images or product.videos %}
-                                    src="{{ product.main_image.image.small if product.main_image else '' }}"
+                                    src="{{ image_url((product.main_image.image.small if product.main_image else 'product-img.svg' | asset_url), w=235, q=85, f='auto') }}"
                              {% else %}
                                  src="{{ image_url(('product-img.svg' | asset_url), w=235, q=85, f='auto') }}"
                             {% endif %}
