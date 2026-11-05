@@ -52,7 +52,7 @@
                                                                     <div class="content">
                                                                         <a class="image-link"
                                                                            style="display:block; width: 100%; height: 100%;">
-                                                                            <img src="{{ image.image.large }}" class="carousel-img" alt="{{ image.alt_text or product.name }}">
+                                                                            <img src="{{ image.image.large }}" class="carousel-img" alt="{{ (image.alt_text or product.name) | e }}">
                                                                             {% if image.provider and image.link %}
                                                                                 <img id="main-video-icon"
                                                                                   class="play-icon"
@@ -1067,15 +1067,15 @@
             }
         }
 
-        function escapeAttr(value) {
-            return String(value == null ? '' : value)
-                .replace(/&/g, '&amp;')
-                .replace(/"/g, '&quot;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
-        }
-
         function updateProductImages(selected_product) {
+            function escapeAttr(value) {
+                return value
+                    .replace(/&/g, '&amp;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+            }
+
             if (selected_product && selected_product.media && selected_product.media.length > 0) {
                 $('.product-images-carousel').removeClass('d-none');
                 $('.product-images-carousel-thumbs').removeClass('d-none-important');
