@@ -16,9 +16,9 @@
 
                                     <img
                                             {% if categoryItem.category.image %}
-                                                src="{{ image_url(categoryItem.category.image_full_size, w=400, q=100, f='auto') }}"
+                                                src="{{ image_url(categoryItem.category.image_full_size, w=400, q=85, f='auto') }}"
                                             {% else %}
-                                                src="{{ image_url(('product-img.svg' | asset_url), w=235, q=100, f='auto') }}"
+                                                src="{{ image_url(('product-img.svg' | asset_url), w=235, q=85, f='auto') }}"
                                             {% endif %}
 
                                             loading="lazy" alt="{{ categoryItem.category.name }}">

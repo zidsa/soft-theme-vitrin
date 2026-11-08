@@ -49,9 +49,9 @@
 
                                                 <img
                                                         {% if categoryItem.image %}
-                                                            src="{{ image_url(categoryItem.image, w=235, q=100, f='auto') }}"
+                                                            src="{{ image_url(categoryItem.image, w=235, q=85, f='auto') }}"
                                                         {% else %}
-                                                            src="{{ image_url(('product-img.svg' | asset_url) , w=235, q=100, f='auto') }}"
+                                                            src="{{ image_url(('product-img.svg' | asset_url) , w=235, q=85, f='auto') }}"
                                                         {% endif %}
 
                                                         loading="lazy" alt="{{ categoryItem.name }}">

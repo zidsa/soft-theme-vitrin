@@ -145,14 +145,14 @@
                     <div class="logistics-pay-icons d-flex flex-wrap justify-content-center">
                         {% for shipping_method in store.settings.checkout.shipping_methods %}
                             <a href="/shipping-and-payment">
-                                <img src="{{ image_url(shipping_method.icon, h=80, q=100) }}" loading="lazy" alt="" height="21">
+                                <img src="{{ image_url(shipping_method.icon, h=80, q=85) }}" loading="lazy" alt="" height="21">
                             </a>
                         {% endfor %}
 
 
                         {% for payment_method in store.settings.checkout.payment_methods %}
                             <a href="/shipping-and-payment">
-                                <img src="{{ image_url(payment_method.icon, h=80, q=100) }}" loading="lazy" alt="" height="21">
+                                <img src="{{ image_url(payment_method.icon, h=80, q=85) }}" loading="lazy" alt="" height="21">
                             </a>
                         {% endfor %}
 

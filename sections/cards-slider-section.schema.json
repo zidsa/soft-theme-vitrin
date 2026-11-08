@@ -51,6 +51,22 @@
             "ar": "الرابط",
             "en": "Link"
           }
+        },
+        {
+          "id": "custom_height",
+          "type": "number",
+          "label": {
+            "ar": "حدد طول الصورة بالبكسل",
+            "en": "Add Custom Height by pixel"
+          }
+        },
+        {
+          "id": "custom_width",
+          "type": "number",
+          "label": {
+            "ar": "حدد عرض الصورة بالبكسل",
+            "en": "Add Custom Width by pixel"
+          }
         }
       ]
     }
