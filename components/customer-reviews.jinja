@@ -4,10 +4,10 @@
                     <div class="card-body">
                             <div class="d-flex">
                                     <span class="icon-account_circle">
-                                        <span class="d-none">{{ review.customer.name }}</span>
+                                        <span class="d-none">{{ review.customer.name | e }}</span>
                                     </span>
                                     <div class="card-name">
-                                            <p class="card-name-customer">{{ review.customer.name }}</p>
+                                            <p class="card-name-customer">{{ review.customer.name | e }}</p>
                                             <div class="d-flex card-rate-comment">
                                                 {% set rating=review.rating %}{% include 'components/rating-stars.jinja' %}
                                             </div>
