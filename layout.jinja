@@ -237,7 +237,7 @@
         var loyalty_button_direction = {{ session.language.direction | tojson }};
         var text_loyalty_rewards = {{ _('Rewards') | tojson }};
         var text_loyalty_options = {{ _('For {points} get a discount {percentage}') | tojson }};
-        var store_currency_code = {{ session.currency | tojson }};
+        var store_currency_code = {{ session.currency.code | tojson }};
     </script>
     <script type='text/javascript' src="{{ ('layout_loyalty_points.js?v=' ~ ver) | asset_url }}"></script>
 

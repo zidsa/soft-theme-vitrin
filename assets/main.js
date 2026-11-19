@@ -616,8 +616,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (navigationElement) {
       event.preventDefault();
       event.stopPropagation();
-      const destination = getSafeNavigationUrl(navigationElement.getAttribute('data-navigation-url'), false);
-      if (destination) window.location.href = destination;
+      const destination = navigationElement.getAttribute('data-navigation-url');
+      if (window.ThemeSecurity.isAllowedUrl(destination, window.location.origin, ['http:', 'https:', 'tel:', 'mailto:'])) {
+        window.location.href = destination;
+      }
       return;
     }
 
@@ -685,7 +687,7 @@ function fetchProductsSearch(catId, query) {
         for (var i = 0; i < response.results.length; i++) {
           var product = response.results[i];
 
-          const productUrl = getSafeNavigationUrl(product.html_url, true);
+          const productUrl = getSafeNavigationUrl(product.html_url, false);
           if (!productUrl) continue;
 
           const result = document.createElement('div');
