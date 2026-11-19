@@ -52,7 +52,7 @@
                                                                     <div class="content">
                                                                         <a class="image-link"
                                                                            style="display:block; width: 100%; height: 100%;">
-                                                                            <img src="{{ image.image.full_size }}" class="carousel-img" alt="{{ image.alt_text }}">
+                                                                            <img src="{{ image.image.large }}" class="carousel-img" alt="{{ (image.alt_text or product.name) | e }}">
                                                                             {% if image.provider and image.link %}
                                                                                 <img id="main-video-icon"
                                                                                   class="play-icon"
@@ -163,8 +163,11 @@
 
 
                                     {% if store.settings.products.low_stock_label_enabled %}
-                                        {% set show_low_stock = not selected_product.is_infinite
-                                                                and selected_product.quantity < store.settings.products.low_stock_quantity_threshold %}
+                                        {% set show_low_stock =
+                                            product.product_class != 'dynamic_bundle'
+                                            and not selected_product.is_infinite
+                                            and selected_product.quantity < store.settings.products.low_stock_quantity_threshold
+                                        %}
                                         <div class="low-quantity-section {{ 'd-inline-block' if show_low_stock else 'd-none' }}">
                                             <span class="icon-flag_black" style="color: #EC5550; font-size: 16px"></span>&nbsp;
                                             <span class="low-quantity">{{ _("Remaining %s only") | format(selected_product.quantity) }}</span>
@@ -204,6 +207,7 @@
                                 </div>
 
                                 <div>
+                                    {% include 'vitrin:shared/bank_discounts.jinja' %}
                                     {% include 'vitrin:products/payment_widgets.jinja' %}
                                 </div>
                                 <div>
@@ -1103,10 +1107,10 @@
                     imageLink.className = 'image-link';
                     imageLink.style.cssText = 'display:block; width:100%; height:100%;';
                     image.className = 'carousel-img';
-                    image.alt = selected_product.name == null ? '' : String(selected_product.name);
+                    image.alt = prImage.alt_text || selected_product.name || '';
 
                     var fullSizeUrl = getSafeNavigationUrl(
-                        prImage.image && prImage.image.full_size ? prImage.image.full_size : '',
+                        prImage.image && prImage.image.large ? prImage.image.large : '',
                         false
                     );
                     if (fullSizeUrl) image.src = fullSizeUrl;
