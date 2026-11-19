@@ -1009,13 +1009,15 @@
                             quantityMax = selected_product.quantity;
                         }
                         var quantitySelect = document.querySelector('.select-quantity');
-                        quantitySelect.replaceChildren();
-                        for (var i = 1; i <= quantityMax; i++) {
-                            var option = document.createElement('option');
-                            option.value = String(i);
-                            option.textContent = String(i);
-                            option.selected = i === 1;
-                            quantitySelect.appendChild(option);
+                        if (quantitySelect) {
+                            quantitySelect.replaceChildren();
+                            for (var i = 1; i <= quantityMax; i++) {
+                                var option = document.createElement('option');
+                                option.value = String(i);
+                                option.textContent = String(i);
+                                option.selected = i === 1;
+                                quantitySelect.appendChild(option);
+                            }
                         }
                     } else {
                         $('.select-quantity-div').addClass('d-none');
