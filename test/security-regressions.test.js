@@ -25,4 +25,13 @@ assert.equal(isAllowedUrl('mailto:a@b.c', origin, ['http:', 'https:']), false);
 assert.equal(isAllowedUrl('mailto:a@b.c', origin, ['http:', 'https:', 'mailto:', 'tel:']), true);
 assert.equal(isAllowedUrl('tel:+966500000000', origin, ['http:', 'https:', 'mailto:', 'tel:']), true);
 
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.join(__dirname, '..');
+const templates = fs.readdirSync(root, { recursive: true }).filter((f) => f.endsWith('.jinja') && !f.includes('node_modules'));
+for (const file of templates) {
+  // vitrin's SessionContext.currency is a string code ('SAR'), so `.code` renders undefined.
+  assert.doesNotMatch(fs.readFileSync(path.join(root, file), 'utf8'), /session\.currency\.code/, file);
+}
+
 console.log('security regressions: ok');
