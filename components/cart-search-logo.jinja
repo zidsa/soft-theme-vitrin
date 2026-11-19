@@ -22,7 +22,7 @@
         <a class="cart-section d-flex text-center" onclick="showShoppingCart();">
             <div class="cart-total-price d-flex flex-row-reverse px-4">
                 <span id="cart-total"></span>
-                <span class="mx-2">{{ session.currency.code }}</span>
+                <span class="mx-2">{{ session.currency }}</span>
             </div>
             <div class="cart-icon-section">
                 <img src="{{ 'cart-icon.svg' | asset_url }}" alt="" width="31" height="31">

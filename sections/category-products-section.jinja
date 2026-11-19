@@ -32,7 +32,8 @@
 
     <script>
 
-        document.addEventListener("DOMContentLoaded", function(){
+    document.addEventListener("DOMContentLoaded", function(){
+        var sectionRoot = document.getElementById(String({{ sectionId | tojson }}));
             var arrowNextClass, arrowPrevClass;
             if (window.appDirection === 'ltr') {
                 arrowNextClass = 'icon-keyboard_arrow_right';
@@ -47,7 +48,7 @@
             var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
 
             if(screenWidth >= 768 || editingMode){
-                $('[section-id={{ sectionId }}] .products-slider').slick({
+                $(sectionRoot).find('.products-slider').slick({
                     slidesToShow: 5,
                     slidesToScroll: 5,
                     infinite: false,
@@ -74,5 +75,3 @@
             }
         });
     </script>
-
-

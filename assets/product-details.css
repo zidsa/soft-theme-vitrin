@@ -387,6 +387,7 @@
 .user-review-text {
     color: #484848;
     margin-left: 50px;
+    white-space: pre-wrap;
 }
 
 .rtl .user-review-text {
