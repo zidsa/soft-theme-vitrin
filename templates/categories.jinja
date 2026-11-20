@@ -22,6 +22,8 @@
         </nav>
     </section>
 
+    {% set title=_("All categories") %}{% set description=none %}{% include 'components/breadcrumb-subTitle-detail.jinja' %}
+
     <div class="container mb-5">
         <div class="row categories-row">
             {% for category in categories %}
