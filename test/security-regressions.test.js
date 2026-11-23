@@ -32,6 +32,8 @@ const templates = fs.readdirSync(root, { recursive: true }).filter((f) => f.ends
 for (const file of templates) {
   // vitrin's SessionContext.currency is a string code ('SAR'), so `.code` renders undefined.
   assert.doesNotMatch(fs.readFileSync(path.join(root, file), 'utf8'), /session\.currency\.code/, file);
+  // vitrin's url_for returns a URL object; `| tojson` dumps it as {"_url": ...}, so location.href becomes [object Object] (INCIDENT-15797).
+  assert.doesNotMatch(fs.readFileSync(path.join(root, file), 'utf8'), /url_for\([^)]*\)\s*\|\s*tojson/, file);
 }
 
 console.log('security regressions: ok');
