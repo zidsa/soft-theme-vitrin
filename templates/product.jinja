@@ -353,7 +353,7 @@
                             <div class="border-product">
                                 <h4 class="product-title">{{ _("share product") }}</h4>
                                 <div class="product-icon">
-                                    <div class="product-social d-flex">
+                                    <div class="product-social d-flex" data-product-share="{{ product.html_url }}">
                                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ product.html_url }}" target="_blank"><i class="icon-facebook-f"></i></a>
                                         <a href="https://www.pinterest.com/pin/create/button/?url={{ product.html_url }}" target="_blank"><i class="icon-pinterest"></i></a>
                                         <a href="https://twitter.com/intent/tweet?text={{ product.name }}: {{ product.html_url }}" target="_blank"><i class="icon-twitter"></i></a>
@@ -1504,6 +1504,25 @@
                     }
                 }
             }
+        });
+
+        function productShareUrl(productUrl) {
+            const variantId = new URLSearchParams(window.location.search).get('pid');
+            if (!variantId) return productUrl;
+
+            const url = new URL(productUrl, window.location.href);
+            url.searchParams.set('pid', variantId);
+            return url.href;
+        }
+
+        $('[data-product-share] a').each(function () {
+            const link = $(this);
+            const href = link.attr('href');
+            const productUrl = link.closest('[data-product-share]').attr('data-product-share');
+
+            link.on('click', function () {
+                link.attr('href', href.replace(productUrl, encodeURIComponent(productShareUrl(productUrl))));
+            });
         });
 
         document.addEventListener("DOMContentLoaded", function() {
