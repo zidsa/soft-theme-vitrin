@@ -1508,7 +1508,7 @@
 
         function productShareUrl(productUrl) {
             const variantId = new URLSearchParams(window.location.search).get('pid');
-            if (!variantId) return productUrl;
+            if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(variantId)) return productUrl;
 
             const url = new URL(productUrl, window.location.href);
             url.searchParams.set('pid', variantId);
@@ -1520,7 +1520,7 @@
             const href = link.attr('href');
             const productUrl = link.closest('[data-product-share]').attr('data-product-share');
 
-            link.on('click', function () {
+            link.on('pointerdown click', function () {
                 link.attr('href', href.replace(productUrl, encodeURIComponent(productShareUrl(productUrl))));
             });
         });
