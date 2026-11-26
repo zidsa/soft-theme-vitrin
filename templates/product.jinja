@@ -162,10 +162,9 @@
                                     {% endif %}
 
 
-                                    {% if store.settings.products.low_stock_label_enabled %}
+                                    {% if store.settings.products.low_stock_label_enabled and product.product_class != 'dynamic_bundle' %}
                                         {% set show_low_stock =
-                                            product.product_class != 'dynamic_bundle'
-                                            and not selected_product.is_infinite
+                                            not selected_product.is_infinite
                                             and selected_product.quantity < store.settings.products.low_stock_quantity_threshold
                                         %}
                                         <div class="low-quantity-section {{ 'd-inline-block' if show_low_stock else 'd-none' }}">
